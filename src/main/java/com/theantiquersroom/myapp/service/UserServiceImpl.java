@@ -54,7 +54,8 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     
     @Override
 	public boolean login(String id, String pwd) {
-		// TODO Auto-generated method stub
+		log.debug("login() invoked.");
+		
 		return false;
 	}
 
