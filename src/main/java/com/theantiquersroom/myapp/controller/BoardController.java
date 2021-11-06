@@ -1,28 +1,30 @@
 package com.theantiquersroom.myapp.controller;
 
 
-import com.theantiquersroom.myapp.domain.BoardDTO;
-import com.theantiquersroom.myapp.domain.BoardVO;
-import com.theantiquersroom.myapp.service.BoardService;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.theantiquersroom.myapp.domain.BoardDTO;
+import com.theantiquersroom.myapp.domain.BoardVO;
+
+import lombok.NoArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+
 
 @Log4j2
+@NoArgsConstructor
 
-
+@RequestMapping("/board")
 @Controller
 public class BoardController {
 
-    @Setter(onMethod_= { @Autowired} )
-    private BoardService service;
+//    @Setter(onMethod_= { @Autowired} )
+//    private BoardService service;
 
 
     @GetMapping("/review")
