@@ -15,3 +15,6 @@
 - @hayo01
 - @beomsookim96
 - @ggujin
+- @gombibi
+- @subakibaksu
+- @kimdindoo
