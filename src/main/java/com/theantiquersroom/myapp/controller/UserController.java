@@ -101,10 +101,12 @@ public class UserController {
 
 
     @PostMapping("/logout")
-    public String logout() {	// 로그아웃 실행
+    public String logout(HttpServletRequest request) {	// 로그아웃 실행
         log.debug("logout() invoked.");
-
-        return "/user/main";
+        HttpSession session = request.getSession();
+        session.invalidate();
+        
+        return "/main";
     } //logout
 
 
