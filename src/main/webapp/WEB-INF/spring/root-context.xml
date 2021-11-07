@@ -6,21 +6,20 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-
 	<!-- HikariCP 라이브러리를 이용한, 데이터소스 설정 -->
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-		<description>이 빈의 설명을 넣어라!!!</description>
+		<description>maria DB</description>
 
 		<property
 				name="driverClassName"
-				value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+				value="org.mariadb.jdbc.Driver"/>
 
 		<property
 				name="jdbcUrl"
-				value="jdbc:log4jdbc:oracle:thin:@db202110221035_high?TNS_ADMIN=C:/opt/OracleCloudWallet/ATP"/>
+				value="jdbc:mariadb://antiquers.czeunykbiyt3.ap-northeast-2.rds.amazonaws.com:3306"/>
 
-		<property name="username" value="ADMIN"/>
-		<property name="password" value="Oracle12345!!!"/>
+		<property name="username" value="admin"/>
+		<property name="password" value="antiquers"/>
 
 		<!-- Connection Pool 에 대한 상세설정 -->
 		<property name="maximumPoolSize" value="10"/>
@@ -40,16 +39,6 @@
 		<constructor-arg ref="hikariConfig"/>
 	</bean>
 
-<!--	<bean id="mailConfig" class="org.sleptawake.myapp.utils.MailConfig">-->
-<!--		<property name="from" value="rlaqjatn1030@naver.com"/>-->
-<!--		<property name="fromname" value="The Antiquer's Room"/>-->
-<!--		<property name="smtp_username" value=""/>-->
-<!--		<property name="smtp_password" value=""/>-->
-<!--		<property name="host" value="smtp.naver.com"/>-->
-<!--		<property name="port" value="587"/>-->
-<!--		<property name="subject" value="The Antiquer's Room Authorization mail"/>-->
-<!--	</bean>-->
-
 	<!-- MyBatis-Spring 연계라이브러리에서 제공되는 특수한 빈을 등록 -->
 	<bean
 			id="sqlSessionFactory"
@@ -60,15 +49,7 @@
 	</bean>
 
 
-	<!-- MyBatis-Spring 연계라이브러리에서 제공되는 특수한 태그를 등록:
-	MyBatis Mapper Interface를 Scanning해서, 자동으로 빈으로 등록해주는
-	태그가 있다! -->
-
-
+	<!-- MyBatis-Spring Bean -->
 	<mybatis-spring:scan base-package="com.theantiquersroom.myapp.mapper"/>
 
-	<!--	<bean id="userMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">-->
-	<!--		<property name="mapperInterface" value="org.mybatis.spring.sample.mapper.UserMapper" />-->
-	<!--		<property name="sqlSessionFactory" ref="sqlSessionFactory" />-->
-	<!--	</bean>-->
 </beans>
