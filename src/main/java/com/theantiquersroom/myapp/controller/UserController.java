@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.theantiquersroom.myapp.domain.UserDTO;
@@ -130,10 +131,16 @@ public class UserController {
     } //resetPwd
 
     @PostMapping("/resetPwd")
-    public String resetPwd(String nickName, String id) {	// 비밀번호 재설정 실행
-        log.debug("resetPwd({}, {}) invoked.", nickName, id);
+    public String resetPwd(@RequestParam("id") String id) throws Exception {	// 비밀번호 재설정 실행
 
-        return "/user/main";
+        System.out.println("hihi");
+        log.trace("resetPwd() invoked. model {} ", id);
+
+        Boolean b = service.resetPwd(id);
+
+        log.debug(b);
+
+        return "users/resetPwdCheck";
     } //resetPwd
 
 

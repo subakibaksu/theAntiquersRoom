@@ -10,5 +10,8 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+
+<a href="/users/resetPwd">resetPwd</a>
+
 </body>
 </html>
