@@ -1,8 +1,20 @@
-## 요약
-<!-- 이슈 요약한 내용을 적어주세요 -->
+---
+name: Feature request
+about: Suggest an idea for this project
+title: ''
+labels: ''
+assignees: ''
 
-## 상세 내용
-<!-- 이슈 상세 내용을 적어주세요 -->
+---
 
-## 관련 이슈
-<!-- 관련 이슈를 적어주세요 -->
+**Is your feature request related to a problem? Please describe.**
+A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+
+**Describe the solution you'd like**
+A clear and concise description of what you want to happen.
+
+**Describe alternatives you've considered**
+A clear and concise description of any alternative solutions or features you've considered.
+
+**Additional context**
+Add any other context or screenshots about the feature request here.
