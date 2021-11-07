@@ -21,10 +21,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService, InitializingBean, DisposableBean{
 
-    private UserMapper mapper;
 
     @Setter(onMethod_= {@Autowired})
     Mailsender mailsender;
+    UserMapper mapper;
+
 
 
     @Override
@@ -74,7 +75,11 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	@Override
 	public boolean resetPwd(String userId, String nickname) throws Exception {
 
-        log.debug("userId : {} nicknmae : {} ",userId,nickname);
+        log.debug("userId : {} nickname : {} ",userId,nickname);
+
+        String nick = mapper.selectUserNickname(userId);
+
+        log.debug(nick);
 
         mailsender.sendmail("email sent..",userId);
 
