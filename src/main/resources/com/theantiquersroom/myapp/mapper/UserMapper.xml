@@ -9,16 +9,29 @@
     <!-- 전체 회원 목록 조회 -->
     <select
             id="getUserList"
-            resultType="org.zerock.myapp.domain.UserVO">
-        <![CDATA[
+            resultType="com.theantiquersroom.myapp.domain.UserDTO">
 
-        ]]>
+       <![CDATA[
+            select
+                user_id as userId,
+                password,
+                nickname,
+                phone,
+                user_type as userType
+            from users
+       ]]>
+
     </select>
 
     <!-- 회원가입 -->
-    <insert id="insertUser">
-
-
+    <insert
+        id="insertUser"
+        parameterType="com.theantiquersroom.myapp.domain.UserDTO"
+    >
+        <![CDATA[
+            INSERT INTO USERS(USER_ID, PASSWORD, NICKNAME, PHONE, USER_TYPE)
+            VALUES (#{userId}, #{password}, #{nickName}, #{phone}, #{userType})
+        ]]>
     </insert>
 
     <!-- 특정 아이디 조회 -->
