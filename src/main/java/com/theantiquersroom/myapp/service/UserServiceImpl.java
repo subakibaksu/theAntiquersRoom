@@ -72,10 +72,11 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	}
 
 	@Override
-	public boolean resetPwd(String id) throws Exception {
+	public boolean resetPwd(String userId, String nickname) throws Exception {
 
-        log.debug(id);
-        mailsender.sendmail("email sent..",id);
+        log.debug("userId : {} nicknmae : {} ",userId,nickname);
+
+        mailsender.sendmail("email sent..",userId);
 
         return false;
 	}

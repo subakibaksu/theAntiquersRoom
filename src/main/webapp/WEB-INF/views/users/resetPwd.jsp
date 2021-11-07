@@ -14,7 +14,8 @@
     <h3>resetPwd</h3>
 
     <form action="/users/resetPwd" method="post">
-        <input name="id" placeholder="email">
+        <input name="UserId" placeholder="email">
+        <input name="nickName" placeholder="type your nickname">
         <button type="submit">click this</button>
     </form>
 </body>
