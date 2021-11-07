@@ -5,66 +5,68 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Header</title>
+		
+		<style type="text/css">
+		
+		* {
+    text-decoration: none;
+}
 
-		<style>
-			* {
-				text-decoration: none;
-			}
+.logo {
+    color: tomato;
+    /* font-size:36px; */
+}
 
-			.logo {
-				color: tomato;
-				/* font-size:36px; */
-			}
+#header_container {
+    margin: 0 15%;
+    margin-top: 5%;
+}
 
-			#header_container {
-				margin: 0 15%;
-				margin-top: 5%;
-			}
+#logoimg {
+    float: left;
+}
 
-			#logoimg {
-				float: left;
-			}
+#header_right {
+    float: right;
+}
 
-			#header_right {
-				float: right;
-			}
+#header_logo {
+    width: 50%;
+}
 
-			#header_logo {
-				width: 50%;
-			}
+.menu_btn {
+    float: right;
+}
 
-			.menu_btn {
-				float: right;
-			}
+#login_btn {
+    font-size: 16px;
 
-			#login_btn {
-				font-size: 16px;
+}
 
-			}
+#signin_btn {
+    border: 1px;
+    border-color: #c2b1b1;
+    border-radius: 5px;
+    background-color: #fff;
+    font-size: 16px;
+}
 
-			#signin_btn {
-				border: 1px;
-				border-color: #c2b1b1;
-				border-radius: 5px;
-				background-color: #fff;
-				font-size: 16px;
-			}
+.menu {
+    display: inline;
+    font-size: 18px;
+    width: 66px;
+    height: 31px;
+    margin-left: 5%;
+}
 
-			.menu {
-				display: inline;
-				font-size: 18px;
-				width: 66px;
-				height: 31px;
-				margin-left: 5%;
-			}
-
-			.base {
-				margin: 60px 18% 0 18%;
-			}
+.base {
+    margin: 60px 18% 0 18%;
+}
+		
 		</style>
 
 		<link rel="stylesheet"
-			href="/Users/admin/app/jee/theAntiquersRoomFromGit/src/main/webapp/style/header/header.css">
+			href="/WEB-INF/style/header/header.css">
 	</head>
 
 	<body>
