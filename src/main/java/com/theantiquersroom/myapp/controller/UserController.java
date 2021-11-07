@@ -131,14 +131,19 @@ public class UserController {
     } //resetPwd
 
     @PostMapping("/resetPwd")
-    public String resetPwd(@RequestParam("userId") String userId, @RequestParam("nickName") String nickName) throws Exception {	// 비밀번호 재설정 실행
+    public String resetPwd(@RequestParam("userId") String userId, @RequestParam("nickName") String nickName, Model model) throws Exception {	// 비밀번호 재설정 실행
 
         System.out.println("hihi");
         log.trace("resetPwd() invoked. model {} {} ", userId, nickName);
 
-        Boolean b = service.resetPwd(userId, nickName);
+        Boolean b = false;
 
-        log.debug(b);
+        b = service.resetPwd(userId, nickName);
+
+        log.debug("result : {}", b);
+
+        model.addAttribute("checkemailsent",b);
+
 
         return "users/resetPwdCheck";
     } //resetPwd

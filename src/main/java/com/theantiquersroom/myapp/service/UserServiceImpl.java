@@ -76,14 +76,20 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	public boolean resetPwd(String userId, String nickname) throws Exception {
 
         log.debug("userId : {} nickname : {} ",userId,nickname);
-
+        boolean b = false;
         String nick = mapper.selectUserNickname(userId);
 
         log.debug(nick);
 
-        mailsender.sendmail("email sent..",userId);
 
-        return false;
+       if(nick.equals(nickname) && nick!=null){
+            log.debug("yes you can");
+//            mailsender.sendmail("email sent..",userId);
+            b = true;
+
+        }
+
+        return b;
 	}
 
 	@Override
