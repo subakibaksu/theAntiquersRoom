@@ -71,12 +71,12 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     @Override
 	public boolean login(String userId, String password) {
 		log.debug("login({}, {}) invoked.", userId, password);
-		
+
 		UserVO vo =this.mapper.login(userId);
 		log.info("\t+ vo: {}", vo);
 		
 		assert vo != null;
-		
+
 		return (vo.getPassword().equals(password));
 	}
 
@@ -87,30 +87,28 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	}
 
 	@Override
-
 	public boolean resetPwd(String userId, String nickname) throws Exception {
 
         log.debug("userId : {} nickname : {} ",userId,nickname);
-        boolean b = false;
+        boolean mailSentCheck = false;
         String nick = mapper.selectUserNickname(userId);
 
         log.debug(nick);
 
-        String npw = Integer.toString((int)(Math.random()*3000+1));
+        String newpassword = Integer.toString((int)(Math.random()*3000+1));
 
         if(nick.equals(nickname) && nick!=null){
             log.debug("yes you can");
 
-           mailsender.sendmail("your new password is : "+ npw,userId);
+           mailsender.sendmail("your new password is : "+ newpassword,userId);
 
-            mapper.updatePassword(npw,userId);
+            mapper.updatePassword(newpassword,userId);
 
-            b = true;
+            mailSentCheck = true;
 
         }
 
-        return b;
-
+        return mailSentCheck;
 	}
 
 	@Override

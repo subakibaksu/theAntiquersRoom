@@ -145,13 +145,12 @@ public class UserController {
         log.trace("resetPwd() invoked. model {} {} ", userId, nickName);
         Map<Object,Object> map = new HashMap<Object, Object>();
 
-        Boolean b = false;
+        Boolean mailSentCheck = false;
 
-        b = service.resetPwd(userId, nickName);
-        map.put("check",b);
-        log.debug("result : {}", b);
+        mailSentCheck = service.resetPwd(userId, nickName);
+        map.put("check",mailSentCheck);
+        log.debug("result : {}", mailSentCheck);
 
-//        model.addAttribute("checkemailsent",b);
 
 
         return map;
