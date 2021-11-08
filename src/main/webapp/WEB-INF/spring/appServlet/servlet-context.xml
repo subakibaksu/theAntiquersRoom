@@ -22,7 +22,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.theantiquersroom.myapp" />
-	
-	
-	
+	<context:component-scan base-package="com.theantiquersroom.myapp.controller" />
+	<context:component-scan base-package="com.theantiquersroom.myapp.service" />
+
 </beans:beans>

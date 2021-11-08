@@ -13,7 +13,7 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="org.sleptawake.myapp" level="trace" />
+        <Logger name="com.theantiquersroom.myapp" level="trace" />
 
         <!-- 3rdparty Loggers -->
         <logger name="org.springframework.core" level="info"/>
