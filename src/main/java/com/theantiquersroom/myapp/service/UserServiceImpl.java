@@ -38,9 +38,11 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
 
     @Override
-    public boolean registerUsers(UserVO user) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean registerUser(UserDTO user) {
+        log.debug("login({}, {}) invoked.", user);
+        int affectedRows = this.mapper.insertUser(user);
+
+        return affectedRows > 0;
     }
 
     @Override

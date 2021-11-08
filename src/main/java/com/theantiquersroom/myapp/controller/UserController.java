@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -39,12 +40,12 @@ public class UserController {
     } //register
 
     @PostMapping("/register")
-    public String register(UserDTO user, RedirectAttributes rttrs) {
-        //회원가입 서비스 수행, 저장
+    @ResponseStatus(HttpStatus.CREATED)
+    public String register(UserDTO user) { //회원가입 서비스 수행, 저장
+        log.debug("register({}, {}) invoked.", user);
 
-        log.debug("register({}, {}) invoked.", user, rttrs);
-
-        return "redirect:/";
+        this.service.registerUser(user);
+        return "/main";
     } //register
 
     @GetMapping("/kakaoLogin")

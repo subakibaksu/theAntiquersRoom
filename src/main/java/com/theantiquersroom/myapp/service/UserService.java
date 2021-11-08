@@ -15,7 +15,7 @@ import com.theantiquersroom.myapp.domain.UserVO;
 public interface UserService {
 
     // 회원가입
-    public abstract boolean registerUsers(UserVO user);
+    public abstract boolean registerUser(UserDTO user);
 
     // 아이디 중복 검사
     public abstract boolean checkId(String userId);

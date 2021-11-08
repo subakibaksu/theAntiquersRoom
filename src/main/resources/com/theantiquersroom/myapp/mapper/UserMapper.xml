@@ -9,7 +9,7 @@
     <!-- 전체 회원 목록 조회 -->
     <select
             id="getUserList"
-            resultType="com.theantiquersroom.myapp.domain.UserDTO">
+            resultType="String">
 
        <![CDATA[
             select
@@ -29,8 +29,8 @@
         parameterType="com.theantiquersroom.myapp.domain.UserDTO">
 
         <![CDATA[
-            INSERT INTO USERS(USER_ID, PASSWORD, NICKNAME, PHONE, USER_TYPE)
-            VALUES (#{userId}, #{password}, #{nickName}, #{phone}, #{userType})
+            INSERT INTO users(USER_ID, PASSWORD, NICKNAME, PHONE, USER_TYPE)
+            VALUES (#{userId}, #{password}, #{nickName}, #{phone}, 2)
         ]]>
     </insert>
 
