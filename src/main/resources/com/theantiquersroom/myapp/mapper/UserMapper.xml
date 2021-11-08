@@ -26,8 +26,8 @@
     <!-- 회원가입 -->
     <insert
         id="insertUser"
-        parameterType="com.theantiquersroom.myapp.domain.UserDTO"
-    >
+        parameterType="com.theantiquersroom.myapp.domain.UserDTO">
+
         <![CDATA[
             INSERT INTO USERS(USER_ID, PASSWORD, NICKNAME, PHONE, USER_TYPE)
             VALUES (#{userId}, #{password}, #{nickName}, #{phone}, #{userType})
@@ -37,6 +37,7 @@
     <!-- 특정 아이디 조회 -->
     <select
             id="getUserId">
+
         <![CDATA[
 
         ]]>
@@ -45,6 +46,7 @@
     <!-- 특정 닉네임 조회 -->
     <select
             id="getNickName">
+
         <![CDATA[
 
         ]]>
@@ -53,8 +55,22 @@
     <!-- 특정 연락처 조회 -->
     <select
             id="getPhone">
+
         <![CDATA[
 
+        ]]>
+    </select>
+
+    <!-- 로그인 -->
+    <select
+            id="login"
+            resultType="com.theantiquersroom.myapp.domain.UserVO"
+            parameterType="string">
+            
+        <![CDATA[
+            SELECT *
+            FROM users
+            WHERE user_id=#{userId}
         ]]>
     </select>
 
