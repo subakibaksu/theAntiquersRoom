@@ -6,17 +6,21 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+
+import org.springframework.web.bind.annotation.*;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.theantiquersroom.myapp.domain.UserDTO;
+import com.theantiquersroom.myapp.domain.UserVO;
 import com.theantiquersroom.myapp.service.UserService;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Log4j2
 @NoArgsConstructor
@@ -86,21 +90,24 @@ public class UserController {
     } //login
 
     @PostMapping("/login")
-    public String login(String userId, String password, HttpServletRequest request) {	// 로그인 실행
+    public String login(
+    		@RequestParam("userId") String userId, 
+    		@RequestParam("password") String password, HttpServletRequest request) {	// 로그인 실행
         log.debug("login({}, {}) invoked.", userId, password);
         HttpSession session = request.getSession();
         
         boolean isUser=this.service.login(userId, password);
+        log.info("\t+ isUser: {}", isUser);
         
-        session.setAttribute("userId", userId);
-//        if(isUser) {
-//        	session.setAttribute("userId", id);
-//        }
+        if(isUser) {
+        	session.setAttribute("userId", userId);
+        } //if
+        
         return "/main";
     } //login
 
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public String logout(HttpServletRequest request) {	// 로그아웃 실행
         log.debug("logout() invoked.");
         HttpSession session = request.getSession();
@@ -132,10 +139,22 @@ public class UserController {
     } //resetPwd
 
     @PostMapping("/resetPwd")
-    public String resetPwd(String nickName, String id) {	// 비밀번호 재설정 실행
-        log.debug("resetPwd({}, {}) invoked.", nickName, id);
+    public @ResponseBody Map<Object, Object> resetPwd(@RequestParam("userId") String userId, @RequestParam("nickName") String nickName) throws Exception {	// 비밀번호 재설정 실행
 
-        return "/user/main";
+        System.out.println("hihi");
+        log.trace("resetPwd() invoked. model {} {} ", userId, nickName);
+        Map<Object,Object> map = new HashMap<Object, Object>();
+
+        Boolean b = false;
+
+        b = service.resetPwd(userId, nickName);
+        map.put("check",b);
+        log.debug("result : {}", b);
+
+//        model.addAttribute("checkemailsent",b);
+
+
+        return map;
     } //resetPwd
 
 

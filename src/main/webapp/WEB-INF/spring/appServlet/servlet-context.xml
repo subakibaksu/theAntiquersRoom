@@ -25,4 +25,7 @@
 	<context:component-scan base-package="com.theantiquersroom.myapp.controller" />
 	<context:component-scan base-package="com.theantiquersroom.myapp.service" />
 
+	<beans:bean id="mailsender" class="com.theantiquersroom.myapp.utils.Mailsender"/>
+	<beans:bean id="userservice" class="com.theantiquersroom.myapp.service.UserService" abstract="true"/>
+
 </beans:beans>

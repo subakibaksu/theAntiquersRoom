@@ -1,15 +1,27 @@
 package com.theantiquersroom.myapp.service;
 
 
+import java.util.List;
+
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.theantiquersroom.myapp.domain.Criteria;
+import com.theantiquersroom.myapp.domain.ProductVO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
 import com.theantiquersroom.myapp.mapper.UserMapper;
+import com.theantiquersroom.myapp.utils.Mailsender;
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 
 @AllArgsConstructor
@@ -18,7 +30,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService, InitializingBean, DisposableBean{
 
-    private UserMapper mapper;
+
+    @Setter(onMethod_= {@Autowired})
+    Mailsender mailsender;
+    UserMapper mapper;
+
 
 
     @Override
@@ -53,22 +69,48 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
     
     @Override
-	public boolean login(String id, String pwd) {
-		log.debug("login() invoked.");
+	public boolean login(String userId, String password) {
+		log.debug("login({}, {}) invoked.", userId, password);
 		
-		return false;
+		UserVO vo =this.mapper.login(userId);
+		log.info("\t+ vo: {}", vo);
+		
+		assert vo != null;
+		
+		return (vo.getPassword().equals(password));
 	}
 
 	@Override
-	public boolean findId(String nickName, String phone) {
+	public UserVO findId(String nickName, String phone) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override
-	public boolean resetPwd(String nickName, String id) {
-		// TODO Auto-generated method stub
-		return false;
+
+	public boolean resetPwd(String userId, String nickname) throws Exception {
+
+        log.debug("userId : {} nickname : {} ",userId,nickname);
+        boolean b = false;
+        String nick = mapper.selectUserNickname(userId);
+
+        log.debug(nick);
+
+        String npw = Integer.toString((int)(Math.random()*3000+1));
+
+        if(nick.equals(nickname) && nick!=null){
+            log.debug("yes you can");
+
+           mailsender.sendmail("your new password is : "+ npw,userId);
+
+            mapper.updatePassword(npw,userId);
+
+            b = true;
+
+        }
+
+        return b;
+
 	}
 
 	@Override
@@ -78,21 +120,21 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	}
 
 	@Override
-	public boolean remove(String id) {
+	public boolean remove(String userId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean getMyAuctionList(Criteria cri) {
+	public List<ProductVO> getMyAuctionList(Criteria cri) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override
-	public boolean getBidList(Criteria cri) {
+	public List<ProductVO> getBidList(Criteria cri) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
     
 //---------------------------------------------------//
