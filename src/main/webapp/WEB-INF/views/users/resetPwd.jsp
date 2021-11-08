@@ -68,7 +68,7 @@
 
                             }
 
-                            setTimeout(function (){ isAjaxing = false}, 10000);
+                            setTimeout(function (){ isAjaxing = false}, 1000);
 
 
                         },
@@ -76,7 +76,7 @@
 
                             console.log("error", error);
 
-                            setTimeout(function (){ isAjaxing = false}, 10000);
+                            setTimeout(function (){ isAjaxing = false}, 1000);
 
                         },
                         complete : function () {
