@@ -1,7 +1,15 @@
 package com.theantiquersroom.myapp.service;
 
 
+import java.util.List;
+
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.theantiquersroom.myapp.domain.Criteria;
+import com.theantiquersroom.myapp.domain.ProductVO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
 import com.theantiquersroom.myapp.mapper.UserMapper;
@@ -13,6 +21,7 @@ import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 
 
 @AllArgsConstructor
@@ -60,19 +69,25 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
     
     @Override
-	public boolean login(String id, String pwd) {
-		log.debug("login() invoked.");
+	public boolean login(String userId, String password) {
+		log.debug("login({}, {}) invoked.", userId, password);
 		
-		return false;
+		UserVO vo =this.mapper.login(userId);
+		log.info("\t+ vo: {}", vo);
+		
+		assert vo != null;
+		
+		return (vo.getPassword().equals(password));
 	}
 
 	@Override
-	public boolean findId(String nickName, String phone) {
+	public UserVO findId(String nickName, String phone) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override
+
 	public boolean resetPwd(String userId, String nickname) throws Exception {
 
         log.debug("userId : {} nickname : {} ",userId,nickname);
@@ -95,6 +110,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
         }
 
         return b;
+
 	}
 
 	@Override
@@ -104,21 +120,21 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	}
 
 	@Override
-	public boolean remove(String id) {
+	public boolean remove(String userId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean getMyAuctionList(Criteria cri) {
+	public List<ProductVO> getMyAuctionList(Criteria cri) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override
-	public boolean getBidList(Criteria cri) {
+	public List<ProductVO> getBidList(Criteria cri) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
     
 //---------------------------------------------------//

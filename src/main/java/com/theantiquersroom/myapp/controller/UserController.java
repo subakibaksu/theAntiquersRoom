@@ -6,10 +6,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.*;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.theantiquersroom.myapp.domain.UserDTO;
+import com.theantiquersroom.myapp.domain.UserVO;
 import com.theantiquersroom.myapp.service.UserService;
 
 import lombok.NoArgsConstructor;
@@ -87,25 +90,30 @@ public class UserController {
     } //login
 
     @PostMapping("/login")
-    public String login(String userId, String password, HttpServletRequest request) {	// 로그인 실행
+    public String login(
+    		@RequestParam("userId") String userId, 
+    		@RequestParam("password") String password, HttpServletRequest request) {	// 로그인 실행
         log.debug("login({}, {}) invoked.", userId, password);
         HttpSession session = request.getSession();
         
         boolean isUser=this.service.login(userId, password);
+        log.info("\t+ isUser: {}", isUser);
         
-        session.setAttribute("userId", userId);
-//        if(isUser) {
-//        	session.setAttribute("userId", id);
-//        }
+        if(isUser) {
+        	session.setAttribute("userId", userId);
+        } //if
+        
         return "/main";
     } //login
 
 
-    @PostMapping("/logout")
-    public String logout() {	// 로그아웃 실행
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {	// 로그아웃 실행
         log.debug("logout() invoked.");
-
-        return "/user/main";
+        HttpSession session = request.getSession();
+        session.invalidate();
+        
+        return "/main";
     } //logout
 
 

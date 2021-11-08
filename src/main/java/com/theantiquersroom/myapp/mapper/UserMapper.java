@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.theantiquersroom.myapp.domain.Criteria;
+import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -25,7 +26,7 @@ public interface UserMapper {
     public abstract Integer updatePassword(@Param("newPassword") String newPassword, @Param("userId") String userId);
 
     //특정 아이디 조회
-    public abstract Integer getUserId(String id);
+    public abstract Integer getUserId(String userId);
 
     //특정 닉네임 조회
     public abstract Integer getNickName(String nickName);
@@ -34,6 +35,6 @@ public interface UserMapper {
     public abstract Integer getPhone(String phone);
 
     //로그인
-    public abstract Integer login(String id, String pwd);
+    public abstract UserVO login(String userId);
     
 } // end interface

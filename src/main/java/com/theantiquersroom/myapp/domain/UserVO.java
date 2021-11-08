@@ -7,9 +7,9 @@ import lombok.Value;
 public class UserVO {
 
     private String userId;
+    private String password;
     private String nickName;
     private String phone;
     private Integer userType;
-    private String password;
 
 } //end class
