@@ -136,6 +136,37 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	// ========================================= //
+
+
+	@Override
+	public List<UserVO> getUserList() {
+		log.debug("getList() invoked.");
+
+		
+		return this.mapper.getUserList();
+	} // getList
+	
+	@Override
+	public UserVO get(String userId) {
+		log.debug("get({}) invoked.", userId);
+		
+		UserVO user=this.mapper.read(userId);
+		log.info("\t+ board: {}", user);
+		
+		return user;
+	} // get
+	
+	@Override
+	public boolean modify(UserVO user) {
+		log.debug("modify({}) invoked.", user);
+		
+		int affectedRows=this.mapper.update(user);
+		log.info("\t+ affectedRows: {}", affectedRows);
+		
+		return affectedRows==1;		
+	} // modify
     
 //---------------------------------------------------//
     @Override
