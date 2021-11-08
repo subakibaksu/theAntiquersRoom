@@ -15,8 +15,7 @@
 
 <P>  The time on the server is ${serverTime}. </P>
 
-<!-- <img onclick="kakaoLogin();" style="cursor: pointer;" src="//k.kakaocdn.net/14/dn/btqbjxsO6vP/KPiGpdnsubSq3a0PHEGUK1/o.jpg" width="100%" height ="50px"></button> -->
-<img onclick="kakaoLogin();" style="cursor: pointer;" src="../../resources/images/kakao_login.png"></button>
+<img onclick="kakaoLogin();" style="cursor: pointer;" src="../../resources/images/kakao_login.png">
 
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 
@@ -36,6 +35,7 @@ function kakaoLogin() {
 
   }
 </script>		
+<a href="/users/resetPwd">resetPwd</a>
 
 </body>
 </html>
