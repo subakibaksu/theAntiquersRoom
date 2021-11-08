@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.theantiquersroom.myapp.domain.Criteria;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
+import org.apache.ibatis.annotations.Param;
 
 
 @Mapper
@@ -17,6 +18,12 @@ public interface UserMapper {
 
     //회원가입
     public abstract Integer insertUser(UserVO user);
+
+    //특정 아이디의 닉네임 조회
+    public abstract String selectUserNickname(@Param("userId") String userId);
+
+    //비밀번호 변경
+    public abstract Integer updatePassword(@Param("newPassword") String newPassword, @Param("userId") String userId);
 
     //특정 아이디 조회
     public abstract Integer getUserId(String userId);

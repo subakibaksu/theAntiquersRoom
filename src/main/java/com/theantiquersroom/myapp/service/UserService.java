@@ -37,7 +37,8 @@ public interface UserService {
     public abstract UserVO findId(String nickName, String phone);
     
     // 비밀번호 재설정
-    public abstract boolean resetPwd(String nickName, String userId);
+    public abstract boolean resetPwd(String userId, String nickName) throws Exception;
+
     
     // 회원정보 수정
     public abstract boolean modify(UserDTO userDto);

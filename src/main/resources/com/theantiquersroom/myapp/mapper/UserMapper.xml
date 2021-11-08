@@ -34,6 +34,28 @@
         ]]>
     </insert>
 
+    <update
+            id="updatePassword"
+            parameterType="String"
+    >
+        <![CDATA[
+        UPDATE users SET password = #{newPassword} where user_id = #{userId}
+        ]]>
+    </update>
+    <!-- 특정 아이디의 닉네임 조회  -->
+    <select
+            id="selectUserNickname"
+            resultType="string"
+            parameterType="string"
+    >
+        <![CDATA[
+
+          SELECT nickname FROM users WHERE user_id = #{userId}
+
+        ]]>
+
+    </select>
+
     <!-- 특정 아이디 조회 -->
     <select
             id="getUserId">

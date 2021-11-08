@@ -13,10 +13,15 @@ import com.theantiquersroom.myapp.domain.ProductVO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
 import com.theantiquersroom.myapp.mapper.UserMapper;
-
+import com.theantiquersroom.myapp.utils.Mailsender;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 
 
 @AllArgsConstructor
@@ -25,8 +30,11 @@ import lombok.extern.log4j.Log4j2;
 @Service
 public class UserServiceImpl implements UserService, InitializingBean, DisposableBean{
 
-	@Setter(onMethod_= {@Autowired})
-    private UserMapper mapper;
+
+    @Setter(onMethod_= {@Autowired})
+    Mailsender mailsender;
+    UserMapper mapper;
+
 
 
     @Override
@@ -79,9 +87,30 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	}
 
 	@Override
-	public boolean resetPwd(String nickName, String userId) {
-		// TODO Auto-generated method stub
-		return false;
+
+	public boolean resetPwd(String userId, String nickname) throws Exception {
+
+        log.debug("userId : {} nickname : {} ",userId,nickname);
+        boolean b = false;
+        String nick = mapper.selectUserNickname(userId);
+
+        log.debug(nick);
+
+        String npw = Integer.toString((int)(Math.random()*3000+1));
+
+        if(nick.equals(nickname) && nick!=null){
+            log.debug("yes you can");
+
+           mailsender.sendmail("your new password is : "+ npw,userId);
+
+            mapper.updatePassword(npw,userId);
+
+            b = true;
+
+        }
+
+        return b;
+
 	}
 
 	@Override
