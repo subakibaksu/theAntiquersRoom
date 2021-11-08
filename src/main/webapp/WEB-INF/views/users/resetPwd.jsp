@@ -24,6 +24,8 @@
 
         $(document).ready(function (){
 
+        var isAjaxing = false;
+
             $( "#resetPasswordFormSubmit").click(function (){
                 console.log('clicked')
                 $( "#resetPasswordForm").submit(function (e){
@@ -36,10 +38,15 @@
 
                     console.log(requestdata);
 
+                    if( isAjaxing ){
+                        return;
+                    }
+
+                    isAjaxing = true;
                     $.ajax({
                         async: true,
                         type : 'POST',
-                        url : "/users/resetPwd?"+requestdata,
+                        url : "/users/resetPwd?" + requestdata,
                         dataType : "json",
                         contentType: "application/json; charset=UTF-8",
                         success : function (result) {
@@ -48,18 +55,42 @@
                             if(result.check){
                                 console.log('okay');
                                 $('#mymsg').text('okay');
+                                $('#inputuserId').val(null);
+                                $('#inputNickname').val(null);
+
+
                             }else {
                                 console.log('nope');
                                 $('#mymsg').text('nope');
+                                $('#inputuserId').val(null);
+                                $('#inputNickname').val(null);
+
+
                             }
+
+                            setTimeout(function (){ isAjaxing = false}, 10000);
+
 
                         },
                         error : function (error) {
 
                             console.log("error", error);
 
+                            setTimeout(function (){ isAjaxing = false}, 10000);
+
+                        },
+                        complete : function () {
+
+                            console.log("ajax completed")
+
+
                         }
+
+
                     });
+
+
+
 
                 });
 
@@ -122,16 +153,14 @@
                 </div>
                 <div class="modal-body">
                     <form id="resetPasswordForm" action=#>
-                        <input name="userId" placeholder="email">
-                        <input name="nickName" placeholder="type your nickname">
+                        <input id="inputuserId" name="userId" placeholder="email">
+                        <input id="inputNickname" name="nickName" placeholder="type your nickname">
                         <button type="submit" id="resetPasswordFormSubmit" class="btn btn-secondary mybtn">click this</button>
                     </form>
 
                 </div>
                 <div class="modal-footer">
-                    <p id="mymsg">
-                        status
-                    </p>
+                    <p id="mymsg"></p>
 
                     <button type="button" class="btn btn-secondary mybtn" data-dismiss="modal">Close</button>
                 </div>
