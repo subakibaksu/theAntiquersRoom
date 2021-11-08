@@ -3,6 +3,7 @@ package com.theantiquersroom.myapp.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -59,9 +60,34 @@ public class UserController {
 
     } //register
 
-    @PostMapping("/confirmEmail")
-    public void confirmEmail(String email) {	//입력받은 이메일로 인증코드 발송
+    @GetMapping("/confirmEmail")
+    public void confirmEmail(){
+
+    };
+
+    //입력받은 이메일로 인증코드 발송
+    @PostMapping("/sendEmail")
+    public @ResponseBody Map<Object,Object> sendEmail(@Param("userId") String userId) throws Exception {	//입력받은 이메일로 인증코드 발송
         log.debug("confirmEmail() invoked.");
+        log.debug(userId);
+
+        Map<Object,Object> map = new HashMap<Object, Object>();
+
+        Boolean mailSentCheck = false;
+
+        mailSentCheck = service.sendEmail(userId);
+
+        map.put("check",mailSentCheck);
+        log.debug("result : {}", mailSentCheck);
+
+
+        return map;
+    } //sendEmail
+
+    @PostMapping("/confirmEmail")
+    public void confirmEmail(@Param("authorizationNumber") String authorizationNumber) {
+        log.debug("confirmEmail() invoked.");
+        log.debug(authorizationNumber);
 
     } //confirmEmail
 

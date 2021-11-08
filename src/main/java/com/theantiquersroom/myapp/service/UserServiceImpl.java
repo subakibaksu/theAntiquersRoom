@@ -67,7 +67,31 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
         return false;
     }
 
-    
+    @Override
+    public boolean sendEmail(String userId) throws Exception {
+
+        log.debug("userId : {} nickname : {} ",userId);
+        boolean mailSentCheck = false;
+        String nick = mapper.selectUserNickname(userId);
+
+        log.debug(nick);
+
+        String authorizationNumber = Integer.toString((int)(Math.random()*3000+1));
+
+        if(userId != null){
+
+            mailsender.sendmail("authorizationNumber : "+ authorizationNumber,userId);
+
+            mapper.insertAuthorizationNumber(authorizationNumber,userId);
+
+            mailSentCheck = true;
+
+        }
+
+        return mailSentCheck;
+    }
+
+
     @Override
 	public boolean login(String userId, String password) {
 		log.debug("login({}, {}) invoked.", userId, password);

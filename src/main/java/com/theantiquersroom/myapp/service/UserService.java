@@ -29,7 +29,9 @@ public interface UserService {
     // 이메일 인증번호 매칭검사
     public abstract boolean confirmEmail(String eCode);
 
-    
+    // 이메일 발송
+    public abstract boolean sendEmail(String userId) throws Exception;
+
     // 로그인 실행
     public abstract boolean login(String userId, String password);
     

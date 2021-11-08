@@ -34,6 +34,18 @@
         ]]>
     </insert>
 
+    <!-- 회원가입 -->
+    <insert
+            id="insertAuthorizationNumber"
+            parameterType="string">
+
+        <![CDATA[
+        INSERT INTO emailchecktemp(userid, auth, updatedate)
+        VALUES (#{userId}, #{authorizationNumber}, now())
+        ]]>
+    </insert>
+
+    <!-- 비밀번호 재설정  -->
     <update
             id="updatePassword"
             parameterType="String"
@@ -88,12 +100,14 @@
             id="login"
             resultType="com.theantiquersroom.myapp.domain.UserVO"
             parameterType="string">
-            
+
         <![CDATA[
             SELECT *
             FROM users
             WHERE user_id=#{userId}
         ]]>
     </select>
+
+
 
 </mapper>
