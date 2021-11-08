@@ -84,7 +84,12 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
        if(nick.equals(nickname) && nick!=null){
             log.debug("yes you can");
-//            mailsender.sendmail("email sent..",userId);
+
+           String npw = Integer.toString((int)(Math.random()*3000+1));
+           mailsender.sendmail("your new password is : "+ npw,userId);
+
+            mapper.updatePassword(npw,userId);
+
             b = true;
 
         }
