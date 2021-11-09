@@ -17,7 +17,7 @@ public interface UserMapper {
     public abstract List<UserVO> getUserList(Criteria cri);
 
     //회원가입
-    public abstract Integer insertUser(UserVO user);
+    public abstract Integer insertUser(UserDTO user);
 
     //특정 아이디의 닉네임 조회
     public abstract String selectUserNickname(@Param("userId") String userId);
