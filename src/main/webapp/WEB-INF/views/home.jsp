@@ -14,6 +14,7 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+<P>  The time on the server is ${accessToken}. </P>
 
 <img onclick="kakaoLogin();" style="cursor: pointer;" src="../../resources/images/kakao_login.png">
 
