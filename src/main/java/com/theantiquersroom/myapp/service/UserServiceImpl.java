@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.theantiquersroom.myapp.domain.Criteria;
@@ -34,6 +35,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     @Setter(onMethod_= {@Autowired})
     Mailsender mailsender;
     UserMapper mapper;
+    BCryptPasswordEncoder passwordEncoder;
 
 
 
