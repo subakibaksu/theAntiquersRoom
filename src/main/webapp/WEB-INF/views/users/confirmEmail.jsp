@@ -80,7 +80,14 @@
                         contentType: "application/json; charset=UTF-8",
                         success : function (result) {
 
-                            log.info("success ajax")
+                            console.log("success ajax")
+                            console.log(result.confirmResult);
+
+                            if(result.confirmResult){
+                                $("#emailCheckStatus").text('이메일 인증이 완료되었습니다.')
+                            }else {
+                                $("#emailCheckStatus").text('유효하지 않은 인증코드입니다.')
+                            }
 
                         },
                         error : function (error) {
@@ -109,7 +116,7 @@
         <input id="userIdForAuth" name="userId" hidden>
         <input name="authorizationNumber">
         <button id="checkAuthBtn">check</button>
-        <div id = "emailCheckStatus"></div>
+        <p id = "emailCheckStatus"></p>
     </form>
 
 </body>

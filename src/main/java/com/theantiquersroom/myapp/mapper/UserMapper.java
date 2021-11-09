@@ -43,9 +43,12 @@ public interface UserMapper {
     public abstract UserVO login(String userId);
 
     //현재시간 조회
-    public abstract Date selectNow();
+    public abstract String selectNow();
 
     //emailchecktemp table의 auth 조회
     public abstract String selectAuth(@Param("userId") String userId);
-    
+
+    //emailchecktemp table의 updatedate 조회
+    public abstract String selectUpdatedate(@Param("userId") String userId);
+
 } // end interface

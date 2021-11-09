@@ -70,7 +70,6 @@
 
                             setTimeout(function (){ isAjaxing = false}, 1000);
 
-
                         },
                         error : function (error) {
 
@@ -83,14 +82,9 @@
 
                             console.log("ajax completed")
 
-
                         }
 
-
                     });
-
-
-
 
                 });
 

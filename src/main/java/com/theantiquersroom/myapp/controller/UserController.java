@@ -13,13 +13,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.theantiquersroom.myapp.domain.UserDTO;
-import com.theantiquersroom.myapp.domain.UserVO;
 import com.theantiquersroom.myapp.service.UserService;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -86,11 +86,20 @@ public class UserController {
     } //sendEmail
 
     @PostMapping("/confirmEmail")
-    public void confirmEmail(@RequestParam("userId") String userId, @RequestParam("authorizationNumber") String authorizationNumber) {
+    public @ResponseBody Map<Object, Object> confirmEmail(@RequestParam("userId") String userId, @RequestParam("authorizationNumber") String authorizationNumber) throws ParseException {
         log.debug("confirmEmail() invoked. userId : {} auth : {}",userId,authorizationNumber);
         log.debug(authorizationNumber);
         log.debug(userId);
-        service.confirmEmail(userId,authorizationNumber);
+
+        boolean confirmResult = false;
+
+        Map<Object, Object> map = new HashMap<Object, Object>();
+
+        confirmResult = service.confirmEmail(userId,authorizationNumber);
+
+        map.put("confirmResult",confirmResult);
+
+        return map;
 
     } //confirmEmail
 

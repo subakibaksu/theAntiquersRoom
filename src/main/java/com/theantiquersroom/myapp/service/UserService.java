@@ -1,5 +1,6 @@
 package com.theantiquersroom.myapp.service;
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -27,7 +28,7 @@ public interface UserService {
     public abstract boolean checkPhone(String phone);
 
     // 이메일 인증번호 매칭검사
-    public abstract boolean confirmEmail(String userId, String auth);
+    public abstract boolean confirmEmail(String userId, String auth) throws ParseException;
 
     // 이메일 발송
     public abstract boolean sendEmail(String userId) throws Exception;
