@@ -14,7 +14,7 @@ import org.apache.ibatis.annotations.Param;
 public interface UserMapper {
 
     //전체 회원 목록 조회
-    public abstract List<UserVO> getUserList(Criteria cri);
+//    public abstract List<UserVO> getUserList(Criteria cri);
 
     //회원가입
     public abstract Integer insertUser(UserDTO user);
@@ -36,5 +36,17 @@ public interface UserMapper {
 
     //로그인
     public abstract UserVO login(String userId);
+    
+	// =========================== //
+
+    //전체 회원 목록 조회
+  public abstract List<UserVO> getUserList();
+  
+  // 회원 정보 수정
+	public abstract Integer update(UserVO user);
+
+	// 특정 게시물 상세조회 - XML Mapper 방식으로 처리
+	public abstract UserVO read(String userId);
+	
     
 } // end interface

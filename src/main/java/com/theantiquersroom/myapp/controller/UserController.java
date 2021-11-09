@@ -21,6 +21,7 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Log4j2
@@ -159,18 +160,7 @@ public class UserController {
     } //resetPwd
 
 
-    @GetMapping("/modify")
-    public void modify() {	// 회원정보 수정페이지로 이동
-        log.debug("USER_modify() invoked.");
 
-    } //modify
-
-    @PostMapping("/modify")
-    public String modify(UserDTO userDto) {	// 회원정보 수정 실행
-        log.debug("USER_modify({}) invoked.", userDto);
-
-        return "/user/userInfo";
-    } //modify
 
 
     @PostMapping("/remove")
@@ -195,5 +185,53 @@ public class UserController {
 
         return "/user/myBidList";
     } //getBidList
+    
+    
+    // =================================================== //
+
+ // 전체회원 목록조회
+ 	@GetMapping("/getUserList")
+ 	public void list(Model model) {	// 게시판 목록화면 요청
+ 		log.debug("list() invoked.");
+ 		
+ 		List<UserVO> list=this.service.getUserList();
+ 		log.info("\t+ list size: {}", list.size());
+ 		
+ 		model.addAttribute("list",list);
+ 	} //list
+ 	
+ 	@GetMapping({"/get" , "/modify"})
+ 	public void get(String userId, Model model) {         // 특정 게시물 상세조회 화면요청
+ 		log.debug("get({}, {}) invoked." , userId, model);
+ 		
+ 		UserVO user = this.service.get(userId);
+ 		log.info("\t+ board: {}" , user);
+ 		
+ 		model.addAttribute("user", user);
+ 	} // get
+ 	
+ 	@PostMapping("/modify")
+ 	public String modify(UserDTO user, RedirectAttributes rttrs) {
+ 		log.debug("modify({}, {}) invoked.", user,rttrs);
+ 		
+ 		UserVO vo=
+ 				new UserVO(
+ 						user.getUserId(),
+ 						user.getPassword(),
+ 						user.getNickName(),
+ 						user.getPhone(),
+ 						user.getUserType()
+ 						
+ 				);
+ 		
+ 		boolean result=this.service.modify(vo);
+ 		
+ 		// 이동되는 화면으로 전송해 줘야 할 파라미터가 있으면,
+ 		// rttrs를 이용해야 한다.
+ 		rttrs.addAttribute("result", result);
+ 		
+ 		return "redirect:/users/getUserList";
+ 	} //modify
+ 	
 
 }  //end class
