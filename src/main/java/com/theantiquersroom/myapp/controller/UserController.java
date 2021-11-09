@@ -42,7 +42,7 @@ public class UserController {
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public String register(UserDTO user) { //회원가입 서비스 수행, 저장
-        log.debug("register({}, {}) invoked.", user);
+        log.debug("register({}) invoked.", user);
 
         this.service.registerUser(user);
         return "/main";
