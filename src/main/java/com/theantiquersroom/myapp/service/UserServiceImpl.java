@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
             mailsender.sendmail("authorizationNumber : "+ authorizationNumber,userId);
 
-            mapper.insertAuthorizationNumber(authorizationNumber,userId);
+            mapper.insertAuthorizationNumber(userId,authorizationNumber);
 
             mailSentCheck = true;
 

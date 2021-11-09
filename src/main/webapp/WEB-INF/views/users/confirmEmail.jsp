@@ -25,7 +25,9 @@
                     dataType : "json",
                     contentType: "application/json; charset=UTF-8",
                     success : function (result) {
-                        log.info("success ajax")
+
+                        console.log("success ajax");
+                        console.log(result.check);
                         // if(result.check){
                         //     console.log('okay');
                         //     $('#mymsg').text('okay');
@@ -44,7 +46,6 @@
 
                         setTimeout(function (){ isAjaxing = false}, 1000);
 
-
                     },
                     error : function (error) {
 
@@ -53,7 +54,6 @@
                         setTimeout(function (){ isAjaxing = false}, 1000);
 
                     },
-
 
                 });
 
@@ -90,7 +90,6 @@
 
                         setTimeout(function (){ isAjaxing = false}, 1000);
 
-
                     },
                     error : function (error) {
 
@@ -99,7 +98,6 @@
                         setTimeout(function (){ isAjaxing = false}, 1000);
 
                     },
-
 
                 });
 

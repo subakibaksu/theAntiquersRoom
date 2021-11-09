@@ -34,16 +34,17 @@
         ]]>
     </insert>
 
-    <!-- 회원가입 -->
+    <!-- 인증번호 -->
     <insert
             id="insertAuthorizationNumber"
             parameterType="string">
 
         <![CDATA[
-        INSERT INTO emailchecktemp(userid, auth, updatedate)
+        REPLACE INTO emailchecktemp(userid, auth, updatedate)
         VALUES (#{userId}, #{authorizationNumber}, now())
         ]]>
     </insert>
+
 
     <!-- 비밀번호 재설정  -->
     <update
