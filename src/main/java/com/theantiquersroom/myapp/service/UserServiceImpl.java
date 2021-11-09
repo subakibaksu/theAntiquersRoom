@@ -40,6 +40,10 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     @Override
     public boolean registerUser(UserDTO user) {
         log.debug("login({}) invoked.", user);
+
+        // 비밀번호 암호화
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         int affectedRows = this.mapper.insertUser(user);
 
         return affectedRows > 0;
