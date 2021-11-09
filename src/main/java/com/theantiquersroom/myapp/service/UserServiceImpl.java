@@ -78,14 +78,11 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     
     @Override
 	public boolean login(String userId, String password) {
-		log.debug("login({}, {}) invoked.", userId, password);
-		
-		UserVO vo =this.mapper.login(userId);
-		log.info("\t+ vo: {}", vo);
-		
-		assert vo != null;
-		
-		return (vo.getPassword().equals(password));
+        log.debug("login({}, {}) invoked.", userId, password);
+
+        UserVO vo = this.mapper.login(userId);
+
+        return passwordEncoder.matches(password, vo.getPassword());
 	}
 
 	@Override
