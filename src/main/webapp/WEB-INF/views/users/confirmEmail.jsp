@@ -14,6 +14,10 @@
     <script>
         $(document).ready(function (){
 
+            $("#timer").hide();
+            var counter = 0;
+            var lefttime = 0;
+
             var isAjaxing = false;
 
             $("#sendMailBtn").click(function (){
@@ -48,6 +52,10 @@
                             if(result.check){
 
                                 console.log('emaiisent');
+                                lefttime = 180;
+                                counter = 0;
+                                $("#timer").show();
+                                makeTimer();
 
                             }
 
@@ -118,7 +126,30 @@
 
             });
 
+            function convertSeconds(s){
+                var min = Math.floor(s / 60);
+                var sec = s % 60;
+                return min + ':' + sec;
+
+            }
+
+            function makeTimer(){
+
+                var setinterval = setInterval(function (){
+                    counter++;
+                    if(lefttime >= counter){
+                        $("#timer").html(convertSeconds(lefttime - counter));
+                    } else {
+                        $("#timer").html('시간이 만료되었습니다.');
+                    }
+                }, 1000);
+
+            };
+
         });
+
+
+
     </script>
 </head>
 <body>
@@ -132,6 +163,7 @@
         <input id="userIdForAuth" name="userId" hidden>
         <input name="authorizationNumber">
         <button id="checkAuthBtn">check</button>
+        <div id="timer"></div>
         <p id = "emailCheckStatus"></p>
     </form>
 
