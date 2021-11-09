@@ -66,9 +66,18 @@ public class UserController {
     } //confirmEmail
 
     @PostMapping("/checkId")
-    public void checkId(String id) {	//아이디 중복검사
-        log.debug("checkId() invoked.");
-
+    public Integer checkId(@RequestParam("userId") String userId) {	//아이디 중복검사
+        log.debug("checkId({}) invoked.", userId);
+        
+        boolean checkid = this.service.checkId(userId); //true/false인지 서비스에서 판별 
+        log.info("\t+ checkid: {}", checkid);
+        
+        if(checkid) {
+        	return 1;		//중복값이 없을때 --> 다음단계로 
+        } else {
+        	return 0;		//중복값이 있을때 --> register 막는다.
+        }
+        
     } //checkId
 
     @PostMapping("/checkNickName")

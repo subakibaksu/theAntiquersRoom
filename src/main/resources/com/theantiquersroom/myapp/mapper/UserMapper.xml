@@ -58,10 +58,14 @@
 
     <!-- 특정 아이디 조회 -->
     <select
-            id="getUserId">
-
+            id="getUserId"
+            resultType="com.theantiquersroom.myapp.domain.UserVO"
+            parameterType="String"
+    >
         <![CDATA[
-
+			
+		  SELECT userId FROM users WHERE user_id = #{userId}
+		  
         ]]>
     </select>
 
