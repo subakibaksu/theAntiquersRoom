@@ -45,6 +45,26 @@
         ]]>
     </insert>
 
+    <!-- 현재DB서버 시간받아오기 -->
+    <select id="selectNow"
+            parameterType="Date"
+    >
+    <![CDATA[
+    SELECT now()
+    ]]>
+
+    </select>
+
+    <!-- emailchecktemp table의 auth 조회 -->
+    <select id="selectAuth"
+            parameterType="String"
+            resultType="String"
+    >
+        <![CDATA[
+           SELECT auth from emailchecktemp WHERE userId = #{userId}
+        ]]>
+
+    </select>
 
     <!-- 비밀번호 재설정  -->
     <update

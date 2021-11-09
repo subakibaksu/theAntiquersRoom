@@ -62,7 +62,7 @@ public class UserController {
 
     @GetMapping("/confirmEmail")
     public void confirmEmail(){
-
+        log.debug("confirmEmail");
     };
 
     //입력받은 이메일로 인증코드 발송
@@ -78,6 +78,7 @@ public class UserController {
         mailSentCheck = service.sendEmail(userId);
 
         map.put("check",mailSentCheck);
+        map.put("userId",userId);
         log.debug("result : {}", mailSentCheck);
 
 
@@ -85,9 +86,11 @@ public class UserController {
     } //sendEmail
 
     @PostMapping("/confirmEmail")
-    public void confirmEmail(@Param("authorizationNumber") String authorizationNumber) {
-        log.debug("confirmEmail() invoked.");
+    public void confirmEmail(@RequestParam("userId") String userId, @RequestParam("authorizationNumber") String authorizationNumber) {
+        log.debug("confirmEmail() invoked. userId : {} auth : {}",userId,authorizationNumber);
         log.debug(authorizationNumber);
+        log.debug(userId);
+        service.confirmEmail(userId,authorizationNumber);
 
     } //confirmEmail
 

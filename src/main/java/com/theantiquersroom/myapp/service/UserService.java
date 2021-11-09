@@ -27,7 +27,7 @@ public interface UserService {
     public abstract boolean checkPhone(String phone);
 
     // 이메일 인증번호 매칭검사
-    public abstract boolean confirmEmail(String eCode);
+    public abstract boolean confirmEmail(String userId, String auth);
 
     // 이메일 발송
     public abstract boolean sendEmail(String userId) throws Exception;
@@ -41,7 +41,6 @@ public interface UserService {
     // 비밀번호 재설정
     public abstract boolean resetPwd(String userId, String nickName) throws Exception;
 
-    
     // 회원정보 수정
     public abstract boolean modify(UserDTO userDto);
     

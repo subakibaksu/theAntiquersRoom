@@ -14,94 +14,86 @@
     <script>
         $(document).ready(function (){
 
-            $("#mailSendForAuthorizationForm").submit(function (){
+            $("#sendMailBtn").click(function (){
 
-                var requestdata = $(this).serialize();
+                var userId = $("#userId").val();
+                $("#userIdForAuth").val(userId);
 
-                $.ajax({
-                    async: true,
-                    type : 'POST',
-                    url : "/users/sendEmail?" + requestdata,
-                    dataType : "json",
-                    contentType: "application/json; charset=UTF-8",
-                    success : function (result) {
+                $("#mailSendForAuthorizationForm").submit(function (event){
 
-                        console.log("success ajax");
-                        console.log(result.check);
-                        // if(result.check){
-                        //     console.log('okay');
-                        //     $('#mymsg').text('okay');
-                        //     $('#inputuserId').val(null);
-                        //     $('#inputNickname').val(null);
-                        //
-                        //
-                        // }else {
-                        //     console.log('nope');
-                        //     $('#mymsg').text('nope');
-                        //     $('#inputuserId').val(null);
-                        //     $('#inputNickname').val(null);
-                        //
-                        //
-                        // }
+                    event.preventDefault();
 
-                        setTimeout(function (){ isAjaxing = false}, 1000);
+                    var requestdata = $(this).serialize();
 
-                    },
-                    error : function (error) {
+                    console.log(requestdata);
 
-                        console.log("error", error);
+                    $.ajax({
+                        async: true,
+                        type : 'POST',
+                        url : "/users/sendEmail?" + requestdata,
+                        dataType : "json",
+                        contentType: "application/json; charset=UTF-8",
+                        success : function (result) {
 
-                        setTimeout(function (){ isAjaxing = false}, 1000);
+                            console.log("success ajax");
+                            console.log(result.check);
 
-                    },
+                            if(result.check){
+                                console.log('emaiisent');
 
-                });
+                            }
 
-            })
+                        },
+                        error : function (error) {
 
+                            console.log("error", error);
 
-            $("#checkAuthorizationNumberForm").submit(function (){
+                        },
 
-                var requestdata = $(this).serialize();
+                        complete : function () {
 
-                $.ajax({
-                    async: true,
-                    type : 'POST',
-                    url : "/users/confirmEmail?" + requestdata,
-                    dataType : "json",
-                    contentType: "application/json; charset=UTF-8",
-                    success : function (result) {
-                        log.info("success ajax")
-                        // if(result.check){
-                        //     console.log('okay');
-                        //     $('#mymsg').text('okay');
-                        //     $('#inputuserId').val(null);
-                        //     $('#inputNickname').val(null);
-                        //
-                        //
-                        // }else {
-                        //     console.log('nope');
-                        //     $('#mymsg').text('nope');
-                        //     $('#inputuserId').val(null);
-                        //     $('#inputNickname').val(null);
-                        //
-                        //
-                        // }
+                            console.log("completed");
 
-                        setTimeout(function (){ isAjaxing = false}, 1000);
+                        }
 
-                    },
-                    error : function (error) {
+                    });
 
-                        console.log("error", error);
+                })
 
-                        setTimeout(function (){ isAjaxing = false}, 1000);
+            });
 
-                    },
+            $("#checkAuthBtn").click(function (){
 
-                });
+                console.log('clicked');
 
-            })
+                $("#checkAuthorizationNumberForm").submit(function (event){
+
+                    event.preventDefault();
+
+                    var requestdata = $(this).serialize();
+                    console.log(requestdata);
+                    $.ajax({
+                        async: true,
+                        type : 'POST',
+                        url : "/users/confirmEmail?" + requestdata,
+                        dataType : "json",
+                        contentType: "application/json; charset=UTF-8",
+                        success : function (result) {
+
+                            log.info("success ajax")
+
+                        },
+                        error : function (error) {
+
+                            console.log("error", error);
+
+                        },
+
+                    });
+
+                })
+
+            });
 
         });
     </script>
@@ -109,13 +101,14 @@
 <body>
 
     <form id = mailSendForAuthorizationForm action="#">
-        <input name="userId">
-        <button type="submit">send</button>
+        <input id="userId" name="userId">
+        <button id="sendMailBtn">send</button>
     </form>
 
     <form id = checkAuthorizationNumberForm action="#">
+        <input id="userIdForAuth" name="userId" hidden>
         <input name="authorizationNumber">
-        <button type="submit">check</button>
+        <button id="checkAuthBtn">check</button>
         <div id = "emailCheckStatus"></div>
     </form>
 

@@ -1,5 +1,6 @@
 package com.theantiquersroom.myapp.mapper;
 
+import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -40,5 +41,11 @@ public interface UserMapper {
 
     //로그인
     public abstract UserVO login(String userId);
+
+    //현재시간 조회
+    public abstract Date selectNow();
+
+    //emailchecktemp table의 auth 조회
+    public abstract String selectAuth(@Param("userId") String userId);
     
 } // end interface

@@ -1,6 +1,8 @@
 package com.theantiquersroom.myapp.service;
 
 
+
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.DisposableBean;
@@ -17,10 +19,7 @@ import com.theantiquersroom.myapp.utils.Mailsender;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.DisposableBean;
-import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+
 
 
 
@@ -62,8 +61,12 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     }
 
     @Override
-    public boolean confirmEmail(String eCode) {
-        // TODO Auto-generated method stub
+    public boolean confirmEmail(String userId, String auth) {
+
+        Date serverTime = mapper.selectNow();
+        log.debug("serverTime : {}",serverTime);
+        log.debug("userId : {}",mapper.selectAuth(userId));
+
         return false;
     }
 
