@@ -14,6 +14,8 @@
     <script>
         $(document).ready(function (){
 
+            var isAjaxing = false;
+
             $("#sendMailBtn").click(function (){
 
                 var userId = $("#userId").val();
@@ -24,8 +26,13 @@
                     event.preventDefault();
 
                     var requestdata = $(this).serialize();
-
                     console.log(requestdata);
+
+                    if( isAjaxing ){
+                        return;
+                    }
+
+                    isAjaxing = true;
 
                     $.ajax({
                         async: true,
@@ -39,22 +46,20 @@
                             console.log(result.check);
 
                             if(result.check){
+
                                 console.log('emaiisent');
 
                             }
+
+                            setTimeout(function (){ isAjaxing = false}, 1000);
 
                         },
                         error : function (error) {
 
                             console.log("error", error);
+                            setTimeout(function (){ isAjaxing = false}, 1000);
 
                         },
-
-                        complete : function () {
-
-                            console.log("completed");
-
-                        }
 
                     });
 
@@ -66,9 +71,16 @@
 
                 console.log('clicked');
 
+
                 $("#checkAuthorizationNumberForm").submit(function (event){
 
                     event.preventDefault();
+
+                    if( isAjaxing ){
+                        return;
+                    }
+
+                    isAjaxing = true;
 
                     var requestdata = $(this).serialize();
                     console.log(requestdata);
@@ -89,10 +101,14 @@
                                 $("#emailCheckStatus").text('유효하지 않은 인증코드입니다.')
                             }
 
+                            setTimeout(function (){ isAjaxing = false}, 1000);
+
                         },
                         error : function (error) {
 
                             console.log("error", error);
+
+                            setTimeout(function (){ isAjaxing = false}, 1000);
 
                         },
 

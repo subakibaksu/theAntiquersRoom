@@ -35,7 +35,6 @@
 
                     var requestdata = $(this).serialize();
 
-
                     console.log(requestdata);
 
                     if( isAjaxing ){
