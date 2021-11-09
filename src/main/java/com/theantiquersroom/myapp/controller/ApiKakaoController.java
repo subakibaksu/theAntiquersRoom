@@ -1,12 +1,10 @@
 package com.theantiquersroom.myapp.controller;
 
 import java.net.URI;
-import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -19,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
 import com.theantiquersroom.myapp.domain.KakaoTokenVO;
+import com.theantiquersroom.myapp.domain.KakaoUserInfoVO;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -66,10 +65,12 @@ public class ApiKakaoController {
 		}
 		
 	    String accessToken = getAccessToken(req, code);
-	    String kakaoEmail = getUserEmail(accessToken);
+	    String userId = getUserId(accessToken);
+	    String userEmail = getUserEmail(accessToken);
 	    
 		log.info("\t + accessToken : {}", accessToken);
-		log.info("\t + kakaoEmail : {}", kakaoEmail);
+		log.info("\t + userId : {}", userId);
+		log.info("\t + userEmail : {}", userEmail);
 
 
 	    return "redirect:/";
@@ -114,9 +115,38 @@ public class ApiKakaoController {
 	}//getAccessToken
 
 	
-	//유저 카카오계정 이메일 정보 가져오기
+	//유저 카카오계정 ID 정보 가져오기
+	public String getUserId (String accessToken) throws Exception {
+		log.debug("getUserId({}) invoked.", accessToken);
+
+	    String userId = ""; //사용자 id	
+
+	    // restTemplate을 사용하여 API 호출
+	    RestTemplate restTemplate = new RestTemplate();
+	    String reqUrl = "https://kapi.kakao.com/v2/user/me";
+	    URI uri = URI.create(reqUrl);
+	    
+	    HttpHeaders headers = new HttpHeaders();
+	    headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+	    headers.set("Authorization", "Bearer " + accessToken);
+	    
+	    HttpEntity<MultiValueMap<String, Object>> restRequest = new HttpEntity<>(headers);
+	    
+	    ResponseEntity<KakaoUserInfoVO> result =restTemplate.postForEntity(uri,  restRequest, KakaoUserInfoVO.class);
+	    
+	    KakaoUserInfoVO responseBody = result.getBody();
+	    log.info("\t + responseBody : {}", responseBody.toString());
+
+	    userId = Long.toString(responseBody.getId());
+	    log.info("\t + userId : {}", userId);
+	    
+	    return userId;
+	}//getUserId
+	
+	
+	//유저 카카오계정 Email 정보 가져오기
 	public String getUserEmail (String accessToken) throws Exception {
-		log.debug("getUserEmail() invoked.");
+		log.debug("getUserEmail({}) invoked.", accessToken);
 
 	    String userEmail = ""; //사용자 이메일	
 
@@ -130,17 +160,20 @@ public class ApiKakaoController {
 	    headers.set("Authorization", "Bearer " + accessToken);
 	    
 	    MultiValueMap<String, Object> parameters = new LinkedMultiValueMap<String, Object>();
-	    parameters.add("property_keys", "kakao_account.email");
+	    String keys = "[\"kakao_account.email\"]"; 
+	    parameters.add("property_keys", keys);
 
 	    HttpEntity<MultiValueMap<String, Object>> restRequest = new HttpEntity<>(parameters, headers);
 	    
-	    ResponseEntity<String> result =restTemplate.postForEntity(uri,  restRequest, String.class);
+	    ResponseEntity<KakaoUserInfoVO> result =restTemplate.postForEntity(uri,  restRequest, KakaoUserInfoVO.class);
 	    
-	    String responseBody = result.getBody();
+	    KakaoUserInfoVO responseBody = result.getBody();
 	    log.info("\t + responseBody : {}", responseBody.toString());
-
-//	    userEmail = responseBody.getString("kakao_account.email");
-//	    log.info("\t + userEmail : {}", userEmail);
+	    
+	    if(responseBody.getKakao_account() != null) {
+		    userEmail = responseBody.getKakao_account().getEmail();
+		    log.info("\t + userEmail : {}", userEmail);
+	    }//if
 
 	    return userEmail;
 	}//getUserEmail
