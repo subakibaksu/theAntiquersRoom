@@ -39,7 +39,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
     @Override
     public boolean registerUser(UserDTO user) {
-        log.debug("login({}, {}) invoked.", user);
+        log.debug("login({}) invoked.", user);
         int affectedRows = this.mapper.insertUser(user);
 
         return affectedRows > 0;
