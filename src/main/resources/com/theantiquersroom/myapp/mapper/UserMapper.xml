@@ -95,5 +95,18 @@
             WHERE user_id=#{userId}
         ]]>
     </select>
+    
+    <!-- 카카오 아이디 조회  -->
+    <select
+            id="getKakaoUser"
+            resultType="com.theantiquersroom.myapp.domain.UserDTO"
+            parameterType="string">
+            
+        <![CDATA[
+
+          SELECT * FROM users WHERE kakao_unique_id = #{kakaoUniqueId}
+
+        ]]>
+    </select>
 
 </mapper>
