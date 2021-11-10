@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.theantiquersroom.myapp.domain.Criteria;
@@ -34,12 +35,17 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     @Setter(onMethod_= {@Autowired})
     Mailsender mailsender;
     UserMapper mapper;
+    BCryptPasswordEncoder passwordEncoder;
 
 
 
     @Override
     public boolean registerUser(UserDTO user) {
         log.debug("login({}) invoked.", user);
+
+        // 비밀번호 암호화
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         int affectedRows = this.mapper.insertUser(user);
 
         return affectedRows > 0;
@@ -72,14 +78,11 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     
     @Override
 	public boolean login(String userId, String password) {
-		log.debug("login({}, {}) invoked.", userId, password);
-		
-		UserVO vo =this.mapper.login(userId);
-		log.info("\t+ vo: {}", vo);
-		
-		assert vo != null;
-		
-		return (vo.getPassword().equals(password));
+        log.debug("login({}, {}) invoked.", userId, password);
+
+        UserVO vo = this.mapper.login(userId);
+
+        return passwordEncoder.matches(password, vo.getPassword());
 	}
 
 	@Override
