@@ -85,7 +85,7 @@ public class ApiKakaoController {
 		    	return "redirect:/"; //메인 화면으로 이동
 		    	
 		    }else {
-		    	return "redirect:/users/register"; //회원가입 페이지로 이동
+		    	return "redirect:/users/register"; //카카오-회원가입 페이지로 이동
 		    }//if-else
 		    
 	    }else {
