@@ -91,24 +91,22 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
         }
 
         return isChecked;
-    }
+
+    } // confirmEmail
 
     @Override
     public boolean sendEmail(String userId) throws Exception {
 
         log.debug("userId : {} nickname : {} ",userId);
+
         boolean mailSentCheck = false;
-        String nick = mapper.selectUserNickname(userId);
-
-        log.debug(nick);
-
-        String authorizationNumber = Integer.toString((int)(Math.random()*3000+1));
 
         if(userId != null){
 
-            mailsender.sendmail("authorizationNumber : "+ authorizationNumber,userId);
-
-            mapper.insertAuthorizationNumber(userId,authorizationNumber);
+            // 인증키 생성후 이메일로 전송 , DB에 Insert
+            String auth = Integer.toString((int)(Math.random()*3000+1));
+            mailsender.sendmail("authorizationKey : "+ auth,userId);
+            mapper.insertAuthorizationNumber(userId,auth);
 
             mailSentCheck = true;
 
@@ -140,18 +138,17 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	public boolean resetPwd(String userId, String nickname) throws Exception {
 
         log.debug("userId : {} nickname : {} ",userId,nickname);
-        boolean mailSentCheck = false;
-        String nick = mapper.selectUserNickname(userId);
 
+        boolean mailSentCheck = false;
+
+        String nick = mapper.selectUserNickname(userId);
         log.debug(nick);
 
-        String newpassword = Integer.toString((int)(Math.random()*3000+1));
-
         if(nick.equals(nickname) && nick!=null){
-            log.debug("yes you can");
 
-           mailsender.sendmail("your new password is : "+ newpassword,userId);
-
+            // 새로운 비밀번호 생성후 이메일로 전송 , DB에 Insert
+            String newpassword = Integer.toString((int)(Math.random()*3000+1));
+            mailsender.sendmail("your new password is : "+ newpassword,userId);
             mapper.updatePassword(newpassword,userId);
 
             mailSentCheck = true;
@@ -159,7 +156,8 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
         }
 
         return mailSentCheck;
-	}
+
+	} // resetPwd()
 
 	@Override
 	public boolean modify(UserDTO userDto) {

@@ -60,48 +60,47 @@ public class UserController {
 
     } //register
 
+    //
     @GetMapping("/confirmEmail")
     public void confirmEmail(){
-        log.debug("confirmEmail");
-    };
 
-    //입력받은 이메일로 인증코드 발송
+        log.debug("confirmEmail() invoked");
+
+    } // confirmEmail
+
     @PostMapping("/sendEmail")
-    public @ResponseBody Map<Object,Object> sendEmail(@Param("userId") String userId) throws Exception {	//입력받은 이메일로 인증코드 발송
-        log.debug("confirmEmail() invoked.");
-        log.debug(userId);
+    public @ResponseBody Map<Object,Object> sendEmail(@Param("userId") String userId) throws Exception {    //입력받은 이메일로 인증코드 발송
 
+        log.debug("confirmEmail() invoked. userid : {}",userId);
+        
+        //Ajax의 결과값을 Json으로 받기 위해 Map객체를 생성
         Map<Object,Object> map = new HashMap<Object, Object>();
 
-        Boolean mailSentCheck = false;
-
-        mailSentCheck = service.sendEmail(userId);
-
-        map.put("check",mailSentCheck);
-        map.put("userId",userId);
-        log.debug("result : {}", mailSentCheck);
-
+        boolean mailSendResult = service.sendEmail(userId);
+        log.debug("result : {}", mailSendResult);
+        map.put("check",mailSendResult);
 
         return map;
-    } //sendEmail
+
+    } // sendEmail
 
     @PostMapping("/confirmEmail")
-    public @ResponseBody Map<Object, Object> confirmEmail(@RequestParam("userId") String userId, @RequestParam("authorizationNumber") String authorizationNumber) throws ParseException {
-        log.debug("confirmEmail() invoked. userId : {} auth : {}",userId,authorizationNumber);
-        log.debug(authorizationNumber);
-        log.debug(userId);
+    public @ResponseBody Map<Object, Object> confirmEmail(
+            @RequestParam("userId") String userId,
+            @RequestParam("auth") String auth) throws ParseException {    //DB인증코드 입력받은 인증코드를 비교
 
-        boolean confirmResult = false;
+        log.debug("confirmEmail() invoked. userId : {} auth : {}" ,userId , auth);
 
+        //Ajax의 결과값을 Json으로 받기 위해 Map객체를 생성
         Map<Object, Object> map = new HashMap<Object, Object>();
 
-        confirmResult = service.confirmEmail(userId,authorizationNumber);
-
+        boolean confirmResult = service.confirmEmail(userId,auth);
+        log.debug("confirmResult : {}", confirmResult);
         map.put("confirmResult",confirmResult);
 
         return map;
 
-    } //confirmEmail
+    } // confirmEmail
 
     @PostMapping("/checkId")
     public void checkId(String id) {	//아이디 중복검사
@@ -172,26 +171,27 @@ public class UserController {
 
     @GetMapping("/resetPwd")
     public void resetPwd() {	// 비밀번호 재설정 페이지로 이동
+
         log.debug("resetPwd() invoked.");
 
     } //resetPwd
 
     @PostMapping("/resetPwd")
-    public @ResponseBody Map<Object, Object> resetPwd(@RequestParam("userId") String userId, @RequestParam("nickName") String nickName) throws Exception {	// 비밀번호 재설정 실행
+    public @ResponseBody Map<Object, Object> resetPwd(
+            @RequestParam("userId") String userId,
+            @RequestParam("nickName") String nickName) throws Exception {	// 비밀번호 재설정 실행
 
-        System.out.println("hihi");
-        log.trace("resetPwd() invoked. model {} {} ", userId, nickName);
+        log.debug("resetPwd() invoked. model {} {} ", userId, nickName);
+
+        //Ajax의 결과값을 Json으로 받기 위해 Map객체를 생성
         Map<Object,Object> map = new HashMap<Object, Object>();
 
-        Boolean mailSentCheck = false;
-
-        mailSentCheck = service.resetPwd(userId, nickName);
+        boolean mailSentCheck = service.resetPwd(userId, nickName);
         map.put("check",mailSentCheck);
         log.debug("result : {}", mailSentCheck);
 
-
-
         return map;
+
     } //resetPwd
 
 

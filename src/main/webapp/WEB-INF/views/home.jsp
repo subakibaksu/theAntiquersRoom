@@ -12,6 +12,7 @@
 <P>  The time on the server is ${serverTime}. </P>
 
 <a href="/users/resetPwd">resetPwd</a>
+<a href="/users/confirmEmail">confirmEmail</a>
 
 </body>
 </html>

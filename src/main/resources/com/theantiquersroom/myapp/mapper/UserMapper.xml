@@ -25,23 +25,25 @@
 
     <!-- 회원가입 -->
     <insert
-        id="insertUser"
-        parameterType="com.theantiquersroom.myapp.domain.UserDTO">
+            id="insertUser"
+            parameterType="com.theantiquersroom.myapp.domain.UserDTO">
 
         <![CDATA[
             INSERT INTO USERS(USER_ID, PASSWORD, NICKNAME, PHONE, USER_TYPE)
             VALUES (#{userId}, #{password}, #{nickName}, #{phone}, #{userType})
         ]]>
+
     </insert>
 
-    <!-- 인증번호 -->
+    <!-- 인증번호 INSERT-->
     <insert
             id="insertAuthorizationNumber"
-            parameterType="string">
+            parameterType="string"
+    >
 
         <![CDATA[
         REPLACE INTO emailchecktemp(userid, auth, updatedate)
-        VALUES (#{userId}, #{authorizationNumber}, now())
+        VALUES (#{userId}, #{auth}, now())
         ]]>
     </insert>
 

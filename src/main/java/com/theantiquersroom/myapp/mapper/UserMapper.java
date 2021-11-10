@@ -23,9 +23,8 @@ public interface UserMapper {
     //특정 아이디의 닉네임 조회
     public abstract String selectUserNickname(@Param("userId") String userId);
 
-
     //아이디와 인증번호 값을 임시 테이블에 INSERT
-    public abstract Integer insertAuthorizationNumber(@Param("userId") String userId, @Param("authorizationNumber") String authorizationNumber);
+    public abstract Integer insertAuthorizationNumber(@Param("userId") String userId, @Param("auth") String auth);
 
     //비밀번호 변경
     public abstract Integer updatePassword(@Param("newPassword") String newPassword, @Param("userId") String userId);
