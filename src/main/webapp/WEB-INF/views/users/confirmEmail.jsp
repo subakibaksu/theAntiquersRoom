@@ -17,7 +17,7 @@
             //timer에 사용될 변수와, timer div hide()
             $("#timer").hide();
             var counter = 0;
-            var lefttime = 0;
+            var lefttime = 180;
 
             //Ajax로 인한 중복요청문제를 방지하기 위한 변수설정
             var isAjaxing = false;
@@ -57,10 +57,9 @@
                             if(result.check){
 
                                 console.log('emaiisent');
-                                lefttime = 180;
                                 counter = 0;
+                                lefttime = 180;
                                 $("#timer").show();
-                                makeTimer();
 
                             }
 
@@ -144,18 +143,17 @@
             }
 
             //타이머
-            function makeTimer(){
 
-                var setinterval = setInterval(function (){
-                    counter++;
-                    if(lefttime >= counter){
-                        $("#timer").html(convertSeconds(lefttime - counter));
-                    } else {
-                        $("#timer").html('시간이 만료되었습니다.');
-                    }
-                }, 1000);
+            setInterval(function (){
+                counter++;
+                if(lefttime >= counter){
+                    $("#timer").html(convertSeconds(lefttime - counter));
+                } else {
+                    $("#timer").html('시간이 만료되었습니다.');
+                }
+            }, 1000);
 
-            };
+
 
         });
 

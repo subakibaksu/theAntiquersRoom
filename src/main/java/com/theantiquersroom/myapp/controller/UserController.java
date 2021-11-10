@@ -3,7 +3,6 @@ package com.theantiquersroom.myapp.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,7 +68,7 @@ public class UserController {
     } // confirmEmail
 
     @PostMapping("/sendEmail")
-    public @ResponseBody Map<Object,Object> sendEmail(@Param("userId") String userId) throws Exception {    //입력받은 이메일로 인증코드 발송
+    public @ResponseBody Map<Object,Object> sendEmail(@RequestParam("userId") String userId) throws Exception {    //입력받은 이메일로 인증코드 발송
 
         log.debug("confirmEmail() invoked. userid : {}",userId);
         
