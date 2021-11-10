@@ -4,7 +4,9 @@ import java.net.URI;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -18,8 +20,10 @@ import org.springframework.web.client.RestTemplate;
 
 import com.theantiquersroom.myapp.domain.KakaoTokenVO;
 import com.theantiquersroom.myapp.domain.KakaoUserInfoVO;
+import com.theantiquersroom.myapp.service.UserService;
 
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
@@ -27,6 +31,9 @@ import lombok.extern.log4j.Log4j2;
 
 @Controller
 public class ApiKakaoController {
+	
+    @Setter(onMethod_= {@Autowired})
+    private UserService service;
 	
     private static final String REST_API_KEY = "12a4433b06d9de4acedcd972fa6a3fa9";
     private static final String REDIRECT_URI = "http://localhost:8090/login/kakao";
@@ -48,7 +55,7 @@ public class ApiKakaoController {
 	
 	//카카오 인가 코드 받기
 	@RequestMapping("/login/kakao")
-	public String oauthKakao(HttpServletRequest req, HttpServletResponse res) throws Exception{
+	public String oauthKakao(HttpServletRequest req, HttpServletResponse res, HttpSession session) throws Exception{
 		log.debug("oauthKakao() invoked.");
 		
 		String code = req.getParameter("code"); //토큰 받기 요청에 필요한 인가 코드
@@ -65,15 +72,26 @@ public class ApiKakaoController {
 		}
 		
 	    String accessToken = getAccessToken(req, code);
-	    String userId = getUserId(accessToken);
-	    String userEmail = getUserEmail(accessToken);
+	    String kakaoUniqueId = getUserId(accessToken);
 	    
 		log.info("\t + accessToken : {}", accessToken);
-		log.info("\t + userId : {}", userId);
-		log.info("\t + userEmail : {}", userEmail);
-
-
-	    return "redirect:/";
+		log.info("\t + userId : {}", kakaoUniqueId);
+		
+	    
+	    if(kakaoUniqueId != null) { //카카오 계정 ID를 session에 바인딩
+		    session.setAttribute("kakaoUniqueId", kakaoUniqueId);
+		    
+		    if(service.getKakaoUser(kakaoUniqueId) != null) { //이미 카카오 통해 가입한 사람이라면,
+		    	return "redirect:/"; //메인 화면으로 이동
+		    	
+		    }else {
+		    	return "redirect:/users/register"; //회원가입 페이지로 이동
+		    }//if-else
+		    
+	    }else {
+		    return "redirect:/";
+	    }//if-else
+	    
 	}//oauthKakao
 	
 	
@@ -117,65 +135,31 @@ public class ApiKakaoController {
 	
 	//유저 카카오계정 ID 정보 가져오기
 	public String getUserId (String accessToken) throws Exception {
-		log.debug("getUserId({}) invoked.", accessToken);
+	   log.debug("getUserId({}) invoked.", accessToken);
 
-	    String userId = ""; //사용자 id	
+	    String userId = ""; //사용자 id   
 
 	    // restTemplate을 사용하여 API 호출
 	    RestTemplate restTemplate = new RestTemplate();
 	    String reqUrl = "https://kapi.kakao.com/v2/user/me";
 	    URI uri = URI.create(reqUrl);
-	    
+	       
 	    HttpHeaders headers = new HttpHeaders();
-	    headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+	    headers.set("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 	    headers.set("Authorization", "Bearer " + accessToken);
 	    
 	    HttpEntity<MultiValueMap<String, Object>> restRequest = new HttpEntity<>(headers);
-	    
+	       
 	    ResponseEntity<KakaoUserInfoVO> result =restTemplate.postForEntity(uri,  restRequest, KakaoUserInfoVO.class);
-	    
+	       
 	    KakaoUserInfoVO responseBody = result.getBody();
 	    log.info("\t + responseBody : {}", responseBody.toString());
 
 	    userId = Long.toString(responseBody.getId());
 	    log.info("\t + userId : {}", userId);
-	    
+	       
 	    return userId;
 	}//getUserId
-	
-	
-	//유저 카카오계정 Email 정보 가져오기
-	public String getUserEmail (String accessToken) throws Exception {
-		log.debug("getUserEmail({}) invoked.", accessToken);
 
-	    String userEmail = ""; //사용자 이메일	
-
-	    // restTemplate을 사용하여 API 호출
-	    RestTemplate restTemplate = new RestTemplate();
-	    String reqUrl = "https://kapi.kakao.com/v2/user/me";
-	    URI uri = URI.create(reqUrl);
-	    
-	    HttpHeaders headers = new HttpHeaders();
-	    headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-	    headers.set("Authorization", "Bearer " + accessToken);
-	    
-	    MultiValueMap<String, Object> parameters = new LinkedMultiValueMap<String, Object>();
-	    String keys = "[\"kakao_account.email\"]"; 
-	    parameters.add("property_keys", keys);
-
-	    HttpEntity<MultiValueMap<String, Object>> restRequest = new HttpEntity<>(parameters, headers);
-	    
-	    ResponseEntity<KakaoUserInfoVO> result =restTemplate.postForEntity(uri,  restRequest, KakaoUserInfoVO.class);
-	    
-	    KakaoUserInfoVO responseBody = result.getBody();
-	    log.info("\t + responseBody : {}", responseBody.toString());
-	    
-	    if(responseBody.getKakao_account() != null) {
-		    userEmail = responseBody.getKakao_account().getEmail();
-		    log.info("\t + userEmail : {}", userEmail);
-	    }//if
-
-	    return userEmail;
-	}//getUserEmail
 	
 }  //end class

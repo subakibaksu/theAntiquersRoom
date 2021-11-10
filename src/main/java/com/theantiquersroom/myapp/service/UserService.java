@@ -63,6 +63,12 @@ public interface UserService {
     // 회원정보 수정
     public abstract boolean modify(UserVO user);
     
+    
+    // =====================카카오 로그인 API 관련===================== //
+    
+    // 카카오 아이디 조회
+    public abstract UserDTO getKakaoUser(String kakaoUniqueId);    
+    
 } // end interface
 
 

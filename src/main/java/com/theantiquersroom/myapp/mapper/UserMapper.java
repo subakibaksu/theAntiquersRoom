@@ -48,5 +48,10 @@ public interface UserMapper {
 	// 특정 게시물 상세조회 - XML Mapper 방식으로 처리
 	public abstract UserVO read(String userId);
 	
-    
+	
+    // =====================카카오 로그인 API 관련===================== //
+	
+	public abstract UserDTO getKakaoUser(String kakaoUniqueId);
+	
+	
 } // end interface
