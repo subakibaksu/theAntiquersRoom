@@ -117,18 +117,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
         return b;
 
 	}
-
-	@Override
-	public boolean modify(UserDTO userDto) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean remove(String userId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 	@Override
 	public List<ProductVO> getMyAuctionList(Criteria cri) {
@@ -142,6 +131,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 		return null;
 	}
 	
+
 	// ========================================= //
 
 
@@ -157,21 +147,39 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	public UserVO get(String userId) {
 		log.debug("get({}) invoked.", userId);
 		
+		// 비즈니스 로직 수행에 필요한 경우, 영속성 계층의 메소드를 호출
 		UserVO user=this.mapper.read(userId);
 		log.info("\t+ board: {}", user);
 		
 		return user;
-	} // get
+	} // get ( 회원 상세 정보 보기)
 	
 	@Override
 	public boolean modify(UserVO user) {
 		log.debug("modify({}) invoked.", user);
 		
+		// 비즈니스 로직 수행에 필요한 경우, 영속성 계층의 메소드를 호출
 		int affectedRows=this.mapper.update(user);
 		log.info("\t+ affectedRows: {}", affectedRows);
 		
 		return affectedRows==1;		
 	} // modify
+
+	@Override
+	public boolean remove(String userId) {
+		log.debug("remove({}) invoked.", userId);
+
+		// 비즈니스 로직 수행에 필요한 경우, 영속성 계층의 메소드를 호출
+		int affectedRows=this.mapper.delete(userId);
+		log.info("\t+ affectedRows: {}", affectedRows);
+		
+		return affectedRows==1;	
+	} // remove
+	
+	@Override
+	public UserVO findId(UserVO vo) {
+		return mapper.findId(vo);
+	} // getNickName
     
 //---------------------------------------------------//
     @Override

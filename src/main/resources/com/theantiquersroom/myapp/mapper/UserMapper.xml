@@ -95,5 +95,48 @@
             WHERE user_id=#{userId}
         ]]>
     </select>
+    
+        <select 
+        id="read"
+        resultType="com.theantiquersroom.myapp.domain.UserVO">
+            select
+                user_id as userId,
+                password,
+                nickname,
+                phone,
+                user_type as userType
+            from users
+       WHERE user_id=#{userId}
+    </select>
+    
+       <!-- 닉네임, 전화번호로 아이디찾기  -->
+    <select
+            id="findId"
+            resultType="com.theantiquersroom.myapp.domain.UserVO">
+            
+		select * from users where nickname=#{nickName} and phone=#{phone}    
+		</select>
+
+        <!-- 회원 정보 삭제 -->
+    
+    <delete id="delete">
+        DELETE FROM users WHERE user_id=#{userId}
+    </delete>
+    
+    	<!-- 회원 정보 수정 -->
+        <update id="update">
+                
+        UPDATE users
+        SET 
+    	    password=#{password},
+            nickname=#{nickName},
+            phone=#{phone},
+            user_type=#{userType}
+           
+        
+        WHERE
+            user_id=#{userId}
+           </update>
+            
 
 </mapper>
