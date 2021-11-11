@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -20,6 +21,7 @@ import lombok.extern.log4j.Log4j2;
 
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Log4j2
@@ -39,24 +41,12 @@ public class UserController {
     } //register
 
     @PostMapping("/register")
-    public String register(UserDTO user, RedirectAttributes rttrs) {
-        //회원가입 서비스 수행, 저장
+    @ResponseStatus(HttpStatus.CREATED)
+    public String register(UserDTO user) { //회원가입 서비스 수행, 저장
+        log.debug("register({}) invoked.", user);
 
-        log.debug("register({}, {}) invoked.", user, rttrs);
-
-        return "redirect:/";
-    } //register
-
-    @GetMapping("/kakaoLogin")
-    public void kakaoLogin() {	//카카오 로그인 화면 요청
-        log.debug("kakaoLogin() invoked.");
-
-    } //register
-
-    @PostMapping("/kakaoLogin")
-    public void kakaoLogin(String code) {	//카카오 로그인 화면 요청
-        log.debug("kakaoLogin() invoked.");
-
+        this.service.registerUser(user);
+        return "/main";
     } //register
 
     //
@@ -152,18 +142,7 @@ public class UserController {
     } //logout
 
 
-    @GetMapping("/findId")
-    public void findId() {		// 아이디 찾기 페이지로 이동
-        log.debug("findId() invoked.");
 
-    } //findId
-
-    @PostMapping("/findId")
-    public String findId(String nickName, String phone) {	// 아이디 찾기 실행
-        log.debug("findId({}, {}) invoked.", nickName, phone);
-
-        return "/user/login";	// 아이디 확인 후, 로그인 페이지로 이동
-    } //findId
 
 
 
@@ -193,26 +172,9 @@ public class UserController {
     } //resetPwd
 
 
-    @GetMapping("/modify")
-    public void modify() {	// 회원정보 수정페이지로 이동
-        log.debug("USER_modify() invoked.");
-
-    } //modify
-
-    @PostMapping("/modify")
-    public String modify(UserDTO userDto) {	// 회원정보 수정 실행
-        log.debug("USER_modify({}) invoked.", userDto);
-
-        return "/user/userInfo";
-    } //modify
 
 
-    @PostMapping("/remove")
-    public String remove(Model model) {	// 회원탈퇴 실행	// id는 session값인데.. 흠..?
-        log.debug("USER_remove({}) invoked.", model);
 
-        return "/user/main";
-    } //remove
 
 
     @GetMapping("/getMyAuctionList")
@@ -229,5 +191,91 @@ public class UserController {
 
         return "/user/myBidList";
     } //getBidList
+    
+    
+    // ======================== JS =========================== //
+
+ // 전체회원 목록조회
+ 	@GetMapping("/getUserList")
+ 	public void list(Model model) {	// 게시판 목록화면 요청
+ 		log.debug("list() invoked.");
+ 		
+ 		List<UserVO> list=this.service.getUserList();
+ 		log.info("\t+ list size: {}", list.size());
+ 		
+ 		model.addAttribute("list",list);
+ 	} //list
+ 	
+ 	@GetMapping({"/get" , "/modify"})
+ 	public void get(String userId, Model model) {         // 특정 게시물 상세조회 화면요청
+ 		log.debug("get({}, {}) invoked." , userId, model);
+ 		
+ 		UserVO user = this.service.get(userId);
+ 		log.info("\t+ board: {}" , user);
+ 		
+ 		model.addAttribute("user", user);
+ 	} // get
+ 	
+ 	@PostMapping("/modify")
+ 	public String modify(UserDTO user, RedirectAttributes rttrs) {
+ 		log.debug("modify({}, {}) invoked.", user,rttrs);
+ 		
+ 		UserVO vo=
+ 				new UserVO(
+ 						user.getKakaoUniqueId(),
+ 						user.getUserId(),
+ 						user.getPassword(),
+ 						user.getNickName(),
+ 						user.getPhone(),
+ 						user.getUserType()
+ 						
+ 				);
+ 		
+ 		boolean result=this.service.modify(vo);
+ 		
+ 		// 이동되는 화면으로 전송해 줘야 할 파라미터가 있으면,
+ 		// rttrs를 이용해야 한다.
+ 		rttrs.addAttribute("result", result);
+ 		
+ 		return "redirect:/users/getUserList";
+ 	} //modify
+ 	
+ 	
+    // 아이디 찾기 페이지 이동
+	@GetMapping("/findId")
+	public String findIdView() {
+		return "users/findId";
+	} // findId
+	
+    // 아이디 찾기 실행
+	@PostMapping("/findId")
+	public String findIdAction(UserVO vo, Model model) {
+		UserVO user = service.findId(vo);
+		
+		
+		if(user == null) { 
+			model.addAttribute("check", 1);
+		} else { 
+			model.addAttribute("check", 0);
+			model.addAttribute("userId", user.getUserId());
+		}
+		
+		return "users/findId";
+	} // findId
+
+    
+	@PostMapping("/remove")
+	public String remove(
+			@RequestParam("userId") String userId,
+			RedirectAttributes rttrs) 
+	{
+		log.debug("remove({}) invoked.", userId);
+		
+		boolean result=this.service.remove(userId);
+		rttrs.addAttribute("result", result);
+		
+		return "redirect:/users/getUserList";
+	} //remove
+ 	
 
 }  //end class

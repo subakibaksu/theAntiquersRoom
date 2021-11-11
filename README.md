@@ -18,3 +18,9 @@
 - @gombibi
 - @subakibaksu
 - @kimdindoo
+
+## 📃 Use Case
+![UseCase_1102](https://user-images.githubusercontent.com/86665569/140708210-ffc9dedb-a5d9-490b-952b-7c011af6468b.png)
+
+## 📃 eXERD
+![image](https://user-images.githubusercontent.com/86665569/140708585-d3b6ca3a-7ca6-4745-80a4-17026d987849.png)

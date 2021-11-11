@@ -16,7 +16,7 @@ import com.theantiquersroom.myapp.domain.UserVO;
 public interface UserService {
 
     // 회원가입
-    public abstract boolean registerUsers(UserVO user);
+    public abstract boolean registerUser(UserDTO user);
 
     // 아이디 중복 검사
     public abstract boolean checkId(String userId);
@@ -47,12 +47,34 @@ public interface UserService {
     
     // 회원 탈퇴
     public abstract boolean remove(String userId);
+
     
     // 나의 경매리스트 조회
     public abstract List<ProductVO> getMyAuctionList(Criteria cri);
     
     // 나의 입찰리스트 조회
     public abstract List<ProductVO> getBidList(Criteria cri);
+    
+
+	// 전체 회원 목록조회
+	public abstract List<UserVO> getUserList();
+	
+	// 상세 회원 목록 조회
+	public abstract UserVO get(String userId);
+	
+    // 회원정보 수정
+    public abstract boolean modify(UserVO user);
+    
+    // 닉네임, 폰번호로 아이디찾기
+    public abstract UserVO findId(UserVO vo);
+    
+    // 회원 탈퇴
+    public abstract boolean remove(String userId);
+    
+    // =====================카카오 로그인 API 관련===================== //
+    
+    // 카카오 아이디 조회
+    public abstract UserDTO getKakaoUser(String kakaoUniqueId);    
     
 } // end interface
 

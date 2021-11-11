@@ -15,10 +15,10 @@ import org.apache.ibatis.annotations.Param;
 public interface UserMapper {
 
     //전체 회원 목록 조회
-    public abstract List<UserVO> getUserList(Criteria cri);
+//    public abstract List<UserVO> getUserList(Criteria cri);
 
     //회원가입
-    public abstract Integer insertUser(UserVO user);
+    public abstract Integer insertUser(UserDTO user);
 
     //특정 아이디의 닉네임 조회
     public abstract String selectUserNickname(@Param("userId") String userId);
@@ -40,14 +40,29 @@ public interface UserMapper {
 
     //로그인
     public abstract UserVO login(String userId);
-
-    //현재시간 조회
-    public abstract String selectNow();
-
+  
     //emailchecktemp table의 auth 조회
     public abstract String selectAuth(@Param("userId") String userId);
 
-    //emailchecktemp table의 updatedate 조회
-    public abstract String selectUpdatedate(@Param("userId") String userId);
+	  // =========================== //
 
+    // 전체 회원 목록 조회
+    public abstract List<UserVO> getUserList();
+  
+    // 회원 정보 수정
+	  public abstract Integer update(UserVO user);
+
+	  // 회원정보 상세조회 - XML Mapper 방식으로 처리
+	  public abstract UserVO read(String userId);
+	
+	  //  특정 회원 삭제
+	  public abstract Integer delete(String userId);
+	
+    // 아이디 찾기
+    public abstract UserVO findId(UserVO vo);
+	
+    // =====================카카오 로그인 API 관련===================== //
+	
+	  public abstract UserDTO getKakaoUser(String kakaoUniqueId);
+	
 } // end interface
