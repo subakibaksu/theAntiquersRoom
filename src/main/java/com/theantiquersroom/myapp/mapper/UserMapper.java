@@ -1,14 +1,14 @@
 package com.theantiquersroom.myapp.mapper;
 
-import java.sql.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.theantiquersroom.myapp.domain.Criteria;
+import com.theantiquersroom.myapp.domain.ProductVO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
-import org.apache.ibatis.annotations.Param;
 
 
 @Mapper
@@ -60,9 +60,17 @@ public interface UserMapper {
 	
     // 아이디 찾기
     public abstract UserVO findId(UserVO vo);
+    
+    
+    // =====================마이페이지 관련===================== //
+    
+    //특정 회원 ID 통한 경매 리스트 조회
+    public abstract List<ProductVO> getMyAuctionList(String userId, Criteria cri);
 	
+    
     // =====================카카오 로그인 API 관련===================== //
 	
-	  public abstract UserDTO getKakaoUser(String kakaoUniqueId);
+    //카카오계정 ID 조회
+	public abstract UserDTO getKakaoUser(String kakaoUniqueId);
 	
 } // end interface

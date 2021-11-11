@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.theantiquersroom.myapp.domain.Criteria;
+import com.theantiquersroom.myapp.domain.ProductVO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
 import com.theantiquersroom.myapp.service.UserService;
@@ -179,14 +182,20 @@ public class UserController {
 
 
 
+    // ======================== MyPage =========================== //
 
-
-
+    
     @GetMapping("/getMyAuctionList")
-    public String getMyAuctionList(Model model) {	// 나의 경매리스트 페이지로 이동
-        log.debug("getMyAuctionList({}) invoked.", model);
+    public void getMyAuctionList(
+    		String userId, 
+    		@ModelAttribute("cri") Criteria cri,
+    		Model model) {	// 나의 경매리스트 페이지로 이동
+        log.debug("getMyAuctionList({}, {}) invoked.", userId, model);
 
-        return "/user/myAuctionList";
+        List<ProductVO> myAuctionList = this.service.getMyAuctionList(userId, cri);
+ 		log.info("\t+ myAuctionList: {}", myAuctionList);
+
+ 		model.addAttribute("myAuctionList",myAuctionList);
     } //getMyAuctionList
 
 

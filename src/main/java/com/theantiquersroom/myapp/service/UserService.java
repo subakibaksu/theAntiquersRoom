@@ -47,7 +47,7 @@ public interface UserService {
 
     
     // 나의 경매리스트 조회
-    public abstract List<ProductVO> getMyAuctionList(Criteria cri);
+    public abstract List<ProductVO> getMyAuctionList(String userId, Criteria cri);
     
     // 나의 입찰리스트 조회
     public abstract List<ProductVO> getBidList(Criteria cri);

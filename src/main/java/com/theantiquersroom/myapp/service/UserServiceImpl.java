@@ -151,11 +151,16 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
 
 	@Override
-	public List<ProductVO> getMyAuctionList(Criteria cri) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	public List<ProductVO> getMyAuctionList(String userId, Criteria cri) {
+		log.debug("getMyAuctionList({},{}) invoked.",userId,cri);
+		
+		List<ProductVO> list=this.mapper.getMyAuctionList(userId, cri);
+		log.info("\t+ list size: {}", list.size());
+		
+		return list;
+	}//getMyAuctionList
+	
+	
 	@Override
 	public List<ProductVO> getBidList(Criteria cri) {
 		// TODO Auto-generated method stub
@@ -221,7 +226,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 		UserDTO user = this.mapper.getKakaoUser(kakaoUniqueId);
 		
 		return user;
-	}
+	}//getKakaoUser
     
 //---------------------------------------------------//
     @Override

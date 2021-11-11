@@ -164,6 +164,24 @@
         WHERE
             user_id=#{userId}
            </update>
+           
+           
+    <!-- 마이페이지-나의경매리스트 조회 -->
+    <select
+        id="getMyAuctionList"
+        resultType="com.theantiquersroom.myapp.domain.ProductVO">
+
+        <![CDATA[ 
+
+            SELECT * 
+            FROM product 
+            OFFSET (#{currPage}-1) * #{amount} ROWS 
+            FETCH NEXT #{amount} ROWS ONLY 
+            WHERE user_id=#{userId}
+            ORDER BY p_created_at DESC
+
+        ]]>
+    </select>       
             
 
 
