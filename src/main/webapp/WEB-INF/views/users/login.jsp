@@ -6,10 +6,6 @@
 <head>
     <meta charset="UTF-8">
     <title>login.jsp</title>
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
-    </style>
         
     <link rel="stylesheet" href="../../../resources/css/login.css">
 
