@@ -25,15 +25,42 @@
 
     <!-- 회원가입 -->
     <insert
-        id="insertUser"
-        parameterType="com.theantiquersroom.myapp.domain.UserDTO">
+            id="insertUser"
+            parameterType="com.theantiquersroom.myapp.domain.UserDTO">
 
         <![CDATA[
             INSERT INTO users(USER_ID, PASSWORD, NICKNAME, PHONE, USER_TYPE)
             VALUES (#{userId}, #{password}, #{nickName}, #{phone}, 2)
         ]]>
+
     </insert>
 
+    <!-- 인증번호 INSERT-->
+    <insert
+            id="insertAuthorizationNumber"
+            parameterType="string"
+    >
+
+        <![CDATA[
+        REPLACE INTO authkey(userid, auth, updatedate)
+        VALUES (#{userId}, #{auth}, now())
+        ]]>
+    </insert>
+
+    <!-- emailchecktemp table의 auth 조회 -->
+    <select id="selectAuth"
+            parameterType="String"
+            resultType="String"
+    >
+        <![CDATA[
+                SELECT auth from authkey
+                WHERE userId = #{userId}
+                AND updatedate BETWEEN DATE_SUB(now(), interval 3 minute) AND now()
+        ]]>
+
+    </select>
+
+    <!-- 비밀번호 재설정  -->
     <update
             id="updatePassword"
             parameterType="String"
@@ -88,7 +115,7 @@
             id="login"
             resultType="com.theantiquersroom.myapp.domain.UserVO"
             parameterType="string">
-            
+
         <![CDATA[
             SELECT *
             FROM users
@@ -152,5 +179,7 @@
 
         ]]>
     </select>
+
+
 
 </mapper>

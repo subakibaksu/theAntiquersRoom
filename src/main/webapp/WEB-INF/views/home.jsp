@@ -43,6 +43,7 @@
     <script>
     function kakaoLogin() {
 
+
         $.ajax({
             url: '/login/getKakaoAuthUrl',
             type: 'get',
