@@ -68,8 +68,6 @@ public interface UserService {
     // 닉네임, 폰번호로 아이디찾기
     public abstract UserVO findId(UserVO vo);
     
-    // 회원 탈퇴
-    public abstract boolean remove(String userId);
     
     // =====================카카오 로그인 API 관련===================== //
     

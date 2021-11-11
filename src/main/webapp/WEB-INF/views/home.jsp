@@ -28,7 +28,7 @@
     <P>  The time on the server is ${serverTime}. </P>
 
     <P>  Kakao Id : ${kakaoUserId}. </P>
-    <P>  Kakao Email : ${kakaoUserEmail}. </P>
+    <P>  Kakao usertype : ${usertype}. </P>
 
     <img onclick="kakaoLogin();" style="cursor: pointer;" src="../../resources/images/kakao_login.png">
 
