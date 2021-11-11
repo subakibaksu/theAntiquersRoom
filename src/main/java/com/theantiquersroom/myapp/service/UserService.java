@@ -40,11 +40,7 @@ public interface UserService {
     public abstract boolean resetPwd(String userId, String nickName) throws Exception;
 
     
-    // 회원정보 수정
-    public abstract boolean modify(UserDTO userDto);
-    
-    // 회원 탈퇴
-    public abstract boolean remove(String userId);
+
     
     // 나의 경매리스트 조회
     public abstract List<ProductVO> getMyAuctionList(Criteria cri);
@@ -52,7 +48,6 @@ public interface UserService {
     // 나의 입찰리스트 조회
     public abstract List<ProductVO> getBidList(Criteria cri);
     
-    // =================================================== //
 
 	// 전체 회원 목록조회
 	public abstract List<UserVO> getUserList();
@@ -63,6 +58,11 @@ public interface UserService {
     // 회원정보 수정
     public abstract boolean modify(UserVO user);
     
+    // 닉네임, 폰번호로 아이디찾기
+    public abstract UserVO findId(UserVO vo);
+    
+    // 회원 탈퇴
+    public abstract boolean remove(String userId);
     
     // =====================카카오 로그인 API 관련===================== //
     

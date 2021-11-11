@@ -22,9 +22,26 @@
 	$(function(){
 		console.clear();
 		console.log('jquery started..');
-
-
 		
+		// REMOVE 버튼에 대한 통작
+		$('#removeBtn').click(function name(params) {
+			console.log('click event triggered..');
+
+			// 현재 이 문서에 있는, form 태그를 얻어내서 , 
+			// 우리 마음대로 조작하자!!!
+
+			var formObj=$('form');
+
+			formObj.attr('method', 'POST'); // 태그의 속성을 고치고 싶을땐 attr 을 쓴다.
+			formObj.attr('action', '/users/remove');
+
+			formObj.submit();
+
+			// BOM(Browser Object Model) : winodw == self
+			// self.location='/board/remove?bno=${board.bno}';  // 브라우저 주소창에 넣는 거기때문에 post (x), 무조건 get (o)
+
+		}); //onclick
+
 		// LIST 버튼에 대한 이벤트 등록 처리
 		$('#listBtn').click(function(){
 			console.log('click event triggered..');
@@ -74,6 +91,7 @@
 				<tr>
 					<td colspan="2">
 						<button type="submit" id="modifyBtn">SUBMIT</button>
+						<button type="button" id="removeBtn">REMOVE</button>
 						<button type="button" id="listBtn">LIST</button>
 					</td>
 				</tr>

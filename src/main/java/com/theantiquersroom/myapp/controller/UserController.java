@@ -107,18 +107,7 @@ public class UserController {
     } //logout
 
 
-    @GetMapping("/findId")
-    public void findId() {		// 아이디 찾기 페이지로 이동
-        log.debug("findId() invoked.");
 
-    } //findId
-
-    @PostMapping("/findId")
-    public String findId(String nickName, String phone) {	// 아이디 찾기 실행
-        log.debug("findId({}, {}) invoked.", nickName, phone);
-
-        return "/user/login";	// 아이디 확인 후, 로그인 페이지로 이동
-    } //findId
 
 
 
@@ -151,12 +140,6 @@ public class UserController {
 
 
 
-    @PostMapping("/remove")
-    public String remove(Model model) {	// 회원탈퇴 실행	// id는 session값인데.. 흠..?
-        log.debug("USER_remove({}) invoked.", model);
-
-        return "/user/main";
-    } //remove
 
 
     @GetMapping("/getMyAuctionList")
@@ -175,7 +158,7 @@ public class UserController {
     } //getBidList
     
     
-    // =================================================== //
+    // ======================== JS =========================== //
 
  // 전체회원 목록조회
  	@GetMapping("/getUserList")
@@ -221,6 +204,43 @@ public class UserController {
  		
  		return "redirect:/users/getUserList";
  	} //modify
+ 	
+ 	
+    // 아이디 찾기 페이지 이동
+	@GetMapping("/findId")
+	public String findIdView() {
+		return "users/findId";
+	} // findId
+	
+    // 아이디 찾기 실행
+	@PostMapping("/findId")
+	public String findIdAction(UserVO vo, Model model) {
+		UserVO user = service.findId(vo);
+		
+		
+		if(user == null) { 
+			model.addAttribute("check", 1);
+		} else { 
+			model.addAttribute("check", 0);
+			model.addAttribute("userId", user.getUserId());
+		}
+		
+		return "users/findId";
+	} // findId
+
+    
+	@PostMapping("/remove")
+	public String remove(
+			@RequestParam("userId") String userId,
+			RedirectAttributes rttrs) 
+	{
+		log.debug("remove({}) invoked.", userId);
+		
+		boolean result=this.service.remove(userId);
+		rttrs.addAttribute("result", result);
+		
+		return "redirect:/users/getUserList";
+	} //remove
  	
 
 }  //end class

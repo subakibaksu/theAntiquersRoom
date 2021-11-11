@@ -39,15 +39,22 @@ public interface UserMapper {
     
 	// =========================== //
 
-    //전체 회원 목록 조회
+    // 전체 회원 목록 조회
   public abstract List<UserVO> getUserList();
   
   // 회원 정보 수정
 	public abstract Integer update(UserVO user);
 
-	// 특정 게시물 상세조회 - XML Mapper 방식으로 처리
+	// 회원정보 상세조회 - XML Mapper 방식으로 처리
 	public abstract UserVO read(String userId);
 	
+	//  특정 회원 삭제
+	public abstract Integer delete(String userId);
+	
+  // 아이디 찾기
+  public abstract UserVO findId(UserVO vo);
+	
+    
 	
     // =====================카카오 로그인 API 관련===================== //
 	
