@@ -65,32 +65,18 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     @Override
     public boolean confirmEmail(String userId, String auth) throws ParseException {
 
-        boolean isChecked = false;
         log.debug("confirmEmail invoked userId : {} auth : {}",userId,auth);
-
-        //DB에서 SELECT한 값을 DATE로 변환
-        String stringSeverTime = mapper.selectNow();
-        String userMailSentTime = mapper.selectUpdatedate(userId);
-        SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date databaseTime = transFormat.parse(stringSeverTime);
-        Date userTime = transFormat.parse(userMailSentTime);
-        log.debug("userTime : {}",userTime);
-        log.debug("severTime : {}",databaseTime);
-
-        //DB시간과 유저시간의 차이계산
-        long comparedDate = databaseTime.getTime() - userTime.getTime();
-        log.debug(comparedDate);
 
         //DB Auth값 조회
         String databaseAuth = mapper.selectAuth(userId);
         log.debug("auth : {}",databaseAuth);
 
         //comparedDate 가 3분 이내, 요청값 Auth와 DB Auth가 일치할 경우 true를 반환.
-        if(comparedDate < 3*60*1000 && auth.equals(databaseAuth)){
-            isChecked = true;
+        if(auth != null && auth.equals(databaseAuth)){
+            return true;
         }
 
-        return isChecked;
+        return false;
 
     } // confirmEmail
 
@@ -99,8 +85,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
         log.debug("userId : {} nickname : {} ",userId);
 
-        boolean mailSentCheck = false;
-
         if(userId != null){
 
             // 인증키 생성후 이메일로 전송 , DB에 Insert
@@ -108,11 +92,11 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
             mailsender.sendmail("authorizationKey : "+ auth,userId);
             mapper.insertAuthorizationNumber(userId,auth);
 
-            mailSentCheck = true;
+            return true;
 
         }
 
-        return mailSentCheck;
+        return false;
     }
 
 

@@ -42,31 +42,10 @@
     >
 
         <![CDATA[
-        REPLACE INTO emailchecktemp(userid, auth, updatedate)
+        REPLACE INTO authkey(userid, auth, updatedate)
         VALUES (#{userId}, #{auth}, now())
         ]]>
     </insert>
-
-    <!-- 현재DB서버 시간받아오기 -->
-    <select id="selectNow"
-            resultType="String"
-    >
-        <![CDATA[
-            SELECT now()
-        ]]>
-
-    </select>
-
-    <!--  emailchecktemp table의 updatedate 조회  -->
-    <select id="selectUpdatedate"
-            resultType="String"
-            parameterType="String"
-    >
-        <![CDATA[
-            SELECT updatedate from emailchecktemp WHERE userId = #{userId};
-        ]]>
-
-    </select>
 
     <!-- emailchecktemp table의 auth 조회 -->
     <select id="selectAuth"
@@ -74,11 +53,12 @@
             resultType="String"
     >
         <![CDATA[
-           SELECT auth from emailchecktemp WHERE userId = #{userId}
+                SELECT auth from authkey
+                WHERE userId = #{userId}
+                AND updatedate BETWEEN DATE_SUB(now(), interval 3 minute) AND now()
         ]]>
 
     </select>
-
 
     <!-- 비밀번호 재설정  -->
     <update
