@@ -48,7 +48,6 @@ public interface UserService {
     // 나의 입찰리스트 조회
     public abstract List<ProductVO> getBidList(Criteria cri);
     
-    // =================================================== //
 
 	// 전체 회원 목록조회
 	public abstract List<UserVO> getUserList();
@@ -64,6 +63,11 @@ public interface UserService {
     
     // 회원 탈퇴
     public abstract boolean remove(String userId);
+    
+    // =====================카카오 로그인 API 관련===================== //
+    
+    // 카카오 아이디 조회
+    public abstract UserDTO getKakaoUser(String kakaoUniqueId);    
     
 } // end interface
 

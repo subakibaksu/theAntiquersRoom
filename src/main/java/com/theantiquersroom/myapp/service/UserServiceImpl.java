@@ -180,6 +180,17 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	public UserVO findId(UserVO vo) {
 		return mapper.findId(vo);
 	} // getNickName
+	
+    // =====================카카오 로그인 API 관련===================== //
+	
+	@Override
+	public UserDTO getKakaoUser(String kakaoUniqueId) {
+		log.debug("checkKakaoId({}) invoked.", kakaoUniqueId);
+		
+		UserDTO user = this.mapper.getKakaoUser(kakaoUniqueId);
+		
+		return user;
+	}
     
 //---------------------------------------------------//
     @Override
@@ -193,5 +204,8 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     	// TODO Auto-generated method stub
     	
     }
+
+
+
 
 } // end class

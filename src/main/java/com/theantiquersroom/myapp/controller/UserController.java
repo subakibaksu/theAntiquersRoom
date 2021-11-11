@@ -49,18 +49,6 @@ public class UserController {
         return "/main";
     } //register
 
-    @GetMapping("/kakaoLogin")
-    public void kakaoLogin() {	//카카오 로그인 화면 요청
-        log.debug("kakaoLogin() invoked.");
-
-    } //register
-
-    @PostMapping("/kakaoLogin")
-    public void kakaoLogin(String code) {	//카카오 로그인 화면 요청
-        log.debug("kakaoLogin() invoked.");
-
-    } //register
-
     @PostMapping("/confirmEmail")
     public void confirmEmail(String email) {	//입력받은 이메일로 인증코드 발송
         log.debug("confirmEmail() invoked.");
@@ -199,6 +187,7 @@ public class UserController {
  		
  		UserVO vo=
  				new UserVO(
+ 						user.getKakaoUniqueId(),
  						user.getUserId(),
  						user.getPassword(),
  						user.getNickName(),

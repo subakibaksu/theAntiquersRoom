@@ -51,8 +51,14 @@ public interface UserMapper {
 	//  특정 회원 삭제
 	public abstract Integer delete(String userId);
 	
-    // 아이디 찾기
-    public abstract UserVO findId(UserVO vo);
+  // 아이디 찾기
+  public abstract UserVO findId(UserVO vo);
 	
     
+	
+    // =====================카카오 로그인 API 관련===================== //
+	
+	public abstract UserDTO getKakaoUser(String kakaoUniqueId);
+	
+	
 } // end interface
