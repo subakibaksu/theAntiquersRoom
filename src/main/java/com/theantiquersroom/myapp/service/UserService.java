@@ -41,9 +41,6 @@ public interface UserService {
     
     // 비밀번호 재설정
     public abstract boolean resetPwd(String userId, String nickName) throws Exception;
-
-    // 회원정보 수정
-    public abstract boolean modify(UserDTO userDto);
     
     // 회원 탈퇴
     public abstract boolean remove(String userId);

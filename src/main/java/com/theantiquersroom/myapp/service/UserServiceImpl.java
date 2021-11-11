@@ -236,13 +236,5 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     	
     }
 
-	@Override
-	public boolean modify(UserDTO userDto) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-
 
 } // end class
