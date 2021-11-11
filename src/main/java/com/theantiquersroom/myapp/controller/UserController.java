@@ -3,6 +3,7 @@ package com.theantiquersroom.myapp.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.theantiquersroom.myapp.domain.AuthKeyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -68,14 +69,14 @@ public class UserController {
     } // confirmEmail
 
     @PostMapping("/sendEmail")
-    public @ResponseBody Map<Object,Object> sendEmail(@RequestParam("userId") String userId) throws Exception {    //입력받은 이메일로 인증코드 발송
+    public @ResponseBody Map<Object,Object> sendEmail(@RequestBody AuthKeyDTO authKeyDTO) throws Exception {    //입력받은 이메일로 인증코드 발송
 
-        log.debug("confirmEmail() invoked. userid : {}",userId);
+        log.debug("confirmEmail() invoked. userid : {}",authKeyDTO.getUserId());
         
         //Ajax의 결과값을 Json으로 받기 위해 Map객체를 생성
         Map<Object,Object> map = new HashMap<Object, Object>();
 
-        boolean mailSendResult = service.sendEmail(userId);
+        boolean mailSendResult = service.sendEmail(authKeyDTO.getUserId());
         log.debug("result : {}", mailSendResult);
         map.put("check",mailSendResult);
 
@@ -85,15 +86,14 @@ public class UserController {
 
     @PostMapping("/confirmEmail")
     public @ResponseBody Map<Object, Object> confirmEmail(
-            @RequestParam("userId") String userId,
-            @RequestParam("auth") String auth) throws ParseException {    //DB인증코드 입력받은 인증코드를 비교
+            @RequestBody AuthKeyDTO authKeyDTO) throws ParseException {    //DB인증코드 입력받은 인증코드를 비교
 
-        log.debug("confirmEmail() invoked. userId : {} auth : {}" ,userId , auth);
+        log.debug("confirmEmail() invoked. userId : {} auth : {}" ,authKeyDTO.getUserId() ,authKeyDTO.getAuth());
 
         //Ajax의 결과값을 Json으로 받기 위해 Map객체를 생성
         Map<Object, Object> map = new HashMap<Object, Object>();
 
-        boolean confirmResult = service.confirmEmail(userId,auth);
+        boolean confirmResult = service.confirmEmail(authKeyDTO.getUserId() ,authKeyDTO.getAuth());
         log.debug("confirmResult : {}", confirmResult);
         map.put("confirmResult",confirmResult);
 

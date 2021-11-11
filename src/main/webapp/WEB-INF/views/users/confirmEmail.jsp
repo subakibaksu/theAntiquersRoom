@@ -29,107 +29,96 @@
                 var userId = $("#userId").val();
                 $("#userIdForAuth").val(userId);
 
-                $("#mailSendForAuthorizationForm").submit(function (event){
+                //form 내부 input값을 serialize
+                var formdata  = $("#mailSendForAuthorizationForm").serialize();
 
-                    //태그의 Default로인한 인한 문제를 방지
-                    event.preventDefault();
+                //Ajax로 인한 중복요청문제를 방지
+                if( isAjaxing ){
+                    return;
+                }
 
-                    //form 내부 input값을 serialize
-                    var requestdata = $(this).serialize();
+                isAjaxing = true;
 
-                    //Ajax로 인한 중복요청문제를 방지
-                    if( isAjaxing ){
-                        return;
-                    }
+                //비동기 요청
+                $.ajax({
+                    async: true,
+                    type : 'POST',
+                    data : formdata,
+                    url : "/users/sendEmail",
+                    dataType : "json",
+                    contentType: "application/json; charset=UTF-8",
+                    success : function (result) {
 
-                    isAjaxing = true;
+                        //emailsend 성공시 타이머생성
+                        if(result.check){
 
-                    //비동기 요청
-                    $.ajax({
-                        async: true,
-                        type : 'POST',
-                        url : "/users/sendEmail?" + requestdata,
-                        dataType : "json",
-                        contentType: "application/json; charset=UTF-8",
-                        success : function (result) {
+                            console.log('emaiisent');
+                            counter = 0;
+                            lefttime = 180;
+                            $("#timer").show();
 
-                            //emailsend 성공시 타이머생성
-                            if(result.check){
+                        }
 
-                                console.log('emaiisent');
-                                counter = 0;
-                                lefttime = 180;
-                                $("#timer").show();
+                        //Ajax로 인한 중복요청문제를 방지
+                        setTimeout(function (){ isAjaxing = false}, 1000);
 
-                            }
+                    },
+                    error : function (error) {
 
-                            //Ajax로 인한 중복요청문제를 방지
-                            setTimeout(function (){ isAjaxing = false}, 1000);
+                        console.log("error", error);
 
-                        },
-                        error : function (error) {
+                        //Ajax로 인한 중복요청문제를 방지
+                        setTimeout(function (){ isAjaxing = false}, 1000);
 
-                            console.log("error", error);
+                    },
 
-                            //Ajax로 인한 중복요청문제를 방지
-                            setTimeout(function (){ isAjaxing = false}, 1000);
-
-                        },
-
-                    });
-
-                })
+                });
 
             });
 
             $("#checkAuthBtn").click(function (){
 
-                $("#checkAuthorizationKeyForm").submit(function (event){
+                //Ajax로 인한 중복요청문제를 방지
+                if( isAjaxing ){
+                    return;
+                }
 
-                    //태그의 Default로인한 인한 문제를 방지
-                    event.preventDefault();
+                isAjaxing = true;
 
-                    //Ajax로 인한 중복요청문제를 방지
-                    if( isAjaxing ){
-                        return;
-                    }
+                //비동기 요청
+                var formdata  = $("#checkAuthorizationKeyForm").serialize();
 
-                    isAjaxing = true;
+                console.log(queryString);
+                $.ajax({
+                    async: true,
+                    type : 'POST',
+                    data : JSON.stringify(formdata),
+                    url : "/users/confirmEmail",
+                    dataType : "json",
+                    contentType: "application/json; charset=UTF-8",
+                    success : function (result) {
 
-                    //비동기 요청
-                    var requestdata = $(this).serialize();
-                    console.log(requestdata);
-                    $.ajax({
-                        async: true,
-                        type : 'POST',
-                        url : "/users/confirmEmail?" + requestdata,
-                        dataType : "json",
-                        contentType: "application/json; charset=UTF-8",
-                        success : function (result) {
+                        //emailconfirm 성공시 #mymsg의 emailCheckStatus태그 내용을 변경
+                        if(result.confirmResult){
+                            $("#emailCheckStatus").text('이메일 인증이 완료되었습니다.')
+                        }else {
+                            $("#emailCheckStatus").text('유효하지 않은 인증코드입니다.')
+                        }
 
-                            //emailconfirm 성공시 #mymsg의 emailCheckStatus태그 내용을 변경
-                            if(result.confirmResult){
-                                $("#emailCheckStatus").text('이메일 인증이 완료되었습니다.')
-                            }else {
-                                $("#emailCheckStatus").text('유효하지 않은 인증코드입니다.')
-                            }
+                        //Ajax로 인한 중복요청문제를 방지
+                        setTimeout(function (){ isAjaxing = false}, 1000);
 
-                            //Ajax로 인한 중복요청문제를 방지
-                            setTimeout(function (){ isAjaxing = false}, 1000);
+                    },
+                    error : function (error) {
 
-                        },
-                        error : function (error) {
+                        console.log("error", error);
 
-                            console.log("error", error);
+                        //Ajax로 인한 중복요청문제를 방지
+                        setTimeout(function (){ isAjaxing = false}, 1000);
 
-                            //Ajax로 인한 중복요청문제를 방지
-                            setTimeout(function (){ isAjaxing = false}, 1000);
+                    },
 
-                        },
-
-                    });
-
-                })
+                });
 
             });
 
@@ -162,14 +151,14 @@
     <%-- 메일전송 --%>
     <form id = mailSendForAuthorizationForm action="#">
         <input type="email" id="userId" name="userId">
-        <button id="sendMailBtn">send</button>
+        <button type="button" id="sendMailBtn">send</button>
     </form>
 
     <%-- 인증번호 확인 --%>
     <form id = checkAuthorizationKeyForm action="#">
         <input id="userIdForAuth" name="userId" hidden>
         <input name="auth">
-        <button id="checkAuthBtn">check</button>
+        <button type="button" id="checkAuthBtn">check</button>
         <%-- 타이머 --%>
         <div id="timer"></div>
         <%-- 인증결과 --%>
