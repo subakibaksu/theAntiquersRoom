@@ -3,7 +3,6 @@ package com.theantiquersroom.myapp.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.theantiquersroom.myapp.domain.AuthKeyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,14 +68,14 @@ public class UserController {
     } // confirmEmail
 
     @PostMapping("/sendEmail")
-    public @ResponseBody Map<Object,Object> sendEmail(@RequestBody AuthKeyDTO authKeyDTO) throws Exception {    //입력받은 이메일로 인증코드 발송
+    public @ResponseBody Map<Object,Object> sendEmail(@RequestBody Map<String,String> userMap) throws Exception {    //입력받은 이메일로 인증코드 발송
 
-        log.debug("confirmEmail() invoked. userid : {}",authKeyDTO.getUserId());
+        log.debug("confirmEmail() invoked. userid : {}",userMap.get("userId"));
         
         //Ajax의 결과값을 Json으로 받기 위해 Map객체를 생성
         Map<Object,Object> map = new HashMap<Object, Object>();
 
-        boolean mailSendResult = service.sendEmail(authKeyDTO.getUserId());
+        boolean mailSendResult = service.sendEmail(userMap.get("userId"));
         log.debug("result : {}", mailSendResult);
         map.put("check",mailSendResult);
 
@@ -86,14 +85,14 @@ public class UserController {
 
     @PostMapping("/confirmEmail")
     public @ResponseBody Map<Object, Object> confirmEmail(
-            @RequestBody AuthKeyDTO authKeyDTO) throws ParseException {    //DB인증코드 입력받은 인증코드를 비교
+            @RequestBody Map<String, String> auth) throws ParseException {    //DB인증코드 입력받은 인증코드를 비교
 
-        log.debug("confirmEmail() invoked. userId : {} auth : {}" ,authKeyDTO.getUserId() ,authKeyDTO.getAuth());
+        log.debug("confirmEmail() invoked. userId : {} auth : {}" ,auth.get("userId"));
 
         //Ajax의 결과값을 Json으로 받기 위해 Map객체를 생성
         Map<Object, Object> map = new HashMap<Object, Object>();
 
-        boolean confirmResult = service.confirmEmail(authKeyDTO.getUserId() ,authKeyDTO.getAuth());
+        boolean confirmResult = service.confirmEmail(auth.get("userId") ,auth.get("auth"));
         log.debug("confirmResult : {}", confirmResult);
         map.put("confirmResult",confirmResult);
 

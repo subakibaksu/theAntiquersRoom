@@ -30,7 +30,7 @@
                 $("#userIdForAuth").val(userId);
 
                 //form 내부 input값을 serialize
-                var formdata  = $("#mailSendForAuthorizationForm").serialize();
+                var data  = $("#mailSendForAuthorizationForm").serializeObject();
 
                 //Ajax로 인한 중복요청문제를 방지
                 if( isAjaxing ){
@@ -39,14 +39,16 @@
 
                 isAjaxing = true;
 
+                console.log(data);
+
                 //비동기 요청
                 $.ajax({
                     async: true,
+                    cache : false,
                     type : 'POST',
-                    data : formdata,
+                    data : JSON.stringify(data),
                     url : "/users/sendEmail",
-                    dataType : "json",
-                    contentType: "application/json; charset=UTF-8",
+                    contentType: 'application/json',
                     success : function (result) {
 
                         //emailsend 성공시 타이머생성
@@ -86,16 +88,16 @@
                 isAjaxing = true;
 
                 //비동기 요청
-                var formdata  = $("#checkAuthorizationKeyForm").serialize();
+                var data  = $("#checkAuthorizationKeyForm").serializeObject();
 
-                console.log(queryString);
+                console.log(data);
                 $.ajax({
                     async: true,
+                    cache : false,
                     type : 'POST',
-                    data : JSON.stringify(formdata),
+                    data : JSON.stringify(data),
                     url : "/users/confirmEmail",
-                    dataType : "json",
-                    contentType: "application/json; charset=UTF-8",
+                    contentType: 'application/json',
                     success : function (result) {
 
                         //emailconfirm 성공시 #mymsg의 emailCheckStatus태그 내용을 변경
@@ -121,6 +123,27 @@
                 });
 
             });
+
+            //데이터를 JSON형태로 변환
+            jQuery.fn.serializeObject = function() {
+                var obj = null;
+                try {
+                    if (this[0].tagName && this[0].tagName.toUpperCase() == "FORM") {
+                        var arr = this.serializeArray();
+                        if (arr) {
+                            obj = {};
+                            jQuery.each(arr, function() {
+                                obj[this.name] = this.value;
+                            });
+                        }//if ( arr ) {
+                    }
+                } catch (e) {
+                    alert(e.message);
+                } finally {
+                }
+
+                return obj;
+            };
 
             //값을 지정된 시간형태로 바꿔주는 function
             function convertSeconds(s){
