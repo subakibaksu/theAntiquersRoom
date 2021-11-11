@@ -57,8 +57,8 @@
 	<bean id="mailconfig" class="com.theantiquersroom.myapp.config.MailConfig">
 		<property name="from" value="gannong@naver.com"/>
 		<property name="fromname" value="The Antiquer's Room"/>
-		<property name="smtp_username" value="gannong"/>
-		<property name="smtp_password" value="antiquers6!"/>
+		<property name="smtp_username" value=""/>
+		<property name="smtp_password" value=""/>
 		<property name="host" value="smtp.naver.com"/>
 		<property name="port" value="587"/>
 		<property name="subject" value="The Antiquer's Room Authorization mail"/>
