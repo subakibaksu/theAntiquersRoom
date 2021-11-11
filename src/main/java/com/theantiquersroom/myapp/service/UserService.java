@@ -41,9 +41,6 @@ public interface UserService {
     
     // 비밀번호 재설정
     public abstract boolean resetPwd(String userId, String nickName) throws Exception;
-
-    // 회원정보 수정
-    public abstract boolean modify(UserDTO userDto);
     
     // 회원 탈퇴
     public abstract boolean remove(String userId);
@@ -68,8 +65,6 @@ public interface UserService {
     // 닉네임, 폰번호로 아이디찾기
     public abstract UserVO findId(UserVO vo);
     
-    // 회원 탈퇴
-    public abstract boolean remove(String userId);
     
     // =====================카카오 로그인 API 관련===================== //
     
