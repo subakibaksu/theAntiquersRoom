@@ -1,16 +1,17 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
 
 *{
     padding: 0;
     margin: 0;
 }
 
-html{
+/* html{
 	background: 
         url(../../resources/images/flowerBack.jpg)
         no-repeat center center fixed;
     background-size: cover;
-}
+} */
 
 body{
     display: flex;
@@ -29,7 +30,6 @@ body{
 
     background: rgba(255, 255, 255, 0.9);
 
-    /* padding-top: 1.3rem; */
     padding: 2rem;
 }
 
