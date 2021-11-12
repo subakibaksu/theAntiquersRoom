@@ -52,13 +52,12 @@ public class UserController {
         log.debug("register({}) invoked.", user);
 
         this.service.registerUser(user);
-        return "/main";
+        return "/";
     } //register
 
     //
     @GetMapping("/confirmEmail")
     public void confirmEmail(){
-
         log.debug("confirmEmail() invoked");
 
     } // confirmEmail
@@ -76,7 +75,6 @@ public class UserController {
         map.put("check",mailSendResult);
 
         return map;
-
     } // sendEmail
 
     @PostMapping("/confirmEmail")
@@ -93,7 +91,6 @@ public class UserController {
         map.put("confirmResult",confirmResult);
 
         return map;
-
     } // confirmEmail
 
     @PostMapping("/checkId")
@@ -121,10 +118,9 @@ public class UserController {
         HttpSession session = request.getSession();
         session.invalidate();
         
-        return "/main";
+        return "redirect:/";
     } //logout
 
-    
     @GetMapping("/resetPwd")
     public void resetPwd() {	// 비밀번호 재설정 페이지로 이동
 
@@ -194,18 +190,7 @@ public class UserController {
  	public String modify(UserDTO user, RedirectAttributes rttrs) {
  		log.debug("modify({}, {}) invoked.", user,rttrs);
  		
- 		UserVO vo=
- 				new UserVO(
- 						user.getUserId(),
- 						user.getPassword(),
- 						user.getNickName(),
- 						user.getPhone(),
- 						user.getUserType(),
- 						user.getKakaoUniqueId()
- 						
- 				);
- 		
- 		boolean result=this.service.modify(vo);
+ 		boolean result=this.service.modify(user);
  		
  		// 이동되는 화면으로 전송해 줘야 할 파라미터가 있으면,
  		// rttrs를 이용해야 한다.

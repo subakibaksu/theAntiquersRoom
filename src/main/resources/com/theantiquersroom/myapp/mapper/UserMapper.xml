@@ -106,15 +106,18 @@
 
     <!-- 로그인 -->
     <select
-            id="login"
-            resultType="com.theantiquersroom.myapp.domain.UserVO"
-            parameterType="string">
+            id="selectUserById"
+            resultType="com.theantiquersroom.myapp.domain.UserDTO">
 
         <![CDATA[
-            SELECT *
+            SELECT 
+				user_id as userId,
+				password,
+				nickname,
+				phone,
+				user_type as userType
             FROM users
             WHERE user_id=#{userId}
-            AND password=#{password}
         ]]>
     </select>
     

@@ -36,19 +36,18 @@ public interface UserMapper {
 	// 특정 연락처 조회
 	public abstract Integer getPhone(String phone);
 
-	// 로그인
-	public abstract UserVO login(LoginDTO dto);
+	//로그인
+    public abstract UserDTO selectUserById(String userId);
+  
+    //emailchecktemp table의 auth 조회
+    public abstract String selectAuth(@Param("userId") String userId);
+    
 
-	// emailchecktemp table의 auth 조회
-	public abstract String selectAuth(@Param("userId") String userId);
-
-	// ================================================= //
-
-	// 전체 회원 목록 조회
-	public abstract List<UserVO> getUserList();
-
-	// 회원 정보 수정
-	public abstract Integer update(UserVO user);
+    // 전체 회원 목록 조회
+    public abstract List<UserVO> getUserList();
+ 
+    // 회원 정보 수정
+    public abstract Integer update(UserDTO user);
 
 	// 회원정보 상세조회 - XML Mapper 방식으로 처리
 	public abstract UserVO read(String userId);

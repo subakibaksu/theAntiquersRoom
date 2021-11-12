@@ -1,5 +1,6 @@
 package com.theantiquersroom.myapp.service;
 
+
 import java.text.ParseException;
 import java.util.List;
 
@@ -30,10 +31,9 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
 
     @Setter(onMethod_= {@Autowired})
-    Mailsender mailsender;
-    UserMapper mapper;
-    BCryptPasswordEncoder passwordEncoder;
-
+    private Mailsender mailsender;
+    private UserMapper mapper;
+    private BCryptPasswordEncoder passwordEncoder;
 
 
     @Override
@@ -103,12 +103,13 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
 
     @Override
-	public UserVO login(LoginDTO dto) throws Exception {
+	public UserDTO login(LoginDTO dto) throws Exception {
         log.debug("login({}) invoked.", dto);
 
-        UserVO user = this.mapper.login(dto);
-
-        return user;
+        UserDTO user = this.mapper.selectUserById(dto.getUserId());
+        log.info("\t+ user: {}", user);
+        
+        return (passwordEncoder.matches(dto.getPassword(), user.getPassword()))? user:null;
 	}
 
 	@Override
@@ -153,7 +154,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
 	// ========================================= //
 
-
 	@Override
 	public List<UserVO> getUserList() {
 		log.debug("getList() invoked.");
@@ -174,7 +174,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	} // get ( 회원 상세 정보 보기)
 	
 	@Override
-	public boolean modify(UserVO user) {
+	public boolean modify(UserDTO user) {
 		log.debug("modify({}) invoked.", user);
 		
 		// 비즈니스 로직 수행에 필요한 경우, 영속성 계층의 메소드를 호출
@@ -215,12 +215,10 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     @Override
     public void destroy() throws Exception {
     	// TODO Auto-generated method stub
-    	
     }
     
     @Override
     public void afterPropertiesSet() throws Exception {
     	// TODO Auto-generated method stub
-    	
     }
 } // end class
