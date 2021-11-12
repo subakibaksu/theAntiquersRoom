@@ -36,6 +36,7 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class UserController {
 
+	
     @Setter(onMethod_= {@Autowired})
     private UserService service;
 
@@ -113,30 +114,7 @@ public class UserController {
 
     } //checkPhone
 
-    @GetMapping("/login")
-    public void login() {	// 로그인 페이지로 이동
-        log.debug("login() invoked.");
-
-    } //login
-
-    @PostMapping("/login")
-    public String login(
-    		@RequestParam("userId") String userId, 
-    		@RequestParam("password") String password, HttpServletRequest request) {	// 로그인 실행
-        log.debug("login({}, {}) invoked.", userId, password);
-        HttpSession session = request.getSession();
-        
-        boolean isUser=this.service.login(userId, password);
-        log.info("\t+ isUser: {}", isUser);
-        
-        if(isUser) {
-        	session.setAttribute("userId", userId);
-        } //if
-        
-        return "/main";
-    } //login
-
-
+    
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {	// 로그아웃 실행
         log.debug("logout() invoked.");
@@ -146,11 +124,7 @@ public class UserController {
         return "/main";
     } //logout
 
-
-
-
-
-
+    
     @GetMapping("/resetPwd")
     public void resetPwd() {	// 비밀번호 재설정 페이지로 이동
 
@@ -176,12 +150,7 @@ public class UserController {
 
     } //resetPwd
 
-
-
-
-
-
-
+    
     @GetMapping("/getMyAuctionList")
     public String getMyAuctionList(Model model) {	// 나의 경매리스트 페이지로 이동
         log.debug("getMyAuctionList({}) invoked.", model);
@@ -227,12 +196,12 @@ public class UserController {
  		
  		UserVO vo=
  				new UserVO(
- 						user.getKakaoUniqueId(),
  						user.getUserId(),
  						user.getPassword(),
  						user.getNickName(),
  						user.getPhone(),
- 						user.getUserType()
+ 						user.getUserType(),
+ 						user.getKakaoUniqueId()
  						
  				);
  		

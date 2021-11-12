@@ -12,15 +12,14 @@
             resultType="com.theantiquersroom.myapp.domain.UserDTO">
 
        <![CDATA[
-            select
+            SELECT
                 user_id as userId,
                 password,
                 nickname,
                 phone,
                 user_type as userType
-            from users
+            FROM users
        ]]>
-
     </select>
 
     <!-- 회원가입 -->
@@ -32,55 +31,50 @@
             INSERT INTO users(USER_ID, PASSWORD, NICKNAME, PHONE, USER_TYPE)
             VALUES (#{userId}, #{password}, #{nickName}, #{phone}, 2)
         ]]>
-
     </insert>
 
     <!-- 인증번호 INSERT-->
     <insert
             id="insertAuthorizationNumber"
-            parameterType="string"
-    >
+            parameterType="string">
 
         <![CDATA[
-        REPLACE INTO authkey(userid, auth, updatedate)
-        VALUES (#{userId}, #{auth}, now())
+	        REPLACE INTO authkey(userid, auth, updatedate)
+	        VALUES (#{userId}, #{auth}, now())
         ]]>
     </insert>
 
     <!-- emailchecktemp table의 auth 조회 -->
     <select id="selectAuth"
             parameterType="String"
-            resultType="String"
-    >
+            resultType="String">
+            
         <![CDATA[
-                SELECT auth from authkey
-                WHERE userId = #{userId}
-                AND updatedate BETWEEN DATE_SUB(now(), interval 3 minute) AND now()
+            SELECT auth from authkey
+            WHERE userId = #{userId}
+            AND updatedate BETWEEN DATE_SUB(now(), interval 3 minute) AND now()
         ]]>
-
     </select>
 
     <!-- 비밀번호 재설정  -->
     <update
             id="updatePassword"
-            parameterType="String"
-    >
+            parameterType="String">
+            
         <![CDATA[
-        UPDATE users SET password = #{newPassword} where user_id = #{userId}
+        	UPDATE users SET password = #{newPassword} where user_id = #{userId}
         ]]>
     </update>
+    
     <!-- 특정 아이디의 닉네임 조회  -->
     <select
             id="selectUserNickname"
             resultType="string"
-            parameterType="string"
-    >
+            parameterType="string">
+            
         <![CDATA[
-
           SELECT nickname FROM users WHERE user_id = #{userId}
-
         ]]>
-
     </select>
 
     <!-- 특정 아이디 조회 -->
@@ -120,20 +114,24 @@
             SELECT *
             FROM users
             WHERE user_id=#{userId}
+            AND password=#{password}
         ]]>
     </select>
     
-        <select 
+    <select 
         id="read"
         resultType="com.theantiquersroom.myapp.domain.UserVO">
-            select
-                user_id as userId,
-                password,
-                nickname,
-                phone,
-                user_type as userType
-            from users
-       WHERE user_id=#{userId}
+        
+        <![CDATA[
+			SELECT
+			    user_id as userId,
+			    password,
+			    nickname,
+			    phone,
+			    user_type as userType
+			FROM users
+			WHERE user_id=#{userId}
+       ]]>
     </select>
     
        <!-- 닉네임, 전화번호로 아이디찾기  -->
@@ -141,8 +139,8 @@
             id="findId"
             resultType="com.theantiquersroom.myapp.domain.UserVO">
             
-		select * from users where nickname=#{nickName} and phone=#{phone}    
-		</select>
+		SELECT * FROM users WHERE nickname=#{nickName} AND phone=#{phone}    
+	</select>
 
         <!-- 회원 정보 삭제 -->
     
@@ -151,21 +149,18 @@
     </delete>
     
     	<!-- 회원 정보 수정 -->
-        <update id="update">
-                
-        UPDATE users
-        SET 
-    	    password=#{password},
-            nickname=#{nickName},
-            phone=#{phone},
-            user_type=#{userType}
-           
-        
-        WHERE
-            user_id=#{userId}
-           </update>
-            
-
+	<update id="update">
+	
+		<![CDATA[     
+	        UPDATE users
+	        SET 
+	    	    password=#{password},
+	            nickname=#{nickName},
+	            phone=#{phone}
+	        WHERE
+	            user_id=#{userId}
+		]]>
+	</update>
 
     <!-- 카카오 아이디 조회  -->
     <select
@@ -174,12 +169,8 @@
             parameterType="string">
             
         <![CDATA[
-
           SELECT * FROM users WHERE kakao_unique_id = #{kakaoUniqueId}
-
         ]]>
     </select>
-
-
-
+    
 </mapper>

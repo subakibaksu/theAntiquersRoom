@@ -22,12 +22,22 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.theantiquersroom.myapp" />
-	<context:component-scan base-package="com.theantiquersroom.myapp.controller" />
-	<context:component-scan base-package="com.theantiquersroom.myapp.service" />
 
 	<beans:bean id="mailsender" class="com.theantiquersroom.myapp.utils.Mailsender"/>
-	<beans:bean id="userservice" class="com.theantiquersroom.myapp.service.UserService" abstract="true"/>
+	<beans:bean id="userService" class="com.theantiquersroom.myapp.service.UserService" abstract="true"/>
 	<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
+	<interceptors>
+		<interceptor>
+			<mapping path="/loginCheck"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/users/*"/>
+			<beans:ref bean="authInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
+	<view-controller path="/main" status-code="200" view-name="/main"/>
 
 </beans:beans>

@@ -17,7 +17,7 @@
             $('#loginBtn').click(function(){
                 console.log('loginBtn click event triggered..');
 
-                self.location='/users/login';
+                self.location='/login';
             });
         });
     </script>

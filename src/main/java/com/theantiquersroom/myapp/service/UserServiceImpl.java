@@ -1,7 +1,5 @@
 package com.theantiquersroom.myapp.service;
 
-
-
 import java.text.ParseException;
 import java.util.List;
 
@@ -12,6 +10,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.theantiquersroom.myapp.domain.Criteria;
+import com.theantiquersroom.myapp.domain.LoginDTO;
 import com.theantiquersroom.myapp.domain.ProductVO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
@@ -21,8 +20,6 @@ import com.theantiquersroom.myapp.utils.Mailsender;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
-
-
 
 
 @AllArgsConstructor
@@ -100,27 +97,22 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
             mapper.insertAuthorizationNumber(userId,auth);
 
             return true;
-
         }
-
         return false;
     }
 
 
     @Override
-	public boolean login(String userId, String password) {
+	public UserVO login(LoginDTO dto) throws Exception {
+        log.debug("login({}) invoked.", dto);
 
-        log.debug("login({}, {}) invoked.", userId, password);
+        UserVO user = this.mapper.login(dto);
 
-        UserVO vo = this.mapper.login(userId);
-
-        return passwordEncoder.matches(password, vo.getPassword());
-
+        return user;
 	}
 
 	@Override
 	public UserVO findId(String nickName, String phone) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -140,15 +132,11 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
             String newpassword = Integer.toString((int)(Math.random()*3000+1));
             mailsender.sendmail("your new password is : "+ newpassword,userId);
             mapper.updatePassword(newpassword,userId);
-
+            
             mailSentCheck = true;
-
         }
-
         return mailSentCheck;
-
 	} // resetPwd()
-
 
 	@Override
 	public List<ProductVO> getMyAuctionList(Criteria cri) {
@@ -235,6 +223,4 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     	// TODO Auto-generated method stub
     	
     }
-
-
 } // end class

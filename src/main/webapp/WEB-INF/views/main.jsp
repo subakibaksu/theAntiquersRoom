@@ -30,7 +30,7 @@
 
     <hr>
 
-    <h3>${userId}</h3>
+    <h3>${sessionScope.__AUTH_ANTIQUE__}</h3>
 
     <hr>
 
