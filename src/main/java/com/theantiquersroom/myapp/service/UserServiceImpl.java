@@ -1,6 +1,7 @@
 package com.theantiquersroom.myapp.service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.DisposableBean;
@@ -44,9 +45,19 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     public boolean checkId(String userId) {
     	log.debug("checkId({}) invoked.", userId);
     	
-    	UserVO uservo=this.mapper.login(userId);
+    	String id = "";
     	
-    	return uservo.getUserId().equals(userId);
+    	id = mapper.getUserId(userId);
+    	
+    	log.debug(id);
+    	
+    	if(id.equals(userId)) {
+    		
+    		log.debug("please");
+    		return true;
+    	}
+    	
+    	return false;
     }
 
     @Override

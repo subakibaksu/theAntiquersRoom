@@ -59,12 +59,12 @@
     <!-- 특정 아이디 조회 -->
     <select
             id="getUserId"
-            resultType="com.theantiquersroom.myapp.domain.UserVO"
+            resultType="String"
             parameterType="String"
     >
         <![CDATA[
 			
-		  SELECT userId FROM users WHERE user_id = #{userId}
+		  SELECT user_id FROM users WHERE user_id = #{userId}
 		  
         ]]>
     </select>
@@ -83,7 +83,7 @@
             id="getPhone">
 
         <![CDATA[
-
+	
         ]]>
     </select>
 

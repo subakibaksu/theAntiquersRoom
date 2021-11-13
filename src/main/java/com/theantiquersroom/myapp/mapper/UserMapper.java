@@ -26,7 +26,7 @@ public interface UserMapper {
     public abstract Integer updatePassword(@Param("newPassword") String newPassword, @Param("userId") String userId);
 
     //특정 아이디 조회
-    public abstract Integer getUserId(String userId);
+    public abstract String getUserId(String userId);
 
     //특정 닉네임 조회
     public abstract Integer getNickName(String nickName);

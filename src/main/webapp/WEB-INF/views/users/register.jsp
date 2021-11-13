@@ -6,7 +6,7 @@
 		<meta charset="UTF-8">
 		<title>앤티커스 : 회원가입</title>
 
-    <link rel="stylesheet" href="../../../resources/css/register.css">		
+		<link rel="stylesheet" href="../../../resources/css/register.css">
 
 		<script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 
@@ -46,14 +46,18 @@
 
 								// 이메일 중복체크 
 							} else {
+								console.log($('#email').val());
 								$.ajax(
-									{	
+									{
+										async: true,
 										type: "post",
 										url: "/users/checkId",
-										data: { email: $('#email').val() },
-										dataType: "html",
-										success: function(data) {
-											if ($.trim(data) == "true") {
+										data: JSON.stringify({ userId: $('#email').val() }),
+										contentType: "application/json",
+										success: function (data) {
+											console.log('success');
+											console.log(data.emailCheck);
+											if (data.emailCheck) {
 												$('#idchecker').text("사용가능한 아이디입니다.");
 												$('#email').focus();
 												idcheck = true;
@@ -65,7 +69,16 @@
 												idcheck = false;
 											}
 											buttonlive();
+										},
+										error: function (e) {
+											console.log('error');
+										},
+										complete: function () {
+
+											console.log('coplete');
+
 										}
+
 									}
 								);
 							}
@@ -187,8 +200,8 @@
 					return false;
 				}
 			}
-		
-		
+
+
 		</script>
 
 	</head>
@@ -199,8 +212,8 @@
 	<body>
 
 
-	<!-- 사이트 로고-->
-	
+		<!-- 사이트 로고-->
+
 		<div class="basecontainer">
 			<div class="top-header">
 				<a href="#" class="logo">
@@ -208,14 +221,14 @@
 					<div class="logo">Antiquer's Room</div>
 				</a>
 			</div>
-			
+
 			<div>
 				<div id="subject">회원가입</div>
 			</div>
 
 
-			<form action="/users/register" method="post">
-			
+			<form action="#">
+
 				<!-- container -->
 				<div class="form-container">
 					<div class="regbase">
@@ -244,7 +257,7 @@
 						</div>
 
 
-						<!-- 비밀번호 확인  --> 
+						<!-- 비밀번호 확인  -->
 						<div class="regconfirm">
 							<input type="text" class="register" id="confirmpassword" placeholder="비밀번호 확인">
 							<p class="pwdconfirmcheck"></p>
@@ -263,14 +276,14 @@
 							<p class="phonenumbercheck"></p>
 						</div>
 
-						
+
 						<!-- 가입하기 버튼  -->
 						<p>&nbsp</p>
 						<div id="registerbtn">
 							<button type="submit" class="submitbtn" id="checkit">가입하기</button>
 						</div>
 						<p>&nbsp</p>
-	
+
 					</div>
 				</div>
 			</form>

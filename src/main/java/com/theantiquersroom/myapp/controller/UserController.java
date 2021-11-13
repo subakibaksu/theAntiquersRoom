@@ -1,26 +1,28 @@
 package com.theantiquersroom.myapp.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.theantiquersroom.myapp.domain.UserDTO;
-import com.theantiquersroom.myapp.domain.UserVO;
 import com.theantiquersroom.myapp.service.UserService;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Log4j2
 @NoArgsConstructor
@@ -66,17 +68,18 @@ public class UserController {
     } //confirmEmail
 
     @PostMapping("/checkId")
-    public Integer checkId(@RequestParam("userId") String userId) {	//아이디 중복검사
-        log.debug("checkId({}) invoked.", userId);
+    public @ResponseBody Map<Object, Object> checkId(@RequestBody Map<Object,Object> map) {	//아이디 중복검사
+        log.debug("checkId({}) invoked.", map.get("userId"));
         
-        boolean checkid = this.service.checkId(userId); //true/false인지 서비스에서 판별 
+        boolean checkid = this.service.checkId((String)map.get("userId")); //true/false인지 서비스에서 판별 
         log.info("\t+ checkid: {}", checkid);
         
-        if(checkid) {
-        	return 1;		//중복값이 없을때 --> 다음단계로 
-        } else {
-        	return 0;		//중복값이 있을때 --> register 막는다.
-        }
+        Map<Object, Object> resultMap = new HashMap<Object,Object>();
+        
+        map.put("emailCheck", checkid);
+        log.debug(map.get("emailCheck"));
+        
+        return resultMap;
         
     } //checkId
 
