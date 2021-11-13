@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 /**
@@ -13,12 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
  * Time: 오후 5:08
  */
 
-@Controller("/product")
+@RequestMapping("/product")
+@Controller
 public class ProductController {
 
     /*상품 목록 페이지로 이동*/
-    @GetMapping("")
-    public void product(){
+    @GetMapping("/productList")
+    public void productList(){
 
     } // Get product()
 
