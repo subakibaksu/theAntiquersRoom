@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 /**
@@ -13,7 +14,8 @@ import org.springframework.web.bind.annotation.PostMapping;
  * Time: 오후 5:08
  */
 
-@Controller("/product")
+@Controller
+@RequestMapping("/product")
 public class ProductController {
 
     /*상품 목록 페이지로 이동*/
@@ -59,31 +61,32 @@ public class ProductController {
     } // Post modify()
 
     /*상품 삭제*/
-    @PostMapping("remove")
+    @PostMapping("/remove")
     public void remove(Model model) {
 
     } // Post remove()
 
     /*상품 검색*/
-    @GetMapping("findProduct")
+    @GetMapping("/findProduct")
     public void findProduct() {
 
     } // findProduct()
 
     /*상품 상세보기 페이지로 이동*/
-    @GetMapping("getDetail")
-    public void getDetail() {
+    @GetMapping("/getDetail")
+    public String getDetail() {
+    	return "/detail";
 
     } // getDetail()
 
     /*해당 상품의 입찰 히스토리 조회*/
-    @GetMapping("getBiddingHistory")
+    @GetMapping("/getBiddingHistory")
     public void getBiddingHistory() {
 
     } // getBiddingHistory()
 
     /*입찰정보 DB전달*/
-    @PostMapping("bid")
+    @PostMapping("/bid")
     public void bid(Model model) {
 
     } // bid()

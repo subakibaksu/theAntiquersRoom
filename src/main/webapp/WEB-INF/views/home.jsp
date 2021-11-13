@@ -38,6 +38,8 @@
     <hr>
     <button type="button" id="loginBtn">로그인</button>
 
+	<hr>
+	<a href="/product/getDetail">상세보기</a>
 <!---------------- 카카오 로그인 ---------------->
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>
