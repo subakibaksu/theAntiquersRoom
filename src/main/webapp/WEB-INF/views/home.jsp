@@ -33,6 +33,7 @@
     <img onclick="kakaoLogin();" style="cursor: pointer;" src="../../resources/images/kakao_login.png">
 
     <hr>
+    <a href="/product/productList?categoryId=0">productList</a>
     <a href="/users/resetPwd">resetPwd</a>
 
     <hr>

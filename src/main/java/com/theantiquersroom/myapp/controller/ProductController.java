@@ -1,10 +1,15 @@
 package com.theantiquersroom.myapp.controller;
 
+import com.theantiquersroom.myapp.service.ProductService;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 /**
@@ -13,16 +18,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * Date: 11/4/2021
  * Time: 오후 5:08
  */
+@Log4j2
 
 @RequestMapping("/product")
 @Controller
 public class ProductController {
 
+    @Setter(onMethod_= {@Autowired})
+    private ProductService service;
+
     /*상품 목록 페이지로 이동*/
     @GetMapping("/productList")
-    public void productList(){
+    public void productList(@RequestParam("categoryId") String categoryId ,Model model){
 
-    } // Get product()
+        log.debug("productList() invoked");
+        log.debug("category : {}",categoryId);
+
+        model.addAttribute("productList",service.getProductList(categoryId));
+
+    } // productList()
 
     /*상품 등록 페이지로 이동*/
     @GetMapping("/register")

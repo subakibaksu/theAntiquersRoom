@@ -1,11 +1,6 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: KBS
-  Date: 11/14/2021
-  Time: 오전 1:23
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>Title</title>
@@ -13,6 +8,13 @@
 <body>
 
     <p>this is productList</p>
+    <c:set value="${productList}" var="list"/>
+
+    <c:forEach items="${productList}" var="product">
+        <p>${product.name}</p>
+        <p>${product.user_id}</p>
+    </c:forEach>
+
 
 </body>
 </html>
