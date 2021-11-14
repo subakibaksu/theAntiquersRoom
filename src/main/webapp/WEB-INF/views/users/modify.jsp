@@ -1,105 +1,97 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-
-<!DOCTYPE html>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+    
+    
+ <!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>modify.jsp</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
 
-	<style>
-		#listBtn,
-		#modifyBtn{
-			cursor: pointer;
-		}
-	</style>
+     <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+     
+	<link rel="stylesheet" href="../../../resources/css/modify.css">
 
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
 
-	<script>
 
-	$(function(){
-		console.clear();
-		console.log('jquery started..');
-		
-		// REMOVE 버튼에 대한 통작
-		$('#removeBtn').click(function name(params) {
-			console.log('click event triggered..');
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
 
-			// 현재 이 문서에 있는, form 태그를 얻어내서 , 
-			// 우리 마음대로 조작하자!!!
 
-			var formObj=$('form');
-
-			formObj.attr('method', 'POST'); // 태그의 속성을 고치고 싶을땐 attr 을 쓴다.
-			formObj.attr('action', '/users/remove');
-
-			formObj.submit();
-
-			// BOM(Browser Object Model) : winodw == self
-			// self.location='/board/remove?bno=${board.bno}';  // 브라우저 주소창에 넣는 거기때문에 post (x), 무조건 get (o)
-
-		}); //onclick
-
-		// LIST 버튼에 대한 이벤트 등록 처리
-		$('#listBtn').click(function(){
-			console.log('click event triggered..');
-
-			self.location='/users/getUserList';
-		}); //onclick
-
-}); // .jq
- 
-	</script>
-
+     
 </head>
+     
 <body>
 
-	<h1>/WEB-INF/views/board/modify.jsp</h1>
-	
-	<hr>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-	<div id="wrapper">
-		<!-- 게시판에 기존 게시물을 변경할 수 있는 양식 -->
-		<form action="/users/modify" method="post">
+<jsp:include page="/WEB-INF/views/common/mypageHeader.jsp"/>
 
 
-			<table border="1">
-				<tr>
-					<td>아이디</td>
-					<td><input type="text" name="userId" value="${user.userId}" readonly></td>
-				</tr>
-					<tr>
-					<td>비밀번호</td>
-					<td><input type="text" name="password" value="${user.password}" ></td>
-				</tr>
-				<tr>
-					<td>닉네임</td>
-					<td><input type="text" name="nickName" value="${user.nickName}" ></td>
-				</tr>
-				<tr>
-					<td>폰번호</td>
-					<td><input type="text" name="phone" value="${user.phone}" ></td>
-				</tr>
-				<tr>
-					<td>회원타입</td>
-					<td><input type="text" name="userType" value="${user.userType}" ></td>
-				</tr>
 
 
-				<tr>
-					<td colspan="2">
-						<button type="submit" id="modifyBtn">SUBMIT</button>
-						<button type="button" id="removeBtn">REMOVE</button>
-						<button type="button" id="listBtn">LIST</button>
-					</td>
-				</tr>
+    <div id="outline">
+        
+        
+        
+    
+        <div id="inline">
+        
+                 <form action="/users/modify" method="post">
+        
+            
+            
+            <div class="text" >NickName: <input class="modifyInput" type="text"  name="nickName" value="${sessionScope.__AUTH_ANTIQUE__.nickName}"><i class="fas fa-check" id="check"></i></div>
+            <div>&nbsp;</div>
+            <div id="checkNickName">&nbsp;&nbsp;&nbsp;&nbsp;</div> 
+            <div>&nbsp;</div>
 
-			</table>
+            <div class="text">Email: <input class="modifyInput" type="text" name="userId"  value="${sessionScope.__AUTH_ANTIQUE__.userId}" ></div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
 
-		</form>
-	 </div>
-	
+            <div class="text">Paswword: <input class="modifyInput" type="text"   name="password" value="${sessionScope.__AUTH_ANTIQUE__.password}"></div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+
+            <div class="text">Check Paswword: <input class="modifyInput" type="text"  name="password"  value="${sessionScope.__AUTH_ANTIQUE__.password}"></div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+
+
+
+            <div>Phone: <input class="modifyInput" type="text"  name="phone" value="${sessionScope.__AUTH_ANTIQUE__.phone}"></div>
+
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+
+            <div>&nbsp;</div>
+
+
+            <div class="btnset"> 
+                <button type="submit" id="modifyBtn">수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button id="cancleBtn"><a href="/users/mypage">취소</a></button>
+            </div>
+            
+            
+            		</form>        
+            
+        </div>
+           
+        
+        
+    
+    
+    </div>
+
+    
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
 </body>
 </html>

@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
+import com.theantiquersroom.myapp.domain.modifyDTO;
 import com.theantiquersroom.myapp.service.UserService;
 
 import lombok.NoArgsConstructor;
@@ -173,7 +174,6 @@ public class UserController {
     } //getBidList
     
     
-    // ======================== JS =========================== //
 
  // 전체회원 목록조회
  	@GetMapping("/getUserList")
@@ -197,16 +197,24 @@ public class UserController {
  	} // get
  	
  	@PostMapping("/modify")
- 	public String modify(UserDTO user, RedirectAttributes rttrs) {
+ 	public String modify(modifyDTO user, RedirectAttributes rttrs) {
  		log.debug("modify({}, {}) invoked.", user,rttrs);
+ 		
+ 		modifyDTO dto=
+				new modifyDTO(
+						user.getUserId(),
+						user.getPassword(),
+						user.getNickName(),
+						user.getPhone()
+
+						
+				);
  		
  		boolean result=this.service.modify(user);
  		
- 		// 이동되는 화면으로 전송해 줘야 할 파라미터가 있으면,
- 		// rttrs를 이용해야 한다.
- 		rttrs.addAttribute("result", result);
+
  		
- 		return "redirect:/users/getUserList";
+ 		return "redirect:/users/mypage";
  	} //modify
  	
  	

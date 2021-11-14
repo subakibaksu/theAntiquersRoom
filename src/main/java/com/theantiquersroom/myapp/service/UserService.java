@@ -10,6 +10,7 @@ import com.theantiquersroom.myapp.domain.LoginDTO;
 import com.theantiquersroom.myapp.domain.ProductVO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
+import com.theantiquersroom.myapp.domain.modifyDTO;
 
 
 @Service
@@ -60,7 +61,7 @@ public interface UserService {
 	public abstract UserVO get(String userId);
     
 	// 회원 정보 수정
-	public abstract boolean modify(UserDTO user);
+	public abstract boolean modify(modifyDTO user);
 	
     // 닉네임, 폰번호로 아이디찾기
     public abstract UserVO findId(UserVO vo);

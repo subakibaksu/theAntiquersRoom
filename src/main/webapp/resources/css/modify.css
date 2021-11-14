@@ -1,0 +1,91 @@
+@charset "UTF-8";
+
+    #modifyBtn, #cancleBtn {
+
+
+        border: 1px solid #C2B1B1;
+        border-radius: 5px;
+        background-color:  #C2B1B1;
+        color: white;
+        font-size: 15px;
+
+    }
+
+    #modifyBtn:hover, #cancleBtn:hover {
+        color: #9C0000;
+        
+    }
+
+
+
+    #info {
+        padding-top: 8rem;
+        text-align: center;
+    }
+
+
+    /* 여기서 부터 mypage_info */
+    #outline {
+
+        width: 810px;
+        height: 600px;
+
+
+
+        background: #FFFFFF;
+        border: 1px solid #C2B1B1;
+        box-sizing: border-box;
+        border-radius: 50px;
+
+        margin: 6rem auto;
+    
+    }
+
+    #inline {
+        margin: 10rem 7rem 7rem 10rem; 
+    }
+
+    .modifyInput {
+
+        width: 18rem;
+        height: 2rem;
+  
+
+        background: #FFFFFF;
+        border: 1px solid #C2B1B1;
+        box-sizing: border-box;
+
+        float: right;
+        margin-right: 3rem;
+        border-radius: 5px;
+
+
+    }
+
+
+
+    .btnset { /* 버튼 중앙 정렬 */
+ 
+        float: left;
+        margin-left: 12rem;
+    }
+
+    #checkNickName {
+        color: #9C0000;
+        float: right;
+        margin-right: 5rem;
+    }
+
+    .text {
+        position: relative;
+
+    }
+
+    #check {
+        position: absolute;
+        left: 29rem;
+        top: 0.5rem;
+        color: #9C0000;
+    }
+    
+    
