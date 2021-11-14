@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.service.ProductService;
 
 @Log4j2
 @NoArgsConstructor
