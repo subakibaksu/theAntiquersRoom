@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <html>
 <head>
     <title>/product/register.jsp</title>
@@ -29,15 +29,13 @@
             <td><input type="text" name="bidIncrement" placeholder="입찰 단위금액을 선택해주세요"></td>
         </tr>
 
-
-
-            <tr>
-                <td>
-                    <button type="submit" id="register">상품등록</button>
-                </td>
-            </tr>
-        </table>
-    </form>
+        <tr>
+            <td>
+                <button type="submit" id="register">상품등록</button>
+            </td>
+        </tr>
+    </table>
+</form>
 
 </body>
 </html>
