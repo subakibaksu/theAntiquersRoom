@@ -50,8 +50,21 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
     @Override
     public boolean checkId(String userId) {
-        // TODO Auto-generated method stub
-        return false;
+    	log.debug("checkId({}) invoked.", userId);
+    	
+    	String id = "";
+    	
+    	id = mapper.getUserId(userId);
+    	
+    	log.debug(id);
+    	
+    	if(id.equals(userId)) {
+    		
+    		log.debug("please");
+    		return true;
+    	}
+    	
+    	return false;
     }
 
     @Override

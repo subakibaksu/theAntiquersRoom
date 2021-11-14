@@ -94,9 +94,19 @@ public class UserController {
     } // confirmEmail
 
     @PostMapping("/checkId")
-    public void checkId(String id) {	//아이디 중복검사
-        log.debug("checkId() invoked.");
-
+    public @ResponseBody Map<Object, Object> checkId(@RequestBody Map<Object,Object> map) {	//아이디 중복검사
+        log.debug("checkId({}) invoked.", map.get("userId"));
+        
+        boolean checkid = this.service.checkId((String)map.get("userId")); //true/false인지 서비스에서 판별 
+        log.info("\t+ checkid: {}", checkid);
+        
+        Map<Object, Object> resultMap = new HashMap<Object,Object>();
+        
+        map.put("emailCheck", checkid);
+        log.debug(map.get("emailCheck"));
+        
+        return resultMap;
+        
     } //checkId
 
     @PostMapping("/checkNickName")
