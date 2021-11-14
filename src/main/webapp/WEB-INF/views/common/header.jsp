@@ -14,14 +14,14 @@
 		<header>
 			<div id="header_container">
 
-				<!-- 로그인버튼 -->
-				<div class="menu_btn">
-					<input type="button" id="login_btn" value="Log in" />
+				<!-- 회원가입버튼-->
+				<div class="menu_btn" id="signin_btn">
+					<a href="#" >Sign in</a>
 				</div>
 
-				<!-- 회원가입버튼-->
+				<!-- 로그인버튼 -->
 				<div class="menu_btn">
-					<input type="button" id="signin_btn" value="Sign in" />
+					<a href="#" id="login_btn" >Log in</a>
 				</div>
 
 				<!-- 사이트 로고-->
@@ -51,15 +51,14 @@
 		<!-- navbar -->
 		<nav>
 			<div id="navbar">
-				<ul class="base">
-					<li class="menu"><a href="#chair">의자</a> </li>
+ 				<ul class="base">
 					<li class="menu"><a href="#desk">책상</a> </li>
 					<li class="menu"><a href="cupboard">수납장</a> </li>
 					<li class="menu"><a href="bed">침대</a> </li>
 					<li class="menu"><a href="wardrobe">옷장</a> </li>
 					<li class="menu"><a href="table">화장대</a> </li>
 					<li class="menu"><a href="etc">기타</a> </li>
-				</ul>
+ 				</ul>
 			</div>
 
 

@@ -2,6 +2,7 @@
 
 * {
 	text-decoration: none;
+	color: black;
 }
 
 .logo {
@@ -9,6 +10,12 @@
 	/* font-size:36px; */
 	font-family: Mercury Display A, Mercury Display B, MercuryDisplay-wb,
 		Mercury Display, serif;
+	width: 250px;
+}
+
+.logo_default {
+	width: 250px;
+	
 }
 
 #header_container {
@@ -30,40 +37,44 @@
 
 .menu_btn {
 	float: right;
+	padding: 5px;
+	margin-left: 10px;
 }
+
+
 
 #login_btn {
 	font-size: 16px;
+	border: none;
+	
 }
 
 #signin_btn {
-	border: 1px;
+	border: 1px solid;
 	border-color: #c2b1b1;
-	border-radius: 5px;
+	border-radius: 12px;
 	background-color: #fff;
 	font-size: 16px;
+	padding-right: 10px;
+	padding-left: 10px;
 }
 
-.menu {
-	display: inline;
-	font-size: 18px;
-	width: 66px;
-	height: 31px;
-	margin-left: 5%;
-	color: black;
-}
-
-.menu:hover {
+#signin_btn:hover {
+	background-color: #c2b1b1;
 	color: white;
 }
 
 #navbar {
 	background-color: #D6B6B6;
-	opacity: 60%;
+	opacity: 70%;
+	margin-right: 10%;
+	margin-left: 10%;
+	border-top-left-radius: 25px;
+	border-bottom-right-radius: 25px;
 }
 
 .base {
-	margin: 60px 18% 0 18%;
+	margin: 70px 18% 0 18%;
 	padding-top: 9px;
 	padding-bottom: 9px;
 }
@@ -71,20 +82,17 @@
 #search_bar {
 	border: none;
 	background-color: #D6B6B6;
-	opacity: 60%;
+	opacity: 75%;
 	padding: 5px;
 	padding-left: 5px;
 	width: 180px;
-/* 	background-image:
-		url("data:image/svg+xml,%3Csvg aria-hidden='true' focusable='false' data-prefix='fas' data-icon='search' class='svg-inline--fa fa-search fa-w-16' role='img' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='currentColor' d='M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z'%3E%3C/path%3E%3C/svg%3E");
-	background-repeat: no-repeat;
-	background-position: right; */
 }
 
 #header_right {
 	background-color: #D6B6B6;
 	opacity: 60%;
 	width: 230px;
+	box-shadow: 2px 2px;
 }
 
 .findIconLink {
@@ -94,6 +102,24 @@
 	cursor: pointer;
 }
 
-.findIconLink:hover {
-	color: purple;
+.findIcon:hover {
+	color: #C2B1B1;
+}
+
+.menu {
+	display: inline;
+	padding-right: 30px;
+	padding-left: 30px;
+	margin-right: 8px;
+	margin-left: 8px;
+}
+
+.menu:hover {
+	text-decoration: underline;
+	text-underline-position:under;
+	text-decoration: white;
+}
+
+.menu_btn > a :hover{
+	color: white;
 }
