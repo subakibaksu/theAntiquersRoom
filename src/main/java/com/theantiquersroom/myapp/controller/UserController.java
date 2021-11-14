@@ -22,8 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.theantiquersroom.myapp.domain.Criteria;
-import com.theantiquersroom.myapp.domain.ProductVO;
+import com.theantiquersroom.myapp.domain.MyPageDTO;
+import com.theantiquersroom.myapp.domain.MypageCriteria;
+import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
 import com.theantiquersroom.myapp.service.UserService;
@@ -153,16 +154,28 @@ public class UserController {
     // ======================== MyPage =========================== //
     
     @GetMapping("/getMyAuctionList")
-    public void getMyAuctionList(
-    		String userId, 
-    		@ModelAttribute("cri") Criteria cri,
+    public String getMyAuctionList(
+    		HttpSession session,
+    		@ModelAttribute("cri") MypageCriteria cri,
     		Model model) {	// 나의 경매리스트 페이지로 이동
-        log.debug("getMyAuctionList({}, {}) invoked.", userId, model);
+        log.debug("getMyAuctionList({}, {}) invoked.", cri, model);
 
-        List<ProductVO> myAuctionList = this.service.getMyAuctionList(userId, cri);
- 		log.info("\t+ myAuctionList: {}", myAuctionList);
+        UserDTO user = (UserDTO) session.getAttribute(LoginController.authKey);
+        String userId = user.getUserId();
+        
+        List<ProductDTO> myAuctionList = this.service.getMyAuctionList(userId, cri);
+ 		log.info("\t+ myAuctionList size: {}", myAuctionList.size());
 
  		model.addAttribute("myAuctionList",myAuctionList);
+	
+ 		//페이징 처리
+ 		Integer totalAmount = this.service.getMyAuctionTotal(userId);
+		
+		MyPageDTO pageDTO = new MyPageDTO(cri, totalAmount);
+		
+		model.addAttribute("pageMaker", pageDTO);
+    
+		return "/users/myAuctionList";
     } //getMyAuctionList
 
 

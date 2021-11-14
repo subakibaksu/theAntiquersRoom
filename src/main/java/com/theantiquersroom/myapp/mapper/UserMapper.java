@@ -5,8 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.theantiquersroom.myapp.domain.Criteria;
-import com.theantiquersroom.myapp.domain.ProductVO;
+import com.theantiquersroom.myapp.domain.MypageCriteria;
+import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
 
@@ -60,10 +60,14 @@ public interface UserMapper {
     public abstract UserVO findId(UserVO vo);
     
     
+	
     // =====================마이페이지 관련===================== //
     
+	// 마이옥션리스트 총 게시물 개수를 반환
+	public abstract Integer getMyAuctionTotalCount(String userId);
+	
     //특정 회원 ID 통한 경매 리스트 조회
-    public abstract List<ProductVO> getMyAuctionList(String userId, Criteria cri);
+    public abstract List<ProductDTO> getMyAuctionList(String userId, MypageCriteria cri);
 	
     
     // =====================카카오 로그인 API 관련===================== //

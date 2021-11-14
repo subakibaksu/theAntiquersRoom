@@ -165,21 +165,50 @@
 	            user_id=#{userId}
 		]]>
 	</update>
+	
+	
+	<!-- 마이페이지 게시판 총 목록개수 반환 -->
+    <select
+        id="getMyAuctionTotalCount"
+        resultType="int">
+        
+        <![CDATA[
+
+            SELECT count(p_id)
+            FROM product
+            WHERE user_id=#{userId}
+
+        ]]>
+    </select>
            
            
     <!-- 마이페이지-나의경매리스트 조회 -->
     <select
         id="getMyAuctionList"
-        resultType="com.theantiquersroom.myapp.domain.ProductVO">
+        resultType="com.theantiquersroom.myapp.domain.ProductDTO">
 
         <![CDATA[ 
 
-            SELECT * 
-            FROM product 
+            SELECT
+            	A.p_id as pId,
+                A.name,
+                A.created_at as createdAt,
+                A.updated_at as updatedAt,
+                A.content,
+                A.category_id as categoryId,
+                A.user_id as userId,
+                A.started_at as startedAt,
+                A.ended_at as endedAt,
+                A.started_price as startedPrice,
+                A.bid_increment as bidIncrement,
+                A.status,
+                (select nickname from users as B where B.USER_ID='asdfasdf@gmail.com') as nickname,
+                (select category_name from category as C where C.category_id='1') as categoryName
+            FROM product as A
+            WHERE A.user_id=#{userId}
+            ORDER BY A.p_created_at DESC
             OFFSET (#{currPage}-1) * #{amount} ROWS 
             FETCH NEXT #{amount} ROWS ONLY 
-            WHERE user_id=#{userId}
-            ORDER BY p_created_at DESC
 
         ]]>
     </select>       
