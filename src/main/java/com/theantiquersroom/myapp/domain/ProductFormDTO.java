@@ -1,5 +1,6 @@
 package com.theantiquersroom.myapp.domain;
 
+
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 

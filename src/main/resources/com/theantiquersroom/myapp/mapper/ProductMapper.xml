@@ -8,9 +8,7 @@
 
     <insert id="inserProduct"
             parameterType="com.theantiquersroom.myapp.domain.ProductFormDTO">
-        <selectKey keyProperty="pId" resultType="int" order="AFTER">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
+
     <![CDATA[
             insert into product(name, content, category_id, user_id, started_at, ended_at, started_price, bid_increment, status)
             VALUES (#{name}, #{content}, #{categoryId}, #{userId}, #{startedAt}, #{endedAt}, #{startedPrice}, #{bidIncrement}, "REQUESTED")
