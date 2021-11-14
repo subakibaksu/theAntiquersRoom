@@ -25,15 +25,42 @@
 
     <!-- 회원가입 -->
     <insert
-        id="insertUser"
-        parameterType="com.theantiquersroom.myapp.domain.UserDTO">
+            id="insertUser"
+            parameterType="com.theantiquersroom.myapp.domain.UserDTO">
 
         <![CDATA[
-            INSERT INTO USERS(USER_ID, PASSWORD, NICKNAME, PHONE, USER_TYPE)
-            VALUES (#{userId}, #{password}, #{nickName}, #{phone}, #{userType})
+            INSERT INTO users(USER_ID, PASSWORD, NICKNAME, PHONE, USER_TYPE)
+            VALUES (#{userId}, #{password}, #{nickName}, #{phone}, 2)
+        ]]>
+
+    </insert>
+
+    <!-- 인증번호 INSERT-->
+    <insert
+            id="insertAuthorizationNumber"
+            parameterType="string"
+    >
+
+        <![CDATA[
+        REPLACE INTO authkey(userid, auth, updatedate)
+        VALUES (#{userId}, #{auth}, now())
         ]]>
     </insert>
 
+    <!-- emailchecktemp table의 auth 조회 -->
+    <select id="selectAuth"
+            parameterType="String"
+            resultType="String"
+    >
+        <![CDATA[
+                SELECT auth from authkey
+                WHERE userId = #{userId}
+                AND updatedate BETWEEN DATE_SUB(now(), interval 3 minute) AND now()
+        ]]>
+
+    </select>
+
+    <!-- 비밀번호 재설정  -->
     <update
             id="updatePassword"
             parameterType="String"
@@ -92,12 +119,71 @@
             id="login"
             resultType="com.theantiquersroom.myapp.domain.UserVO"
             parameterType="string">
-            
+
         <![CDATA[
             SELECT *
             FROM users
             WHERE user_id=#{userId}
         ]]>
     </select>
+    
+        <select 
+        id="read"
+        resultType="com.theantiquersroom.myapp.domain.UserVO">
+            select
+                user_id as userId,
+                password,
+                nickname,
+                phone,
+                user_type as userType
+            from users
+       WHERE user_id=#{userId}
+    </select>
+    
+       <!-- 닉네임, 전화번호로 아이디찾기  -->
+    <select
+            id="findId"
+            resultType="com.theantiquersroom.myapp.domain.UserVO">
+            
+		select * from users where nickname=#{nickName} and phone=#{phone}    
+		</select>
+
+        <!-- 회원 정보 삭제 -->
+    
+    <delete id="delete">
+        DELETE FROM users WHERE user_id=#{userId}
+    </delete>
+    
+    	<!-- 회원 정보 수정 -->
+        <update id="update">
+                
+        UPDATE users
+        SET 
+    	    password=#{password},
+            nickname=#{nickName},
+            phone=#{phone},
+            user_type=#{userType}
+           
+        
+        WHERE
+            user_id=#{userId}
+           </update>
+            
+
+
+    <!-- 카카오 아이디 조회  -->
+    <select
+            id="getKakaoUser"
+            resultType="com.theantiquersroom.myapp.domain.UserDTO"
+            parameterType="string">
+            
+        <![CDATA[
+
+          SELECT * FROM users WHERE kakao_unique_id = #{kakaoUniqueId}
+
+        ]]>
+    </select>
+
+
 
 </mapper>

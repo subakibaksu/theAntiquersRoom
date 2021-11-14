@@ -12,7 +12,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.theantiquersroom.myapp">
-		<level value="info" />
+		<level value="trace" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
