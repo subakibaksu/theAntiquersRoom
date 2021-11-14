@@ -18,31 +18,35 @@
 
 
     <script type="text/javascript">
+
         $('#myModal').on('shown.bs.modal', function () {
             $('#myInput').trigger('focus')
         })
 
         $(document).ready(function (){
 
-        var isAjaxing = false;
+            //Ajax로 인한 중복요청문제를 방지하기 위한 변수설정
+            var isAjaxing = false;
 
+            //resetPasswordForm의 submit을 Ajax로 실행
             $( "#resetPasswordFormSubmit").click(function (){
-                console.log('clicked')
-                $( "#resetPasswordForm").submit(function (e){
 
-                    console.log('submited')
-                    e.preventDefault();
+                $( "#resetPasswordForm").submit(function (event){
 
+                    //태그의 Default로인한 인한 문제를 방지
+                    event.preventDefault();
+
+                    //form 내부 input값을 serialize
                     var requestdata = $(this).serialize();
 
-
-                    console.log(requestdata);
-
+                    //Ajax로 인한 중복요청문제를 방지
                     if( isAjaxing ){
                         return;
                     }
 
                     isAjaxing = true;
+
+                    //비동기 요청
                     $.ajax({
                         async: true,
                         type : 'POST',
@@ -50,47 +54,38 @@
                         dataType : "json",
                         contentType: "application/json; charset=UTF-8",
                         success : function (result) {
-                            console.log(result.check);
 
+                            //emailsend 성공시 #mymsg의 p태그 내용을 변경
                             if(result.check){
+
                                 console.log('okay');
                                 $('#mymsg').text('okay');
                                 $('#inputuserId').val(null);
                                 $('#inputNickname').val(null);
 
-
                             }else {
+
                                 console.log('nope');
                                 $('#mymsg').text('nope');
                                 $('#inputuserId').val(null);
                                 $('#inputNickname').val(null);
 
-
                             }
 
+                            //Ajax로 인한 중복요청문제를 방지
                             setTimeout(function (){ isAjaxing = false}, 1000);
-
 
                         },
                         error : function (error) {
 
                             console.log("error", error);
 
+                            //Ajax로 인한 중복요청문제를 방지
                             setTimeout(function (){ isAjaxing = false}, 1000);
 
                         },
-                        complete : function () {
-
-                            console.log("ajax completed")
-
-
-                        }
-
 
                     });
-
-
-
 
                 });
 

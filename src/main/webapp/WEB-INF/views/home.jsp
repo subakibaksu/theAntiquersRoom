@@ -17,9 +17,15 @@
             $('#loginBtn').click(function(){
                 console.log('loginBtn click event triggered..');
 
-                self.location='/users/login';
-            });
-        });
+                self.location='/login';
+            }); //login_onclick
+            
+            $('#logoutBtn').click(function(){
+                console.log('click event triggered..');
+
+                self.location='/users/logout';
+            }); //logout_onclick
+        }); //.jq
     </script>
 </head>
 <body>
@@ -28,7 +34,7 @@
     <P>  The time on the server is ${serverTime}. </P>
 
     <P>  Kakao Id : ${kakaoUserId}. </P>
-    <P>  Kakao Email : ${kakaoUserEmail}. </P>
+    <P>  Kakao usertype : ${usertype}. </P>
 
     <img onclick="kakaoLogin();" style="cursor: pointer;" src="../../resources/images/kakao_login.png">
 
@@ -38,10 +44,15 @@
     <hr>
     <button type="button" id="loginBtn">로그인</button>
 
+    <hr>
+	<h3>${sessionScope.__AUTH_ANTIQUE__}</h3>
+    <button type="button" id="logoutBtn">로그아웃</button>
+
 <!---------------- 카카오 로그인 ---------------->
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>
     function kakaoLogin() {
+
 
         $.ajax({
             url: '/login/getKakaoAuthUrl',

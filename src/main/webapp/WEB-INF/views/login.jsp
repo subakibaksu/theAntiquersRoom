@@ -6,10 +6,6 @@
 <head>
     <meta charset="UTF-8">
     <title>login.jsp</title>
-
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
-    </style>
         
     <link rel="stylesheet" href="../../../resources/css/login.css">
 
@@ -32,7 +28,7 @@
         </div>
         <div id="loginDiv">
             
-            <form action="/users/login" method="post">
+            <form action="/loginCheck" method="post">
             <table id="loginForm">
                 <tr>
                     <td><input type="text" name="userId" placeholder="이메일 주소를 입력하세요"></td>

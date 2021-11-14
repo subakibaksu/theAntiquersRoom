@@ -1,6 +1,7 @@
 package com.theantiquersroom.myapp.service;
 
 
+import java.text.ParseException;
 import java.util.List;
 
 import org.springframework.beans.factory.DisposableBean;
@@ -10,10 +11,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.theantiquersroom.myapp.domain.Criteria;
+
+import com.theantiquersroom.myapp.domain.LoginDTO;
+import com.theantiquersroom.myapp.domain.ProductVO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
 import com.theantiquersroom.myapp.mapper.UserMapper;
 import com.theantiquersroom.myapp.utils.Mailsender;
+
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
@@ -27,10 +32,9 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
 
     @Setter(onMethod_= {@Autowired})
-    Mailsender mailsender;
-    UserMapper mapper;
-    BCryptPasswordEncoder passwordEncoder;
-
+    private Mailsender mailsender;
+    private UserMapper mapper;
+    private BCryptPasswordEncoder passwordEncoder;
 
 
     @Override
@@ -47,8 +51,21 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
     @Override
     public boolean checkId(String userId) {
-        // TODO Auto-generated method stub
-        return false;
+    	log.debug("checkId({}) invoked.", userId);
+    	
+    	String id = "";
+    	
+    	id = mapper.getUserId(userId);
+    	
+    	log.debug(id);
+    	
+    	if(id.equals(userId)) {
+    		
+    		log.debug("please");
+    		return true;
+    	}
+    	
+    	return false;
     }
 
     @Override
@@ -64,54 +81,77 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     }
 
     @Override
-    public boolean confirmEmail(String eCode) {
-        // TODO Auto-generated method stub
+    public boolean confirmEmail(String userId, String auth) throws ParseException {
+
+        log.debug("confirmEmail invoked userId : {} auth : {}",userId,auth);
+
+        //DB Auth값 조회
+        String databaseAuth = mapper.selectAuth(userId);
+        log.debug("auth : {}",databaseAuth);
+
+        //comparedDate 가 3분 이내, 요청값 Auth와 DB Auth가 일치할 경우 true를 반환.
+        if(auth != null && auth.equals(databaseAuth)){
+            return true;
+        }
+
+        return false;
+
+    } // confirmEmail
+
+    @Override
+    public boolean sendEmail(String userId) throws Exception {
+
+        log.debug("userId : {} nickname : {} ",userId);
+
+        if(userId != null){
+
+            // 인증키 생성후 이메일로 전송 , DB에 Insert
+            String auth = Integer.toString((int)(Math.random()*3000+1));
+            mailsender.sendmail("authorizationKey : "+ auth,userId);
+            mapper.insertAuthorizationNumber(userId,auth);
+
+            return true;
+        }
         return false;
     }
 
-    
+
     @Override
-	public boolean login(String userId, String password) {
-        log.debug("login({}, {}) invoked.", userId, password);
+	public UserDTO login(LoginDTO dto) throws Exception {
+        log.debug("login({}) invoked.", dto);
 
-        UserVO vo = this.mapper.login(userId);
-
-        return passwordEncoder.matches(password, vo.getPassword());
+        UserDTO user = this.mapper.selectUserById(dto.getUserId());
+        log.info("\t+ user: {}", user);
+        
+        return (passwordEncoder.matches(dto.getPassword(), user.getPassword()))? user:null;
 	}
 
 	@Override
 	public UserVO findId(String nickName, String phone) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-
 	public boolean resetPwd(String userId, String nickname) throws Exception {
 
         log.debug("userId : {} nickname : {} ",userId,nickname);
-        boolean b = false;
-        String nick = mapper.selectUserNickname(userId);
 
+        boolean mailSentCheck = false;
+
+        String nick = mapper.selectUserNickname(userId);
         log.debug(nick);
 
-        String npw = Integer.toString((int)(Math.random()*3000+1));
-
         if(nick.equals(nickname) && nick!=null){
-            log.debug("yes you can");
 
-           mailsender.sendmail("your new password is : "+ npw,userId);
-
-            mapper.updatePassword(npw,userId);
-
-            b = true;
-
+            // 새로운 비밀번호 생성후 이메일로 전송 , DB에 Insert
+            String newpassword = Integer.toString((int)(Math.random()*3000+1));
+            mailsender.sendmail("your new password is : "+ newpassword,userId);
+            mapper.updatePassword(newpassword,userId);
+            
+            mailSentCheck = true;
         }
-
-        return b;
-
-	}
-	
+        return mailSentCheck;
+	} // resetPwd()
 
 	@Override
 	public List<ProductVO> getMyAuctionList(Criteria cri) {
@@ -127,7 +167,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	
 
 	// ========================================= //
-
 
 	@Override
 	public List<UserVO> getUserList() {
@@ -149,7 +188,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	} // get ( 회원 상세 정보 보기)
 	
 	@Override
-	public boolean modify(UserVO user) {
+	public boolean modify(UserDTO user) {
 		log.debug("modify({}) invoked.", user);
 		
 		// 비즈니스 로직 수행에 필요한 경우, 영속성 계층의 메소드를 호출
@@ -190,16 +229,10 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     @Override
     public void destroy() throws Exception {
     	// TODO Auto-generated method stub
-    	
     }
     
     @Override
     public void afterPropertiesSet() throws Exception {
     	// TODO Auto-generated method stub
-    	
     }
-
-
-
-
 } // end class
