@@ -2,12 +2,14 @@ package com.theantiquersroom.myapp.controller;
 
 import com.theantiquersroom.myapp.domain.AuctionDTO;
 import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.ProductFormDTO;
 import com.theantiquersroom.myapp.service.ProductService;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,19 +33,20 @@ public class ProductController {
 
     /*상품 등록 페이지로 이동*/
     @GetMapping("/register")
-    public void register() {
-        log.debug("register() invoked.");
+    public String register() {
 
+        System.out.println("Test");
+
+        return "/product/register";
     } // Get register()
 
     /*상품 등록정보 DB전달*/
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public String register(ProductDTO product, AuctionDTO auction) {
-        log.debug("register({}) invoked.", product, auction);
+    public String register(ProductFormDTO product, @SessionAttribute("userId") String userId) {
 
+        product.setUserId(userId);
         this.service.registerProduct(product);
-        this.service.registerAuction(auction);
 
         return "/main"; // 추후 mypage로 가자
     } // Post register()

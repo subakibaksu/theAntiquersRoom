@@ -7,18 +7,20 @@
 <mapper namespace="com.theantiquersroom.myapp.mapper.ProductMapper">
 
     <insert id="inserProduct"
-            parameterType="com.theantiquersroom.myapp.domain.ProductDTO">
-
+            parameterType="com.theantiquersroom.myapp.domain.ProductFormDTO">
+        <selectKey keyProperty="productId" resultType="int" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
     <![CDATA[
-            insert into product(name, created_at, content, category_id, user_id)
-            VALUES (#{name}, #{createdAt}, #{content}, #{categoryId}, #{userId})
+            insert into product(name, content, category_id, user_id)
+            VALUES (#{name}, #{content}, #{categoryId}, #{userId})
         ]]>
     </insert>
     <insert id="inserAuction"
-            parameterType="com.theantiquersroom.myapp.domain.AuctionDTO">
+            parameterType="com.theantiquersroom.myapp.domain.ProductFormDTO">
     <![CDATA[
-            insert into auction(started_at, ended_at, started_price, bid_increment, status)
-            VALUES (#{staredAt}, #{endedAt}, #{stardtedPrice}, #{bidIncrement}, "승인요청")
+            insert into auction(auction_id, started_at, ended_at, started_price, bid_increment, status)
+            VALUES (#{productId} ,#{startedAt}, #{endedAt}, #{startedPrice}, #{bidIncrement}, "REQUESTED")
         ]]>
     </insert>
 
