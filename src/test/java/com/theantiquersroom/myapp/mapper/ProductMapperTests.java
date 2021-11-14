@@ -1,7 +1,6 @@
 package com.theantiquersroom.myapp.mapper;
 
 import com.theantiquersroom.myapp.domain.ProductFormDTO;
-import com.theantiquersroom.myapp.service.ProductService;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
@@ -14,8 +13,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.Assert.assertTrue;
-
 @Log4j2
 @NoArgsConstructor
 
@@ -23,9 +20,11 @@ import static org.junit.Assert.assertTrue;
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
 public class ProductMapperTests {
 
+
     @Setter(onMethod_= {@Autowired})
     private ProductMapper mapper;
 
+    // 상품 등록 Test
     @Test
     public void testInsert() {
 
@@ -44,6 +43,4 @@ public class ProductMapperTests {
         int affectedLines = this.mapper.inserProduct(product);
         log.info("\t+ affectedLines: {}", affectedLines);
     }
-
-
 }

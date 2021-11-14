@@ -44,7 +44,7 @@ public class ProductController {
         product.setUserId(userId);
         this.service.registerProduct(product);
 
-        return "/main"; // 추후 mypage로 가자
+        return "/main"; // 추후 완료 alert으로 변경
     } // Post register()
 
     /*유찰된 상품 재등록 페이지로 이동*/

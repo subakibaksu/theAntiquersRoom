@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 @Data
 public class ProductFormDTO {
 
+    // 상품등록관련
     private Integer pId;
     private String name;
     private String content;
@@ -23,4 +24,5 @@ public class ProductFormDTO {
     private Integer startedPrice;
     private Integer bidIncrement;
     private String status;
+
 }
