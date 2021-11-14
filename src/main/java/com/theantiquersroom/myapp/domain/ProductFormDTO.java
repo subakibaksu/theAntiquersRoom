@@ -8,12 +8,13 @@ import java.time.LocalDateTime;
 @Data
 public class ProductFormDTO {
 
-    private Integer productId;
+    private Integer pId;
     private String name;
     private String content;
     private Integer categoryId;
     private String userId;
 
+    // 경매관련
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startedAt;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

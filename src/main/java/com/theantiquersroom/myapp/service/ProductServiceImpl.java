@@ -1,7 +1,5 @@
 package com.theantiquersroom.myapp.service;
 
-import com.theantiquersroom.myapp.domain.AuctionDTO;
-import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.domain.ProductFormDTO;
 import com.theantiquersroom.myapp.mapper.ProductMapper;
 import lombok.AllArgsConstructor;
@@ -25,7 +23,6 @@ public class ProductServiceImpl implements ProductService {
         log.debug("login({}) invoked.", product);
 
         this.mapper.inserProduct(product);
-        this.mapper.inserAuction(product);
         return true;
     }
 
