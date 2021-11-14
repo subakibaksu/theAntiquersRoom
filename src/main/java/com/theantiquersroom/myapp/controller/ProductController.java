@@ -1,6 +1,7 @@
 package com.theantiquersroom.myapp.controller;
 
 import com.theantiquersroom.myapp.domain.ProductFormDTO;
+import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.service.ProductService;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+
 @Log4j2
 @NoArgsConstructor
 
@@ -18,9 +20,11 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class ProductController {
 
-    @Setter(onMethod_= {@Autowired})
-    private ProductService service;
-
+	
+	@Setter(onMethod_= {@Autowired})
+	private ProductService service;
+	
+	
     /*상품 목록 페이지로 이동*/
     @GetMapping("")
     public void product(){
@@ -85,9 +89,16 @@ public class ProductController {
 
     /*상품 상세보기 페이지로 이동*/
     @GetMapping("/getDetail")
-    public String getDetail() {
+    public String getDetail(Integer pId, Model model) {
+    	log.debug("getDetail({}) invoked.", pId);
+    	
+    	ProductDTO dto = this.service.getDetail(pId);
+    	log.info("/t+ dto: {}", dto);
+    	assert dto != null;
+    	
+    	model.addAttribute("product", dto);
+    	
     	return "/detail";
-
     } // getDetail()
 
     /*해당 상품의 입찰 히스토리 조회*/

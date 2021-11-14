@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -10,6 +11,10 @@
 
     <!-- fontAwdome for icons -->
     <script src="https://kit.fontawesome.com/91815d1378.js" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
+    
 </head>
 <body>
 
@@ -34,19 +39,19 @@
                 <table id="infoTable">
                     <tr>
                         <th>판매자 닉네임</th>
-                        <td>냥냥냥</td>
+                        <td>${product.nickname}</td>
                     </tr>
                     <tr>
                         <th>상품명</th>
-                        <td>냥구냥구</td>
+                        <td>${product.name}</td>
                     </tr>
                     <tr>
                         <th>카테고리</th>
-                        <td>이게뭐냥</td>
+                        <td>${product.categoryId}</td>
                     </tr>
                     <tr>
                         <th>경매 시작 가격</th>
-                        <td>1000원</td>
+                        <td>${product.startedPrice}원</td>
                     </tr>
                     <tr>
                         <th>현재 금액</th>
@@ -55,9 +60,13 @@
                     <tr>
                         <th>입찰 금액</th>
                         <td id="bidTd">
-                            <i id="upBtn" class="fas fa-chevron-circle-up"/>
-                            <input type="text" id="bidPrice" name="bidPrice" value="50000원">
-                            <i id="downBtn" class="fas fa-chevron-circle-down"/>
+                            <button id="upBtn" type="button" onclick='changeBid("up")'>
+                                <i class="fas fa-chevron-circle-up" ></i>
+                            </button>
+                            <input type="text" id="bidPrice" name="bidPrice" value="${product.bidIncrement}">원
+                            <button id="downBtn" type="button" onclick='changeBid("down")'>
+                                <i class="fas fa-chevron-circle-down" ></i>
+                            </button>
                             <button type="button" id="bidBtn">입찰</button>
                         </td>
                     </tr>
@@ -82,12 +91,32 @@
                     <th><a href="#">문의사항</a></th>
                 </tr>
                 <tr id="infoDetail">
-                    <td id="contentBox" colspan="3"></td> <!-- ajax로 정보 받아와서 띄워주기 -->
+                    <td id="contentBox" colspan="3">${product.content}</td> <!-- ajax로 정보 받아와서 띄워주기 -->
                 </tr>
             </table>
         </section>
 
     </div>
+
+
+
+    <script>
+        function changeBid(type){
+            const bidPrice = document.getElementById('bidPrice');
+            let amount = bidPrice.value;
+            
+            let product = "${product}";
+            let increment = "${product.bidIncrement}";
+
+            if(type == 'up'){
+                amount = parseInt(amount)+parseInt(increment);
+            }else if(type == 'down' && amount != increment){
+                amount = parseInt(amount)-parseInt(increment);
+            }
+            
+            bidPrice.value = amount;
+        }
+    </script>
 
 </body>
 </html>
