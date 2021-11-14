@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.theantiquersroom.myapp.domain.Criteria;
+import com.theantiquersroom.myapp.domain.LoginDTO;
 import com.theantiquersroom.myapp.domain.ProductVO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
@@ -22,8 +23,6 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 
-
-
 @AllArgsConstructor
 @Log4j2
 
@@ -32,10 +31,9 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
 
     @Setter(onMethod_= {@Autowired})
-    Mailsender mailsender;
-    UserMapper mapper;
-    BCryptPasswordEncoder passwordEncoder;
-
+    private Mailsender mailsender;
+    private UserMapper mapper;
+    private BCryptPasswordEncoder passwordEncoder;
 
 
     @Override
@@ -112,27 +110,23 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
             mapper.insertAuthorizationNumber(userId,auth);
 
             return true;
-
         }
-
         return false;
     }
 
 
     @Override
-	public boolean login(String userId, String password) {
+	public UserDTO login(LoginDTO dto) throws Exception {
+        log.debug("login({}) invoked.", dto);
 
-        log.debug("login({}, {}) invoked.", userId, password);
-
-        UserVO vo = this.mapper.login(userId);
-
-        return passwordEncoder.matches(password, vo.getPassword());
-
+        UserDTO user = this.mapper.selectUserById(dto.getUserId());
+        log.info("\t+ user: {}", user);
+        
+        return (passwordEncoder.matches(dto.getPassword(), user.getPassword()))? user:null;
 	}
 
 	@Override
 	public UserVO findId(String nickName, String phone) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -152,15 +146,11 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
             String newpassword = Integer.toString((int)(Math.random()*3000+1));
             mailsender.sendmail("your new password is : "+ newpassword,userId);
             mapper.updatePassword(newpassword,userId);
-
+            
             mailSentCheck = true;
-
         }
-
         return mailSentCheck;
-
 	} // resetPwd()
-
 
 	@Override
 	public List<ProductVO> getMyAuctionList(Criteria cri) {
@@ -176,7 +166,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	
 
 	// ========================================= //
-
 
 	@Override
 	public List<UserVO> getUserList() {
@@ -198,7 +187,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	} // get ( 회원 상세 정보 보기)
 	
 	@Override
-	public boolean modify(UserVO user) {
+	public boolean modify(UserDTO user) {
 		log.debug("modify({}) invoked.", user);
 		
 		// 비즈니스 로직 수행에 필요한 경우, 영속성 계층의 메소드를 호출
@@ -239,14 +228,10 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     @Override
     public void destroy() throws Exception {
     	// TODO Auto-generated method stub
-    	
     }
     
     @Override
     public void afterPropertiesSet() throws Exception {
     	// TODO Auto-generated method stub
-    	
     }
-
-
 } // end class
