@@ -28,7 +28,7 @@
         </div>
         <div id="loginDiv">
             
-            <form action="/users/login" method="post">
+            <form action="/loginCheck" method="post">
             <table id="loginForm">
                 <tr>
                     <td><input type="text" name="userId" placeholder="이메일 주소를 입력하세요"></td>
