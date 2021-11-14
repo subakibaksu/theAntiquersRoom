@@ -12,7 +12,8 @@
 
     <c:forEach items="${productList}" var="product">
         <p>${product.name}</p>
-        <p>${product.user_id}</p>
+        <p>${product.userId}</p>
+        <p>${product.startedPrice}</p>
     </c:forEach>
 
 

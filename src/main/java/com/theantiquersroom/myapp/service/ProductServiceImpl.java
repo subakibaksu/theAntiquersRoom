@@ -36,6 +36,9 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
         map.put("pageStart",cri.getPageStart());
         map.put("perPageNum",cri.getPerPageNum());
         map.put("category_id",productCommand.getCategory_id());
+        map.put("filter",productCommand.getFilter());
+        map.put("searchQuery",productCommand.getSearchQuery());
+
         return mapper.listCriteria(map);
 
     } // listCriteria()

@@ -13,6 +13,6 @@ public class ProductCommand {
 
     private String category_id;
     private String searchQuery;
-    private String filter;
+    private Integer filter;
 
 }

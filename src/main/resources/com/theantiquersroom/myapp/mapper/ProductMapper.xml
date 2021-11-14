@@ -7,16 +7,37 @@
 <mapper namespace="com.theantiquersroom.myapp.mapper.ProductMapper">
 
     <select id="listCriteria" resultType="com.theantiquersroom.myapp.domain.ProductDTO" parameterType="hashmap"> <!-- typeAlias를 지정했음으로 풀 네임 기재 필요 없음 -->
-        <![CDATA[
-            select p_id,name,created_at,updated_at,content,category_id,user_id from product  WHERE category_id = #{category_id} limit #{pageStart}, #{perPageNum}
-        ]]>
+            SELECT p_id,name,created_at,updated_at,content,category_id,user_id, started_at, ended_at, started_price, bid_increment, status
+            FROM product
+
+            <where>
+                <if test="category_id != null">
+                    AND category_id = #{category_id}
+                </if>
+            </where>
+
+            <trim prefix="ORDER BY">
+
+                <if test="filter == 0">  p_id DESC </if>
+
+                <if test="filter == 1">  p_id ASC </if>
+
+            </trim>
+
+
+
+
+            limit #{pageStart}, #{perPageNum}
+
     </select>
 
     <!-- 전체 게시글 수를 구하는 sql문 -->
     <select id="getTotalCount" resultType="java.lang.Integer" parameterType="com.theantiquersroom.myapp.domain.ProductCommand">
+        <![CDATA[
         select count(*) from
             product
         WHERE category_id = #{category_id}
+        ]]>
     </select>
 
 </mapper>
