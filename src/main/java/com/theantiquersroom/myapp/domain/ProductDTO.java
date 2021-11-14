@@ -1,8 +1,7 @@
 package com.theantiquersroom.myapp.domain;
 
-
-import java.util.Date;
-
+import java.time.LocalDateTime;
+import org.springframework.format.annotation.DateTimeFormat;
 import lombok.Data;
 
 
@@ -10,11 +9,24 @@ import lombok.Data;
 public class ProductDTO {
 
 	private Integer pId;
-	private String pName;
-	private Date createdAt;
-	private Date updatedAt;
+	private String name;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime createdAt;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime updatedAt;
 	private String content;
 	private Integer categoryId;
 	private String userId;
 	
+	//경매정보
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime startedAt;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+	private LocalDateTime endedAt;
+	private Integer startedPrice;
+	private Integer bidIncrement;
+	private String status;
+	
+	//Users 테이블에서 가져온 정보
+	private String nickname;
 } // end class
