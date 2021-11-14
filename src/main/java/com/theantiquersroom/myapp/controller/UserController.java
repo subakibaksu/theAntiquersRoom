@@ -176,25 +176,25 @@ public class UserController {
     
 
  // 전체회원 목록조회
- 	@GetMapping("/getUserList")
- 	public void list(Model model) {	// 게시판 목록화면 요청
- 		log.debug("list() invoked.");
+//  	@GetMapping("/getUserList") // 추후 관리자 페이지에서
+//  	public void list(Model model) {	
+//  		log.debug("list() invoked.");
  		
- 		List<UserVO> list=this.service.getUserList();
- 		log.info("\t+ list size: {}", list.size());
+//  		List<UserVO> list=this.service.getUserList();
+//  		log.info("\t+ list size: {}", list.size());
  		
- 		model.addAttribute("list",list);
- 	} //list
+//  		model.addAttribute("list",list);
+//  	} //list
  	
  	@GetMapping({"/get" , "/modify"})
- 	public void get(String userId, Model model) {         // 특정 게시물 상세조회 화면요청
+ 	public void get(String userId, Model model) {         
  		log.debug("get({}, {}) invoked." , userId, model);
  		
  		UserVO user = this.service.get(userId);
  		log.info("\t+ board: {}" , user);
  		
  		model.addAttribute("user", user);
- 	} // get
+ 	} // get , modify
  	
  	@PostMapping("/modify")
  	public String modify(modifyDTO user, RedirectAttributes rttrs) {
@@ -211,9 +211,7 @@ public class UserController {
 				);
  		
  		boolean result=this.service.modify(user);
- 		
-
- 		
+ 			
  		return "redirect:/users/mypage";
  	} //modify
  	
