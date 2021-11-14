@@ -22,7 +22,7 @@ public class ProductServiceImpl implements ProductService {
     public boolean registerProduct(ProductFormDTO product) {
         log.debug("login({}) invoked.", product);
 
-        this.mapper.inserProduct(product);
+        this.mapper.insertProduct(product);
         return true;
     }
 

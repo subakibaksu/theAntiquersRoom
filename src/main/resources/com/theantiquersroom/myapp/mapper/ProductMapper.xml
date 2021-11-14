@@ -6,7 +6,7 @@
 
 <mapper namespace="com.theantiquersroom.myapp.mapper.ProductMapper">
 
-    <insert id="inserProduct"
+    <insert id="insertProduct"
             parameterType="com.theantiquersroom.myapp.domain.ProductFormDTO">
 
     <![CDATA[

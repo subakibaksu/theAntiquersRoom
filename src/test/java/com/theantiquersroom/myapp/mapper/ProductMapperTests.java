@@ -40,7 +40,7 @@ public class ProductMapperTests {
             product.setBidIncrement(500);
             product.setStatus("REQUESTED");
 
-        int affectedLines = this.mapper.inserProduct(product);
+        int affectedLines = this.mapper.insertProduct(product);
         log.info("\t+ affectedLines: {}", affectedLines);
     }
 }
