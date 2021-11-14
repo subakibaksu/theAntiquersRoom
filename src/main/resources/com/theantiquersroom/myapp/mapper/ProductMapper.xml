@@ -6,5 +6,20 @@
 
 <mapper namespace="com.theantiquersroom.myapp.mapper.ProductMapper">
 
+    <insert id="inserProduct"
+            parameterType="com.theantiquersroom.myapp.domain.ProductDTO">
+
+    <![CDATA[
+            insert into product(name, created_at, content, category_id, user_id)
+            VALUES (#{name}, #{createdAt}, #{content}, #{categoryId}, #{userId})
+        ]]>
+    </insert>
+    <insert id="inserAuction"
+            parameterType="com.theantiquersroom.myapp.domain.AuctionDTO">
+    <![CDATA[
+            insert into auction(started_at, ended_at, started_price, bid_increment, status)
+            VALUES (#{staredAt}, #{endedAt}, #{stardtedPrice}, #{bidIncrement}, "승인요청")
+        ]]>
+    </insert>
 
 </mapper>
