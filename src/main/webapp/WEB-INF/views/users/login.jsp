@@ -6,7 +6,6 @@
 <head>
     <meta charset="UTF-8">
     <title>login.jsp</title>
-    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 </head>
 <body>
 
@@ -33,6 +32,5 @@
         
     </form>
     
-    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
 </html>

@@ -16,12 +16,12 @@
 
 				<!-- 회원가입버튼-->
 				<div class="menu_btn" id="signin_btn">
-					<a href="#" >Sign in</a>
+					<a href="/WEB-INF/views/users/register.jsp" >Sign in</a>
 				</div>
 
 				<!-- 로그인버튼 -->
 				<div class="menu_btn">
-					<a href="#" id="login_btn" >Log in</a>
+					<a href="/WEB-INF/views/users/login.jsp" id="login_btn" >Log in</a>
 				</div>
 
 				<!-- 사이트 로고-->
