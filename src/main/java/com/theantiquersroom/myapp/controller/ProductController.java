@@ -1,15 +1,18 @@
 package com.theantiquersroom.myapp.controller;
 
+import com.theantiquersroom.myapp.domain.ProductCriteria;
+import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.ProductCommand;
 import com.theantiquersroom.myapp.service.ProductService;
+import com.theantiquersroom.myapp.utils.ProductPageMaker;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -27,14 +30,25 @@ public class ProductController {
     @Setter(onMethod_= {@Autowired})
     private ProductService service;
 
-    /*상품 목록 페이지로 이동*/
+    /*상품 목록 페이지로 이동(카테고리)*/
     @GetMapping("/productList")
-    public void productList(@RequestParam("categoryId") String categoryId ,Model model){
+    public void productList(
+            @ModelAttribute("cri") ProductCriteria cri,
+            @ModelAttribute("productCommand") ProductCommand productCommand,
+            Model model) throws Exception {
 
-        log.debug("productList() invoked");
-        log.debug("category : {}",categoryId);
+        log.debug("productList() invoked cri : {} command : {}",cri,productCommand);
 
-        model.addAttribute("productList",service.getProductList(categoryId));
+        List<ProductDTO> dto = service.listCriteria(cri,productCommand);
+
+        ProductPageMaker pageMaker =new ProductPageMaker();
+        pageMaker.setCri(cri);
+        Integer totalNum = service.totalCount(productCommand);
+        pageMaker.setTotalCount(totalNum);
+
+        model.addAttribute("pageMaker", pageMaker);
+        model.addAttribute("productList", dto);
+        model.addAttribute("productCommand",productCommand);
 
     } // productList()
 

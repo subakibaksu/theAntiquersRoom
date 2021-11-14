@@ -1,5 +1,7 @@
 package com.theantiquersroom.myapp.service;
 
+import com.theantiquersroom.myapp.domain.ProductCommand;
+import com.theantiquersroom.myapp.domain.ProductCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.mapper.ProductMapper;
 import lombok.Setter;
@@ -9,8 +11,9 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by KBS.
@@ -27,32 +30,20 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
     private ProductMapper mapper;
 
     @Override
-    public List<ProductDTO> getProductList(String categoryId) {
+    public List<ProductDTO> listCriteria(ProductCriteria cri, ProductCommand productCommand) throws Exception {
 
-        log.debug("getProductList() invoked");
-        log.debug("categoryId : {}",categoryId);
+        HashMap<Object,Object> map = new HashMap<>();
+        map.put("pageStart",cri.getPageStart());
+        map.put("perPageNum",cri.getPerPageNum());
+        map.put("category_id",productCommand.getCategory_id());
+        return mapper.listCriteria(map);
 
-        List<ProductDTO> productDTOList = new ArrayList<>();
-
-        productDTOList.add(mapper.selectProduct(categoryId));
-
-        productDTOList.forEach(log::debug);
-
-        return productDTOList;
-
-    } // getProductList()
+    } // listCriteria()
 
     @Override
-    public List<ProductDTO> getProductList(String categoryId, Integer mode) {
-
-        log.debug("getProductList() invoked");
-        log.debug("categoryId : {}",categoryId);
-
-        List<ProductDTO> productDTOList = new ArrayList<ProductDTO>();
-
-        return null;
-
-    } // getProductList()
+    public Integer totalCount(ProductCommand productCommand) throws Exception {
+        return mapper.getTotalCount(productCommand);
+    } //totalCount()
 
     @Override
     public void destroy() throws Exception {

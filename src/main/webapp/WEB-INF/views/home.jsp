@@ -23,6 +23,8 @@
     </script>
 </head>
 <body>
+
+    <jsp:include page="common/header.jsp"></jsp:include>
     <h1>HimNaeYo GamDongHeeJo!!</h1>
 
     <P>  The time on the server is ${serverTime}. </P>
@@ -33,7 +35,9 @@
     <img onclick="kakaoLogin();" style="cursor: pointer;" src="../../resources/images/kakao_login.png">
 
     <hr>
-    <a href="/product/productList?categoryId=0">productList</a>
+    <a href="/product/productList?category_id=0">0</a>
+    <a href="/product/productList?category_id=1">1</a>
+    <a href="/product/productList?category_id=2">2</a>
     <a href="/users/resetPwd">resetPwd</a>
 
     <hr>
