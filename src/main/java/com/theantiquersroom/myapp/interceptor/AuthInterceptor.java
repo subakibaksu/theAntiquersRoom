@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.theantiquersroom.myapp.controller.LoginController;
-import com.theantiquersroom.myapp.domain.UserVO;
+import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.service.UserService;
 
 import lombok.NoArgsConstructor;
@@ -36,7 +36,7 @@ public class AuthInterceptor
 		log.debug("1. preHandle({}, {}, {}) invoked.", req, res, handler);	
 		
 		HttpSession session=req.getSession();
-		UserVO user=(UserVO) session.getAttribute(LoginController.authKey);
+		UserDTO user=(UserDTO) session.getAttribute(LoginController.authKey);
 		log.info("\t+ user: {}", user);
 		
 		if(user == null) { // 아직 인증되지 않은 상태
