@@ -60,12 +60,11 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     	
     	log.debug(id);
     	
-    	if(id.equals(userId)) {
-    		
+    	if(id != null) {
     		return true;
+    	}else {
+    		return false;
     	}
-    	
-    	return false;
     }
 
     @Override
@@ -77,13 +76,11 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     	nName = mapper.getNickName(nickName);
     	log.debug("닉네임 from controller ({})", nickName);
     	
-    	if(nName.equals(nickName)) {
-    		
-    		log.debug("has a NickName");
+    	if(nName != null) {
     		return true;
+    	}else {
+    		return false;
     	}
-    	
-    	return false;
     }
 
     @Override
@@ -93,10 +90,11 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     	
     	pNum = mapper.getPhone(phone);
     	
-    	if(pNum.equals(phone)) {
+    	if(pNum != null) {
     		return true;
+    	}else {
+    		return false;
     	}
-    	return false;
     }
 
     @Override

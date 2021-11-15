@@ -60,24 +60,23 @@
 										contentType: "application/json",
 										success: function (data) {
 											console.log('success');
-											console.log(data.emailCheck);
-											if (data.emailCheck) {
-												$('#idchecker').text("사용가능한 아이디입니다.");
-												$('#email').focus();
-												idcheck = true;
-											} else {
-												$('#idchecker').text("사용중인 아이디입니다.");
-												$('#idchecker').css('color', '#f82a2aa3');
-												$('#email').focus();
-												idcheck = false;
-											}
-											buttonlive();
+												if (data.emailCheck == false) {
+													$('#idchecker').text("OK");
+													$('#idchecker').css('color', '#FFCC99');
+													$('#email').focus();
+													idcheck = true;
+												} else {
+													$('#idchecker').text("사용중인 아이디입니다.");
+													$('#idchecker').css('color', '#f82a2aa3');
+													$('#email').focus();
+													idcheck = false;
+												}
+											
 										},
 										error: function (e) {
 											console.log('error');
 										},
 										complete: function () {
-
 											console.log('complete');
 										}
 									}
@@ -109,10 +108,10 @@
 											'#f82a2aa3');
 										pwcheck = false;
 									} else {
-										$('.passwordcheck').text('');
+										$('.passwordcheck').text('OK');
+										$('#idchecker').css('color', '#f82a2aa3');
 										pwcheck = true;
 									}
-									buttonlive();
 								});
 
 						// 비밀번호체크
@@ -124,10 +123,10 @@
 									$('.pwdconfirmcheck').css('color', '#f82a2aa3');
 									pwchcheck = false;
 								} else {
-									$('.pwdconfirmcheck').text('');
+									$('.pwdconfirmcheck').text('OK');
+									$('.pwdconfirmcheck').css('color', '#f82a2aa3');
 									pwchcheck = true;
 								}
-								buttonlive();
 							});
 
 						//닉네임 체크
@@ -149,15 +148,15 @@
 										success: function (data) {
 											console.log('nickname in ajax');
 											console.log('data.nicknameCheck');
-											if (data.nicknameCheck) {
-												$('.nicknamecheck').text("사용가능한 닉네임입니다.");
+											if (data.nicknameCheck == false) {
+												$('.nicknamecheck').text("OK");
+												$('.nicknamecheck').css('color', '#f82a2aa3');
 												niccheck = true;
 											} else {
 												$('.nicknamecheck').text("사용중인 닉네임입니다.");
 												$('.nicknamecheck').css('color', '#f82a2aa3');
 												niccheck = false;
 											}
-											buttonlive();
 										}
 									}
 								);
@@ -192,15 +191,16 @@
 											data: JSON.stringify({ phone: $('#phonenumber').val()}),
 											contentType: "application/json",
 											success: function(data){
-												if(data.checkPhone) {
-													$(".phonenumbercheck").text("사용할 수 있는 핸드폰번호 입니다.");
+												if(data.phonenumberCheck == false) {
+													$(".phonenumbercheck").text("OK");
+													$(".phonenumbercheck").css('color', '#f82a2aa3');
 												} else {
-													$(".phonenumbercheck").text("이미 사용중인 핸드폰번호 입니다.");
+													$(".phonenumbercheck").text("이 번호로 가입한 이력이 존재합니다.");
+													$(".phonenumbercheck").css('color', '#f82a2aa3');
 												}
 											} 
 										});
 									}
-									buttonlive();
 								});
 						
 						//가입하기 버튼클릭시에 alert 창 띄우기
@@ -225,7 +225,7 @@
 				<div id="subject">회원가입</div>
 			</div>
 
-			<form name="register" action="/users/login" method="post">
+			<form action="/users/insertRegister" method="post">
 
 				<!-- container -->
 				<div class="form-container">

@@ -100,18 +100,19 @@ public class UserController {
 
     @PostMapping("/checkId")
     public @ResponseBody Map<Object, Object> checkId(@RequestBody Map<Object,Object> map) {	//아이디 중복검사
-        log.debug("checkId({}) invoked.", map.get("userId"));
+        log.debug("userId({}) invoked.", map.get("userId"));
         
-        boolean checkid = this.service.checkId((String)map.get("userId")); //true/false인지 서비스에서 판별 
+        boolean checkid = this.service.checkId((String)map.get("userId")); // NullPointerException 발생
         log.info("\t+ checkid: {}", checkid);
         
         Map<Object, Object> resultMap = new HashMap<Object,Object>();
         
-        map.put("emailCheck", checkid);
-        log.debug(map.get("emailCheck"));
+        resultMap.put("emailCheck", checkid);
+        log.debug(resultMap.get("emailCheck"));
         
+        log.info("\t+ resultMap: {}", resultMap);
         return resultMap;
-        
+
     } //checkId
 
     @PostMapping("/checkNickName")
@@ -121,10 +122,8 @@ public class UserController {
         boolean checknickname = this.service.checkNickName((String)map.get("nickName"));
         
         Map<Object, Object> resultMap = new HashMap<Object, Object>();
-        
-        map.put("nicknameCheck", checknickname);
-        log.debug(map.get("nicknamecheck"));
-        
+                
+        resultMap.put("nicknameCheck", checknickname);        
         return resultMap;
     } //checkNickName
 
@@ -136,7 +135,8 @@ public class UserController {
 
         Map<Object, Object> resultMap = new HashMap<Object, Object>();
         
-        map.put("phonenumberCheck", checkphone);
+        resultMap.put("phonenumberCheck", checkphone);
+        log.info("\t+ resultMap: {}", resultMap);
         
         return resultMap;
         
@@ -183,9 +183,8 @@ public class UserController {
 
     } //resetPwd
 
-
     // ======================== MyPage =========================== //
-    
+
     @GetMapping("/getMyAuctionList")
     public String getMyAuctionList(
     		HttpSession session,
