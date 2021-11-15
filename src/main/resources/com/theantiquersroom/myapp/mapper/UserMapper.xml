@@ -135,7 +135,8 @@
 			    password,
 			    nickname,
 			    phone,
-			    user_type as userType
+			    user_type as userType,
+			    kakao_unique_id
 			FROM users
 			WHERE user_id=#{userId}
        ]]>

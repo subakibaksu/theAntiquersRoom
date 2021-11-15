@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
+import com.theantiquersroom.myapp.domain.modifyDTO;
 import com.theantiquersroom.myapp.service.UserService;
 
 import lombok.NoArgsConstructor;
@@ -173,40 +174,45 @@ public class UserController {
     } //getBidList
     
     
-    // ======================== JS =========================== //
 
  // 전체회원 목록조회
- 	@GetMapping("/getUserList")
- 	public void list(Model model) {	// 게시판 목록화면 요청
- 		log.debug("list() invoked.");
+//  	@GetMapping("/getUserList") // 추후 관리자 페이지에서
+//  	public void list(Model model) {	
+//  		log.debug("list() invoked.");
  		
- 		List<UserVO> list=this.service.getUserList();
- 		log.info("\t+ list size: {}", list.size());
+//  		List<UserVO> list=this.service.getUserList();
+//  		log.info("\t+ list size: {}", list.size());
  		
- 		model.addAttribute("list",list);
- 	} //list
+//  		model.addAttribute("list",list);
+//  	} //list
  	
  	@GetMapping({"/get" , "/modify"})
- 	public void get(String userId, Model model) {         // 특정 게시물 상세조회 화면요청
+ 	public void get(String userId, Model model) {         
  		log.debug("get({}, {}) invoked." , userId, model);
  		
  		UserVO user = this.service.get(userId);
  		log.info("\t+ board: {}" , user);
  		
  		model.addAttribute("user", user);
- 	} // get
+ 	} // get , modify
  	
  	@PostMapping("/modify")
- 	public String modify(UserDTO user, RedirectAttributes rttrs) {
+ 	public String modify(modifyDTO user, RedirectAttributes rttrs) {
  		log.debug("modify({}, {}) invoked.", user,rttrs);
  		
+ 		modifyDTO dto=
+				new modifyDTO(
+						user.getUserId(),
+						user.getPassword(),
+						user.getNickName(),
+						user.getPhone()
+
+						
+				);
+ 		
  		boolean result=this.service.modify(user);
- 		
- 		// 이동되는 화면으로 전송해 줘야 할 파라미터가 있으면,
- 		// rttrs를 이용해야 한다.
- 		rttrs.addAttribute("result", result);
- 		
- 		return "redirect:/users/getUserList";
+ 			
+ 		return "redirect:/users/mypage";
  	} //modify
  	
  	
