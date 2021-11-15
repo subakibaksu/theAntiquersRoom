@@ -6,5 +6,13 @@
 
 <mapper namespace="com.theantiquersroom.myapp.mapper.ProductMapper">
 
+    <insert id="insertProduct"
+            parameterType="com.theantiquersroom.myapp.domain.ProductFormDTO">
+
+    <![CDATA[
+            insert into product(name, content, category_id, user_id, started_at, ended_at, started_price, bid_increment, status)
+            VALUES (#{name}, #{content}, #{categoryId}, #{userId}, #{startedAt}, #{endedAt}, #{startedPrice}, #{bidIncrement}, "REQUESTED")
+        ]]>
+    </insert>
 
 </mapper>

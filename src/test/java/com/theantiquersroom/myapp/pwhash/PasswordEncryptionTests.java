@@ -23,5 +23,4 @@ public class PasswordEncryptionTests {
 
 		assertTrue(encoder.matches(rawPassword, encryptedPassword));
 	}
-
 }
