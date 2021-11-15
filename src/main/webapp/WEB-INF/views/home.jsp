@@ -36,9 +36,15 @@
 
     <hr>
     <a href="/product/productList?category_id=0">0</a>
-    <a href="/product/productList?category_id=1&filter=0">1/0</a>
-    <a href="/product/productList?category_id=1&filter=1">1/1</a>
+    <a href="/product/productList?category_id=1">1</a>
     <a href="/product/productList?category_id=2">2</a>
+
+    <form action="/product/productList" method="get">
+        <input name="searchQuery" placeholder="type">
+        <button type="submit">click</button>
+    </form>
+
+
     <a href="/users/resetPwd">resetPwd</a>
 
     <hr>
