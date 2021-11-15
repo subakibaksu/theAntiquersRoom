@@ -45,6 +45,7 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
 
     @Override
     public Integer totalCount(ProductCommand productCommand) throws Exception {
+
         return mapper.getTotalCount(productCommand);
     } //totalCount()
 

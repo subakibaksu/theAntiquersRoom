@@ -11,11 +11,11 @@
             FROM product
 
             <where>
-                <if test="category_id != null">
+                <if test="category_id != null and category_id != ''">
                     AND category_id = #{category_id}
                 </if>
 
-                <if test="searchQuery != null">
+                <if test="searchQuery != null and searchQuery != ''">
                     AND name LIKE CONCAT('%',#{searchQuery},'%')
                 </if>
             </where>
@@ -38,14 +38,14 @@
     <!-- 전체 게시글 수를 구하는 sql문 -->
     <select id="getTotalCount" resultType="java.lang.Integer" parameterType="com.theantiquersroom.myapp.domain.ProductCommand">
 
-        select count(*) from
-            product
+        SELECT count(*)
+        FROM product
         <where>
-            <if test="category_id != null">
+            <if test="category_id != null and category_id != ''">
                 AND category_id = #{category_id}
             </if>
 
-            <if test="searchQuery != null">
+            <if test="searchQuery != null and searchQuery != ''">
                 AND name LIKE CONCAT('%',#{searchQuery},'%')
             </if>
         </where>
