@@ -3,6 +3,7 @@ package com.theantiquersroom.myapp.service;
 import com.theantiquersroom.myapp.domain.ProductCommand;
 import com.theantiquersroom.myapp.domain.ProductCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.ProductFormDTO;
 import com.theantiquersroom.myapp.mapper.ProductMapper;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
