@@ -30,7 +30,7 @@
 
             <trim prefix="ORDER BY">
 
-                <if test="filter == 0">  p_id DESC </if>
+                <if test="filter == 0 or filter == null">  p_id DESC </if>
 
                 <if test="filter == 1">  p_id ASC </if>
 
