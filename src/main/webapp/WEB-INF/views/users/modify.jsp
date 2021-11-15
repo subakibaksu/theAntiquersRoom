@@ -31,20 +31,13 @@
 <jsp:include page="/WEB-INF/views/common/mypageHeader.jsp"/>
 
 
-
-
     <div id="outline">
         
-        
-        
-    
         <div id="inline">
-        
+
                  <form action="/users/modify" method="post">
-        
-            
-            
-            <div class="text" >NickName: <input class="modifyInput" type="text"  name="nickName" value="${sessionScope.__AUTH_ANTIQUE__.nickName}"><i class="fas fa-check" id="check"></i></div>
+ 
+            <div class="text" >NickName: <input class="modifyInput" type="text"  name="nickName" value="${sessionScope.__AUTH_ANTIQUE__.nickName}"><!-- <i class="fas fa-check" id="check"></i> --></div>
             <div>&nbsp;</div>
             <div id="checkNickName">&nbsp;&nbsp;&nbsp;&nbsp;</div> 
             <div>&nbsp;</div>
@@ -61,8 +54,6 @@
             <div>&nbsp;</div>
             <div>&nbsp;</div>
 
-
-
             <div>Phone: <input class="modifyInput" type="text"  name="phone" value="${sessionScope.__AUTH_ANTIQUE__.phone}"></div>
 
             <div>&nbsp;</div>
@@ -70,28 +61,23 @@
             <div>&nbsp;</div>
             <div>&nbsp;</div>
             <div>&nbsp;</div>
-
             <div>&nbsp;</div>
-
 
             <div class="btnset"> 
                 <button type="submit" id="modifyBtn">수정</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <button id="cancleBtn"><a href="/users/mypage">취소</a></button>
             </div>
-            
-            
-            		</form>        
+
+				</form>        
             
         </div>
            
-        
-        
-    
-    
     </div>
 
-    
-
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
 </body>
+<footer>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+
+</footer>
+
 </html>
