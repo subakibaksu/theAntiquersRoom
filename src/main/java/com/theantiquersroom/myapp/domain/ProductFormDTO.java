@@ -7,19 +7,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDateTime;
 
 @Data
-public class ProductDTO {
+public class ProductFormDTO {
 
+    // 상품등록관련
     private Integer pId;
     private String name;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createdAt;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updatedAt;
     private String content;
     private Integer categoryId;
     private String userId;
 
-    //경매정보
+    // 경매관련
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startedAt;
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -28,5 +25,4 @@ public class ProductDTO {
     private Integer bidIncrement;
     private String status;
 
-
-} // end class
+}

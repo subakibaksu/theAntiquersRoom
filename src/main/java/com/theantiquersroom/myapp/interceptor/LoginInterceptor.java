@@ -10,11 +10,10 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.theantiquersroom.myapp.controller.LoginController;
-import com.theantiquersroom.myapp.domain.UserVO;
+import com.theantiquersroom.myapp.domain.UserDTO;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-
 
 
 @Log4j2
@@ -47,7 +46,7 @@ public class LoginInterceptor
 		HttpSession session=req.getSession();	
 		
 		ModelMap modelMap=modelAndView.getModelMap();
-		UserVO user= (UserVO) modelMap.get(LoginController.authKey);
+		UserDTO user= (UserDTO) modelMap.get(LoginController.authKey);
 		log.info("\t+ user: {}", user);
 		
 		if(user != null) {  // 로그인 성공
@@ -74,7 +73,7 @@ public class LoginInterceptor
 				
 				res.sendRedirect(originRequest);
 			} else { // 원래의 요청URI가 없는 경우
-				res.sendRedirect("/main"); // 메인화면으로 이동
+				res.sendRedirect("/"); // 메인화면으로 이동
 			} // if-else
 			
 		} else {  // 로그인 실패

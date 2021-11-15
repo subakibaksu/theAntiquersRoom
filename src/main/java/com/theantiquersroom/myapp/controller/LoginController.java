@@ -1,7 +1,5 @@
 package com.theantiquersroom.myapp.controller;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.theantiquersroom.myapp.domain.LoginDTO;
-import com.theantiquersroom.myapp.domain.UserVO;
+import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.service.UserService;
 
 import lombok.NoArgsConstructor;
@@ -42,13 +40,14 @@ public class LoginController {
     		) throws Exception {
         log.debug("login({}) invoked.", dto);
         
-        UserVO user=this.service.login(dto);
+        UserDTO user=this.service.login(dto);
         log.info("\t+ user: {}", user);
         
         if(user != null) {
         	model.addAttribute(LoginController.authKey, user);
-        } //if
+        	return "/home";
+        }
         
-        return "main";
+        return "/login";
     } //login
 }

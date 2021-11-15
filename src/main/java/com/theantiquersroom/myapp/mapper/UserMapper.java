@@ -5,9 +5,9 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.theantiquersroom.myapp.domain.LoginDTO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
+import com.theantiquersroom.myapp.domain.modifyDTO;
 
 @Mapper
 public interface UserMapper {
@@ -27,8 +27,8 @@ public interface UserMapper {
 	// 비밀번호 변경
 	public abstract Integer updatePassword(@Param("newPassword") String newPassword, @Param("userId") String userId);
 
-	// 특정 아이디 조회
-	public abstract Integer getUserId(String userId);
+    //특정 아이디 조회
+    public abstract String getUserId(String userId);
 
 	// 특정 닉네임 조회
 	public abstract Integer getNickName(String nickName);
@@ -36,19 +36,18 @@ public interface UserMapper {
 	// 특정 연락처 조회
 	public abstract Integer getPhone(String phone);
 
-	// 로그인
-	public abstract UserVO login(LoginDTO dto);
+	//로그인
+    public abstract UserDTO selectUserById(String userId);
+  
+    //emailchecktemp table의 auth 조회
+    public abstract String selectAuth(@Param("userId") String userId);
+    
 
-	// emailchecktemp table의 auth 조회
-	public abstract String selectAuth(@Param("userId") String userId);
-
-	// ================================================= //
-
-	// 전체 회원 목록 조회
-	public abstract List<UserVO> getUserList();
-
-	// 회원 정보 수정
-	public abstract Integer update(UserVO user);
+    // 전체 회원 목록 조회
+    public abstract List<UserVO> getUserList();
+ 
+    // 회원 정보 수정
+    public abstract Integer update(modifyDTO user);
 
 	// 회원정보 상세조회 - XML Mapper 방식으로 처리
 	public abstract UserVO read(String userId);
@@ -62,5 +61,6 @@ public interface UserMapper {
 	// =====================카카오 로그인 API 관련===================== //
 
 	public abstract UserDTO getKakaoUser(String kakaoUniqueId);
+
 
 } // end interface

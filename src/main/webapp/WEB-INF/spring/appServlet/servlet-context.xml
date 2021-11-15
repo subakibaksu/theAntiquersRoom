@@ -38,7 +38,5 @@
 			<beans:ref bean="authInterceptor"/>
 		</interceptor>
 	</interceptors>
-	
-	<view-controller path="/main" status-code="200" view-name="/main"/>
 
 </beans:beans>

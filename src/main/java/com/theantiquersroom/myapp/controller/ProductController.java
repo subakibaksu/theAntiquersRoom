@@ -1,5 +1,12 @@
 package com.theantiquersroom.myapp.controller;
 
+import com.theantiquersroom.myapp.domain.ProductFormDTO;
+import com.theantiquersroom.myapp.service.ProductService;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import com.theantiquersroom.myapp.domain.ProductCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.domain.ProductCommand;
@@ -11,17 +18,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
-/**
- * Created by KBS.
- * User: KBS
- * Date: 11/4/2021
- * Time: 오후 5:08
- */
 @Log4j2
+@NoArgsConstructor
 
 @RequestMapping("/product")
 @Controller
@@ -54,14 +56,22 @@ public class ProductController {
 
     /*상품 등록 페이지로 이동*/
     @GetMapping("/register")
-    public void register() {
+    public String register() {
 
+        System.out.println("Test");
+
+        return "/product/register";
     } // Get register()
 
     /*상품 등록정보 DB전달*/
     @PostMapping("/register")
-    public void register(Model model) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public String register(ProductFormDTO product, @SessionAttribute("userId") String userId) {
 
+        product.setUserId(userId);
+        this.service.registerProduct(product);
+
+        return "/main"; // 추후 완료 alert으로 변경
     } // Post register()
 
     /*유찰된 상품 재등록 페이지로 이동*/

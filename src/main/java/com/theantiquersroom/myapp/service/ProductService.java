@@ -3,20 +3,17 @@ package com.theantiquersroom.myapp.service;
 import com.theantiquersroom.myapp.domain.ProductCommand;
 import com.theantiquersroom.myapp.domain.ProductCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.ProductFormDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by KBS.
- * User: KBS
- * Date: 11/14/2021
- * Time: 오전 2:41
- */
 
 @Service
 public interface ProductService {
 
+    //상품등록
+    public  abstract  boolean registerProduct(ProductFormDTO product);
 
     // 페이징 처리 서비스 메서드
     public List<ProductDTO> listCriteria(ProductCriteria cri, ProductCommand productCommand)throws Exception;
@@ -27,3 +24,12 @@ public interface ProductService {
 
 
 } // end interface
+import com.theantiquersroom.myapp.domain.ProductFormDTO;
+import org.springframework.stereotype.Service;
+
+@Service
+public interface ProductService {
+
+    //상품등록
+    public  abstract  boolean registerProduct(ProductFormDTO product);
+}

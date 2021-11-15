@@ -1,5 +1,6 @@
 package com.theantiquersroom.myapp.service;
 
+
 import java.text.ParseException;
 import java.util.List;
 
@@ -10,10 +11,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.theantiquersroom.myapp.domain.Criteria;
+
 import com.theantiquersroom.myapp.domain.LoginDTO;
 import com.theantiquersroom.myapp.domain.ProductVO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
+import com.theantiquersroom.myapp.domain.modifyDTO;
 import com.theantiquersroom.myapp.mapper.UserMapper;
 import com.theantiquersroom.myapp.utils.Mailsender;
 
@@ -30,10 +33,9 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
 
     @Setter(onMethod_= {@Autowired})
-    Mailsender mailsender;
-    UserMapper mapper;
-    BCryptPasswordEncoder passwordEncoder;
-
+    private Mailsender mailsender;
+    private UserMapper mapper;
+    private BCryptPasswordEncoder passwordEncoder;
 
 
     @Override
@@ -50,8 +52,21 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
     @Override
     public boolean checkId(String userId) {
-        // TODO Auto-generated method stub
-        return false;
+    	log.debug("checkId({}) invoked.", userId);
+    	
+    	String id = "";
+    	
+    	id = mapper.getUserId(userId);
+    	
+    	log.debug(id);
+    	
+    	if(id.equals(userId)) {
+    		
+    		log.debug("please");
+    		return true;
+    	}
+    	
+    	return false;
     }
 
     @Override
@@ -103,12 +118,13 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
 
     @Override
-	public UserVO login(LoginDTO dto) throws Exception {
+	public UserDTO login(LoginDTO dto) throws Exception {
         log.debug("login({}) invoked.", dto);
 
-        UserVO user = this.mapper.login(dto);
-
-        return user;
+        UserDTO user = this.mapper.selectUserById(dto.getUserId());
+        log.info("\t+ user: {}", user);
+        
+        return (passwordEncoder.matches(dto.getPassword(), user.getPassword()))? user:null;
 	}
 
 	@Override
@@ -151,8 +167,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	}
 	
 
-	// ========================================= //
-
 
 	@Override
 	public List<UserVO> getUserList() {
@@ -166,7 +180,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	public UserVO get(String userId) {
 		log.debug("get({}) invoked.", userId);
 		
-		// 비즈니스 로직 수행에 필요한 경우, 영속성 계층의 메소드를 호출
 		UserVO user=this.mapper.read(userId);
 		log.info("\t+ board: {}", user);
 		
@@ -174,10 +187,9 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	} // get ( 회원 상세 정보 보기)
 	
 	@Override
-	public boolean modify(UserVO user) {
+	public boolean modify(modifyDTO user) {
 		log.debug("modify({}) invoked.", user);
 		
-		// 비즈니스 로직 수행에 필요한 경우, 영속성 계층의 메소드를 호출
 		int affectedRows=this.mapper.update(user);
 		log.info("\t+ affectedRows: {}", affectedRows);
 		
@@ -188,7 +200,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	public boolean remove(String userId) {
 		log.debug("remove({}) invoked.", userId);
 
-		// 비즈니스 로직 수행에 필요한 경우, 영속성 계층의 메소드를 호출
 		int affectedRows=this.mapper.delete(userId);
 		log.info("\t+ affectedRows: {}", affectedRows);
 		
@@ -198,7 +209,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	@Override
 	public UserVO findId(UserVO vo) {
 		return mapper.findId(vo);
-	} // getNickName
+	} // findId
 	
     // =====================카카오 로그인 API 관련===================== //
 	
@@ -215,12 +226,10 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     @Override
     public void destroy() throws Exception {
     	// TODO Auto-generated method stub
-    	
     }
     
     @Override
     public void afterPropertiesSet() throws Exception {
     	// TODO Auto-generated method stub
-    	
     }
 } // end class

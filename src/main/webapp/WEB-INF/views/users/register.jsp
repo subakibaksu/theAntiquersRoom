@@ -6,123 +6,288 @@
 		<meta charset="UTF-8">
 		<title>앤티커스 : 회원가입</title>
 
-		<style>
-			.basecontainer {
+		<link rel="stylesheet" href="../../../resources/css/register.css">
 
-				max-width: 390px;
-				margin: 0 auto;
+		<script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
+		<script>
+			$(document)
+				.ready(
+					function () {
+						let idcheck = false;
+						let pwcheck = false;
+						let pwchcheck = false;
+						let niccheck = false;
+						let phonecheck = false;
+
+						// 제출버튼 활성화 함수
+						function buttonlive() {
+							if (idcheck && pwcheck && pwchcheck
+								&& phonecheck && niccheck) {
+								$("#checkit").prop("disabled", false);
+							} else {
+								$("#checkit").prop("disabled", true);
+							}
+						}
+
+						//이메일 정규표현식 체크 
+						$('#emailbtn').click(function () {
+							const regxEmail = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/; //문자 + @ + 문자.문자
+							if ($('#email').val() == "") {
+								$('#idchecker').text("아이디를 입력해주세요.");
+								$('#idchecker').css('color', '#f82a2aa3');
+								$('#email').focus();
+								idcheck = false;
+								buttonlive();
+							} else if (regxEmail.test($('#email').val()) != true) {
+								$('#idchecker').text("올바른 양식으로 입력해주세요.");
+								$('#idchecker').css('color', '#f82a2aa3');
+								idcheck = false;
+
+								// 이메일 중복체크 
+							} else {
+								console.log($('#email').val());
+								$.ajax(
+									{
+										async: true,
+										type: "post",
+										url: "/users/checkId",
+										data: JSON.stringify({ userId: $('#email').val() }),
+										contentType: "application/json",
+										success: function (data) {
+											console.log('success');
+											console.log(data.emailCheck);
+											if (data.emailCheck) {
+												$('#idchecker').text("사용가능한 아이디입니다.");
+												$('#email').focus();
+												idcheck = true;
+											} else {
+												$('#idchecker').text("사용중인 아이디입니다.");
+												$('#idchecker').css('color', '#f82a2aa3');
+												$('#email').val("");
+												$('#email').focus();
+												idcheck = false;
+											}
+											buttonlive();
+										},
+										error: function (e) {
+											console.log('error');
+										},
+										complete: function () {
+
+											console.log('coplete');
+
+										}
+
+									}
+								);
+							}
+						});
+
+						// 비밀번호
+						$("#password")
+							.keyup(
+								function () {
+									const password = $("#password")
+										.val();
+									const regxpwd = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[~!@#$%^&*()+|=])[A-Za-z\d~!@#$%^&*()+|=]{8,16}$/;
+									const pwdTest = regxpwd
+										.test(password); //true / false 반환
+									//빈칸일 경우 
+									if ($("#password").val() == "") {
+										$('.passwordcheck')
+											.text("패스워드를 입력해주세요.");
+										$('.passwordcheck').css('color',
+											'#f82a2aa3');
+										pwcheck = false;
+									} else if (!pwdTest) { //false면
+										$('.passwordcheck')
+											.text(
+												"8~16자리의 영문+숫자+특수문자로 입력하세요.");
+										$('.passwordcheck').css('color',
+											'#f82a2aa3');
+										pwcheck = false;
+									} else {
+										$('.passwordcheck').text('');
+										pwcheck = true;
+									}
+									buttonlive();
+								});
+
+						// 비밀번호체크
+						$('#confirmpassword').keyup(
+							function () {
+								if ($('#password').val() != $(
+									'#confirmpassword').val()) {
+									$('.pwdconfirmcheck').text('비밀번호가 일치하지 않습니다.');
+									$('.pwdconfirmcheck').css('color', '#f82a2aa3');
+									pwchcheck = false;
+								} else {
+									$('.pwdconfirmcheck').text('');
+									pwchcheck = true;
+								}
+								buttonlive();
+							});
+
+						//닉네임 체크
+						$('#nickname').keyup(function () {
+							if ($('#nickname').val() == "") {
+								$('.nicknamecheck').text("닉네임을 입력해주세요.");
+								$('.nicknamecheck').css('color', '#f82a2aa3');
+								$('#email').focus();
+								niccheck = false;
+								buttonlive();
+							} else {
+								$.ajax(
+									{
+										url: "checkNickName",
+										data: { email: $('#nickname').val() },
+										dataType: "html",
+										success: function (responsedata) {
+											$('.nicknamecheck').html(responsedata);
+											let data = responsedata.trim();
+											if (data == "true") {
+												$('.nicknamecheck').text("");
+												niccheck = true;
+											} else {
+												$('.nicknamecheck').text("사용중인 아이디입니다.");
+												$('.nicknamecheck').css('color', '#f82a2aa3');
+												$('#nickname').val("");
+												$('#nickname').focus();
+												niccheck = false;
+											}
+											buttonlive();
+										}
+									}
+								);
+							}
+						});
+
+						// 핸드폰
+						$("#phonenumber")
+							.on(
+								"keyup",
+								function () {
+									const regxPhone = /^(010[1-9][0-9]{7})$/
+									// 010으로 시작, 중간번호의 첫 숫자는 0 제외, 총 11자리 숫자
+									if ($('#phonenumber').val() == "") {
+										$(".phonenumbercheck").text(
+											"휴대폰 번호를 입력해주세요.");
+										$(".phonenumbercheck").css('color',
+											'#f82a2aa3');
+										phonecheck = false;
+									} else if (regxPhone.test($(
+										'#phonenumber').val()) != true) {
+										$(".phonenumbercheck").text(
+											"올바른 양식으로 입력해주세요.");
+										$(".phonenumbercheck").css('color',
+											'#f82a2aa3');
+										phonecheck = false;
+									} else {
+										$(".phonenumbercheck").text("");
+										phonecheck = true;
+									}
+									buttonlive();
+								});
+
+
+					});
+			function checkz() {
+				if (idcheck && pwcheck && pwchcheck
+					&& phonecheck && niccheck) {
+					return true;
+				} else {
+					return false;
+				}
 			}
 
-			.top-header {
-				position: relative;
-				padding: 60px 0 54px;
-				box-sizing: border-box;
 
-				margin: 0 auto;
-				max-width: 768px;
-				min-width: 460px;
-				text-align: center;
-			}
-
-			h1 {
-				font-family: Mercury Display A, Mercury Display B, MercuryDisplay-wb, Mercury Display, serif;
-				text-decoration: none;
-			}
-
-			.regbase {
-				text-align: center;
-				align-items: center;
-			}
-
-			.join_title {
-				text-align: left;
-				margin-bottom: 0;
-			}
-
-			.regconfirm {
-				width: 390px;
-				border: 1px solid grey;
-				padding-left: 22px;
-				margin-bottom: ;
-			}
-
-			input {
-				padding: 24px 16 8 16;
-				width: 356px;
-				height: 22px;
-				border: 0;
-			}
-
-			.regbtn {
-				width: 60px;
-			}
-
-			.inputbtn {
-				width: 300px;
-			}
-		</style>
+		</script>
 
 	</head>
+
+
+
 
 	<body>
 
 
+		<!-- 사이트 로고-->
+
 		<div class="basecontainer">
 			<div class="top-header">
 				<a href="#" class="logo">
-					<span class="blind">
-						<h1>The Antiquer's room</h1>
-					</span>
+					<div class="logo">The</div>
+					<div class="logo">Antiquer's Room</div>
 				</a>
 			</div>
 
+			<div>
+				<div id="subject">회원가입</div>
+			</div>
 
-			<form method="POST" action="">
+
+			<form action="#">
+
 				<!-- container -->
 				<div class="form-container">
 					<div class="regbase">
-						<!-- 이메일 입력, 인증 -->
+
+						<!-- 이메일 입력 -->
 						<div class="regcontainer">
 							<div class="regconfirm">
-								<h4 class="join_title"><label for="email">아이디</label></h4>
-								<input class="inputbtn" type="text">
-								<input class="regbtn" type="button" value="중복확인">
+
+								<input class="registerEmail" id="email" type="text" name="userId" placeholder="이메일">
+								<input class="regbtn" id="emailbtn" type="button" value="중복확인">
+								<p id="idchecker"></p>
 							</div>
-							<p class="Input-module_errorMessage" id="email-error">이메일을 다시 입력해주세요</p>
+
+							<!--이메일 인증번호 입력 -->
 							<div class="regconfirm">
-								<h4 class="join_title"><label for="confirmcode">인증번호</label></h4>
-								<input class="inputbtn" type="text">
+								<input class="registerEmail" type="text" placeholder="인증번호">
 								<input class="regbtn" type="button" value="인증하기">
 							</div>
+
 						</div>
 
-						<!-- pwd, pwdconfirm, nickname, phonenumber -->
+						<!-- 비밀번호 입력  -->
 						<div class="regconfirm">
-							<h4 class="join_title"><label for="password">비밀번호</label></h4>
-							<input type="text" class="register">
+							<input type="text" class="register" id="password" name="password" placeholder="비밀번호">
+							<p class="passwordcheck"></p>
 						</div>
-						<p class="Input-module_errorMessage" id="password-error">비밀번호를 다시 입력해주세요</p>
+
+
+						<!-- 비밀번호 확인  -->
 						<div class="regconfirm">
-							<h4 class="join_title"><label for="confirmpassword">비밀번호 확인</label></h4>
-							<input type="text" class="register">
+							<input type="text" class="register" id="confirmpassword" placeholder="비밀번호 확인">
+							<p class="pwdconfirmcheck"></p>
 						</div>
-						<p class="Input-module_errorMessage" id="wrongpassword">비밀번호가 맞지 않습니다</p>
+
+
+						<!-- 닉네임 입력  -->
 						<div class="regconfirm">
-							<h4 class="join_title"><label for="nickname">닉네임</label></h4>
-							<input type="text" class="register">
+							<input type="text" class="register" id="nickname" name="nickName" placeholder="닉네임">
+							<p class="nicknamecheck"></p>
 						</div>
-						<p class="Input-module_errorMessage" id="nickname-error">이미 있는 닉네임입니다.</p>
+
+						<!-- 핸드폰번호 입력 -->
 						<div class="regconfirm">
-							<h4 class="join_title"><label for="phonenumber">핸드폰번호</label></h4>
-							<input type="text" class="register">
+							<input type="text" class="register" id="phonenumber" name="phone" placeholder="핸드폰번호">
+							<p class="phonenumbercheck"></p>
 						</div>
-						<p class="Input-module_errorMessage" id="phonenumber-error">핸드폰번호를 올바르게 입력해주세요</p>
-						<div class="regbtn">
-							<input type="button" value="가입하기">
+
+
+						<!-- 가입하기 버튼  -->
+						<p>&nbsp</p>
+						<div id="registerbtn">
+							<button type="submit" class="submitbtn" id="checkit">가입하기</button>
 						</div>
+						<p>&nbsp</p>
+
 					</div>
 				</div>
 			</form>
+
 		</div>
 	</body>
 

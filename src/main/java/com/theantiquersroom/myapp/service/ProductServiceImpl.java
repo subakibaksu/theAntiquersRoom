@@ -30,6 +30,14 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
     private ProductMapper mapper;
 
     @Override
+    public boolean registerProduct(ProductFormDTO product) {
+        log.debug("login({}) invoked.", product);
+
+        this.mapper.insertProduct(product);
+        return true;
+    }
+
+    @Override
     public List<ProductDTO> listCriteria(ProductCriteria cri, ProductCommand productCommand) throws Exception {
 
         HashMap<Object,Object> map = new HashMap<>();
@@ -60,3 +68,4 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
     } // afterPropertiesSet()
 
 } // end class
+
