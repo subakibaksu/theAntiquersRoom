@@ -208,7 +208,7 @@
             FROM product as A
             WHERE A.user_id=#{userId}
             ORDER BY A.created_at DESC
-            LIMIT #{cri.currPage}, #{cri.amount}
+            LIMIT #{cri.pageStart}, #{cri.amount}
  
 
         ]]>
