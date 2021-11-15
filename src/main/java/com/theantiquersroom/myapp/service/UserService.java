@@ -11,6 +11,7 @@ import com.theantiquersroom.myapp.domain.MypageCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
+import com.theantiquersroom.myapp.domain.modifyDTO;
 
 
 @Service
@@ -54,7 +55,7 @@ public interface UserService {
 	public abstract UserVO get(String userId);
     
 	// 회원 정보 수정
-	public abstract boolean modify(UserDTO user);
+	public abstract boolean modify(modifyDTO user);
 	
     
     // =====================마이페이지 관련===================== //

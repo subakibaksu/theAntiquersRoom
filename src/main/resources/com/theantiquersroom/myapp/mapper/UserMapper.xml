@@ -79,10 +79,14 @@
 
     <!-- 특정 아이디 조회 -->
     <select
-            id="getUserId">
-
+            id="getUserId"
+            resultType="String"
+            parameterType="String"
+    >
         <![CDATA[
-
+			
+		  SELECT user_id FROM users WHERE user_id = #{userId}
+		  
         ]]>
     </select>
 
@@ -100,7 +104,7 @@
             id="getPhone">
 
         <![CDATA[
-
+	
         ]]>
     </select>
 
@@ -131,7 +135,8 @@
 			    password,
 			    nickname,
 			    phone,
-			    user_type as userType
+			    user_type as userType,
+			    kakao_unique_id
 			FROM users
 			WHERE user_id=#{userId}
        ]]>

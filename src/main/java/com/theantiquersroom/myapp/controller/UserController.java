@@ -27,6 +27,7 @@ import com.theantiquersroom.myapp.domain.MypageCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
+import com.theantiquersroom.myapp.domain.modifyDTO;
 import com.theantiquersroom.myapp.service.UserService;
 
 import lombok.NoArgsConstructor;
@@ -98,9 +99,19 @@ public class UserController {
     } // confirmEmail
 
     @PostMapping("/checkId")
-    public void checkId(String id) {	//아이디 중복검사
-        log.debug("checkId() invoked.");
-
+    public @ResponseBody Map<Object, Object> checkId(@RequestBody Map<Object,Object> map) {	//아이디 중복검사
+        log.debug("checkId({}) invoked.", map.get("userId"));
+        
+        boolean checkid = this.service.checkId((String)map.get("userId")); //true/false인지 서비스에서 판별 
+        log.info("\t+ checkid: {}", checkid);
+        
+        Map<Object, Object> resultMap = new HashMap<Object,Object>();
+        
+        map.put("emailCheck", checkid);
+        log.debug(map.get("emailCheck"));
+        
+        return resultMap;
+        
     } //checkId
 
     @PostMapping("/checkNickName")
@@ -191,40 +202,45 @@ public class UserController {
     } //getBidList
     
     
-    // ======================== JS =========================== //
 
  // 전체회원 목록조회
- 	@GetMapping("/getUserList")
- 	public void list(Model model) {	// 게시판 목록화면 요청
- 		log.debug("list() invoked.");
+//  	@GetMapping("/getUserList") // 추후 관리자 페이지에서
+//  	public void list(Model model) {	
+//  		log.debug("list() invoked.");
  		
- 		List<UserVO> list=this.service.getUserList();
- 		log.info("\t+ list size: {}", list.size());
+//  		List<UserVO> list=this.service.getUserList();
+//  		log.info("\t+ list size: {}", list.size());
  		
- 		model.addAttribute("list",list);
- 	} //list
+//  		model.addAttribute("list",list);
+//  	} //list
  	
  	@GetMapping({"/get" , "/modify"})
- 	public void get(String userId, Model model) {         // 특정 게시물 상세조회 화면요청
+ 	public void get(String userId, Model model) {         
  		log.debug("get({}, {}) invoked." , userId, model);
  		
  		UserVO user = this.service.get(userId);
  		log.info("\t+ board: {}" , user);
  		
  		model.addAttribute("user", user);
- 	} // get
+ 	} // get , modify
  	
  	@PostMapping("/modify")
- 	public String modify(UserDTO user, RedirectAttributes rttrs) {
+ 	public String modify(modifyDTO user, RedirectAttributes rttrs) {
  		log.debug("modify({}, {}) invoked.", user,rttrs);
  		
+ 		modifyDTO dto=
+				new modifyDTO(
+						user.getUserId(),
+						user.getPassword(),
+						user.getNickName(),
+						user.getPhone()
+
+						
+				);
+ 		
  		boolean result=this.service.modify(user);
- 		
- 		// 이동되는 화면으로 전송해 줘야 할 파라미터가 있으면,
- 		// rttrs를 이용해야 한다.
- 		rttrs.addAttribute("result", result);
- 		
- 		return "redirect:/users/getUserList";
+ 			
+ 		return "redirect:/users/mypage";
  	} //modify
  	
  	

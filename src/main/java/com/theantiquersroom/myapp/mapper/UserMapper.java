@@ -6,10 +6,10 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import com.theantiquersroom.myapp.domain.MypageCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
+import com.theantiquersroom.myapp.domain.modifyDTO;
 
 @Mapper
 public interface UserMapper {
@@ -29,8 +29,8 @@ public interface UserMapper {
 	// 비밀번호 변경
 	public abstract Integer updatePassword(@Param("newPassword") String newPassword, @Param("userId") String userId);
 
-	// 특정 아이디 조회
-	public abstract Integer getUserId(String userId);
+    //특정 아이디 조회
+    public abstract String getUserId(String userId);
 
 	// 특정 닉네임 조회
 	public abstract Integer getNickName(String nickName);
@@ -49,7 +49,7 @@ public interface UserMapper {
     public abstract List<UserVO> getUserList();
  
     // 회원 정보 수정
-    public abstract Integer update(UserDTO user);
+    public abstract Integer update(modifyDTO user);
 
 	// 회원정보 상세조회 - XML Mapper 방식으로 처리
 	public abstract UserVO read(String userId);
@@ -76,5 +76,6 @@ public interface UserMapper {
     //카카오계정 ID 조회
 	public abstract UserDTO getKakaoUser(String kakaoUniqueId);
 	
+
 
 } // end interface
