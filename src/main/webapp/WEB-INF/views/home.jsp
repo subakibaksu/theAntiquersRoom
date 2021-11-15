@@ -48,6 +48,8 @@
 	<h3>${sessionScope.__AUTH_ANTIQUE__}</h3>
     <button type="button" id="logoutBtn">로그아웃</button>
 
+	<hr>
+	<a href="/product/getDetail">상세보기</a>
 <!---------------- 카카오 로그인 ---------------->
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>
