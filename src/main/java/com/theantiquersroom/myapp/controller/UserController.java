@@ -201,7 +201,7 @@ public class UserController {
     } //resetPwd
 
     // ======================== MyPage =========================== //
-
+    
     @GetMapping("/getMyAuctionList")
     public String getMyAuctionList(
     		HttpSession session,
