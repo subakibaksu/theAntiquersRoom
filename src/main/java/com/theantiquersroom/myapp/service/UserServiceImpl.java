@@ -2,6 +2,7 @@ package com.theantiquersroom.myapp.service;
 
 
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.DisposableBean;
@@ -10,10 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.theantiquersroom.myapp.domain.Criteria;
-
 import com.theantiquersroom.myapp.domain.LoginDTO;
-import com.theantiquersroom.myapp.domain.ProductVO;
+import com.theantiquersroom.myapp.domain.MypageCriteria;
+import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
 import com.theantiquersroom.myapp.domain.modifyDTO;
@@ -126,12 +126,14 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
         
         return (passwordEncoder.matches(dto.getPassword(), user.getPassword()))? user:null;
 	}
+    
+    
+    @Override
+	public UserVO findId(UserVO vo) {
+		return mapper.findId(vo);
+	} //findId
 
-	@Override
-	public UserVO findId(String nickName, String phone) {
-		return null;
-	}
-
+    
 	@Override
 	public boolean resetPwd(String userId, String nickname) throws Exception {
 
@@ -154,17 +156,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
         return mailSentCheck;
 	} // resetPwd()
 
-	@Override
-	public List<ProductVO> getMyAuctionList(Criteria cri) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ProductVO> getBidList(Criteria cri) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 	
 
 
@@ -206,10 +197,34 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 		return affectedRows==1;	
 	} // remove
 	
+
+    // =====================마이페이지 관련===================== //
+	
 	@Override
-	public UserVO findId(UserVO vo) {
-		return mapper.findId(vo);
-	} // findId
+	public List<ProductDTO> getMyAuctionList(HashMap<String, Object> map) {
+		log.debug("getMyAuctionList({}) invoked.",map);
+		
+		List<ProductDTO> list=this.mapper.getMyAuctionList(map);
+		log.info("\t+ list size: {}", list.size());
+		
+		return list;
+	}//getMyAuctionList
+	
+	
+	@Override
+	public List<ProductDTO> getBidList(MypageCriteria cri) {
+		// TODO Auto-generated method stub
+		return null;
+	}//getBidList
+	
+	
+	@Override
+	public Integer getMyAuctionTotal(String userId) {
+		log.debug("getMyAuctionTotal({}) invoked.", userId);
+		
+		return this.mapper.getMyAuctionTotalCount(userId);
+	}//getTotal
+	
 	
     // =====================카카오 로그인 API 관련===================== //
 	
@@ -220,7 +235,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 		UserDTO user = this.mapper.getKakaoUser(kakaoUniqueId);
 		
 		return user;
-	}
+	}//getKakaoUser
     
 //---------------------------------------------------//
     @Override
@@ -232,4 +247,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     public void afterPropertiesSet() throws Exception {
     	// TODO Auto-generated method stub
     }
+
+
 } // end class
