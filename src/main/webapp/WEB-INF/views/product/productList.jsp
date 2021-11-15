@@ -50,7 +50,6 @@
             position: relative;
             width: 60%;
             left: 20%;
-
         }
 
         .product{
@@ -71,20 +70,24 @@
 
             float: left;
             width: 100%;
+            text-align: center;
 
         }
 
         .pagination{
-
-            list-style: none;
-
+            padding-inline-start: 0px;
         }
 
         .page{
 
-            background-color: crimson;
-            margin-left: 1rem;
-            margin-right: 1rem;
+            background-color: #3C3C3C;
+            text-decoration: none;
+            color: white;
+            padding-right: 0.8rem;
+            padding-left: 0.8rem;
+            padding-top: 0.6rem;
+            padding-bottom: 0.6rem;
+            border-radius: 20%;
 
         }
 
@@ -130,21 +133,23 @@
 
         <div id="pagingnationContainer">
             <ul class="pagination">
-                <c:if test="${pageMaker.prev}">
-                    <li>
-                        <a class="page" href="/product/productList${pageMaker.makeQuery(pageMaker.startPage - 1)}&category_id=${productCommand.category_id}&searchQuery=${productCommand.searchQuery}&filter=${productCommand.filter}">[이전]</a>
-                    </li>
 
-                </c:if>
-                <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="index">
-                    <a class="page" href="/product/productList${pageMaker.makeQuery(index)}&category_id=${productCommand.category_id}&searchQuery=${productCommand.searchQuery}&filter=${productCommand.filter}">[${index }]</a>
-                </c:forEach>
+                    <c:if test="${pageMaker.prev}">
+                        <li>
+                            <a class="page" href="/product/productList${pageMaker.makeQuery(pageMaker.startPage - 1)}&category_id=${productCommand.category_id}&searchQuery=${productCommand.searchQuery}&filter=${productCommand.filter}">이전</a>
+                        </li>
 
-                <c:if test="${pageMaker.next }">
-                    <li>
-                        <a class="page" href="/product/productList${pageMaker.makeQuery(pageMaker.endPage + 1)}&category_id=${productCommand.category_id}&searchQuery=${productCommand.searchQuery}&filter=${productCommand.filter}">[다음]</a>
-                    </li>
-                </c:if>
+                    </c:if>
+                    <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="index">
+                        <a class="page" href="/product/productList${pageMaker.makeQuery(index)}&category_id=${productCommand.category_id}&searchQuery=${productCommand.searchQuery}&filter=${productCommand.filter}">${index }</a>
+                    </c:forEach>
+
+                    <c:if test="${pageMaker.next }">
+                        <li>
+                            <a class="page" href="/product/productList${pageMaker.makeQuery(pageMaker.endPage + 1)}&category_id=${productCommand.category_id}&searchQuery=${productCommand.searchQuery}&filter=${productCommand.filter}">다음</a>
+                        </li>
+                    </c:if>
+
             </ul>
         </div>
     </div>
