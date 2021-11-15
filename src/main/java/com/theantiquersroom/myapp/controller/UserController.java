@@ -115,16 +115,38 @@ public class UserController {
     } //checkId
 
     @PostMapping("/checkNickName")
-    public void checkNickName(String nickname) {	//닉네임 중복검사
-        log.debug("confirmEmail() invoked.");
-
+    public @ResponseBody Map<Object, Object> checkNickName(@RequestBody Map<Object, Object> map) {	//닉네임 중복검사
+        log.debug("confirmNickName({}) invoked.", map.get("nickName"));
+        
+        boolean checknickname = this.service.checkNickName((String)map.get("nickName"));
+        
+        Map<Object, Object> resultMap = new HashMap<Object, Object>();
+        
+        map.put("nicknameCheck", checknickname);
+        log.debug(map.get("nicknamecheck"));
+        
+        return resultMap;
     } //checkNickName
 
     @PostMapping("/checkPhone")
-    public void checkPhone(String phone) {	//연락처 중복검사
+    public @ResponseBody Map<Object, Object> checkPhone(@RequestBody Map<Object, Object> map) {	//연락처 중복검사
         log.debug("checkPhone() invoked.");
+        
+        boolean checkphone = this.service.checkPhone((String)map.get("phone"));
 
+        Map<Object, Object> resultMap = new HashMap<Object, Object>();
+        
+        map.put("phonenumberCheck", checkphone);
+        
+        return resultMap;
+        
     } //checkPhone
+    
+    // 회원가입 정보 DB로 전달
+    @PostMapping("/insertRegister")
+    public void insertRegister(Model model) {
+    	log.debug("insertRegister() invoked.");
+    }
 
     
     @GetMapping("/logout")

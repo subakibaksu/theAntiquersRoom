@@ -32,11 +32,11 @@ public interface UserMapper {
     //특정 아이디 조회
     public abstract String getUserId(String userId);
 
-	// 특정 닉네임 조회
-	public abstract Integer getNickName(String nickName);
+    //특정 닉네임 조회
+    public abstract String getNickName(String nickName);
 
-	// 특정 연락처 조회
-	public abstract Integer getPhone(String phone);
+    //특정 연락처 조회
+    public abstract String getPhone(String phone);
 
 	//로그인
     public abstract UserDTO selectUserById(String userId);

@@ -21,14 +21,18 @@
 						let phonecheck = false;
 
 						// 제출버튼 활성화 함수
-						function buttonlive() {
+						  function buttonlive() {
 							if (idcheck && pwcheck && pwchcheck
-								&& phonecheck && niccheck) {
+								&& niccheck && phonecheck) {
 								$("#checkit").prop("disabled", false);
+								alert("성공적으로 가입되었습니다.");
 							} else {
+								alert("입력칸을 모두 채워주세요.");
 								$("#checkit").prop("disabled", true);
-							}
-						}
+							} 
+						} 
+						
+						
 
 						//이메일 정규표현식 체크 
 						$('#emailbtn').click(function () {
@@ -64,7 +68,6 @@
 											} else {
 												$('#idchecker').text("사용중인 아이디입니다.");
 												$('#idchecker').css('color', '#f82a2aa3');
-												$('#email').val("");
 												$('#email').focus();
 												idcheck = false;
 											}
@@ -75,10 +78,8 @@
 										},
 										complete: function () {
 
-											console.log('coplete');
-
+											console.log('complete');
 										}
-
 									}
 								);
 							}
@@ -134,26 +135,26 @@
 							if ($('#nickname').val() == "") {
 								$('.nicknamecheck').text("닉네임을 입력해주세요.");
 								$('.nicknamecheck').css('color', '#f82a2aa3');
-								$('#email').focus();
+								$('#nickname').focus();
 								niccheck = false;
 								buttonlive();
 							} else {
 								$.ajax(
 									{
-										url: "checkNickName",
-										data: { email: $('#nickname').val() },
-										dataType: "html",
-										success: function (responsedata) {
-											$('.nicknamecheck').html(responsedata);
-											let data = responsedata.trim();
-											if (data == "true") {
-												$('.nicknamecheck').text("");
+										async: true,
+										type: "post",
+										url: "/users/checkNickName",
+										data: JSON.stringify({ nickName: $('#nickname').val()}),
+										contentType: "application/json",
+										success: function (data) {
+											console.log('nickname in ajax');
+											console.log('data.nicknameCheck');
+											if (data.nicknameCheck) {
+												$('.nicknamecheck').text("사용가능한 닉네임입니다.");
 												niccheck = true;
 											} else {
-												$('.nicknamecheck').text("사용중인 아이디입니다.");
+												$('.nicknamecheck').text("사용중인 닉네임입니다.");
 												$('.nicknamecheck').css('color', '#f82a2aa3');
-												$('#nickname').val("");
-												$('#nickname').focus();
 												niccheck = false;
 											}
 											buttonlive();
@@ -184,36 +185,35 @@
 											'#f82a2aa3');
 										phonecheck = false;
 									} else {
-										$(".phonenumbercheck").text("");
-										phonecheck = true;
+										$.ajax ({
+											async: true,
+											type: "post", 
+											url: "/users/checkPhone",
+											data: JSON.stringify({ phone: $('#phonenumber').val()}),
+											contentType: "application/json",
+											success: function(data){
+												if(data.checkPhone) {
+													$(".phonenumbercheck").text("사용할 수 있는 핸드폰번호 입니다.");
+												} else {
+													$(".phonenumbercheck").text("이미 사용중인 핸드폰번호 입니다.");
+												}
+											} 
+										});
 									}
 									buttonlive();
 								});
-
-
+						
+						//가입하기 버튼클릭시에 alert 창 띄우기
+						  $('#checkit').click(function() {
+							 buttonlive();
+						});
 					});
-			function checkz() {
-				if (idcheck && pwcheck && pwchcheck
-					&& phonecheck && niccheck) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-
-
 		</script>
-
 	</head>
 
-
-
-
 	<body>
-
-
+	
 		<!-- 사이트 로고-->
-
 		<div class="basecontainer">
 			<div class="top-header">
 				<a href="#" class="logo">
@@ -221,13 +221,11 @@
 					<div class="logo">Antiquer's Room</div>
 				</a>
 			</div>
-
 			<div>
 				<div id="subject">회원가입</div>
 			</div>
 
-
-			<form action="#">
+			<form name="register" action="/users/login" method="post">
 
 				<!-- container -->
 				<div class="form-container">
@@ -247,7 +245,6 @@
 								<input class="registerEmail" type="text" placeholder="인증번호">
 								<input class="regbtn" type="button" value="인증하기">
 							</div>
-
 						</div>
 
 						<!-- 비밀번호 입력  -->
@@ -256,14 +253,12 @@
 							<p class="passwordcheck"></p>
 						</div>
 
-
 						<!-- 비밀번호 확인  -->
 						<div class="regconfirm">
 							<input type="text" class="register" id="confirmpassword" placeholder="비밀번호 확인">
 							<p class="pwdconfirmcheck"></p>
 						</div>
-
-
+						
 						<!-- 닉네임 입력  -->
 						<div class="regconfirm">
 							<input type="text" class="register" id="nickname" name="nickName" placeholder="닉네임">
@@ -272,23 +267,23 @@
 
 						<!-- 핸드폰번호 입력 -->
 						<div class="regconfirm">
-							<input type="text" class="register" id="phonenumber" name="phone" placeholder="핸드폰번호">
+							<input type="text" class="register" id="phonenumber" name="phone" placeholder="핸드폰번호 (-제외)">
 							<p class="phonenumbercheck"></p>
 						</div>
 
-
 						<!-- 가입하기 버튼  -->
-						<p>&nbsp</p>
 						<div id="registerbtn">
 							<button type="submit" class="submitbtn" id="checkit">가입하기</button>
 						</div>
-						<p>&nbsp</p>
-
 					</div>
 				</div>
-			</form>
 
+			</form>
 		</div>
+		
+		<%@ include file="/WEB-INF/views/common/footer.jsp" %>
+		
 	</body>
+	
 
 	</html>

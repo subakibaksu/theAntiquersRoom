@@ -62,7 +62,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     	
     	if(id.equals(userId)) {
     		
-    		log.debug("please");
     		return true;
     	}
     	
@@ -71,14 +70,33 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
     @Override
     public boolean checkNickName(String nickName) {
-        // TODO Auto-generated method stub
-        return false;
+    	log.debug("checkNickName({}) invoked.", nickName);
+    	
+    	String nName = "";
+    	
+    	nName = mapper.getNickName(nickName);
+    	log.debug("닉네임 from controller ({})", nickName);
+    	
+    	if(nName.equals(nickName)) {
+    		
+    		log.debug("has a NickName");
+    		return true;
+    	}
+    	
+    	return false;
     }
 
     @Override
     public boolean checkPhone(String phone) {
-        // TODO Auto-generated method stub
-        return false;
+
+    	String pNum = "";
+    	
+    	pNum = mapper.getPhone(phone);
+    	
+    	if(pNum.equals(phone)) {
+    		return true;
+    	}
+    	return false;
     }
 
     @Override

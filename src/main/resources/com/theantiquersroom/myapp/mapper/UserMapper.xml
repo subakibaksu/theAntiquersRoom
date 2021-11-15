@@ -73,7 +73,9 @@
             parameterType="string">
             
         <![CDATA[
-          SELECT nickname FROM users WHERE user_id = #{userId}
+
+          SELECT nickname FROM users WHERE nickname = #{nickname}
+
         ]]>
     </select>
 
@@ -92,19 +94,25 @@
 
     <!-- 특정 닉네임 조회 -->
     <select
-            id="getNickName">
-
+            id="getNickName"
+            resultType="String"
+			parameterType="String"          
+    >
         <![CDATA[
+        
+        	SELECT nickname FROM users WHERE nickname = #{nickname}
 
         ]]>
     </select>
 
     <!-- 특정 연락처 조회 -->
     <select
-            id="getPhone">
-
+            id="getPhone"
+            resultType="String"
+            parameterType="String"
+            >
         <![CDATA[
-	
+			SELECT phone FROM users WHERE phone = #{phone}
         ]]>
     </select>
 
