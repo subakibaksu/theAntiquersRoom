@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.theantiquersroom.myapp.domain.MyPageDTO;
+import com.theantiquersroom.myapp.domain.MypageCriteria;
+import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
 import com.theantiquersroom.myapp.domain.modifyDTO;
@@ -157,12 +161,36 @@ public class UserController {
 
     } //resetPwd
 
+
+    // ======================== MyPage =========================== //
     
     @GetMapping("/getMyAuctionList")
-    public String getMyAuctionList(Model model) {	// 나의 경매리스트 페이지로 이동
-        log.debug("getMyAuctionList({}) invoked.", model);
+    public String getMyAuctionList(
+    		HttpSession session,
+    		@ModelAttribute("cri") MypageCriteria cri,
+    		Model model) {	// 나의 경매리스트 페이지로 이동
+        log.debug("getMyAuctionList({}, {}) invoked.", cri, model);
 
-        return "/user/myAuctionList";
+        UserDTO user = (UserDTO) session.getAttribute(LoginController.authKey);
+        String userId = user.getUserId();
+        
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("cri", cri);
+        
+        List<ProductDTO> myAuctionList = this.service.getMyAuctionList(map);
+ 		log.info("\t+ myAuctionList size: {}", myAuctionList.size());
+
+ 		model.addAttribute("myAuctionList",myAuctionList);
+	
+ 		//페이징 처리
+ 		Integer totalAmount = this.service.getMyAuctionTotal(userId);
+		
+		MyPageDTO pageDTO = new MyPageDTO(cri, totalAmount);
+		
+		model.addAttribute("pageMaker", pageDTO);
+    
+		return "/users/myAuctionList";
     } //getMyAuctionList
 
 

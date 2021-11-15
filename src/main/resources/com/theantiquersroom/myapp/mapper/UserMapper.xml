@@ -156,7 +156,8 @@
         DELETE FROM users WHERE user_id=#{userId}
     </delete>
     
-    	<!-- 회원 정보 수정 -->
+    
+    <!-- 회원 정보 수정 -->
 	<update id="update">
 	
 		<![CDATA[     
@@ -169,6 +170,55 @@
 	            user_id=#{userId}
 		]]>
 	</update>
+	
+	
+	<!-- 마이페이지 게시판 총 목록개수 반환 -->
+    <select
+        id="getMyAuctionTotalCount"
+        resultType="int">
+        
+        <![CDATA[
+
+            SELECT count(p_id)
+            FROM product
+            WHERE user_id=#{userId}
+
+        ]]>
+    </select>
+           
+           
+    <!-- 마이페이지-나의경매리스트 조회 -->
+    <select
+        id="getMyAuctionList"
+        resultType="com.theantiquersroom.myapp.domain.ProductDTO"
+        parameterType="hashmap">
+
+        <![CDATA[ 
+
+            SELECT
+            	A.p_id as pId,
+                A.name,
+                A.created_at as createdAt,
+                A.updated_at as updatedAt,
+                A.content,
+                A.category_id as categoryId,
+                A.user_id as userId,
+                A.started_at as startedAt,
+                A.ended_at as endedAt,
+                A.started_price as startedPrice,
+                A.bid_increment as bidIncrement,
+                A.status,
+                (select nickname from users as B where B.USER_ID=#{userId}) as nickname,
+                (select category_name from category as C where C.category_id=A.category_id) as categoryName
+            FROM product as A
+            WHERE A.user_id=#{userId}
+            ORDER BY A.created_at DESC
+            LIMIT #{cri.pageStart}, #{cri.amount}
+ 
+
+        ]]>
+    </select>       
+            
 
     <!-- 카카오 아이디 조회  -->
     <select

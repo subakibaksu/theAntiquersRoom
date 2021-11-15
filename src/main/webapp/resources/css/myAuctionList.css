@@ -1,0 +1,104 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+*{
+    margin: 0 auto;
+    padding: 0;
+}
+
+#wrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    width: 1920px;
+
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 16px;
+
+    background-color: #F0E9E7;
+}
+
+table{
+    display: flex;
+
+    width: 73%;
+
+    border: 1px black;
+    border-collapse: collapse;
+
+    text-align: center;
+}
+
+th{
+    padding: 8px;
+}
+
+td{
+    padding: 4px;
+}
+
+tr:hover{
+    background-color: #B1A2A2;
+}
+
+#topmenu > li {
+    float: left;
+
+    text-align: center;
+    line-height: 50px;
+    list-style: none;
+
+    width: 33%;
+    height: 50px;
+}
+
+#regBtn{
+    width: 80px;
+    height: 40px;
+
+    border: 0;
+
+    color: white;
+    background-color: #B1A2A2;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    border-radius: 15px;
+}
+
+#pagingnation{
+    width: 95%;
+    margin: 0 auto;
+
+    color: #B1A2A2;
+    font-size: 14px;
+}
+
+#pagingnation ul {
+    float : right;
+}
+
+#pagingnation li{	
+    float: left;
+    
+    width: 20px;
+    height: 25px;
+    
+    list-style: none;
+    text-align : center;
+    line-height: 25px;
+    text-decoration: none;
+    margin: 8px 3px;
+    
+    border: 1px solid #B1A2A2;
+}
+
+.prev, .next{
+    width: 50px!important;
+
+    color: white!important;
+    background-color: #B1A2A2;
+}
