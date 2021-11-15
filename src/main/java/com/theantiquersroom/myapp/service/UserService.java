@@ -1,6 +1,7 @@
 package com.theantiquersroom.myapp.service;
 
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -59,7 +60,7 @@ public interface UserService {
     // =====================마이페이지 관련===================== //
 	
     // 나의 경매리스트 조회
-    public abstract List<ProductDTO> getMyAuctionList(String userId, MypageCriteria cri);
+    public abstract List<ProductDTO> getMyAuctionList(HashMap<String, Object> map);
     
     // 나의 입찰리스트 조회
     public abstract List<ProductDTO> getBidList(MypageCriteria cri);

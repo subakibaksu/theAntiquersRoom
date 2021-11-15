@@ -163,7 +163,11 @@ public class UserController {
         UserDTO user = (UserDTO) session.getAttribute(LoginController.authKey);
         String userId = user.getUserId();
         
-        List<ProductDTO> myAuctionList = this.service.getMyAuctionList(userId, cri);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("userId", userId);
+        map.put("cri", cri);
+        
+        List<ProductDTO> myAuctionList = this.service.getMyAuctionList(map);
  		log.info("\t+ myAuctionList size: {}", myAuctionList.size());
 
  		model.addAttribute("myAuctionList",myAuctionList);

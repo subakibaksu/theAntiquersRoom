@@ -2,6 +2,7 @@ package com.theantiquersroom.myapp.service;
 
 
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.DisposableBean;
@@ -190,10 +191,10 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     // =====================마이페이지 관련===================== //
 	
 	@Override
-	public List<ProductDTO> getMyAuctionList(String userId, MypageCriteria cri) {
-		log.debug("getMyAuctionList({},{}) invoked.",userId,cri);
+	public List<ProductDTO> getMyAuctionList(HashMap<String, Object> map) {
+		log.debug("getMyAuctionList({}) invoked.",map);
 		
-		List<ProductDTO> list=this.mapper.getMyAuctionList(userId, cri);
+		List<ProductDTO> list=this.mapper.getMyAuctionList(map);
 		log.info("\t+ list size: {}", list.size());
 		
 		return list;

@@ -185,7 +185,8 @@
     <!-- 마이페이지-나의경매리스트 조회 -->
     <select
         id="getMyAuctionList"
-        resultType="com.theantiquersroom.myapp.domain.ProductDTO">
+        resultType="com.theantiquersroom.myapp.domain.ProductDTO"
+        parameterType="hashmap">
 
         <![CDATA[ 
 
@@ -202,13 +203,13 @@
                 A.started_price as startedPrice,
                 A.bid_increment as bidIncrement,
                 A.status,
-                (select nickname from users as B where B.USER_ID='asdfasdf@gmail.com') as nickname,
-                (select category_name from category as C where C.category_id='1') as categoryName
+                (select nickname from users as B where B.USER_ID=#{userId}) as nickname,
+                (select category_name from category as C where C.category_id=A.category_id) as categoryName
             FROM product as A
             WHERE A.user_id=#{userId}
-            ORDER BY A.p_created_at DESC
-            OFFSET (#{currPage}-1) * #{amount} ROWS 
-            FETCH NEXT #{amount} ROWS ONLY 
+            ORDER BY A.created_at DESC
+            LIMIT #{cri.currPage}, #{cri.amount}
+ 
 
         ]]>
     </select>       
