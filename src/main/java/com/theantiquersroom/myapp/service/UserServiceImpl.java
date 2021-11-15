@@ -37,11 +37,16 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     private UserMapper mapper;
     private BCryptPasswordEncoder passwordEncoder;
 
-
+    
+    // DB에 회원정보 저장
     @Override
     public boolean registerUser(UserDTO user) {
         log.debug("login({}) invoked.", user);
 
+        Integer users = null;
+        
+        users = mapper.insertUser(user);
+        
         // 비밀번호 암호화
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 

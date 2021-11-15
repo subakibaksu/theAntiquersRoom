@@ -24,8 +24,10 @@
 						  function buttonlive() {
 							if (idcheck && pwcheck && pwchcheck
 								&& niccheck && phonecheck) {
-								$("#checkit").prop("disabled", false);
+								$("#checkit").click(function(){
+								console.log("가입직전!@!!");
 								alert("성공적으로 가입되었습니다.");
+								});
 							} else {
 								alert("입력칸을 모두 채워주세요.");
 								$("#checkit").prop("disabled", true);
@@ -136,7 +138,6 @@
 								$('.nicknamecheck').css('color', '#f82a2aa3');
 								$('#nickname').focus();
 								niccheck = false;
-								buttonlive();
 							} else {
 								$.ajax(
 									{
@@ -194,9 +195,11 @@
 												if(data.phonenumberCheck == false) {
 													$(".phonenumbercheck").text("OK");
 													$(".phonenumbercheck").css('color', '#f82a2aa3');
+													phonecheck = true;
 												} else {
 													$(".phonenumbercheck").text("이 번호로 가입한 이력이 존재합니다.");
 													$(".phonenumbercheck").css('color', '#f82a2aa3');
+													phonecheck = false;
 												}
 											} 
 										});
@@ -225,7 +228,7 @@
 				<div id="subject">회원가입</div>
 			</div>
 
-			<form action="/users/insertRegister" method="post">
+			<form name="infoRegister" action="/users/register" method="post">
 
 				<!-- container -->
 				<div class="form-container">
