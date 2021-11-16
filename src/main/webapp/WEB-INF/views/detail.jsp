@@ -15,14 +15,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     
+    <script src="../../../resources/js/detail.js"></script>
 </head>
 <body>
-
+	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	
     <div id="wrapper">
         <section id="pInfo">
             <div id="pImgDiv">
                 <table id="pImgTable">
-                    <caption>카테고리 > 이게뭐냥</caption>
+                    <caption>카테고리 > ${product.categoryName}</caption>
                     <tr>
                         <td colspan="3">
                             <img id="focusedImg" src="../../../resources/images/testCat.png" alt="">
@@ -72,7 +74,9 @@
                     </tr>
                     <tr>
                         <th>남은 시간</th>
-                        <td>00시 00분 00초</td>
+                        <td>
+                            <div class="leftTimeTimer">${product.leftTime}</div>
+                        </td>
                     </tr>
                     <tr>
                         <td colspan="2">

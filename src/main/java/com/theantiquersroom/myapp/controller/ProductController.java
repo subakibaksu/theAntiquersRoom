@@ -98,6 +98,7 @@ public class ProductController {
     	assert dto != null;
     	
     	model.addAttribute("product", dto);
+//    	String detailPage = "detail?pId="+pId;
     	
     	return "/detail";
     } // getDetail()
