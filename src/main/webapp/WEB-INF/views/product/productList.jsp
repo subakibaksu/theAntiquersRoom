@@ -78,11 +78,25 @@
             padding-inline-start: 0px;
         }
 
-        .page{
-
-            background-color: #3C3C3C;
+        #currPage{
+            border: solid 0.1rem;
+            border-color: #c2b1b1;
+            background-color: #c2b1b1;
             text-decoration: none;
             color: white;
+            padding-right: 0.8rem;
+            padding-left: 0.8rem;
+            padding-top: 0.6rem;
+            padding-bottom: 0.6rem;
+            border-radius: 20%;
+        }
+
+        .page{
+
+            border: solid 0.1rem;
+            border-color: #c2b1b1;
+            text-decoration: none;
+            color: #3C3C3C;
             padding-right: 0.8rem;
             padding-left: 0.8rem;
             padding-top: 0.6rem;
@@ -141,7 +155,15 @@
 
                     </c:if>
                     <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="index">
-                        <a class="page" href="/product/productList${pageMaker.makeQuery(index)}&category_id=${productCommand.category_id}&searchQuery=${productCommand.searchQuery}&filter=${productCommand.filter}">${index }</a>
+                        <c:choose>
+                            <c:when test="${pageMaker.cri.page eq index}">
+                                <a id="currPage">${index}</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a class="page" href="/product/productList${pageMaker.makeQuery(index)}&category_id=${productCommand.category_id}&searchQuery=${productCommand.searchQuery}&filter=${productCommand.filter}">${index }</a>
+                            </c:otherwise>
+                        </c:choose>
+
                     </c:forEach>
 
                     <c:if test="${pageMaker.next }">
