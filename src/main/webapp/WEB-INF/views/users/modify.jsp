@@ -46,11 +46,11 @@
             <div>&nbsp;</div>
             <div>&nbsp;</div>
 
-            <div class="text">Paswword: <input class="modifyInput" type="text"   name="password" value="${sessionScope.__AUTH_ANTIQUE__.password}"></div>
+            <div class="text">Paswword: <input class="modifyInput" type="password"   name="password" value="${sessionScope.__AUTH_ANTIQUE__.password}"></div>
             <div>&nbsp;</div>
             <div>&nbsp;</div>
 
-            <div class="text">Check Paswword: <input class="modifyInput" type="text"  name="password"  value="${sessionScope.__AUTH_ANTIQUE__.password}"></div>
+            <div class="text">Check Paswword: <input class="modifyInput" type="password"  name="passworcheck" ></div>
             <div>&nbsp;</div>
             <div>&nbsp;</div>
 
