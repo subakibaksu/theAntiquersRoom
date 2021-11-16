@@ -214,7 +214,7 @@ public class UserController {
 //  		model.addAttribute("list",list);
 //  	} //list
  	
- 	@GetMapping({"/get" , "/modify" ,"mypage"})
+ 	@GetMapping({"/get" , "/modify"})
  	public void get(String userId, Model model) {         
  		log.debug("get({}, {}) invoked." , userId, model);
  		
@@ -223,7 +223,6 @@ public class UserController {
  		
  		model.addAttribute("user", user);
  	} // get , modify
- 	
  	
  	@PostMapping("/modify")
  	public String modify(modifyDTO user, RedirectAttributes rttrs) {
