@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ProductMapper {
 
-    //상품등록
+    // 상품등록
     public abstract Integer insertProduct(ProductFormDTO product);
+    public Integer insertSelectKey(ProductFormDTO product);
+
 }

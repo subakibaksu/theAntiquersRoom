@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 public interface ProductService {
 
     //상품등록
-    public  abstract  boolean registerProduct(ProductFormDTO product);
+    public  abstract  void registerProduct(ProductFormDTO product);
 }

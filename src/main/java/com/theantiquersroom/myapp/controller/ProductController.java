@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 
 @Log4j2
 @NoArgsConstructor
@@ -39,10 +41,23 @@ public class ProductController {
     /*상품 등록정보 DB전달*/
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public String register(ProductFormDTO product, @SessionAttribute("userId") String userId) {
+    public String register(ProductFormDTO product,
+                           @SessionAttribute("userId") String userId,
+                           RedirectAttributes rttr) {
 
         product.setUserId(userId);
+//        this.service.registerProduct(product);
+        log.info("==========================");
+        log.info("register: " + product);
+
+        if (product.getImageList() != null) {
+            product.getImageList().forEach(imageDTO -> log.info(imageDTO));
+        }
+        log.info("==========================");
+
         this.service.registerProduct(product);
+
+        rttr.addFlashAttribute("result", product.getPId());
 
         return "/main"; // 추후 완료 alert으로 변경
     } // Post register()
