@@ -8,126 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300&display=swap" rel="stylesheet">
-    <style>
-
-        #productListWraper{
-
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 150%;
-
-        }
-
-        #categoryTitle{
-
-            font-family: Merriweather;
-            margin-top: 10%;
-            margin-bottom: 5%;
-            text-align: center;
-
-        }
-
-        #filterContainer{
-            float: right;
-            position: relative;
-            width: 100%;
-            margin-bottom: 5%;
-
-        }
-
-        .filter{
-
-            font-family: 'Noto Sans KR', sans-serif;
-            font-weight: bolder;
-            float: right;
-            position: relative;
-            right: 15%;
-
-        }
-
-        #productListContainer{
-
-            float: left;
-            list-style: none;
-            position: relative;
-            width: 70%;
-            left: 15%;
-        }
-
-        .product{
-
-            float: left;
-            width: 30%;
-            margin-right: 1.5%;
-            margin-left: 1.5%;
-            padding-top: 2%;
-            margin-bottom: 5%;
-            text-align: center;
-            border: solid 0.1rem;
-            border-radius: 5%;
-            border-color: #c2b1b1;
-
-
-
-        }
-
-        #productName{
-            font-weight: bold;
-            font-size: 1em;
-        }
-
-        .img{
-
-            width: 70%;
-        }
-
-        ul{
-            padding-inline-start: 0;
-        }
-
-        #pagingnationContainer{
-
-            float: left;
-            width: 100%;
-            text-align: center;
-
-        }
-
-        .pagination{
-            padding-inline-start: 0px;
-            margin-bottom: 5%;
-        }
-
-        #currPage{
-            border: solid 0.1rem;
-            border-color: #c2b1b1;
-            background-color: #c2b1b1;
-            text-decoration: none;
-            color: white;
-            padding-right: 0.8rem;
-            padding-left: 0.8rem;
-            padding-top: 0.6rem;
-            padding-bottom: 0.6rem;
-            border-radius: 20%;
-        }
-
-        .page{
-
-            border: solid 0.1rem;
-            border-color: #c2b1b1;
-            text-decoration: none;
-            color: #3C3C3C;
-            padding-right: 0.8rem;
-            padding-left: 0.8rem;
-            padding-top: 0.6rem;
-            padding-bottom: 0.6rem;
-            border-radius: 20%;
-
-        }
-
-
-    </style>
+    <link rel="stylesheet" href="/resources/css/productList.css">
 
     <script type="text/javascript">
 
@@ -167,11 +48,16 @@
 
 
             function convertSeconds(s){
-                var day = Math.floor(s / (60*60*24));
-                var hour = Math.floor(s /(60*24))%24;
-                var min = Math.floor(s / 60 )%60;
-                var sec = s % 60;
-                return day + '일' + hour + '시간' +  min + '분' + sec + '초';
+
+                if(s<0){
+                    return '경매가 종료되었습니다';
+                }else {
+                    var day = Math.floor(s / (60*60*24));
+                    var hour = Math.floor(s /(60*24))%24;
+                    var min = Math.floor(s / 60 )%60;
+                    var sec = s % 60;
+                    return day + '일' + hour + '시간' +  min + '분' + sec + '초';
+                }
 
             }
 
