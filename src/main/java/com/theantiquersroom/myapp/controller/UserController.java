@@ -170,7 +170,7 @@ public class UserController {
 //  		model.addAttribute("list",list);
 //  	} //list
  	
- 	@GetMapping({"/get" , "/modify"})
+ 	@GetMapping({"/get" , "/modify" , "/mypage"})
  	public void get(String userId, Model model) {         
  		log.debug("get({}, {}) invoked." , userId, model);
  		
