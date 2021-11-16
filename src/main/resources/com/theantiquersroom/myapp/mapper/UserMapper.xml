@@ -65,17 +65,6 @@
         	UPDATE users SET password = #{newPassword} where user_id = #{userId}
         ]]>
     </update>
-    
-    <!-- 특정 아이디의 닉네임 조회  -->
-    <select
-            id="selectUserNickname"
-            resultType="string"
-            parameterType="string">
-            
-        <![CDATA[
-          SELECT nickname FROM users WHERE user_id = #{userId}
-        ]]>
-    </select>
 
     <!-- 특정 아이디 조회 -->
     <select
@@ -92,19 +81,25 @@
 
     <!-- 특정 닉네임 조회 -->
     <select
-            id="getNickName">
-
+            id="getNickName"
+            resultType="String"
+			parameterType="String"          
+    >
         <![CDATA[
+        
+        	SELECT nickname FROM users WHERE nickname = #{nickname}
 
         ]]>
     </select>
 
     <!-- 특정 연락처 조회 -->
     <select
-            id="getPhone">
-
+            id="getPhone"
+            resultType="String"
+            parameterType="String"
+            >
         <![CDATA[
-	
+			SELECT phone FROM users WHERE phone = #{phone}
         ]]>
     </select>
 
