@@ -3,6 +3,7 @@ package com.theantiquersroom.myapp.domain;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,6 +29,8 @@ public class ProductFormDTO {
 
     // 이미지 관련
     private List<ImageDTO> imageList;
-    
+
+    // form images
+    private List<MultipartFile> images;
 
 }

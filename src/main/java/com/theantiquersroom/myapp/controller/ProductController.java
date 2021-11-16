@@ -1,6 +1,7 @@
 package com.theantiquersroom.myapp.controller;
 
 import com.theantiquersroom.myapp.domain.ProductFormDTO;
+import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.service.ProductService;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -41,25 +42,15 @@ public class ProductController {
     /*상품 등록정보 DB전달*/
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public String register(ProductFormDTO product,
-                           @SessionAttribute("userId") String userId,
-                           RedirectAttributes rttr) {
+    public String register(
+       ProductFormDTO product,
+       @SessionAttribute(LoginController.authKey) UserDTO user
+    ) throws Exception{
 
-        product.setUserId(userId);
-//        this.service.registerProduct(product);
-        log.info("==========================");
-        log.info("register: " + product);
-
-        if (product.getImageList() != null) {
-            product.getImageList().forEach(imageDTO -> log.info(imageDTO));
-        }
-        log.info("==========================");
+        product.setUserId(user.getUserId());
 
         this.service.registerProduct(product);
-
-        rttr.addFlashAttribute("result", product.getPId());
-
-        return "/main"; // 추후 완료 alert으로 변경
+        return "/product/list"; // 추후 완료 alert으로 변경
     } // Post register()
 
     /*유찰된 상품 재등록 페이지로 이동*/

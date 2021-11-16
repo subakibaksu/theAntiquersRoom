@@ -41,7 +41,7 @@
 <!--	파일 업로드를 위한 설정 -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="defaultEncoding" value="utf8"/>
-		<beans:property name="uploadTempDir" value="file:/Users/yangsujin/Documents/SpringStudy/temp"/>
+<!--		<beans:property name="uploadTempDir" value="file:/Users/yangsujin/Documents/SpringStudy/temp"/>-->
 		<beans:property name="preserveFilename" value="true"/>
 
 		<!-- 10MB -->
@@ -50,6 +50,16 @@
 		<beans:property name="maxUploadSizePerFile" value="2097152"/>
 		<!-- 1MB -->
 		<beans:property name="maxInMemorySize" value="1048576"/>
+	</beans:bean>
+
+
+	<beans:bean id="credential" class="com.amazonaws.auth.BasicAWSCredentials">
+		<beans:constructor-arg name="accessKey" value="AKIAY7E2ZWQTKIMYJ7XB" />
+		<beans:constructor-arg name="secretKey" value="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" />
+	</beans:bean>
+
+	<beans:bean id="s3client" class="com.amazonaws.services.s3.AmazonS3Client">
+		<beans:constructor-arg ref="credential" />
 	</beans:bean>
 
 </beans:beans>

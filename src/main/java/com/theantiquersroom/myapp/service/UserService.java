@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.theantiquersroom.myapp.domain.Criteria;
 import com.theantiquersroom.myapp.domain.LoginDTO;
-import com.theantiquersroom.myapp.domain.ProductVO;
+import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
 
@@ -47,10 +47,10 @@ public interface UserService {
 
     
     // 나의 경매리스트 조회
-    public abstract List<ProductVO> getMyAuctionList(Criteria cri);
+    public abstract List<ProductDTO> getMyAuctionList(Criteria cri);
     
     // 나의 입찰리스트 조회
-    public abstract List<ProductVO> getBidList(Criteria cri);
+    public abstract List<ProductDTO> getBidList(Criteria cri);
     
 
 	// 전체 회원 목록조회

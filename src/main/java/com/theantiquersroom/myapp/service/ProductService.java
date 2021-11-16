@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 public interface ProductService {
 
     //상품등록
-    public  abstract  void registerProduct(ProductFormDTO product);
+    public  void registerProduct(ProductFormDTO product) throws Exception;
 }

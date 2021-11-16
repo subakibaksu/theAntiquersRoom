@@ -9,14 +9,9 @@ import java.util.Date;
 @Data
 public class ImageDTO {
 
-//    @DateTimeFormat(iso = ISO.DATE)
-//    private Date dueDate;
-
-    private Integer imageId; // uuid ..? 식별..?
+    private Integer imageId;
     private String imageName; // 파일 이름
-    private String uploadPath; // 실제 업로드된 경로
-    private Integer pId; // 상품등록번호 bno..?
-
-//    private Long bno;
+    private String imageUrl; // 실제 업로드된 경로
+    private Integer productId; // 상품등록번호 bno..?
 
 }

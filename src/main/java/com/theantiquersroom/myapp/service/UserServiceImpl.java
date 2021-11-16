@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import com.theantiquersroom.myapp.domain.Criteria;
 
 import com.theantiquersroom.myapp.domain.LoginDTO;
-import com.theantiquersroom.myapp.domain.ProductVO;
+import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
 import com.theantiquersroom.myapp.mapper.UserMapper;
@@ -154,13 +154,13 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	} // resetPwd()
 
 	@Override
-	public List<ProductVO> getMyAuctionList(Criteria cri) {
+	public List<ProductDTO> getMyAuctionList(Criteria cri) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<ProductVO> getBidList(Criteria cri) {
+	public List<ProductDTO> getBidList(Criteria cri) {
 		// TODO Auto-generated method stub
 		return null;
 	}

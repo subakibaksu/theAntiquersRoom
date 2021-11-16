@@ -1,5 +1,6 @@
 package com.theantiquersroom.myapp.service;
 
+import com.theantiquersroom.myapp.domain.ImageDTO;
 import com.theantiquersroom.myapp.domain.ProductFormDTO;
 import com.theantiquersroom.myapp.mapper.ImageMapper;
 import com.theantiquersroom.myapp.mapper.ProductMapper;
@@ -9,6 +10,10 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.validation.Errors;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.UUID;
 
 @AllArgsConstructor
 @Log4j2
@@ -16,30 +21,31 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ProductServiceImpl implements ProductService {
 
+    private final String PRODUCT_IMAGE_DIR = "product";
+
     @Setter(onMethod_= {@Autowired})
     ProductMapper mapper;
-    @Setter(onMethod_={@Autowired} )
-    ImageMapper imageMapper;
+    FileUploadService uploadService;
 
     // 상품등록
     @Transactional
     @Override
-    public void registerProduct(ProductFormDTO product) {
+    public void registerProduct(ProductFormDTO product) throws Exception {
         log.debug("login({}) invoked.", product);
 
-//        this.mapper.insertProduct(product);
-//        this.imageMapper.insertImage(image);
-//        return true;
-        this.mapper.insertSelectKey(product);
-
-        if(product.getImageList() == null || product.getImageList().size() <= 0) {
-            return;
+        this.mapper.insertProduct(product);
+        for (MultipartFile img: product.getImages()) {
+            String url = uploadService.upload(img, PRODUCT_IMAGE_DIR);
+            ImageDTO imageDto = new ImageDTO();
+            imageDto.setProductId(product.getPId());
+            imageDto.setImageUrl(url);
+            imageDto.setImageName(img.getOriginalFilename());
+            this.mapper.insertProductImage(imageDto);
         }
-            product.getImageList().forEach(imageDTO ->{
 
-            imageDTO.setPId(product.getPId());
-            imageMapper.insertImage(imageDTO);
-        });
     }
 
 }
+
+
+// FIle[] -> AWS S3 Upload -> Image DB 넣어 -> Image ID -> ProductDB
