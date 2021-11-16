@@ -32,6 +32,6 @@ public class ProductDTO {
    
    private String nickname;
    private String categoryName;
-   private Integer leftTime;
+   private Integer leftTime; // 경매종료까지 남은시간
    
 } // end class

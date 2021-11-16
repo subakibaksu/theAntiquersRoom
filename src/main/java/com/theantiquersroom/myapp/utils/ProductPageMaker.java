@@ -26,12 +26,12 @@ public class ProductPageMaker {
     private int displayPageNum =10;
     private int tempEndPage;
 
-
     public void setTotalCount(int totalCount) {
-        this.totalCount = totalCount;
 
+        this.totalCount = totalCount;
         calcData();
-    }
+
+    } // setTotalCount
 
     private void calcData() {
 
@@ -49,7 +49,7 @@ public class ProductPageMaker {
         prev = startPage ==1 ?false :true;
         next = endPage * cri.getPerPageNum() >= totalCount ?false :true;
 
-    }
+    } // calcData()
 
     public String makeQuery(int page) {
 
@@ -57,7 +57,7 @@ public class ProductPageMaker {
                 .queryParam("perPageNum", cri.getPerPageNum()).build();
 
         return uriComponents.toUriString();
-    }
+    } // makeQuery()
 
-}
+} // end class
 

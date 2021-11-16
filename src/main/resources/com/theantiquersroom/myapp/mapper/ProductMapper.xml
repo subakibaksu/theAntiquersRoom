@@ -40,9 +40,6 @@
 
             </trim>
 
-
-
-
             limit #{pageStart}, #{perPageNum}
 
     </select>

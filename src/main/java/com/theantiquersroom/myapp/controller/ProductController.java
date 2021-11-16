@@ -32,7 +32,7 @@ public class ProductController {
     @Setter(onMethod_= {@Autowired})
     private ProductService service;
 
-    /*상품 목록 페이지로 이동(카테고리)*/
+    /*상품 목록 페이지로 이동*/
     @GetMapping("/productList")
     public void productList(
             @ModelAttribute("cri") ProductCriteria cri,

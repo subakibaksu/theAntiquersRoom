@@ -15,7 +15,6 @@
         $(document).ready(function (){
 
             var timearr = [];
-
             $(".leftTimeTimer").hide();
 
             $(".leftTimeTimer").each(function (){
@@ -23,14 +22,12 @@
                 var time = $(this).text();
                 var timeSecond = Number(time);
                 timearr.push(timeSecond);
-                // $(this).text(convertSeconds(timeSecond));
+
             });
-            console.log(timearr);
 
             setInterval(function (){
 
                 $(".leftTimeTimer").show();
-
                 var count = 0;
 
                 $(".leftTimeTimer").each(function (){
@@ -50,13 +47,17 @@
             function convertSeconds(s){
 
                 if(s<0){
+
                     return '경매가 종료되었습니다';
+
                 }else {
+
                     var day = Math.floor(s / (60*60*24));
                     var hour = Math.floor(s /(60*24))%24;
                     var min = Math.floor(s / 60 )%60;
                     var sec = s % 60;
                     return day + '일' + hour + '시간' +  min + '분' + sec + '초';
+
                 }
 
             }
@@ -101,12 +102,16 @@
 
         <ul id="productListContainer">
             <c:forEach items="${productList}" var="product">
+
                 <a href="/product/getDetail?${product.pId}">
+
                 <li class="product">
+
                     <img class="img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7l2yA1G_b4-kI_Pc8uh4esNvynw6NYealww&usqp=CAU">
                     <p id="productName">${product.name}</p>
                     <p>경매 시작가 : ${product.startedPrice}</p>
                     <p>현재가 : ${product.startedPrice}</p>
+
                     <c:choose>
                         <c:when test="${product.leftTime < 0}">
                             <p>경매가 종료되었습니다.</p>
@@ -115,12 +120,17 @@
                             <p class="leftTimeTimer">${product.leftTime}</p>
                         </c:otherwise>
                     </c:choose>
+
                 </li>
+
                 </a>
+
             </c:forEach>
+
         </ul>
 
         <div id="pagingnationContainer">
+
             <ul class="pagination">
 
                     <c:if test="${pageMaker.prev}">
@@ -129,7 +139,9 @@
                         </li>
 
                     </c:if>
+
                     <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="index">
+
                         <c:choose>
                             <c:when test="${pageMaker.cri.page eq index}">
                                 <a id="currPage">${index}</a>
@@ -148,8 +160,12 @@
                     </c:if>
 
             </ul>
+
         </div>
+
     </div>
+
     <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+
 </body>
 </html>

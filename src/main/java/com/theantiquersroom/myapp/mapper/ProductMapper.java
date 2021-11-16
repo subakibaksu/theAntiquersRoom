@@ -24,5 +24,4 @@ public interface ProductMapper {
     // 전체 게시글 수 구하기
     public Integer getTotalCount(ProductCommand productCommand)throws Exception;
 
-
-}
+} // end interface

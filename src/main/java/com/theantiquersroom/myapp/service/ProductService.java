@@ -21,6 +21,4 @@ public interface ProductService {
     // 전체 게시글 수 구하기
     public Integer totalCount(ProductCommand productCommand)throws Exception;
 
-
-
 } // end interface

@@ -56,22 +56,25 @@
     border-radius: 5%;
     border-color: #c2b1b1;
 
-
-
 }
 
 #productName{
+
     font-weight: bold;
     font-size: 1em;
+
 }
 
 .img{
 
     width: 70%;
+
 }
 
 ul{
+
     padding-inline-start: 0;
+
 }
 
 #pagingnationContainer{
@@ -83,11 +86,14 @@ ul{
 }
 
 .pagination{
+
     padding-inline-start: 0px;
     margin-bottom: 5%;
+
 }
 
 #currPage{
+
     border: solid 0.1rem;
     border-color: #c2b1b1;
     background-color: #c2b1b1;
@@ -98,6 +104,7 @@ ul{
     padding-top: 0.6rem;
     padding-bottom: 0.6rem;
     border-radius: 20%;
+
 }
 
 .page{

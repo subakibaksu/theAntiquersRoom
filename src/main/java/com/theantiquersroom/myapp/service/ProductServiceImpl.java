@@ -36,7 +36,7 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
 
         this.mapper.insertProduct(product);
         return true;
-    }
+    } // registerProduct()
 
     @Override
     public List<ProductDTO> listCriteria(ProductCriteria cri, ProductCommand productCommand) throws Exception {
@@ -56,6 +56,7 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
     public Integer totalCount(ProductCommand productCommand) throws Exception {
 
         return mapper.getTotalCount(productCommand);
+
     } //totalCount()
 
     @Override

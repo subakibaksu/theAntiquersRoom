@@ -10,17 +10,19 @@ package com.theantiquersroom.myapp.domain;
 
 
 public class ProductCriteria {
-    private int page;// 보여줄 페이지
+
+    private int page;// 현재페이지
     private int perPageNum;// 페이지당 보여줄 페이지수
 
-    // limit 구문에서 시작 부분에 필요한 값을 반환(mybatis에서 사용)
     public int getPageStart(){
         return (this.page -1) *this.perPageNum;
     }
 
-    public ProductCriteria() {// 최초 default 생성자로 기본 객체 생성시 초기값을 지정한다. (1페이지, 10개씩)
-        this.page =1; // 사용자가 세팅하지 않으면 기본 1
-        this.perPageNum =9;// 페이지당 기본 10개씩 출력하도록 세팅
+    public ProductCriteria() {
+
+        this.page =1;
+        this.perPageNum =9;// 페이지당 기본 9개씩 출력하도록 초기화
+
     }
 
 
@@ -30,10 +32,13 @@ public class ProductCriteria {
     }
     public void setPage(int page) {
         if ( page <=0 ){
-            // 페이지는 1페이지부터임으로 0보다 작거나 같은값일 경우 무조건 첫번째 페이지로 설정되도록 해준다.
+
             this.page =1;
+
         }else{
+
             this.page = page;
+
         }
     }
     public int getPerPageNum() {
