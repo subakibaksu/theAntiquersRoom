@@ -37,11 +37,16 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     private UserMapper mapper;
     private BCryptPasswordEncoder passwordEncoder;
 
-
+    
+    // DB에 회원정보 저장
     @Override
     public boolean registerUser(UserDTO user) {
         log.debug("login({}) invoked.", user);
 
+        Integer users = null;
+        
+        users = mapper.insertUser(user);
+        
         // 비밀번호 암호화
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
@@ -60,25 +65,41 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     	
     	log.debug(id);
     	
-    	if(id.equals(userId)) {
-    		
-    		log.debug("please");
+    	if(id != null) {
     		return true;
+    	}else {
+    		return false;
     	}
-    	
-    	return false;
     }
 
     @Override
     public boolean checkNickName(String nickName) {
-        // TODO Auto-generated method stub
-        return false;
+    	log.debug("checkNickName({}) invoked.", nickName);
+    	
+    	String nName = "";
+    	
+    	nName = mapper.getNickName(nickName);
+    	log.debug("닉네임 from controller ({})", nickName);
+    	
+    	if(nName != null) {
+    		return true;
+    	}else {
+    		return false;
+    	}
     }
 
     @Override
     public boolean checkPhone(String phone) {
-        // TODO Auto-generated method stub
-        return false;
+
+    	String pNum = "";
+    	
+    	pNum = mapper.getPhone(phone);
+    	
+    	if(pNum != null) {
+    		return true;
+    	}else {
+    		return false;
+    	}
     }
 
     @Override

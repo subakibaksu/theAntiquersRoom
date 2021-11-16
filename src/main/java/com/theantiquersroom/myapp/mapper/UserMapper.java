@@ -32,11 +32,11 @@ public interface UserMapper {
     //특정 아이디 조회
     public abstract String getUserId(String userId);
 
-	// 특정 닉네임 조회
-	public abstract Integer getNickName(String nickName);
+    //특정 닉네임 조회
+    public abstract String getNickName(String nickName);
 
-	// 특정 연락처 조회
-	public abstract Integer getPhone(String phone);
+    //특정 연락처 조회
+    public abstract String getPhone(String phone);
 
 	//로그인
     public abstract UserDTO selectUserById(String userId);
@@ -60,8 +60,6 @@ public interface UserMapper {
     // 아이디 찾기
     public abstract UserVO findId(UserVO vo);
     
-    
-	
     // =====================마이페이지 관련===================== //
     
 	// 마이옥션리스트 총 게시물 개수를 반환
@@ -70,7 +68,6 @@ public interface UserMapper {
     //특정 회원 ID 통한 경매 리스트 조회
     public abstract List<ProductDTO> getMyAuctionList(HashMap<String, Object> map);
 	
-    
     // =====================카카오 로그인 API 관련===================== //
 	
     //카카오계정 ID 조회
