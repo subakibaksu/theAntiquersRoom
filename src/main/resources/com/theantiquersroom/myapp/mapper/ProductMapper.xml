@@ -15,7 +15,7 @@
         ]]>
     </insert>
     <select id="listCriteria" resultType="com.theantiquersroom.myapp.domain.ProductDTO" parameterType="hashmap"> <!-- typeAlias를 지정했음으로 풀 네임 기재 필요 없음 -->
-            SELECT p_id,name,created_at,updated_at,content,category_id,user_id, started_at, ended_at, started_price, bid_increment, status
+            SELECT p_id,name,created_at,updated_at,content,category_id,user_id, started_at, ended_at, started_price, bid_increment, status,TIMESTAMPDIFF(SECOND,NOW(),ended_at) AS lefttime
             FROM product
 
             <where>
@@ -32,7 +32,11 @@
 
                 <if test="filter == 0 or filter == null">  p_id DESC </if>
 
-                <if test="filter == 1">  p_id ASC </if>
+                <if test="filter == 1">  ended_at ASC </if>
+
+                <if test="filter == 2">  started_price ASC </if>
+
+                <if test="filter == 3">  started_price DESC </if>
 
             </trim>
 

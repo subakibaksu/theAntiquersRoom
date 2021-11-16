@@ -32,5 +32,6 @@ public class ProductDTO {
    
    private String nickname;
    private String categoryName;
+   private Integer leftTime;
    
 } // end class
