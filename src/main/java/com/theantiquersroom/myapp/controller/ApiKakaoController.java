@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
@@ -54,7 +55,7 @@ public class ApiKakaoController {
 	
 	
 	//카카오 인가 코드 받기
-	@RequestMapping("/login/kakao")
+	@RequestMapping(value="/login/kakao")
 	public String oauthKakao(HttpServletRequest req, HttpServletResponse res, HttpSession session) throws Exception{
 		log.debug("oauthKakao() invoked.");
 		
@@ -67,7 +68,7 @@ public class ApiKakaoController {
 		//사용자가 로그인을 취소했거나, 만 14세 미만 사용자의 보호자 동의에 실패한 경우, 로그인 초기 화면으로 이동
 		if(error != null) {
 			if(error.equals("access_denied")) {
-				return "redirect:/login";
+				return "/login";
 			}
 		}
 		
@@ -85,14 +86,33 @@ public class ApiKakaoController {
 		    	return "redirect:/"; //메인 화면으로 이동
 		    	
 		    }else {
-		    	return "redirect:/users/register"; //카카오-회원가입 페이지로 이동
+		    	return "/registerByKakao"; //카카오-회원가입 페이지로 이동
 		    }//if-else
 		    
 	    }else {
-		    return "redirect:/";
+		    return "/login";
 	    }//if-else
 	    
 	}//oauthKakao
+	
+	
+	//카카오 통한 회원가입 화면 요청
+    @GetMapping("/registerByKakao")
+    public String registerByKakao() {
+        log.debug("registerByKakao() invoked.");
+        
+		return "redirect:/registerByKakao";
+    } //register
+
+    
+//    @PostMapping("/registerByKakao")
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public String registerByKakao(UserDTO user) { //회원가입 서비스 수행, 저장
+//        log.debug("register({}) invoked.", user);
+//
+//        this.service.registerUser(user);
+//        return "/";
+//    } //register
 	
 	
 	//액세스 토큰, 리프레시 토큰 받기
