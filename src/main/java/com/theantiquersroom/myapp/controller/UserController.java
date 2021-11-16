@@ -45,20 +45,6 @@ public class UserController {
     @Setter(onMethod_= {@Autowired})
     private UserService service;
 
-    @GetMapping("/register")
-    public void register() {	//회원가입 화면 요청
-        log.debug("register() invoked.");
-
-    } //register
-
-    @PostMapping("/register")
-    @ResponseStatus(HttpStatus.CREATED)
-    public String register(UserDTO user) { //회원가입 서비스 수행, 저장
-        log.debug("register({}) invoked.", user);
-
-        this.service.registerUser(user);
-        return "/";
-    } //register
 
     //
     @GetMapping("/confirmEmail")
@@ -98,35 +84,6 @@ public class UserController {
         return map;
     } // confirmEmail
 
-    @PostMapping("/checkId")
-    public @ResponseBody Map<Object, Object> checkId(@RequestBody Map<Object,Object> map) {	//아이디 중복검사
-        log.debug("checkId({}) invoked.", map.get("userId"));
-        
-        boolean checkid = this.service.checkId((String)map.get("userId")); //true/false인지 서비스에서 판별 
-        log.info("\t+ checkid: {}", checkid);
-        
-        Map<Object, Object> resultMap = new HashMap<Object,Object>();
-        
-        map.put("emailCheck", checkid);
-        log.debug(map.get("emailCheck"));
-        
-        return resultMap;
-        
-    } //checkId
-
-    @PostMapping("/checkNickName")
-    public void checkNickName(String nickname) {	//닉네임 중복검사
-        log.debug("confirmEmail() invoked.");
-
-    } //checkNickName
-
-    @PostMapping("/checkPhone")
-    public void checkPhone(String phone) {	//연락처 중복검사
-        log.debug("checkPhone() invoked.");
-
-    } //checkPhone
-
-    
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {	// 로그아웃 실행
         log.debug("logout() invoked.");
@@ -160,7 +117,6 @@ public class UserController {
         return map;
 
     } //resetPwd
-
 
     // ======================== MyPage =========================== //
     
@@ -279,6 +235,5 @@ public class UserController {
 		
 		return "redirect:/users/getUserList";
 	} //remove
- 	
-
+	
 }  //end class
