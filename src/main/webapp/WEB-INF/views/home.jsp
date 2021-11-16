@@ -25,6 +25,12 @@
 
                 self.location='/users/logout';
             }); //logout_onclick
+
+            $('#myAuctionBtn').click(function(){
+                console.log('myAuctionBtn click event triggered..');
+
+                self.location='/users/getMyAuctionList';
+            }); //myAuctionBtn_onclick
         }); //.jq
     </script>
 </head>
@@ -47,6 +53,11 @@
     <hr>
 	<h3>${sessionScope.__AUTH_ANTIQUE__}</h3>
     <button type="button" id="logoutBtn">로그아웃</button>
+
+    <hr>
+    <button type="button" id="myAuctionBtn">마이옥션리스트</button>
+
+
 
 <!---------------- 카카오 로그인 ---------------->
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>

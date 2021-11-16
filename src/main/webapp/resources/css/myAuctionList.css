@@ -7,21 +7,15 @@
 }
 
 #wrapper{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
 
-    width: 1920px;
+    width: 100%;
 
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
 
     background-color: #F0E9E7;
 }
-
 table{
-    display: flex;
 
     width: 73%;
 
@@ -32,6 +26,7 @@ table{
 }
 
 th{
+	background-color: #B1A2A2;
     padding: 8px;
 }
 
@@ -45,13 +40,14 @@ tr:hover{
 
 #topmenu > li {
     float: left;
+    margin-top: 5rem;
+
+    width: 33%;
+    height: 50px;
 
     text-align: center;
     line-height: 50px;
     list-style: none;
-
-    width: 33%;
-    height: 50px;
 }
 
 #regBtn{
@@ -61,7 +57,7 @@ tr:hover{
     border: 0;
 
     color: white;
-    background-color: #B1A2A2;
+    background-color: #9C0000;
 
     font-size: 14px;
     font-weight: bold;

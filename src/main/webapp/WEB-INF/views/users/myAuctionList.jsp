@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,7 +13,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     </head>
     <body>
-        <h1>/users/myAuctionList.jsp</h1>
+        <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+
+        <jsp:include page="/WEB-INF/views/common/mypageHeader.jsp"/>
 
         <div id="wrapper">
 
