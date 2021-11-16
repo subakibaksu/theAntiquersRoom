@@ -143,29 +143,6 @@ public class UserController {
         
     } //checkPhone
 
-    @GetMapping("/login")
-    public void login() {	// 로그인 페이지로 이동
-        log.debug("login() invoked.");
-
-    } //login
-
-    @PostMapping("/login")
-    public String login(
-    		@RequestParam("userId") String userId, 
-    		@RequestParam("password") String password, HttpServletRequest request) {	// 로그인 실행
-        log.debug("login({}, {}) invoked.", userId, password);
-        HttpSession session = request.getSession();
-        
-        boolean isUser=this.service.login(userId, password);
-        log.info("\t+ isUser: {}", isUser);
-        
-        if(isUser) {
-        	session.setAttribute("userId", userId);
-        } //if
-        
-        return "/main";
-    } //login
-
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {	// 로그아웃 실행
         log.debug("logout() invoked.");
