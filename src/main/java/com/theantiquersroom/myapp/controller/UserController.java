@@ -235,6 +235,5 @@ public class UserController {
 		
 		return "redirect:/users/getUserList";
 	} //remove
- 	
-
+	
 }  //end class
