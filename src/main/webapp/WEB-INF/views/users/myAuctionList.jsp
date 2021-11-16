@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,6 +19,10 @@
         <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
         <jsp:include page="/WEB-INF/views/common/mypageHeader.jsp"/>
+        
+        <hr>
+		<h3>2. list: ${myAuctionList}</h3>
+		<h3>1. pageMaker: ${pageMaker}</h3>
 
         <div id="wrapper">
 
@@ -44,15 +51,14 @@
                     <c:forEach items="${myAuctionList}" var="myAuction">
                         <tr>
                             <td><h3>이미지 넣기</h3></td>
-                            <td><a href="/product/register?pId=${myAuction.pId}"><c:out value="${myAuction.name}"/></a></td>
+                            <td><a href="/product/getDetail?pId=${myAuction.pId}"><c:out value="${myAuction.name}"/></a></td>
                             <td><c:out value="${myAuction.categoryName}"/></td>
                             <td><c:out value="${myAuction.nickname}"/></td>
                             <td><c:out value="${myAuction.startedPrice}"/></td>
                             <td><h3>현재가격</h3></td>
-                            <td><fmt:formatDate pattern="MM월 dd일 HH시" value="${myAuction.startedAt}"/><br>
-                            <fmt:formatDate pattern="MM월 dd일 HH시" value="${myAuction.endedAt}"/></td>
+                            <td>${myAuction.startedAt}<br>
+                            ~ ${myAuction.endedAt}</td>
                             <td><c:out value="${myAuction.status}"/></td>
-
                         </tr>
                     </c:forEach>
                 </tbody>
