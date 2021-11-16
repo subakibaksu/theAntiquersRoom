@@ -47,6 +47,8 @@
     <hr>
 	<h3>${sessionScope.__AUTH_ANTIQUE__}</h3>
     <button type="button" id="logoutBtn">로그아웃</button>
+    <hr>
+    <button type="button" id="logoutBtn"><a href="/users/modify?userId=${sessionScope.__AUTH_ANTIQUE__.userId}">마이페이지</a></button>
 
 <!---------------- 카카오 로그인 ---------------->
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>

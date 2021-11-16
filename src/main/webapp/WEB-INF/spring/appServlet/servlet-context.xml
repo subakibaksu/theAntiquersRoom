@@ -27,7 +27,7 @@
 	<beans:bean id="userService" class="com.theantiquersroom.myapp.service.UserService" abstract="true"/>
 	<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
-	<interceptors>
+ 	<interceptors>
 		<interceptor>
 			<mapping path="/loginCheck"/>
 			<beans:ref bean="loginInterceptor"/>
