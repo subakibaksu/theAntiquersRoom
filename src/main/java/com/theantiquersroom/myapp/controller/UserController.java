@@ -45,21 +45,6 @@ public class UserController {
     @Setter(onMethod_= {@Autowired})
     private UserService service;
 
-    @GetMapping("/register")
-    public void register() {	//회원가입 화면 요청
-        log.debug("register() invoked.");
-
-    } //register
-
-    @PostMapping("/register")
-    @ResponseStatus(HttpStatus.CREATED)
-    public String register(UserDTO user) { //회원가입 서비스 수행, 저장
-        log.debug("register({}) invoked.", user);
-
-        this.service.registerUser(user);
-        return "/";
-
-    } //register
 
     //
     @GetMapping("/confirmEmail")
@@ -98,50 +83,6 @@ public class UserController {
 
         return map;
     } // confirmEmail
-
-    @PostMapping("/checkId")
-    public @ResponseBody Map<Object, Object> checkId(@RequestBody Map<Object,Object> map) {	//아이디 중복검사
-        log.debug("userId({}) invoked.", map.get("userId"));
-        
-        boolean checkid = this.service.checkId((String)map.get("userId")); // NullPointerException 발생
-        log.info("\t+ checkid: {}", checkid);
-        
-        Map<Object, Object> resultMap = new HashMap<Object,Object>();
-        
-        resultMap.put("emailCheck", checkid);
-        log.debug(resultMap.get("emailCheck"));
-        
-        log.info("\t+ resultMap: {}", resultMap);
-        return resultMap;
-
-    } //checkId
-
-    @PostMapping("/checkNickName")
-    public @ResponseBody Map<Object, Object> checkNickName(@RequestBody Map<Object, Object> map) {	//닉네임 중복검사
-        log.debug("confirmNickName({}) invoked.", map.get("nickName"));
-        
-        boolean checknickname = this.service.checkNickName((String)map.get("nickName"));
-        
-        Map<Object, Object> resultMap = new HashMap<Object, Object>();
-                
-        resultMap.put("nicknameCheck", checknickname);        
-        return resultMap;
-    } //checkNickName
-
-    @PostMapping("/checkPhone")
-    public @ResponseBody Map<Object, Object> checkPhone(@RequestBody Map<Object, Object> map) {	//연락처 중복검사
-        log.debug("checkPhone() invoked.");
-        
-        boolean checkphone = this.service.checkPhone((String)map.get("phone"));
-
-        Map<Object, Object> resultMap = new HashMap<Object, Object>();
-        
-        resultMap.put("phonenumberCheck", checkphone);
-        log.info("\t+ resultMap: {}", resultMap);
-        
-        return resultMap;
-        
-    } //checkPhone
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request) {	// 로그아웃 실행

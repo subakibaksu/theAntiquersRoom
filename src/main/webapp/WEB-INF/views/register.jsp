@@ -25,15 +25,13 @@
 							if (idcheck && pwcheck && pwchcheck
 								&& niccheck && phonecheck) {
 								$("#checkit").click(function(){
-								console.log("가입직전!@!!");
 								alert("성공적으로 가입되었습니다.");
 								});
 							} else {
 								alert("입력칸을 모두 채워주세요.");
 								$("#checkit").prop("disabled", true);
 							} 
-						} 
-						
+						} 					
 						
 
 						//이메일 정규표현식 체크 
@@ -57,14 +55,14 @@
 									{
 										async: true,
 										type: "post",
-										url: "/users/checkId",
+										url: "/checkId",
 										data: JSON.stringify({ userId: $('#email').val() }),
 										contentType: "application/json",
 										success: function (data) {
 											console.log('success');
 												if (data.emailCheck == false) {
 													$('#idchecker').text("OK");
-													$('#idchecker').css('color', '#FFCC99');
+													$('#idchecker').css('color', '#f82a2aa3');
 													$('#email').focus();
 													idcheck = true;
 												} else {
@@ -143,7 +141,7 @@
 									{
 										async: true,
 										type: "post",
-										url: "/users/checkNickName",
+										url: "/checkNickName",
 										data: JSON.stringify({ nickName: $('#nickname').val()}),
 										contentType: "application/json",
 										success: function (data) {
@@ -188,7 +186,7 @@
 										$.ajax ({
 											async: true,
 											type: "post", 
-											url: "/users/checkPhone",
+											url: "/checkPhone",
 											data: JSON.stringify({ phone: $('#phonenumber').val()}),
 											contentType: "application/json",
 											success: function(data){
