@@ -90,31 +90,4 @@
         </where>
 	</select>
 
-    
-    <select id="getDetailByPId"
-            resultType="com.theantiquersroom.myapp.domain.ProductDTO">
-        
-        <![CDATA[ 
-            SELECT 
-                P.p_id as pId,
-                P.name,
-                P.created_at as createdAt,
-                P.updated_at as updatedAt,
-                P.content,
-                P.category_id as categoryId,
-                P.user_id as userId,
-                P.started_at as startedAt,
-                P.ended_at as endedAt,
-                P.started_price as startedPrice,
-                P.bid_increment as bidIncrement,
-                P.status,
-                (SELECT nickname 
-                FROM users as U
-                WHERE U.user_id=P.user_id) as nickname
-            FROM product as P
-            WHERE p_id=#{pId}
-        ]]>
-
-    </select>
-
 </mapper>
