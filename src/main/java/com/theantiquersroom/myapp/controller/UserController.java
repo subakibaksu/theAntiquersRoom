@@ -174,7 +174,7 @@ public class UserController {
  	public void get(String userId, Model model) {         
  		log.debug("get({}, {}) invoked." , userId, model);
  		
- 		UserVO user = this.service.get(userId);
+ 		UserDTO user = this.service.get(userId);
  		log.info("\t+ board: {}" , user);
  		
  		model.addAttribute("user", user);
@@ -183,16 +183,6 @@ public class UserController {
  	@PostMapping("/modify")
  	public String modify(modifyDTO user, RedirectAttributes rttrs) {
  		log.debug("modify({}, {}) invoked.", user,rttrs);
- 		
- 		modifyDTO dto=
-				new modifyDTO(
-						user.getUserId(),
-						user.getPassword(),
-						user.getNickName(),
-						user.getPhone()
-
-						
-				);
  		
  		boolean result=this.service.modify(user);
  			
@@ -208,9 +198,8 @@ public class UserController {
 	
     // 아이디 찾기 실행
 	@PostMapping("/findId")
-	public String findIdAction(UserVO vo, Model model) {
-		UserVO user = service.findId(vo);
-		
+	public String findIdAction(UserDTO dto, Model model) {
+		UserDTO user = this.service.findId(dto);
 		
 		if(user == null) { 
 			model.addAttribute("check", 1);

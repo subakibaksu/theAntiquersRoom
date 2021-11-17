@@ -46,19 +46,19 @@ public interface UserMapper {
     
 
     // 전체 회원 목록 조회
-    public abstract List<UserVO> getUserList();
+    public abstract List<UserDTO> getUserList();
  
     // 회원 정보 수정
     public abstract Integer update(modifyDTO user);
 
 	// 회원정보 상세조회 - XML Mapper 방식으로 처리
-	public abstract UserVO read(String userId);
+	public abstract UserDTO read(String userId);
 	
 	//  특정 회원 삭제
 	public abstract Integer delete(String userId);
 	
     // 아이디 찾기
-    public abstract UserVO findId(UserVO vo);
+    public abstract UserDTO findId(UserDTO dto);
     
     // =====================마이페이지 관련===================== //
     

@@ -150,8 +150,8 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     
     
     @Override
-	public UserVO findId(UserVO vo) {
-		return mapper.findId(vo);
+	public UserDTO findId(UserDTO dto) {
+		return mapper.findId(dto);
 	} //findId
 
     
@@ -181,18 +181,17 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
 
 	@Override
-	public List<UserVO> getUserList() {
+	public List<UserDTO> getUserList() {
 		log.debug("getList() invoked.");
-
 		
 		return this.mapper.getUserList();
 	} // getList
 	
 	@Override
-	public UserVO get(String userId) {
+	public UserDTO get(String userId) {
 		log.debug("get({}) invoked.", userId);
 		
-		UserVO user=this.mapper.read(userId);
+		UserDTO user=this.mapper.read(userId);
 		log.info("\t+ board: {}", user);
 		
 		return user;

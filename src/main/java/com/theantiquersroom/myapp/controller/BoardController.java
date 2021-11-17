@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.theantiquersroom.myapp.domain.BoardDTO;
-import com.theantiquersroom.myapp.domain.BoardVO;
 
 import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -57,17 +56,7 @@ public class BoardController {
     public String registerReview(BoardDTO board, RedirectAttributes rttrs) {
         log.debug("registerReview()_ invoked.");
 
-        BoardVO vo =
-                new BoardVO( // 진수
-                        board.getB_num(),
-                        board.getB_content(),
-                        board.getAuthor(),
-                        board.getP_num(),
-                        board.getBoard_id(),
-                        board.getScore(),
-                        null, null);
-
-//		boolean result = this.service.registerReview(vo);
+//		boolean result = this.service.registerReview(board);
 //		rttrs.addAttribute("result", result);
 
         return "redirect:/board/review";
@@ -85,18 +74,7 @@ public class BoardController {
     public String modify(BoardDTO board, RedirectAttributes rttrs) {
         log.debug("modify({}) invoked." , board);
 
-        // DTO -> VO 변환
-        BoardVO vo =
-                new BoardVO(
-                        board.getB_num(),
-                        board.getB_content(),
-                        board.getAuthor(),
-                        board.getP_num(),
-                        board.getBoard_id(),
-                        board.getScore(),
-                        null, null);
-
-//		boolean result = this.service.modifyReview(vo);
+//		boolean result = this.service.modifyReview(board);
 
         // 이동되는 화면으로 전송해줘야할 파라미터가 있으면,
         // rttrs 를 사용해야 한다!!!

@@ -15,4 +15,77 @@
         ]]>
     </insert>
 
+    <select id="listCriteria" resultType="com.theantiquersroom.myapp.domain.ProductDTO" parameterType="hashmap"> <!-- typeAlias를 지정했음으로 풀 네임 기재 필요 없음 -->
+            SELECT p_id,name,created_at,updated_at,content,category_id,user_id, started_at, ended_at, started_price, bid_increment, status,TIMESTAMPDIFF(SECOND,NOW(),ended_at) AS lefttime
+            FROM product
+
+            <where>
+                <if test="category_id != null and category_id != ''">
+                    AND category_id = #{category_id}
+                </if>
+
+                <if test="searchQuery != null and searchQuery != ''">
+                    AND name LIKE CONCAT('%',#{searchQuery},'%')
+                </if>
+            </where>
+
+            <trim prefix="ORDER BY">
+
+                <if test="filter == 0 or filter == null">  p_id DESC </if>
+
+                <if test="filter == 1">  ended_at ASC </if>
+
+                <if test="filter == 2">  started_price ASC </if>
+
+                <if test="filter == 3">  started_price DESC </if>
+
+            </trim>
+
+            limit #{pageStart}, #{perPageNum}
+
+    </select>
+
+    <!-- 전체 게시글 수를 구하는 sql문 -->
+    <select id="getTotalCount" resultType="java.lang.Integer" parameterType="com.theantiquersroom.myapp.domain.ProductCommand">
+
+        SELECT count(*)
+        FROM product
+        <where>
+            <if test="category_id != null and category_id != ''">
+                AND category_id = #{category_id}
+            </if>
+
+            <if test="searchQuery != null and searchQuery != ''">
+                AND name LIKE CONCAT('%',#{searchQuery},'%')
+            </if>
+        </where>
+
+
+    
+    <select id="getDetailByPId"
+            resultType="com.theantiquersroom.myapp.domain.ProductDTO">
+        
+        <![CDATA[ 
+            SELECT 
+                P.p_id as pId,
+                P.name,
+                P.created_at as createdAt,
+                P.updated_at as updatedAt,
+                P.content,
+                P.category_id as categoryId,
+                P.user_id as userId,
+                P.started_at as startedAt,
+                P.ended_at as endedAt,
+                P.started_price as startedPrice,
+                P.bid_increment as bidIncrement,
+                P.status,
+                (SELECT nickname 
+                FROM users as U
+                WHERE U.user_id=P.user_id) as nickname
+            FROM product as P
+            WHERE p_id=#{pId}
+        ]]>
+
+    </select>
+
 </mapper>
