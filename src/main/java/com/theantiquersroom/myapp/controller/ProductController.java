@@ -3,6 +3,7 @@ package com.theantiquersroom.myapp.controller;
 import com.theantiquersroom.myapp.domain.ProductFormDTO;
 import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.service.ProductService;
+
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
@@ -26,11 +27,12 @@ import java.util.List;
 import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.service.ProductService;
 
+
 @Log4j2
 @NoArgsConstructor
 
-@RequestMapping("/product")
 @Controller
+@RequestMapping("/product")
 public class ProductController {
 
 	
@@ -126,7 +128,9 @@ public class ProductController {
     	assert dto != null;
     	
     	model.addAttribute("product", dto);
-    	
+
+//    String detailPage = "detail?pId="+pId;
+
     	return "/detail";
     } // getDetail()
 

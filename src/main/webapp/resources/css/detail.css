@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
 
-    padding-top: 15rem;
+    padding-top: 5rem;
     padding-bottom: 5rem;
 }
 
@@ -36,7 +36,8 @@
 }
 
 #focusedImg {
-    border: 3px solid rgba(85, 107, 47, 0.75);
+
+    border: 3px solid rgba(194, 177, 177, 0.9);
     border-image-outset: 1px;
 
     width: 18rem;
@@ -46,8 +47,8 @@
 }
 
 .pImg {
-    border: 2px solid rgba(85, 107, 47, 0.75);
-
+    border: 2px solid rgba(194, 177, 177, 0.9);
+  
     width: 6rem;
     height: 6rem;
 
@@ -60,12 +61,17 @@
 }
 
 #infoTable {
+    border-collapse: collapse;
+
     width: 28em;
+}
+
+#infoTable tr {
+    border-block: 1px solid rgba(194, 177, 177, 0.9);
 }
 
 #infoTable th,
 #infoTable td {
-    border-block-start: 1px solid darkolivegreen;
     text-align: center;
 
     font-size: 0.8rem;
@@ -93,7 +99,6 @@
     font-size: 1.2rem;
     background-color: rgba(255, 255, 255, 0);
     border-style: none;
-    
     width: 1.5rem;
 }
 
@@ -136,15 +141,20 @@
 }
 
 #additionalInfoTable {
+    border-collapse: collapse;
+
     border-block: 2px solid rgba(194, 177, 177, 0.9);
 
     width: 55rem;
 }
 
+#additionalInfoTable tr {
+    border-bottom: 1px solid rgba(194, 177, 177, 0.9);
+}
+
 #additionalInfoTable th {
     padding-top: 1rem;
     padding-bottom: 1rem;
-    padding
 }
 
 #additionalInfoTable th a {

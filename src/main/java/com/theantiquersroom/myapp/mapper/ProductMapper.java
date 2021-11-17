@@ -1,9 +1,8 @@
 package com.theantiquersroom.myapp.mapper;
 
 
-import com.theantiquersroom.myapp.domain.ProductCommand;
-import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.domain.ProductFormDTO;
+import com.theantiquersroom.myapp.domain.ProductDTO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
