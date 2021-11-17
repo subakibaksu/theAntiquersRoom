@@ -1,3 +1,5 @@
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -50,9 +52,11 @@
                             <td><c:out value="${myAuction.categoryName}"/></td>
                             <td><c:out value="${myAuction.startedPrice}"/></td>
                             <td><h3>현재가격</h3></td>
-                            <td>
-                            ${myAuction.startedAt}<br>
-                            ~ ${myAuction.endedAt}</td>
+
+                    		<td>
+                            ${myAuction.startedAt.format(DateTimeFormatter.ofPattern("MM월 dd일 HH시"))}<br>
+                            ~ ${myAuction.endedAt.format(DateTimeFormatter.ofPattern("MM월 dd일 HH시"))}</td>
+                            
                             <td><c:out value="${myAuction.status}"/></td>
                         </tr>
                     </c:forEach>
