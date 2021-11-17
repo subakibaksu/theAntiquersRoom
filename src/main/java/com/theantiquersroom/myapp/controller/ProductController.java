@@ -1,31 +1,66 @@
 package com.theantiquersroom.myapp.controller;
 
 import com.theantiquersroom.myapp.domain.ProductFormDTO;
+import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.service.ProductService;
+
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import com.theantiquersroom.myapp.domain.ProductCriteria;
+import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.ProductCommand;
+import com.theantiquersroom.myapp.service.ProductService;
+import com.theantiquersroom.myapp.utils.ProductPageMaker;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.service.ProductService;
+
 
 @Log4j2
 @NoArgsConstructor
 
-@RequestMapping("/product")
 @Controller
+@RequestMapping("/product")
 public class ProductController {
 
-    @Setter(onMethod_= {@Autowired})
-    private ProductService service;
-
+	
+	@Setter(onMethod_= {@Autowired})
+	private ProductService service;
+	
+	
     /*상품 목록 페이지로 이동*/
-    @GetMapping("")
-    public void product(){
+    @GetMapping("/productList")
+    public void productList(
+            @ModelAttribute("cri") ProductCriteria cri,
+            @ModelAttribute("productCommand") ProductCommand productCommand,
+            Model model) throws Exception {
 
-    } // Get product()
+        log.debug("productList() invoked cri : {} command : {}",cri,productCommand);
+
+        List<ProductDTO> dto = service.listCriteria(cri,productCommand);
+
+        ProductPageMaker pageMaker =new ProductPageMaker();
+        pageMaker.setCri(cri);
+        Integer totalNum = service.totalCount(productCommand);
+        pageMaker.setTotalCount(totalNum);
+
+        model.addAttribute("pageMaker", pageMaker);
+        model.addAttribute("productList", dto);
+        model.addAttribute("productCommand",productCommand);
+
+    } // productList()
 
     /*상품 등록 페이지로 이동*/
     @GetMapping("/register")
@@ -72,31 +107,41 @@ public class ProductController {
     } // Post modify()
 
     /*상품 삭제*/
-    @PostMapping("remove")
+    @PostMapping("/remove")
     public void remove(Model model) {
 
     } // Post remove()
 
     /*상품 검색*/
-    @GetMapping("findProduct")
+    @GetMapping("/findProduct")
     public void findProduct() {
 
     } // findProduct()
 
     /*상품 상세보기 페이지로 이동*/
-    @GetMapping("getDetail")
-    public void getDetail() {
+    @GetMapping("/getDetail")
+    public String getDetail(Integer pId, Model model) {
+    	log.debug("getDetail({}) invoked.", pId);
+    	
+    	ProductDTO dto = this.service.getDetail(pId);
+    	log.info("/t+ dto: {}", dto);
+    	assert dto != null;
+    	
+    	model.addAttribute("product", dto);
 
+//    String detailPage = "detail?pId="+pId;
+
+    	return "/detail";
     } // getDetail()
 
     /*해당 상품의 입찰 히스토리 조회*/
-    @GetMapping("getBiddingHistory")
+    @GetMapping("/getBiddingHistory")
     public void getBiddingHistory() {
 
     } // getBiddingHistory()
 
     /*입찰정보 DB전달*/
-    @PostMapping("bid")
+    @PostMapping("/bid")
     public void bid(Model model) {
 
     } // bid()

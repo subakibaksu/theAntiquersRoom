@@ -1,15 +1,13 @@
 package com.theantiquersroom.myapp.domain;
 
 import java.time.LocalDateTime;
-
 import org.springframework.format.annotation.DateTimeFormat;
-
 import lombok.Data;
 
 
 @Data
 public class ProductDTO {
-
+  
 
    private Integer pId;
    private String name;
@@ -32,6 +30,6 @@ public class ProductDTO {
    
    private String nickname;
    private String categoryName;
+   private Integer leftTime; // 경매종료까지 남은시간
    
 } // end class
-
