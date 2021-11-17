@@ -170,7 +170,7 @@ public class UserController {
 //  		model.addAttribute("list",list);
 //  	} //list
  	
- 	@GetMapping({"/get" , "/modify"})
+ 	@GetMapping({"/modify" , "/mypage"})
  	public void get(String userId, Model model) {         
  		log.debug("get({}, {}) invoked." , userId, model);
  		
@@ -178,7 +178,7 @@ public class UserController {
  		log.info("\t+ board: {}" , user);
  		
  		model.addAttribute("user", user);
- 	} // get , modify
+ 	} // mypage, modify
  	
  	@PostMapping("/modify")
  	public String modify(modifyDTO user, RedirectAttributes rttrs) {
