@@ -19,10 +19,6 @@
         <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
         <jsp:include page="/WEB-INF/views/common/mypageHeader.jsp"/>
-        
-        <hr>
-		<h3>2. list: ${myAuctionList}</h3>
-		<h3>1. pageMaker: ${pageMaker}</h3>
 
         <div id="wrapper">
 
@@ -39,7 +35,6 @@
                         <th></th>
                         <th>상품명</th>
                         <th>카테고리</th>
-                        <th>판매자</th>
                         <th>시작가격</th>
                         <th>현재가격</th>
                         <th>경매기간</th>
@@ -50,13 +45,13 @@
                 <tbody>    
                     <c:forEach items="${myAuctionList}" var="myAuction">
                         <tr>
-                            <td><h3>이미지 넣기</h3></td>
+                            <td><img alt="" src="https://live.staticflickr.com/2827/10767844126_63b11d6c53_b.jpg" height="100px" width="100px"> </td>
                             <td><a href="/product/getDetail?pId=${myAuction.pId}"><c:out value="${myAuction.name}"/></a></td>
                             <td><c:out value="${myAuction.categoryName}"/></td>
-                            <td><c:out value="${myAuction.nickname}"/></td>
                             <td><c:out value="${myAuction.startedPrice}"/></td>
                             <td><h3>현재가격</h3></td>
-                            <td>${myAuction.startedAt}<br>
+                            <td>
+                            ${myAuction.startedAt}<br>
                             ~ ${myAuction.endedAt}</td>
                             <td><c:out value="${myAuction.status}"/></td>
                         </tr>

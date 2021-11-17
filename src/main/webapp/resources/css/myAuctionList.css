@@ -4,17 +4,17 @@
 *{
     margin: 0 auto;
     padding: 0;
+    background-color: whithsmoke;
 }
 
 #wrapper{
-
     width: 100%;
+    margin: 5rem 0 10rem 0;
 
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
-
-    background-color: #F0E9E7;
 }
+
 table{
 
     width: 73%;
@@ -40,7 +40,6 @@ tr:hover{
 
 #topmenu > li {
     float: left;
-    margin-top: 5rem;
 
     width: 33%;
     height: 50px;
@@ -48,6 +47,7 @@ tr:hover{
     text-align: center;
     line-height: 50px;
     list-style: none;
+    
 }
 
 #regBtn{
@@ -62,7 +62,7 @@ tr:hover{
     font-size: 14px;
     font-weight: bold;
 
-    border-radius: 15px;
+	border-radius: 15px;
 }
 
 #pagingnation{
@@ -75,6 +75,7 @@ tr:hover{
 
 #pagingnation ul {
     float : right;
+    margin-right : 15%;
 }
 
 #pagingnation li{	
@@ -90,6 +91,10 @@ tr:hover{
     margin: 8px 3px;
     
     border: 1px solid #B1A2A2;
+    border-radius: 15px;
+    
+    background-color: #B1A2A2;
+    color:white;
 }
 
 .prev, .next{
