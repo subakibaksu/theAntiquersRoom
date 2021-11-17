@@ -14,6 +14,21 @@
 
 </head>
 <body>
+    <!-- 카카오 로그인 -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+    <script>
+    function kakaoLogin() {
+        $.ajax({
+            url: '/login/getKakaoAuthUrl',
+            type: 'get',
+            async: false,
+            dataType: 'text',
+            success: function (res) {
+                location.href = res;
+            }
+        });
+    }
+    </script>
 
     <div id="wrapper">
         <div class="logo">

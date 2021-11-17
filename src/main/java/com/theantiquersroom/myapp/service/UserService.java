@@ -38,8 +38,8 @@ public interface UserService {
     // 로그인 실행
     public abstract UserDTO login(LoginDTO dto) throws Exception;
     
-    // 닉네임, 폰번호로 아이디찾기
-    public abstract UserVO findId(UserVO vo);
+    // 폰번호로 아이디찾기
+    public abstract UserDTO findId(UserDTO dto);
     
     // 비밀번호 재설정
     public abstract boolean resetPwd(String userId, String nickName) throws Exception;
@@ -49,10 +49,10 @@ public interface UserService {
 
     
 	// 전체 회원 목록조회
-	public abstract List<UserVO> getUserList();
+	public abstract List<UserDTO> getUserList();
 	
 	// 상세 회원 목록 조회
-	public abstract UserVO get(String userId);
+	public abstract UserDTO get(String userId);
     
 	// 회원 정보 수정
 	public abstract boolean modify(modifyDTO user);

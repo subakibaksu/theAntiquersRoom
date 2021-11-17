@@ -46,8 +46,8 @@
 
     <!-- emailchecktemp table의 auth 조회 -->
     <select id="selectAuth"
-            parameterType="String"
-            resultType="String">
+            parameterType="string"
+            resultType="string">
             
         <![CDATA[
             SELECT auth from authkey
@@ -59,29 +59,18 @@
     <!-- 비밀번호 재설정  -->
     <update
             id="updatePassword"
-            parameterType="String">
+            parameterType="string">
             
         <![CDATA[
         	UPDATE users SET password = #{newPassword} where user_id = #{userId}
         ]]>
     </update>
-    
-    <!-- 특정 아이디의 닉네임 조회  -->
-    <select
-            id="selectUserNickname"
-            resultType="string"
-            parameterType="string">
-            
-        <![CDATA[
-          SELECT nickname FROM users WHERE user_id = #{userId}
-        ]]>
-    </select>
 
     <!-- 특정 아이디 조회 -->
     <select
             id="getUserId"
-            resultType="String"
-            parameterType="String"
+            resultType="string"
+            parameterType="string"
     >
         <![CDATA[
 			
@@ -92,19 +81,25 @@
 
     <!-- 특정 닉네임 조회 -->
     <select
-            id="getNickName">
-
+            id="getNickName"
+            resultType="String"
+			parameterType="String"          
+    >
         <![CDATA[
+        
+        	SELECT nickname FROM users WHERE nickname = #{nickname}
 
         ]]>
     </select>
 
     <!-- 특정 연락처 조회 -->
     <select
-            id="getPhone">
-
+            id="getPhone"
+            resultType="String"
+            parameterType="String"
+            >
         <![CDATA[
-	
+			SELECT phone FROM users WHERE phone = #{phone}
         ]]>
     </select>
 
@@ -127,7 +122,7 @@
     
     <select 
         id="read"
-        resultType="com.theantiquersroom.myapp.domain.UserVO">
+        resultType="com.theantiquersroom.myapp.domain.UserDTO">
         
         <![CDATA[
 			SELECT
@@ -145,7 +140,7 @@
        <!-- 닉네임, 전화번호로 아이디찾기  -->
     <select
             id="findId"
-            resultType="com.theantiquersroom.myapp.domain.UserVO">
+            resultType="com.theantiquersroom.myapp.domain.UserDTO">
             
 		SELECT * FROM users WHERE nickname=#{nickName} AND phone=#{phone}    
 	</select>

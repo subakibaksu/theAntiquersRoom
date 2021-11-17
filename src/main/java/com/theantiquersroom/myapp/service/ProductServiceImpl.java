@@ -4,6 +4,7 @@ import com.theantiquersroom.myapp.domain.ProductCommand;
 import com.theantiquersroom.myapp.domain.ProductCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.domain.ProductFormDTO;
+import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.mapper.ProductMapper;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
@@ -16,12 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by KBS.
- * User: KBS
- * Date: 11/14/2021
- * Time: 오전 2:42
- */
+
+@AllArgsConstructor
 @Log4j2
 
 @Service
@@ -36,6 +33,7 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
 
         this.mapper.insertProduct(product);
         return true;
+
     } // registerProduct()
 
     @Override
@@ -69,5 +67,15 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
 
     } // afterPropertiesSet()
 
-} // end class
+    // 상품상세보기
+    @Override
+    public ProductDTO getDetail(Integer pId) {
+      log.debug("getDetail({}) invoked.", pId);
 
+      ProductDTO dto = this.mapper.getDetailByPId(pId);
+      log.info("\t+ dto: {}", dto);
+
+      return dto;
+    } //getDetail
+
+} // end class

@@ -29,28 +29,16 @@
     </script>
 </head>
 <body>
-
-    <jsp:include page="common/header.jsp"></jsp:include>
-    <h1>HimNaeYo GamDongHeeJo!!</h1>
+    <h1>KAKAO RESISTER</h1>
 
     <P>  The time on the server is ${serverTime}. </P>
 
-    <P>  Kakao Id : ${kakaoUserId}. </P>
+    <P>  Kakao Id : ${kakaoUniqueId}. </P>
     <P>  Kakao usertype : ${usertype}. </P>
 
     <img onclick="kakaoLogin();" style="cursor: pointer;" src="../../resources/images/kakao_login.png">
 
     <hr>
-    <a href="/product/productList?category_id=0">0</a>
-    <a href="/product/productList?category_id=1">1</a>
-    <a href="/product/productList?category_id=2">2</a>
-
-    <form action="/product/productList" method="get">
-        <input name="searchQuery" placeholder="type">
-        <button type="submit">click</button>
-    </form>
-
-
     <a href="/users/resetPwd">resetPwd</a>
 
     <hr>
@@ -60,8 +48,6 @@
 	<h3>${sessionScope.__AUTH_ANTIQUE__}</h3>
     <button type="button" id="logoutBtn">로그아웃</button>
 
-	<hr>
-	<a href="/product/getDetail">상세보기</a>
 <!---------------- 카카오 로그인 ---------------->
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <script>

@@ -24,13 +24,11 @@
 	position: relative;
 	bottom: 0; 
 	left: 0; 
-	
 	padding: 15px 0;
 	color: white;
 	background: #c2b1b1;
-	text-align: center;
-	
-	}
+	margin-top: 100px;
+}
 
 .svg-inline--fa {
 	width: 20px;

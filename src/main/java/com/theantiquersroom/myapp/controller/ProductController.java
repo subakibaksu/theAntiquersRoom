@@ -1,6 +1,7 @@
 package com.theantiquersroom.myapp.controller;
 
 import com.theantiquersroom.myapp.domain.ProductFormDTO;
+import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.service.ProductService;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +23,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.service.ProductService;
+
 @Log4j2
 @NoArgsConstructor
 
@@ -29,9 +33,11 @@ import java.util.List;
 @Controller
 public class ProductController {
 
-    @Setter(onMethod_= {@Autowired})
-    private ProductService service;
-
+	
+	@Setter(onMethod_= {@Autowired})
+	private ProductService service;
+	
+	
     /*상품 목록 페이지로 이동*/
     @GetMapping("/productList")
     public void productList(
@@ -99,31 +105,39 @@ public class ProductController {
     } // Post modify()
 
     /*상품 삭제*/
-    @PostMapping("remove")
+    @PostMapping("/remove")
     public void remove(Model model) {
 
     } // Post remove()
 
     /*상품 검색*/
-    @GetMapping("findProduct")
+    @GetMapping("/findProduct")
     public void findProduct() {
 
     } // findProduct()
 
     /*상품 상세보기 페이지로 이동*/
-    @GetMapping("getDetail")
-    public void getDetail() {
-
+    @GetMapping("/getDetail")
+    public String getDetail(Integer pId, Model model) {
+    	log.debug("getDetail({}) invoked.", pId);
+    	
+    	ProductDTO dto = this.service.getDetail(pId);
+    	log.info("/t+ dto: {}", dto);
+    	assert dto != null;
+    	
+    	model.addAttribute("product", dto);
+    	
+    	return "/detail";
     } // getDetail()
 
     /*해당 상품의 입찰 히스토리 조회*/
-    @GetMapping("getBiddingHistory")
+    @GetMapping("/getBiddingHistory")
     public void getBiddingHistory() {
 
     } // getBiddingHistory()
 
     /*입찰정보 DB전달*/
-    @PostMapping("bid")
+    @PostMapping("/bid")
     public void bid(Model model) {
 
     } // bid()
