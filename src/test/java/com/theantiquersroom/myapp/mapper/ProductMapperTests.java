@@ -62,6 +62,7 @@ public class ProductMapperTests {
 		log.debug("testGetDetailByPId() invoked.");
 		
 		Integer pId = 30;
+
 		ProductDTO dto = this.mapper.getDetailByPId(pId);
 		
 		log.info("\t+ dto: {}", dto);

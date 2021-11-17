@@ -36,6 +36,7 @@
 }
 
 #focusedImg {
+
     border: 3px solid rgba(194, 177, 177, 0.9);
     border-image-outset: 1px;
 
@@ -47,7 +48,7 @@
 
 .pImg {
     border: 2px solid rgba(194, 177, 177, 0.9);
-
+  
     width: 6rem;
     height: 6rem;
 
@@ -98,7 +99,6 @@
     font-size: 1.2rem;
     background-color: rgba(255, 255, 255, 0);
     border-style: none;
-
     width: 1.5rem;
 }
 
@@ -142,6 +142,7 @@
 
 #additionalInfoTable {
     border-collapse: collapse;
+
     border-block: 2px solid rgba(194, 177, 177, 0.9);
 
     width: 55rem;

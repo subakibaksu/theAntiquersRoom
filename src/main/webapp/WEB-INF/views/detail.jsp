@@ -13,7 +13,7 @@
     <script src="https://kit.fontawesome.com/91815d1378.js" crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     
     <script src="../../../resources/js/detail.js"></script>
 </head>
@@ -24,7 +24,9 @@
         <section id="pInfo">
             <div id="pImgDiv">
                 <table id="pImgTable">
+                 
                     <caption>카테고리 > ${product.categoryName}</caption>
+
                     <tr>
                         <td colspan="3">
                             <img id="focusedImg" src="../../../resources/images/testCat.png" alt="">
@@ -77,6 +79,7 @@
                         <td>
                             <div class="leftTimeTimer">${product.leftTime}</div>
                         </td>
+
                     </tr>
                     <tr>
                         <td colspan="2">

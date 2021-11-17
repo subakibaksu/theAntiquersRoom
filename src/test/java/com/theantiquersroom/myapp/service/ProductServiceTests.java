@@ -43,8 +43,9 @@ public class ProductServiceTests {
 	@Test
 	public void testGetDetail() {
 		log.debug("testGetDetail() invoked.");
-		
+
 		Integer pId = 30;
+
 		ProductDTO dto = this.service.getDetail(pId);
 		
 		Objects.requireNonNull(dto);
