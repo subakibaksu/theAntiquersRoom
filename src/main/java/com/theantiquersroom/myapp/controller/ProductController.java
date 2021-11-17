@@ -8,9 +8,20 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import com.theantiquersroom.myapp.domain.ProductCriteria;
+import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.ProductCommand;
+import com.theantiquersroom.myapp.service.ProductService;
+import com.theantiquersroom.myapp.utils.ProductPageMaker;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.service.ProductService;
@@ -28,10 +39,26 @@ public class ProductController {
 	
 	
     /*상품 목록 페이지로 이동*/
-    @GetMapping("")
-    public void product(){
+    @GetMapping("/productList")
+    public void productList(
+            @ModelAttribute("cri") ProductCriteria cri,
+            @ModelAttribute("productCommand") ProductCommand productCommand,
+            Model model) throws Exception {
 
-    } // Get product()
+        log.debug("productList() invoked cri : {} command : {}",cri,productCommand);
+
+        List<ProductDTO> dto = service.listCriteria(cri,productCommand);
+
+        ProductPageMaker pageMaker =new ProductPageMaker();
+        pageMaker.setCri(cri);
+        Integer totalNum = service.totalCount(productCommand);
+        pageMaker.setTotalCount(totalNum);
+
+        model.addAttribute("pageMaker", pageMaker);
+        model.addAttribute("productList", dto);
+        model.addAttribute("productCommand",productCommand);
+
+    } // productList()
 
     /*상품 등록 페이지로 이동*/
     @GetMapping("/register")
