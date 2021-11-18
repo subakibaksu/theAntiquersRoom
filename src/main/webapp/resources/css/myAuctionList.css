@@ -15,27 +15,31 @@
     font-size: 16px;
 }
 
-table{
-
+#myAcutionTbl {
     width: 73%;
-
-    border: 1px black;
     border-collapse: collapse;
-
     text-align: center;
 }
 
-th{
+#myAcutionTbl th{
 	background-color: #B1A2A2;
     padding: 8px;
 }
 
-td{
+#myAcutionTbl td{
     padding: 4px;
 }
 
-tr:hover{
-    background-color: #B1A2A2;
+#myAcutionTbl tr{
+	border-block: 1px solid #B1A2A2;
+}
+
+#myAcutionTbl tr:hover{
+    background-color:aliceblue;
+}
+
+#topmenu{
+	margin-bottom: 5rem;
 }
 
 #topmenu > li {
@@ -45,14 +49,13 @@ tr:hover{
     height: 50px;
 
     text-align: center;
-    line-height: 50px;
+	font-size: 24px;
     list-style: none;
-    
 }
 
 #regBtn{
     width: 80px;
-    height: 40px;
+    height: 38px;
 
     border: 0;
 
@@ -64,8 +67,49 @@ tr:hover{
 
 	border-radius: 15px;
 }
+form{
+	display:inline;
+}
 
-#pagingnation{
+input[type=submit] {
+    font-size: 14px;
+  	cursor: pointer;
+}
+
+#modifyBtn {
+    width: 40px;
+  	height: 28px;
+	
+	color:black;
+  	box-sizing: border-box;
+  	background-color: white;
+  	border: 1px solid #C2B1B1;
+  	border-radius: 10px;
+}
+
+#removeBtn {
+    width: 40px;
+  	height: 28px;
+	
+	color:white;
+  	box-sizing: border-box;
+  	background-color: #9C0000;
+  	border: 1px solid white;
+  	border-radius: 10px;
+}
+
+#reRegisterBtn{
+	width: 60px;
+  	height: 28px;
+	
+	color:black;
+  	box-sizing: border-box;
+  	background-color: white;
+  	border: 1px solid #C2B1B1;
+  	border-radius: 10px;
+}
+
+#pagination{
     width: 95%;
     margin: 0 auto;
 
@@ -73,12 +117,12 @@ tr:hover{
     font-size: 14px;
 }
 
-#pagingnation ul {
+#pagination ul {
     float : right;
     margin-right : 15%;
 }
 
-#pagingnation li{	
+#pagination li{	
     float: left;
     
     width: 20px;
@@ -95,6 +139,10 @@ tr:hover{
     
     background-color: #B1A2A2;
     color:white;
+}
+
+#pagination li:hover{
+    background-color: #9C0000;
 }
 
 .prev, .next{
