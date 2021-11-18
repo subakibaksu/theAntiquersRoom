@@ -11,7 +11,7 @@
 
     <![CDATA[
             insert into product(name, content, category_id, user_id, started_at, ended_at, started_price, bid_increment, status)
-            VALUES (#{name}, #{content}, #{categoryId}, #{userId}, #{startedAt}, #{endedAt}, #{startedPrice}, #{bidIncrement}, "승인대기")
+            VALUES (#{name}, #{content}, #{categoryId}, #{userId}, #{startedAt}, #{endedAt}, #{startedPrice}, #{bidIncrement}, "승인대기중")
         ]]>
         <selectKey resultType="int" keyProperty="pId" order="AFTER">
             SELECT LAST_INSERT_ID()
