@@ -16,7 +16,7 @@
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
-
+    	
     </head>
     <body>
         <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -58,17 +58,42 @@
                 <tbody>    
                     <c:forEach items="${myAuctionList}" var="myAuction">
                         <tr>
-                            <td><img alt="" src="https://live.staticflickr.com/2827/10767844126_63b11d6c53_b.jpg" height="100px" width="100px"> </td>
+                            <td><a href="/product/getDetail?pId=${myAuction.pId}"><img alt="" src="https://live.staticflickr.com/2827/10767844126_63b11d6c53_b.jpg" height="100px" width="100px"></a></td>
                             <td><a href="/product/getDetail?pId=${myAuction.pId}"><c:out value="${myAuction.name}"/></a></td>
                             <td><c:out value="${myAuction.categoryName}"/></td>
                             <td><c:out value="${myAuction.startedPrice}"/></td>
                             <td><h3>현재가격</h3></td>
-
                     		<td>
-                            ${myAuction.startedAt.format(DateTimeFormatter.ofPattern("MM월 dd일 HH시"))}<br>
-                            ~ ${myAuction.endedAt.format(DateTimeFormatter.ofPattern("MM월 dd일 HH시"))}</td>
-                            
-                            <td><c:out value="${myAuction.status}"/></td>
+                            <b>시작</b> ${myAuction.startedAt.format(DateTimeFormatter.ofPattern("MM월 dd일 HH시"))}<br>
+                            <b>종료</b> ${myAuction.endedAt.format(DateTimeFormatter.ofPattern("MM월 dd일 HH시"))}
+                            </td>
+                            <c:choose>
+                            	<c:when test="${myAuction.status=='승인대기중'}">
+                            		<td>
+                            			<c:out value="${myAuction.status}"/><br>
+                            			<form action="/product/modify" method="get">
+	                            			<input type="hidden" id="pId" name="pId" value="${myAuction.pId}">
+	                            			<input type="submit" id="modifyBtn" value="수정">
+	                            		</form>
+	                            		<form action="/product/remove" method="post">
+	                            			<input type="hidden" id="pId" name="pId" value="${myAuction.pId}">
+	                            			<input type="submit" id="removeBtn" value="삭제">
+	                            		</form>
+                            		</td>
+                            	</c:when>
+                            	<c:when test="${myAuction.status=='미낙찰'}">
+                            	    <td>
+                            			<c:out value="${myAuction.status}"/><br>
+                            			<form action="/product/reRegister" method="get">
+	                            			<input type="hidden" id="pId" name="pId" value="${myAuction.pId}">
+	                            			<input type="submit" id="reRegisterBtn" value="유찰하기">
+	                            		</form>
+                            		</td>
+                            	</c:when>
+                            	<c:otherwise>
+                            		<td><c:out value="${myAuction.status}"/></td>
+                            	</c:otherwise>
+                            </c:choose>
                         </tr>
                     </c:forEach>
                 </tbody>
