@@ -22,7 +22,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.service.ProductService;
@@ -126,8 +128,9 @@ public class ProductController {
     	ProductDTO dto = this.service.getDetail(pId);
     	log.info("/t+ dto: {}", dto);
     	assert dto != null;
-    	
+
     	model.addAttribute("product", dto);
+    	model.addAttribute("pId",pId);
 
 //    String detailPage = "detail?pId="+pId;
 
@@ -142,7 +145,16 @@ public class ProductController {
 
     /*입찰정보 DB전달*/
     @PostMapping("/bid")
-    public void bid(Model model) {
+    public @ResponseBody Map<Object,Object> bid(@RequestBody Map<Object,Object> map, Model model) {
+
+        log.debug("bid invoked()");
+        log.debug(map.get("userId"));
+        log.debug(map.get("pId"));
+        log.debug(map.get("bidPrice"));
+
+        boolean isBided = service.bid(map);
+
+        return null;
 
     } // bid()
 

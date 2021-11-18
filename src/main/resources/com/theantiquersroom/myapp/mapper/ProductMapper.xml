@@ -14,7 +14,7 @@
             VALUES (#{name}, #{content}, #{categoryId}, #{userId}, #{startedAt}, #{endedAt}, #{startedPrice}, #{bidIncrement}, "REQUESTED")
         ]]>
     </insert>
-    
+
     <select id="getDetailByPId"
             resultType="com.theantiquersroom.myapp.domain.ProductDTO">
         
@@ -89,5 +89,21 @@
             </if>
         </where>
 	</select>
+
+    <!-- 가장 높은 Bid값을 구하는 sql문 -->
+    <select id="getMaxBid" resultType="Integer" parameterType="String">
+
+        SELECT bid_price
+        FROM bid_history
+        WHERE p_id = #{pId}
+        ORDER BY bid_price DESC
+        LIMIT 1
+
+    </select>
+
+    <!-- insert to bid_history -->
+    <insert id="insertBid" parameterType="String">
+
+    </insert>
 
 </mapper>

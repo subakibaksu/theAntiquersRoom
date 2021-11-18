@@ -2,6 +2,7 @@ package com.theantiquersroom.myapp.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -57,6 +58,19 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
         return mapper.getTotalCount(productCommand);
 
     } //totalCount()
+
+    @Override
+    public Boolean bid(Map<Object,Object> map) {
+
+        if(map.get("userId")!=null){
+
+            
+
+        }
+
+
+        return false;
+    }
 
     @Override
     public void destroy() throws Exception {

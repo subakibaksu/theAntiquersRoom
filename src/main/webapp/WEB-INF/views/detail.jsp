@@ -13,9 +13,69 @@
     <script src="https://kit.fontawesome.com/91815d1378.js" crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     <script src="../../../resources/js/detail.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function (){
+
+            $("#bidBtn").click(function (){
+
+                $("#bidPriceForBid").val($("#bidPrice").val());
+
+                console.log($("#bidPriceForBid").val());
+
+                var data  = $("#bidForm").serializeObject();
+
+                console.log(data);
+                console.log('clicked');
+
+                $.ajax({
+
+                    async: true,
+                    type : 'POST',
+                    data : JSON.stringify(data),
+                    url : "/product/bid",
+                    contentType: 'application/json',
+
+                    success : function (result) {
+
+                        $("#bidResult").text("입찰에 성공하였습니다.");
+                    },
+                    error : function (error) {
+
+                        console.log("error", error);
+
+                    },
+
+                });
+
+            });
+
+            jQuery.fn.serializeObject = function() {
+                var obj = null;
+                try {
+                    if (this[0].tagName && this[0].tagName.toUpperCase() == "FORM") {
+                        var arr = this.serializeArray();
+                        if (arr) {
+                            obj = {};
+                            jQuery.each(arr, function() {
+                                obj[this.name] = this.value;
+                            });
+                        }//if ( arr ) {
+                    }
+                } catch (e) {
+                    alert(e.message);
+                } finally {
+                }
+
+                return obj;
+            };
+
+        });
+
+    </script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -71,7 +131,14 @@
                             <button id="downBtn" type="button" onclick='changeBid("down")'>
                                 <i class="fas fa-chevron-circle-down" ></i>
                             </button>
+
+                            <form id="bidForm" action="#">
+                                <input hidden id="bidPriceForBid" name="bidPrice" value=""/>
+                                <input hidden id="productIdForBid" name="pId" value="${product.PId}"/>
+                                <input hidden id="userIdForBid" name="userId" value="${sessionScope.__AUTH_ANTIQUE__.userId}"/>
+                            </form>
                             <button type="button" id="bidBtn">입찰</button>
+                            <p id="bidResult"></p>
                         </td>
                     </tr>
                     <tr>
