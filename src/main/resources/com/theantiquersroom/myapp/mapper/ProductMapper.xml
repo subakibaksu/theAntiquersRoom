@@ -19,7 +19,7 @@
     </insert>
 
     <insert id="insertProductImage"
-            parameterType="com.theantiquersroom.myapp.domain.ImageDTO">
+            parameterType="com.theantiquersroom.myapp.domain.ProductImageDTO">
     <![CDATA[
         insert into product_image(image_url, image_name, p_id)
         VALUES (#{imageUrl}, #{imageName}, #{productId})

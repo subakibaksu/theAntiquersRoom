@@ -7,7 +7,7 @@
 <mapper namespace="com.theantiquersroom.myapp.mapper.ImageMapper">
 
     <insert id="insertImage"
-            parameterType="com.theantiquersroom.myapp.domain.ImageDTO">
+            parameterType="com.theantiquersroom.myapp.domain.ProductImageDTO">
     <![CDATA[
         insert into image(image_id, image_name, upload_path, p_id,)
         VALUES (#{imageId} ,#{imageName}, #{uploadPath}, #{pId})
@@ -19,7 +19,7 @@
     </delete>
 
     <select id="findByPId"
-            parameterType="com.theantiquersroom.myapp.domain.ImageDTO">
+            parameterType="com.theantiquersroom.myapp.domain.ProductImageDTO">
         select * from image where p_id = #{pId}
     </select>
 

@@ -28,7 +28,7 @@ public class ProductFormDTO {
     private String status;
 
     // 이미지 관련
-    private List<ImageDTO> imageList;
+    private List<ProductImageDTO> imageList;
 
     // form images
     private List<MultipartFile> images;
