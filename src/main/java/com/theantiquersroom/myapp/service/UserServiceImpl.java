@@ -2,6 +2,7 @@ package com.theantiquersroom.myapp.service;
 
 
 import java.text.ParseException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.DisposableBean;
@@ -10,12 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.theantiquersroom.myapp.domain.Criteria;
-
 import com.theantiquersroom.myapp.domain.LoginDTO;
+import com.theantiquersroom.myapp.domain.MypageCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.UserVO;
+import com.theantiquersroom.myapp.domain.modifyDTO;
 import com.theantiquersroom.myapp.mapper.UserMapper;
 import com.theantiquersroom.myapp.utils.Mailsender;
 
@@ -36,11 +37,16 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     private UserMapper mapper;
     private BCryptPasswordEncoder passwordEncoder;
 
-
+    
+    // DB에 회원정보 저장
     @Override
     public boolean registerUser(UserDTO user) {
         log.debug("login({}) invoked.", user);
 
+        Integer users = null;
+        
+        users = mapper.insertUser(user);
+        
         // 비밀번호 암호화
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
@@ -59,25 +65,41 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     	
     	log.debug(id);
     	
-    	if(id.equals(userId)) {
-    		
-    		log.debug("please");
+    	if(id != null) {
     		return true;
+    	}else {
+    		return false;
     	}
-    	
-    	return false;
     }
 
     @Override
     public boolean checkNickName(String nickName) {
-        // TODO Auto-generated method stub
-        return false;
+    	log.debug("checkNickName({}) invoked.", nickName);
+    	
+    	String nName = "";
+    	
+    	nName = mapper.getNickName(nickName);
+    	log.debug("닉네임 from controller ({})", nickName);
+    	
+    	if(nName != null) {
+    		return true;
+    	}else {
+    		return false;
+    	}
     }
 
     @Override
     public boolean checkPhone(String phone) {
-        // TODO Auto-generated method stub
-        return false;
+
+    	String pNum = "";
+    	
+    	pNum = mapper.getPhone(phone);
+    	
+    	if(pNum != null) {
+    		return true;
+    	}else {
+    		return false;
+    	}
     }
 
     @Override
@@ -125,12 +147,14 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
         
         return (passwordEncoder.matches(dto.getPassword(), user.getPassword()))? user:null;
 	}
+    
+    
+    @Override
+	public UserDTO findId(UserDTO dto) {
+		return mapper.findId(dto);
+	} //findId
 
-	@Override
-	public UserVO findId(String nickName, String phone) {
-		return null;
-	}
-
+    
 	@Override
 	public boolean resetPwd(String userId, String nickname) throws Exception {
 
@@ -154,44 +178,26 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	} // resetPwd()
 
 	@Override
-	public List<ProductDTO> getMyAuctionList(Criteria cri) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<ProductDTO> getBidList(Criteria cri) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-
-	// ========================================= //
-
-	@Override
-	public List<UserVO> getUserList() {
+	public List<UserDTO> getUserList() {
 		log.debug("getList() invoked.");
-
 		
 		return this.mapper.getUserList();
 	} // getList
 	
 	@Override
-	public UserVO get(String userId) {
+	public UserDTO get(String userId) {
 		log.debug("get({}) invoked.", userId);
 		
-		// 비즈니스 로직 수행에 필요한 경우, 영속성 계층의 메소드를 호출
-		UserVO user=this.mapper.read(userId);
+		UserDTO user=this.mapper.read(userId);
 		log.info("\t+ board: {}", user);
 		
 		return user;
 	} // get ( 회원 상세 정보 보기)
 	
 	@Override
-	public boolean modify(UserDTO user) {
+	public boolean modify(modifyDTO user) {
 		log.debug("modify({}) invoked.", user);
 		
-		// 비즈니스 로직 수행에 필요한 경우, 영속성 계층의 메소드를 호출
 		int affectedRows=this.mapper.update(user);
 		log.info("\t+ affectedRows: {}", affectedRows);
 		
@@ -202,17 +208,40 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	public boolean remove(String userId) {
 		log.debug("remove({}) invoked.", userId);
 
-		// 비즈니스 로직 수행에 필요한 경우, 영속성 계층의 메소드를 호출
 		int affectedRows=this.mapper.delete(userId);
 		log.info("\t+ affectedRows: {}", affectedRows);
 		
 		return affectedRows==1;	
 	} // remove
 	
+
+    // =====================마이페이지 관련===================== //
+	
 	@Override
-	public UserVO findId(UserVO vo) {
-		return mapper.findId(vo);
-	} // getNickName
+	public List<ProductDTO> getMyAuctionList(HashMap<String, Object> map) {
+		log.debug("getMyAuctionList({}) invoked.",map);
+		
+		List<ProductDTO> list=this.mapper.getMyAuctionList(map);
+		log.info("\t+ list size: {}", list.size());
+		
+		return list;
+	}//getMyAuctionList
+	
+	
+	@Override
+	public List<ProductDTO> getBidList(MypageCriteria cri) {
+		// TODO Auto-generated method stub
+		return null;
+	}//getBidList
+	
+	
+	@Override
+	public Integer getMyAuctionTotal(String userId) {
+		log.debug("getMyAuctionTotal({}) invoked.", userId);
+		
+		return this.mapper.getMyAuctionTotalCount(userId);
+	}//getTotal
+	
 	
     // =====================카카오 로그인 API 관련===================== //
 	
@@ -223,7 +252,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 		UserDTO user = this.mapper.getKakaoUser(kakaoUniqueId);
 		
 		return user;
-	}
+	}//getKakaoUser
     
 //---------------------------------------------------//
     @Override
@@ -235,4 +264,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     public void afterPropertiesSet() throws Exception {
     	// TODO Auto-generated method stub
     }
+
+
 } // end class

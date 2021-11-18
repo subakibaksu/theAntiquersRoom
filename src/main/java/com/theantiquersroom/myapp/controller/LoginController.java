@@ -2,10 +2,12 @@
 package com.theantiquersroom.myapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.theantiquersroom.myapp.domain.LoginDTO;
 import com.theantiquersroom.myapp.domain.UserDTO;
@@ -27,7 +29,6 @@ public class LoginController {
 	
 	@Setter(onMethod_= {@Autowired})
     private UserService service;
-	
 	
 	@GetMapping("/login")
     public void login() {	// 로그인 페이지로 이동

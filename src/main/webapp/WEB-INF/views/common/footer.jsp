@@ -9,6 +9,8 @@
         </head>
 
         <body>
+        <div id="body-wrapper">
+        
             <div class="footer">
                 <div>© Copyright 감동희조 2021 All rights reserved.
                 <a href="https://github.com/antiquers/theAntiquersRoom">
@@ -17,6 +19,8 @@
 					</span>
                 </a>
                 </div>
+            </div>
+            
             </div>
         </body>
 

@@ -1,0 +1,164 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+#pInfo {
+    display: flex;
+
+    margin-bottom: 3rem;
+}
+
+#pImgTable {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#pImgTable caption {
+    text-align: start;
+    font-size: 0.8rem;
+
+    padding-left: 2rem;
+    margin-bottom: 3rem;
+}
+
+#focusedImg {
+
+    border: 3px solid rgba(194, 177, 177, 0.9);
+    border-image-outset: 1px;
+
+    width: 18rem;
+    height: 18rem;
+
+    margin: 1.3em;
+}
+
+.pImg {
+    border: 2px solid rgba(194, 177, 177, 0.9);
+  
+    width: 6rem;
+    height: 6rem;
+
+    margin: auto;
+}
+
+#infoDiv {
+    padding-top: 7em;
+    margin-left: 5em;
+}
+
+#infoTable {
+    border-collapse: collapse;
+
+    width: 28em;
+}
+
+#infoTable tr {
+    border-block: 1px solid rgba(194, 177, 177, 0.9);
+}
+
+#infoTable th,
+#infoTable td {
+    text-align: center;
+
+    font-size: 0.8rem;
+
+    padding: 1rem 1rem;
+}
+
+#bidTd {
+    text-align: end !important;
+}
+
+#bidPrice {
+    text-align: center;
+    border: none;
+
+    width: 6rem;
+    height: 1.7em;
+
+    margin-left: 0.1rem;
+    margin-right: 0.1rem;
+}
+
+#upBtn,
+#downBtn {
+    font-size: 1.2rem;
+    background-color: rgba(255, 255, 255, 0);
+    border-style: none;
+    width: 1.5rem;
+}
+
+#bidBtn {
+    color: whitesmoke;
+    background-color: rgba(156, 0, 0, 0.8);
+    border-radius: 8px;
+    border-style: none;
+
+    text-align: center;
+
+    width: 3.2rem;
+    height: 1.7rem;
+
+    padding-bottom: 0.2rem;
+    margin-left: 0.5rem;
+}
+
+#bidHistBtn {
+    color: rgba(194, 177, 177, 0.9);
+    font-weight: 800;
+
+    border: 2px solid rgba(194, 177, 177, 0.9);
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+
+    text-align: center;
+
+    width: 6rem;
+    height: 2.3rem;
+
+    padding-bottom: 0.2rem;
+}
+
+#bidHistBtn:hover {
+    color: whitesmoke;
+    background-color: rgba(156, 0, 0, 0.8);
+    border-radius: 8px;
+    border-style: none;
+}
+
+#additionalInfoTable {
+    border-collapse: collapse;
+
+    border-block: 2px solid rgba(194, 177, 177, 0.9);
+
+    width: 55rem;
+}
+
+#additionalInfoTable tr {
+    border-bottom: 1px solid rgba(194, 177, 177, 0.9);
+}
+
+#additionalInfoTable th {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+#additionalInfoTable th a {
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: black;
+}

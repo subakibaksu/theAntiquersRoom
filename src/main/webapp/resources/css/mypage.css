@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+
+    .btnset { /* 버튼 중앙 정렬 */
+        width: 10rem;
+        margin:auto;
+    }
+
+
+    #modifyBtn, #cancleBtn {
+
+
+        border: 1px solid #C2B1B1;
+        border-radius: 20px;
+        background-color: white;
+        color: #C2B1B1;
+    }
+
+    #modifyBtn:hover, #cancleBtn:hover {
+        color: #9C0000;
+    }
+
+
+
+    #info {
+        padding-top: 8rem;
+        text-align: center;
+    }
