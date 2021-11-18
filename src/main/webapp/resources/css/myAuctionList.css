@@ -35,7 +35,7 @@
 }
 
 #myAcutionTbl tr:hover{
-    background-color: aliceblue;
+    background-color:aliceblue;
 }
 
 #topmenu{
@@ -68,7 +68,7 @@
 	border-radius: 15px;
 }
 
-#pagingnation{
+#pagination{
     width: 95%;
     margin: 0 auto;
 
@@ -76,12 +76,12 @@
     font-size: 14px;
 }
 
-#pagingnation ul {
+#pagination ul {
     float : right;
     margin-right : 15%;
 }
 
-#pagingnation li{	
+#pagination li{	
     float: left;
     
     width: 20px;
@@ -98,6 +98,10 @@
     
     background-color: #B1A2A2;
     color:white;
+}
+
+#pagination li:hover{
+    background-color: #9C0000;
 }
 
 .prev, .next{

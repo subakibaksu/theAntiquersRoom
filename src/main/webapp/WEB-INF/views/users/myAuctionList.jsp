@@ -13,12 +13,25 @@
         <title>myAuctionList.jsp</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../../../resources/css/myAuctionList.css">
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
 
     </head>
     <body>
         <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
         <jsp:include page="/WEB-INF/views/common/mypageHeader.jsp"/>
+
+        <script>
+            $(function(){
+                 $('#regBtn').click(function(){
+                    console.log('regBtn click event triggered..');
+    
+                    self.location='/product/register';
+                }); //regBtn_onclick
+            }); //.jq
+        </script>
 
         <div id="wrapper">
 
@@ -27,7 +40,7 @@
                     <ul id="topmenu">
                         <li>&nbsp;</li>
                         <li>My Auction List</li>
-                        <li><button id="regBtn" type="button">판매등록</button></li>
+                        <li><button id="regBtn" type="button" style="cursor: pointer">판매등록</button></li>
                     </ul>
                 </caption>
                 <thead>
@@ -68,7 +81,7 @@
             <p>&nbsp;</p>
     
             <!-- 현재화면 하단부에 페이징 처리기준에 맞게, 페이지번호목록 표시 -->
-            <div id="pagingnation">
+            <div id="pagination">
                 <form action="#" id="paginationForm">
                     <input type="hidden" name="currPage">
                     <input type="hidden" name="amount">
