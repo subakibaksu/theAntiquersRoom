@@ -109,8 +109,12 @@ public class ProductController {
 
     /*상품 삭제*/
     @PostMapping("/remove")
-    public void remove(Model model) {
-
+    public String remove(Integer pId) {
+    	log.debug("remove({}) invoked.", pId);
+    	
+    	boolean isRemoved = this.service.removeProduct(pId);
+    	
+    	return "/productList";
     } // Post remove()
 
     /*상품 검색*/
@@ -130,7 +134,7 @@ public class ProductController {
     	
     	model.addAttribute("product", dto);
 
-//    String detailPage = "detail?pId="+pId;
+//    String detailPage = "detail?pId="+pId; //최종적으로는 pId 전달해야되므로, 해당 주석 지우지 말아주세요!
 
     	return "/detail";
     } // getDetail()

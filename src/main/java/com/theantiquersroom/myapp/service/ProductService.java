@@ -22,7 +22,10 @@ public interface ProductService {
     // 전체 게시글 수 구하기
     public Integer totalCount(ProductCommand productCommand)throws Exception;
 
-	  //상품 상세 보기
-	  public abstract ProductDTO getDetail(Integer pId);
+    //상품 상세 보기
+    public abstract ProductDTO getDetail(Integer pId);
+    
+    //상품삭제
+    public abstract boolean removeProduct(Integer pId);
 	
 } //end interface
