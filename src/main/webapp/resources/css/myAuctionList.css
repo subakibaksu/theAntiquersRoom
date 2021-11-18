@@ -15,27 +15,31 @@
     font-size: 16px;
 }
 
-table{
-
+#myAcutionTbl {
     width: 73%;
-
-    border: 1px black;
     border-collapse: collapse;
-
     text-align: center;
 }
 
-th{
+#myAcutionTbl th{
 	background-color: #B1A2A2;
     padding: 8px;
 }
 
-td{
+#myAcutionTbl td{
     padding: 4px;
 }
 
-tr:hover{
-    background-color: #B1A2A2;
+#myAcutionTbl tr{
+	border-block: 1px solid #B1A2A2;
+}
+
+#myAcutionTbl tr:hover{
+    background-color: aliceblue;
+}
+
+#topmenu{
+	margin-bottom: 5rem;
 }
 
 #topmenu > li {
@@ -45,9 +49,8 @@ tr:hover{
     height: 50px;
 
     text-align: center;
-    line-height: 50px;
+	font-size: 24px;
     list-style: none;
-    
 }
 
 #regBtn{

@@ -14,8 +14,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="../../../resources/css/myAuctionList.css">
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     </head>
     <body>
         <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -24,11 +22,11 @@
 
         <div id="wrapper">
 
-            <table border="1">
+            <table id="myAcutionTbl">
                 <caption>
                     <ul id="topmenu">
                         <li>&nbsp;</li>
-                        <li>나의 경매</li>
+                        <li>My Auction List</li>
                         <li><button id="regBtn" type="button">판매등록</button></li>
                     </ul>
                 </caption>
