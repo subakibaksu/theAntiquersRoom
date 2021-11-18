@@ -1,6 +1,5 @@
 package com.theantiquersroom.myapp.mapper;
 
-import com.theantiquersroom.myapp.domain.BoardVO;
 import com.theantiquersroom.myapp.domain.ProductImageDTO;
 import org.apache.ibatis.annotations.Mapper;
 

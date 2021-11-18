@@ -22,7 +22,7 @@
             parameterType="com.theantiquersroom.myapp.domain.ProductImageDTO">
     <![CDATA[
         insert into product_image(image_url, image_name, p_id)
-        VALUES (#{imageUrl}, #{imageName}, #{productId})
+        VALUES (#{imageUrl}, #{imageName}, #{pId})
         ]]>
     </insert>
     
