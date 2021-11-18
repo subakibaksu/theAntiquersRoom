@@ -11,7 +11,18 @@
 
     <![CDATA[
             insert into product(name, content, category_id, user_id, started_at, ended_at, started_price, bid_increment, status)
-            VALUES (#{name}, #{content}, #{categoryId}, #{userId}, #{startedAt}, #{endedAt}, #{startedPrice}, #{bidIncrement}, "REQUESTED")
+            VALUES (#{name}, #{content}, #{categoryId}, #{userId}, #{startedAt}, #{endedAt}, #{startedPrice}, #{bidIncrement}, "승인대기중")
+        ]]>
+        <selectKey resultType="int" keyProperty="pId" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <insert id="insertProductImage"
+            parameterType="com.theantiquersroom.myapp.domain.ProductImageDTO">
+    <![CDATA[
+        insert into product_image(image_url, image_name, p_id)
+        VALUES (#{imageUrl}, #{imageName}, #{pId})
         ]]>
     </insert>
     

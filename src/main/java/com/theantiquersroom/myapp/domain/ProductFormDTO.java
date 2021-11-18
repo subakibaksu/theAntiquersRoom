@@ -3,8 +3,10 @@ package com.theantiquersroom.myapp.domain;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class ProductFormDTO {
@@ -24,5 +26,11 @@ public class ProductFormDTO {
     private Integer startedPrice;
     private Integer bidIncrement;
     private String status;
+
+    // 이미지 관련
+    private List<ProductImageDTO> imageList;
+
+    // form images
+    private List<MultipartFile> images;
 
 }

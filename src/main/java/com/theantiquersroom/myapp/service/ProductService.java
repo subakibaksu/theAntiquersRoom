@@ -14,7 +14,7 @@ import java.util.List;
 public interface ProductService {
 
     //상품등록
-    public  abstract  boolean registerProduct(ProductFormDTO product);
+    public  void registerProduct(ProductFormDTO product) throws Exception;
 
     // 페이징 처리 서비스 메서드
     public List<ProductDTO> listCriteria(ProductCriteria cri, ProductCommand productCommand)throws Exception;
@@ -29,4 +29,3 @@ public interface ProductService {
     public abstract boolean removeProduct(Integer pId);
 	
 } //end interface
-
