@@ -25,6 +25,7 @@
 
 	<beans:bean id="mailsender" class="com.theantiquersroom.myapp.utils.Mailsender"/>
 	<beans:bean id="userService" class="com.theantiquersroom.myapp.service.UserService" abstract="true"/>
+	<beans:bean id="boardService" class="com.theantiquersroom.myapp.service.BoardService" abstract="true"/>
 	<beans:bean id="productService" class="com.theantiquersroom.myapp.service.ProductService" abstract="true"/>
 	<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
