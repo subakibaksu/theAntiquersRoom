@@ -79,4 +79,13 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
       return dto;
     } //getDetail
 
+	@Override
+	public boolean removeProduct(Integer pId) {
+		log.debug("removeProduct({}) invoked.", pId);
+		
+		Integer affectedProduct = this.mapper.deleteProduct(pId);
+		
+		return ((affectedProduct > 0)? true:false);
+	} //removeProduct
+
 } // end class

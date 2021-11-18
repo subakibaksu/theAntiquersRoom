@@ -22,7 +22,10 @@ public interface ProductMapper {
     // 전체 게시글 수 구하기
     public Integer getTotalCount(ProductCommand productCommand)throws Exception;
 
-	  // 상품번호에 따른 상품 상세정보 불러오기
-	  public abstract ProductDTO getDetailByPId(Integer pId);
+	// 상품번호에 따른 상품 상세정보 불러오기
+	public abstract ProductDTO getDetailByPId(Integer pId);
+	
+	//상품삭제
+	public abstract Integer deleteProduct(Integer pId);
 	
 } //end interface

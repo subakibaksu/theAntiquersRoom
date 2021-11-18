@@ -53,4 +53,14 @@ public class ProductServiceTests {
 		
 	} //testGetDetail
 	
+	@Test
+	public void testRemove() {
+		log.debug("testRemove() invoked.");
+		
+		Integer pId = 11;
+		boolean isRemoved = this.service.removeProduct(pId);
+		
+		log.info("\t+ isRemoved: {}", isRemoved);
+	} //testRemove
+	
 } //end class
