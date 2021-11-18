@@ -20,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Log4j2
@@ -73,6 +74,7 @@ public class ProductController {
        @SessionAttribute(LoginController.authKey) UserDTO user
     ) throws Exception{
 
+        product.setImages(product.getImages().stream().filter(img -> !img.isEmpty()).collect(Collectors.toList()));
         product.setUserId(user.getUserId());
 
         this.service.registerProduct(product);
