@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import com.theantiquersroom.myapp.domain.ProductCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.domain.ProductCommand;
 import com.theantiquersroom.myapp.service.ProductService;
 import com.theantiquersroom.myapp.utils.ProductPageMaker;

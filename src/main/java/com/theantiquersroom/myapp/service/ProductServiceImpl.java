@@ -12,7 +12,7 @@ import com.theantiquersroom.myapp.domain.ProductCommand;
 import com.theantiquersroom.myapp.domain.ProductCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.domain.ProductFormDTO;
-import com.theantiquersroom.myapp.mapper.ProductMapper
+import com.theantiquersroom.myapp.mapper.ProductMapper;
 import com.theantiquersroom.myapp.domain.ProductImageDTO;
 
 import lombok.AllArgsConstructor;
@@ -48,7 +48,7 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
         for (MultipartFile img: product.getImages()) {
             String url = uploadService.upload(img, PRODUCT_IMAGE_DIR);
             ProductImageDTO imageDto = new ProductImageDTO();
-            imageDto.setProductId(product.getPId());
+            imageDto.setPId(product.getPId());
             imageDto.setImageUrl(url);
             imageDto.setImageName(img.getOriginalFilename());
             this.mapper.insertProductImage(imageDto);
