@@ -102,14 +102,14 @@ public class BoardController {
 
     @GetMapping("/QnA")
     public void getQnA() {	// 문의사항 게시판으로 이동
-        log.debug("list() invoked.");
+        log.debug("getQnA() invoked.");
 
 
     } // list
 
     @GetMapping("/getQnADetail")
     public void getQnADetail() {	// 문의사항 상세페이지로 이동
-        log.debug("listPerPage() invoked.");
+        log.debug("getQnADetail() invoked.");
 
     } // getQnADetail
 

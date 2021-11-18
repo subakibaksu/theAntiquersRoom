@@ -1,12 +1,10 @@
 $(function(){
 
     var timearr = [];
-    $(".leftTimeTimer").hide();
 
     $(".leftTimeTimer").each(function(){
 
-        var time = $(this).text();
-        console.log(time); // test
+        var time = $('#leftTime').text();
         var timeSecond = Number(time);
         timearr.push(timeSecond);
     });
@@ -14,7 +12,6 @@ $(function(){
 
     setInterval(function(){
         
-        $(".leftTimeTimer").show();
         var count = 0;
 
         $(".leftTimeTimer").each(function(){

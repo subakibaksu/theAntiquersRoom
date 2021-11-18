@@ -24,7 +24,7 @@
         <section id="pInfo">
             <div id="pImgDiv">
                 <table id="pImgTable">
-                 
+
                     <caption>카테고리 > ${product.categoryName}</caption>
 
                     <tr>
@@ -40,6 +40,7 @@
                 </table>
             </div>
             <div id="infoDiv">
+                <div id="leftTime" hidden>${product.leftTime}</div>
                 <table id="infoTable">
                     <tr>
                         <th>판매자 닉네임</th>
@@ -77,7 +78,7 @@
                     <tr>
                         <th>남은 시간</th>
                         <td>
-                            <div class="leftTimeTimer">${product.leftTime}</div>
+                            <div class="leftTimeTimer"></div>
                         </td>
 
                     </tr>
@@ -93,12 +94,14 @@
         <section id="additionalInfo">
             <table id="additionalInfoTable">
                 <tr>
-                    <th><a href="#">상품 설명</a></th>
-                    <th><a href="#">판매자 이전 리뷰</a></th>
-                    <th><a href="#">문의사항</a></th>
+                    <th><a id="productInfo" >상품 설명</a></th>
+                    <th><a id="sellerReview" >판매자 이전 리뷰</a></th>
+                    <th><a id="thisQnA" >문의사항</a></th>
                 </tr>
                 <tr id="infoDetail">
-                    <td id="contentBox" colspan="3">${product.content}</td> <!-- ajax로 정보 받아와서 띄워주기 -->
+                    <td colspan="3">
+                        <div id="contentBox">${product.content}</div>
+                    </td> <!-- ajax로 정보 받아와서 띄워주기 -->
                 </tr>
             </table>
         </section>
@@ -106,8 +109,38 @@
     </div>
 
 
-
+    <!-- jQuery/script -->
     <script>
+        $(function(){
+            $('#productInfo').on("click", function(){
+                $.ajax($('#contentBox').text('${product.content}'));
+            }); //상품설명
+
+            $('#sellerReview').on("click", function(){
+                $.ajax({
+                    url: "/board/review", //"/board/review?nickname=${product.nickname}"
+                    dataType: "html",
+                    success: function(data){
+                        console.log(data);
+                        $('#contentBox').html(data);
+                    },
+                    error: function(){alert('로드에 실패하였습니다.');}
+                });
+            }); //판매자 이전리뷰
+
+            $('#thisQnA').on("click", function(){
+                $.ajax({
+                    url: "/board/QnA", //"/board/QnA?pId=${product.pId}"
+                    dataType: "html",
+                    success: function(data){
+                        console.log(data);
+                        $('#contentBox').html(data);
+                    },
+                    error: function(){alert('로드에 실패하였습니다.');}
+                });
+            }); //문의사항
+        });
+
         function changeBid(type){
             const bidPrice = document.getElementById('bidPrice');
             let amount = bidPrice.value;
