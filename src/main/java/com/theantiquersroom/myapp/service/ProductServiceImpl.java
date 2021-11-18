@@ -62,12 +62,30 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
     @Override
     public Boolean bid(Map<Object,Object> map) {
 
+        log.debug("bid() invoked");
         if(map.get("userId")!=null){
+            log.debug(map.get("pId"));
+            log.debug(map.get("bidPrice"));
+            log.debug(mapper.getMaxBid((String)map.get("pId")));
+            if(mapper.getMaxBid((String)map.get("pId")) == null || mapper.getMaxBid((String) map.get("pId")) < (Integer)map.get("bidPrice")){
+                HashMap<Object,Object> querymap = new HashMap<>(map);
 
-            
+                if(mapper.insertBid(querymap)<1){
+
+                    log.debug("insert false");
+
+                    return false;
+                }else {
+
+                    log.debug("insert true");
+
+                    return true;
+
+                }
+
+            }
 
         }
-
 
         return false;
     }

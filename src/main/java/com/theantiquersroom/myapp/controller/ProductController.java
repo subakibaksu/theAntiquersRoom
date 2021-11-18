@@ -154,7 +154,12 @@ public class ProductController {
 
         boolean isBided = service.bid(map);
 
-        return null;
+        log.debug("isBided : {}",isBided);
+        Map<Object,Object> resultMap = new HashMap<>();
+
+        resultMap.put("bidCheck",isBided);
+
+        return resultMap;
 
     } // bid()
 

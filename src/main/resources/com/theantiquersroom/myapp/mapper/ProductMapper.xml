@@ -102,7 +102,12 @@
     </select>
 
     <!-- insert to bid_history -->
-    <insert id="insertBid" parameterType="String">
+    <insert id="insertBid" parameterType="hashmap">
+
+        INSERT
+        INTO bid_history
+        (bid_at,user_id, bid_price, p_id)
+        VALUES (NOW(),#{userId},#{bidPrice},#{pId})
 
     </insert>
 

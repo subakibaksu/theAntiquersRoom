@@ -40,8 +40,13 @@
                     contentType: 'application/json',
 
                     success : function (result) {
+                        console.log(result.bidCheck);
 
-                        $("#bidResult").text("입찰에 성공하였습니다.");
+                        if(result.bidCheck){
+                            $("#bidResult").text("입찰에 성공하였습니다.");
+                        }else{
+                            $("#bidResult").text("입찰에 실패하였습니다.");
+                        }
                     },
                     error : function (error) {
 
@@ -135,7 +140,8 @@
                             <form id="bidForm" action="#">
                                 <input hidden id="bidPriceForBid" name="bidPrice" value=""/>
                                 <input hidden id="productIdForBid" name="pId" value="${product.PId}"/>
-                                <input hidden id="userIdForBid" name="userId" value="${sessionScope.__AUTH_ANTIQUE__.userId}"/>
+<%--                                <input hidden id="userIdForBid" name="userId" value="${sessionScope.__AUTH_ANTIQUE__.userId}"/>--%>
+                                <input hidden id="userIdForBid" name="userId" value="superglas1@naver.com"/>
                             </form>
                             <button type="button" id="bidBtn">입찰</button>
                             <p id="bidResult"></p>
