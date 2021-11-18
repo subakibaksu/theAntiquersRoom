@@ -73,7 +73,10 @@ public interface UserService {
     // =====================카카오 로그인 API 관련===================== //
     
     // 카카오 아이디 조회
-    public abstract UserDTO getKakaoUser(String kakaoUniqueId);    
+    public abstract UserDTO getKakaoUser(String kakaoUniqueId); 
+    
+    // 카카오 회원가입
+    public abstract boolean registerKakaoUser(UserDTO user);
     
 } // end interface
 

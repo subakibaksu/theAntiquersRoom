@@ -230,11 +230,11 @@
 
 				<!-- container -->
 				<div class="form-container">
-					<div class="regbase">
+					<div class="regbase"> 
 
 						<!-- 이메일 입력 -->
 						<div class="regcontainer">
-							<div class="regconfirm">
+							<div class="regconfirm"> 
 
 								<input class="registerEmail" id="email" type="text" name="userId" placeholder="이메일">
 								<input class="regbtn" id="emailbtn" type="button" value="중복확인">

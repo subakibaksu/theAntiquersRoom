@@ -10,17 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.RestTemplate;
 
 import com.theantiquersroom.myapp.domain.KakaoTokenVO;
 import com.theantiquersroom.myapp.domain.KakaoUserInfoVO;
+import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.service.UserService;
 
 import lombok.NoArgsConstructor;
@@ -105,14 +109,15 @@ public class ApiKakaoController {
     } //register
 
     
-//    @PostMapping("/registerByKakao")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public String registerByKakao(UserDTO user) { //회원가입 서비스 수행, 저장
-//        log.debug("register({}) invoked.", user);
-//
-//        this.service.registerUser(user);
-//        return "/";
-//    } //register
+    //카카오 통한 회원가입 서비스 수행, 저장
+    @PostMapping("/registerByKakao")
+    @ResponseStatus(HttpStatus.CREATED)
+    public String registerByKakao(UserDTO user) { 
+        log.debug("registerKakaoUser({}) invoked.", user);
+
+        this.service.registerKakaoUser(user);
+        return "/";
+    } //register
 	
 	
 	//액세스 토큰, 리프레시 토큰 받기
