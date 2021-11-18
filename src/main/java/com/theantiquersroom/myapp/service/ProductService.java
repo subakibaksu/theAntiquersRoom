@@ -14,7 +14,7 @@ import java.util.List;
 public interface ProductService {
 
     //상품등록
-    public  abstract  boolean registerProduct(ProductFormDTO product);
+    public  void registerProduct(ProductFormDTO product) throws Exception;
 
     // 페이징 처리 서비스 메서드
     public List<ProductDTO> listCriteria(ProductCriteria cri, ProductCommand productCommand)throws Exception;
@@ -22,8 +22,10 @@ public interface ProductService {
     // 전체 게시글 수 구하기
     public Integer totalCount(ProductCommand productCommand)throws Exception;
 
-	  //상품 상세 보기
-	  public abstract ProductDTO getDetail(Integer pId);
+    //상품 상세 보기
+    public abstract ProductDTO getDetail(Integer pId);
+    
+    //상품삭제
+    public abstract boolean removeProduct(Integer pId);
 	
 } //end interface
-

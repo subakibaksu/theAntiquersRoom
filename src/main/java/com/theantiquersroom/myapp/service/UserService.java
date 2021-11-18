@@ -47,15 +47,15 @@ public interface UserService {
     // 회원 탈퇴
     public abstract boolean remove(String userId);
 
-    
-	// 전체 회원 목록조회
-	public abstract List<UserDTO> getUserList();
-	
-	// 상세 회원 목록 조회
-	public abstract UserDTO get(String userId);
-    
-	// 회원 정보 수정
-	public abstract boolean modify(modifyDTO user);
+
+    // 전체 회원 목록조회
+    public abstract List<UserDTO> getUserList();
+
+    // 상세 회원 목록 조회
+    public abstract UserDTO get(String userId);
+
+    // 회원 정보 수정
+    public abstract boolean modify(modifyDTO user);
 	
     
     // =====================마이페이지 관련===================== //
@@ -67,7 +67,7 @@ public interface UserService {
     public abstract List<ProductDTO> getBidList(MypageCriteria cri);
 	
     // 나의 경매리스트 총 레코드 개수 반환
-	public abstract Integer getMyAuctionTotal(String userId);
+  	public abstract Integer getMyAuctionTotal(String userId);
     
     
     // =====================카카오 로그인 API 관련===================== //
@@ -79,5 +79,3 @@ public interface UserService {
     public abstract boolean registerKakaoUser(UserDTO user);
     
 } // end interface
-
-

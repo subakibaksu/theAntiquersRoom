@@ -177,9 +177,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
         return mailSentCheck;
 	} // resetPwd()
 
-	
-
-
 	@Override
 	public List<UserDTO> getUserList() {
 		log.debug("getList() invoked.");

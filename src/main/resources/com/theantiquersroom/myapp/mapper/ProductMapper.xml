@@ -11,7 +11,18 @@
 
     <![CDATA[
             insert into product(name, content, category_id, user_id, started_at, ended_at, started_price, bid_increment, status)
-            VALUES (#{name}, #{content}, #{categoryId}, #{userId}, #{startedAt}, #{endedAt}, #{startedPrice}, #{bidIncrement}, "REQUESTED")
+            VALUES (#{name}, #{content}, #{categoryId}, #{userId}, #{startedAt}, #{endedAt}, #{startedPrice}, #{bidIncrement}, "승인대기중")
+        ]]>
+        <selectKey resultType="int" keyProperty="pId" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <insert id="insertProductImage"
+            parameterType="com.theantiquersroom.myapp.domain.ProductImageDTO">
+    <![CDATA[
+        insert into product_image(image_url, image_name, p_id)
+        VALUES (#{imageUrl}, #{imageName}, #{pId})
         ]]>
     </insert>
     
@@ -44,8 +55,23 @@
         ]]>
     </select>
 
-    <select id="listCriteria" resultType="com.theantiquersroom.myapp.domain.ProductDTO" parameterType="hashmap"> <!-- typeAlias를 지정했음으로 풀 네임 기재 필요 없음 -->
-            SELECT p_id,name,created_at,updated_at,content,category_id,user_id, started_at, ended_at, started_price, bid_increment, status,TIMESTAMPDIFF(SECOND,NOW(),ended_at) AS lefttime
+    <select id="listCriteria" 
+            resultType="com.theantiquersroom.myapp.domain.ProductDTO" 
+            parameterType="hashmap"> <!-- typeAlias를 지정했음으로 풀 네임 기재 필요 없음 -->
+            SELECT 
+                p_id,
+                name,
+                created_at,
+                updated_at,
+                content,
+                category_id,
+                user_id, 
+                started_at, 
+                ended_at, 
+                started_price, 
+                bid_increment, 
+                status,
+                TIMESTAMPDIFF(SECOND,NOW(),ended_at) AS lefttime
             FROM product
 
             <where>
@@ -59,15 +85,10 @@
             </where>
 
             <trim prefix="ORDER BY">
-
                 <if test="filter == 0 or filter == null">  p_id DESC </if>
-
                 <if test="filter == 1">  ended_at ASC </if>
-
                 <if test="filter == 2">  started_price ASC </if>
-
                 <if test="filter == 3">  started_price DESC </if>
-
             </trim>
 
             limit #{pageStart}, #{perPageNum}
@@ -75,7 +96,9 @@
     </select>
 
     <!-- 전체 게시글 수를 구하는 sql문 -->
-    <select id="getTotalCount" resultType="java.lang.Integer" parameterType="com.theantiquersroom.myapp.domain.ProductCommand">
+    <select id="getTotalCount" 
+            resultType="java.lang.Integer" 
+            parameterType="com.theantiquersroom.myapp.domain.ProductCommand">
 
         SELECT count(*)
         FROM product
@@ -83,11 +106,15 @@
             <if test="category_id != null and category_id != ''">
                 AND category_id = #{category_id}
             </if>
-
             <if test="searchQuery != null and searchQuery != ''">
                 AND name LIKE CONCAT('%',#{searchQuery},'%')
             </if>
         </where>
 	</select>
+
+    <!-- 상품삭제 -->
+    <delete id="deleteProduct">
+        DELETE FROM product WHERE p_id=#{pId}
+    </delete>
 
 </mapper>
