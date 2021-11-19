@@ -140,8 +140,7 @@
                             <form id="bidForm" action="#">
                                 <input hidden id="bidPriceForBid" name="bidPrice" value=""/>
                                 <input hidden id="productIdForBid" name="pId" value="${product.PId}"/>
-<%--                                <input hidden id="userIdForBid" name="userId" value="${sessionScope.__AUTH_ANTIQUE__.userId}"/>--%>
-                                <input hidden id="userIdForBid" name="userId" value="superglas1@naver.com"/>
+                                <input hidden id="userIdForBid" name="userId" value="${sessionScope.__AUTH_ANTIQUE__.userId}"/>
                             </form>
                             <button type="button" id="bidBtn">입찰</button>
                             <p id="bidResult"></p>

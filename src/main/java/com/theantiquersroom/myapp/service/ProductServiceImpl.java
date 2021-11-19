@@ -3,6 +3,7 @@ package com.theantiquersroom.myapp.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -67,21 +68,13 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
             log.debug(map.get("pId"));
             log.debug(map.get("bidPrice"));
             log.debug(mapper.getMaxBid((String)map.get("pId")));
-            if(mapper.getMaxBid((String)map.get("pId")) == null || mapper.getMaxBid((String) map.get("pId")) < (Integer)map.get("bidPrice")){
+
+            if(mapper.getMaxBid((String)map.get("pId")) == null || mapper.getMaxBid((String)map.get("pId")) < Integer.parseInt((String)map.get("bidPrice"))){
                 HashMap<Object,Object> querymap = new HashMap<>(map);
 
-                if(mapper.insertBid(querymap)<1){
+                mapper.insertBid(querymap);
 
-                    log.debug("insert false");
-
-                    return false;
-                }else {
-
-                    log.debug("insert true");
-
-                    return true;
-
-                }
+                return true;
 
             }
 
