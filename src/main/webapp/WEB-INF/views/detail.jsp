@@ -113,7 +113,7 @@
     <script>
         $(function(){
             $('#productInfo').on("click", function(){
-                $.ajax($('#contentBox').text('${product.content}'));
+               $('#contentBox').text('${product.content}');
             }); //상품설명
 
             $('#sellerReview').on("click", function(){
