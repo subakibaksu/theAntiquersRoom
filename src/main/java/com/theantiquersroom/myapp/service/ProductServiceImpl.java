@@ -5,15 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+import com.theantiquersroom.myapp.domain.*;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.theantiquersroom.myapp.domain.ProductCommand;
-import com.theantiquersroom.myapp.domain.ProductCriteria;
-import com.theantiquersroom.myapp.domain.ProductDTO;
-import com.theantiquersroom.myapp.domain.ProductFormDTO;
 import com.theantiquersroom.myapp.mapper.ProductMapper;
 
 import lombok.AllArgsConstructor;
@@ -61,18 +58,14 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
     } //totalCount()
 
     @Override
-    public Boolean bid(Map<Object,Object> map) {
+    public Boolean bid(BidHistoryDTO bidHistoryDTO) {
 
         log.debug("bid() invoked");
-        if(map.get("userId")!=null){
-            log.debug(map.get("pId"));
-            log.debug(map.get("bidPrice"));
-            log.debug(mapper.getMaxBid((String)map.get("pId")));
+        if(bidHistoryDTO.getUserId()!=null){
 
-            if(mapper.getMaxBid((String)map.get("pId")) == null || mapper.getMaxBid((String)map.get("pId")) < Integer.parseInt((String)map.get("bidPrice"))){
-                HashMap<Object,Object> querymap = new HashMap<>(map);
+            if(mapper.getMaxBid(bidHistoryDTO.getPId()) == null || mapper.getMaxBid(bidHistoryDTO.getPId()) < bidHistoryDTO.getBidPrice()){
 
-                mapper.insertBid(querymap);
+                mapper.insertBid(bidHistoryDTO);
 
                 return true;
 

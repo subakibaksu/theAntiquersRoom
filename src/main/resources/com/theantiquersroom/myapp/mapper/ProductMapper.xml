@@ -91,7 +91,7 @@
 	</select>
 
     <!-- 가장 높은 Bid값을 구하는 sql문 -->
-    <select id="getMaxBid" resultType="Integer" parameterType="String">
+    <select id="getMaxBid" resultType="Integer" parameterType="Integer">
 
         SELECT bid_price
         FROM bid_history
@@ -102,7 +102,7 @@
     </select>
 
     <!-- insert to bid_history -->
-    <insert id="insertBid" parameterType="hashmap">
+    <insert id="insertBid" parameterType="com.theantiquersroom.myapp.domain.BidHistoryDTO">
 
         INSERT
         INTO bid_history

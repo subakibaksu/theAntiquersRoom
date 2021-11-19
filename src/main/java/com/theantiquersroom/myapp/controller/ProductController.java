@@ -1,7 +1,6 @@
 package com.theantiquersroom.myapp.controller;
 
-import com.theantiquersroom.myapp.domain.ProductFormDTO;
-import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.*;
 import com.theantiquersroom.myapp.service.ProductService;
 
 import lombok.NoArgsConstructor;
@@ -9,9 +8,7 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import com.theantiquersroom.myapp.domain.ProductCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
-import com.theantiquersroom.myapp.domain.ProductCommand;
 import com.theantiquersroom.myapp.service.ProductService;
 import com.theantiquersroom.myapp.utils.ProductPageMaker;
 import lombok.Setter;
@@ -28,6 +25,8 @@ import java.util.Map;
 
 import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.service.ProductService;
+
+import javax.servlet.http.HttpSession;
 
 
 @Log4j2
@@ -145,18 +144,16 @@ public class ProductController {
 
     /*입찰정보 DB전달*/
     @PostMapping("/bid")
-    public @ResponseBody Map<Object,Object> bid(@RequestBody Map<Object,Object> map, Model model) {
+    public @ResponseBody Map<Object,Object> bid(@RequestBody BidHistoryDTO bidHistoryDTO, Model model, HttpSession session) {
 
         log.debug("bid invoked()");
-        log.debug(map.get("userId"));
-        log.debug(map.get("pId"));
-        log.debug(map.get("bidPrice"));
+        log.info((String)session.getAttribute(LoginController.authKey));
+//        String userId = (String)session.getAttribute(LoginController.authKey);
+        bidHistoryDTO.setUserId((String)session.getAttribute(LoginController.authKey));
+        boolean isBided = service.bid(bidHistoryDTO);
 
-        boolean isBided = service.bid(map);
 
-        log.debug("isBided : {}",isBided);
         Map<Object,Object> resultMap = new HashMap<>();
-
         resultMap.put("bidCheck",isBided);
 
         return resultMap;

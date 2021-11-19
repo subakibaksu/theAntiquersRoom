@@ -16,71 +16,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     <script src="../../../resources/js/detail.js"></script>
 
-    <script type="text/javascript">
-
-        $(document).ready(function (){
-
-            $("#bidBtn").click(function (){
-
-                $("#bidPriceForBid").val($("#bidPrice").val());
-
-                console.log($("#bidPriceForBid").val());
-
-                var data  = $("#bidForm").serializeObject();
-
-                console.log(data);
-                console.log('clicked');
-
-                $.ajax({
-
-                    async: true,
-                    type : 'POST',
-                    data : JSON.stringify(data),
-                    url : "/product/bid",
-                    contentType: 'application/json',
-
-                    success : function (result) {
-                        console.log(result.bidCheck);
-
-                        if(result.bidCheck){
-                            $("#bidResult").text("입찰에 성공하였습니다.");
-                        }else{
-                            $("#bidResult").text("입찰에 실패하였습니다.");
-                        }
-                    },
-                    error : function (error) {
-
-                        console.log("error", error);
-
-                    },
-
-                });
-
-            });
-
-            jQuery.fn.serializeObject = function() {
-                var obj = null;
-                try {
-                    if (this[0].tagName && this[0].tagName.toUpperCase() == "FORM") {
-                        var arr = this.serializeArray();
-                        if (arr) {
-                            obj = {};
-                            jQuery.each(arr, function() {
-                                obj[this.name] = this.value;
-                            });
-                        }//if ( arr ) {
-                    }
-                } catch (e) {
-                    alert(e.message);
-                } finally {
-                }
-
-                return obj;
-            };
-
-        });
-
-    </script>
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -140,7 +75,6 @@
                             <form id="bidForm" action="#">
                                 <input hidden id="bidPriceForBid" name="bidPrice" value=""/>
                                 <input hidden id="productIdForBid" name="pId" value="${product.PId}"/>
-                                <input hidden id="userIdForBid" name="userId" value="${sessionScope.__AUTH_ANTIQUE__.userId}"/>
                             </form>
                             <button type="button" id="bidBtn">입찰</button>
                             <p id="bidResult"></p>
@@ -195,7 +129,44 @@
             
             bidPrice.value = amount;
         }
+
+        $(document).ready(function (){
+
+            $("#bidBtn").click(function (){
+
+                $("#bidPriceForBid").val($("#bidPrice").val());
+                var data  = $("#bidForm").serializeObject();
+
+                $.ajax({
+
+                    async: true,
+                    type : 'POST',
+                    data : JSON.stringify(data),
+                    url : "/product/bid",
+                    contentType: 'application/json',
+
+                    success : function (result) {
+
+                        if(result.bidCheck){
+                            $("#bidResult").text("입찰에 성공하였습니다.");
+                        }else{
+                            $("#bidResult").text("입찰에 실패하였습니다.");
+                        }
+
+                    },
+                    error : function (error) {
+
+                        console.log("error", error);
+
+                    },
+
+                });
+
+            });
+
+        });
     </script>
+    <script src="/resources/js/common/serializeObject.js"></script>
 
 </body>
 </html>

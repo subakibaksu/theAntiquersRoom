@@ -1,9 +1,6 @@
 package com.theantiquersroom.myapp.service;
 
-import com.theantiquersroom.myapp.domain.ProductCommand;
-import com.theantiquersroom.myapp.domain.ProductCriteria;
-import com.theantiquersroom.myapp.domain.ProductDTO;
-import com.theantiquersroom.myapp.domain.ProductFormDTO;
+import com.theantiquersroom.myapp.domain.*;
 import com.theantiquersroom.myapp.domain.ProductDTO;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +21,7 @@ public interface ProductService {
     public Integer totalCount(ProductCommand productCommand)throws Exception;
 
     //입찰
-    public Boolean bid(Map<Object,Object> map);
+    public Boolean bid(BidHistoryDTO bidHistoryDTO);
 
 	  //상품 상세 보기
 	  public abstract ProductDTO getDetail(Integer pId);

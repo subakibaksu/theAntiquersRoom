@@ -1,6 +1,7 @@
 package com.theantiquersroom.myapp.mapper;
 
 
+import com.theantiquersroom.myapp.domain.BidHistoryDTO;
 import com.theantiquersroom.myapp.domain.ProductFormDTO;
 import com.theantiquersroom.myapp.domain.ProductCommand;
 import com.theantiquersroom.myapp.domain.ProductDTO;
@@ -24,10 +25,10 @@ public interface ProductMapper {
     public Integer getTotalCount(ProductCommand productCommand)throws Exception;
 
     // 입찰 최고가 구하기
-    public Integer getMaxBid(@Param("pId") String pId);
+    public Integer getMaxBid(@Param("pId") Integer pId);
 
     // 입찰 등록
-    public Integer insertBid(HashMap<Object,Object> map);
+    public Integer insertBid(BidHistoryDTO bidHistoryDTO);
 
 	  // 상품번호에 따른 상품 상세정보 불러오기
 	  public abstract ProductDTO getDetailByPId(Integer pId);
