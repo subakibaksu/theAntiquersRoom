@@ -4,6 +4,9 @@ target
 .classpath
 .project
 
+*-context.xml
+ApiKakaoController.java
+
 # Created by https://www.toptal.com/developers/gitignore/api/intellij,eclipse,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=intellij,eclipse,java
 
