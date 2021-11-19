@@ -19,7 +19,7 @@
 				value="jdbc:log4jdbc:mariadb://antiquers.czeunykbiyt3.ap-northeast-2.rds.amazonaws.com:3306/antiquers"/>
 
 		<property name="username" value="admin"/>
-		<property name="password" value="antiquers"/>
+		<property name="password" value="-"/>
 
 		<!-- Connection Pool 에 대한 상세설정 -->
 		<property name="maximumPoolSize" value="10"/>
