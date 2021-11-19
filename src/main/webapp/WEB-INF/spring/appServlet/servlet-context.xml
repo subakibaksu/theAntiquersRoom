@@ -55,8 +55,8 @@
 
 
 	<beans:bean id="credential" class="com.amazonaws.auth.BasicAWSCredentials">
-		<beans:constructor-arg name="accessKey" value="-" />
-		<beans:constructor-arg name="secretKey" value="-" />
+		<beans:constructor-arg name="accessKey" value="nenene" />
+		<beans:constructor-arg name="secretKey" value="nene" />
 	</beans:bean>
 
 	<beans:bean id="s3client" class="com.amazonaws.services.s3.AmazonS3Client">
