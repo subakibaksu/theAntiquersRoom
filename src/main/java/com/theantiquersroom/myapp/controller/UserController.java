@@ -79,12 +79,29 @@ public class UserController {
     } // confirmEmail
 
     @GetMapping("/logout")
-    public String logout(HttpServletRequest request) {	// 로그아웃 실행
+    public String logout(HttpServletRequest request, HttpSession session) {	// 로그아웃 실행
         log.debug("logout() invoked.");
-        HttpSession session = request.getSession();
-        session.invalidate();
         
-        return "redirect:/";
+        String kakaoUniqueId = (String) session.getAttribute("kakaoUniqueId");
+       
+        if(kakaoUniqueId != null) {
+        	log.debug("===== kakao logout");
+        	
+            String logout_redirect_uri = "http://localhost:8090";
+
+            String reqUrl = 
+            		"https://kauth.kakao.com/oauth/logout?client_id="
+            		+ ApiKakaoController.REST_API_KEY
+            		+ "&logout_redirect_uri="
+            		+ logout_redirect_uri;
+            
+            return reqUrl;
+            
+        }else {
+            session.invalidate();
+            
+            return "redirect:/";
+        }
     } //logout
 
     @GetMapping("/resetPwd")

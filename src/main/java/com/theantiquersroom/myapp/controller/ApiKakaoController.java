@@ -40,8 +40,38 @@ public class ApiKakaoController {
     @Setter(onMethod_= {@Autowired})
     private UserService service;
 	
-    private static final String REST_API_KEY = "12a4433b06d9de4acedcd972fa6a3fa9";
+    public static final String REST_API_KEY = "12a4433b06d9de4acedcd972fa6a3fa9";
     private static final String REDIRECT_URI = "http://localhost:8090/login/kakao";
+    
+	
+    @RequestMapping("/logout")
+    public @ResponseBody String logout(HttpServletRequest request, HttpSession session) {	// 로그아웃 실행
+        log.debug("logout() invoked.");
+        
+        String kakaoUniqueId = (String) session.getAttribute("kakaoUniqueId");
+       
+        if(kakaoUniqueId != null) {
+        	log.debug("===== kakao logout");
+        	
+            String logout_redirect_uri = "http://localhost:8090";
+
+            String reqUrl = 
+            		"https://kauth.kakao.com/oauth/logout?client_id="
+            		+ ApiKakaoController.REST_API_KEY
+            		+ "&logout_redirect_uri="
+            		+ logout_redirect_uri;
+            
+            session.invalidate();
+            
+            return reqUrl;
+            
+        }else {
+            session.invalidate();
+            
+            return "redirect:/";
+        }
+    } //logout
+   
     
 	//카카오 로그인창 호출
 	@RequestMapping("/login/getKakaoAuthUrl")
@@ -90,7 +120,8 @@ public class ApiKakaoController {
 		    	return "redirect:/"; //메인 화면으로 이동
 		    	
 		    }else {
-		    	return "/registerByKakao"; //카카오-회원가입 페이지로 이동
+		    	return "redirect:/"; //테스트용
+//		    	return "/registerByKakao"; //카카오-회원가입 페이지로 이동
 		    }//if-else
 		    
 	    }else {

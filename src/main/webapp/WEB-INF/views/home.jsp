@@ -19,12 +19,6 @@
 
                 self.location='/login';
             }); //login_onclick
-            
-            $('#logoutBtn').click(function(){
-                console.log('click event triggered..');
-
-                self.location='/users/logout';
-            }); //logout_onclick
 
             $('#myAuctionBtn').click(function(){
                 console.log('myAuctionBtn click event triggered..');
@@ -41,10 +35,10 @@
 
     <P>  The time on the server is ${serverTime}. </P>
 
-    <P>  Kakao Id : ${kakaoUserId}. </P>
+    <P>  Kakao Id : ${kakaoUniqueId}. </P>
     <P>  Kakao usertype : ${usertype}. </P>
 
-    <img onclick="kakaoLogin();" style="cursor: pointer;" src="../../resources/images/kakao_login.png">
+    <img onclick="kakaoLogin();" style="cursor: pointer;" src="/resources/images/kakao_login.png">
 
     <hr>
     <a href="/product/productList?category_id=0">0</a>
@@ -64,7 +58,7 @@
 
     <hr>
 	<h3>${sessionScope.__AUTH_ANTIQUE__}</h3>
-    <button type="button" id="logoutBtn">로그아웃</button>
+    <button type="button" id="logoutBtn" onclick="logout();">로그아웃</button>
 
     <hr>
     <button type="button" id="myAuctionBtn">마이옥션리스트</button>
@@ -80,6 +74,19 @@
 
         $.ajax({
             url: '/login/getKakaoAuthUrl',
+            type: 'get',
+            async: false,
+            dataType: 'text',
+            success: function (res) {
+                location.href = res;
+            }
+        });
+    }
+    
+    function logout() {
+
+        $.ajax({
+            url: '/logout',
             type: 'get',
             async: false,
             dataType: 'text',
