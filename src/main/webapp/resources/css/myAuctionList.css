@@ -112,9 +112,15 @@ input[type=submit] {
 #pagination{
     width: 95%;
     margin: 0 auto;
-
     color: #B1A2A2;
     font-size: 14px;
+    float: right;
+    align-items: center;
+    display: flex;
+}
+
+#paginationForm {
+	width: 300px;
 }
 
 #pagination ul {

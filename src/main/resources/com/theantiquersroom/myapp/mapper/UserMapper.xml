@@ -226,4 +226,14 @@
         ]]>
     </select>
     
+    <!-- 카카오 회원가입 -->
+    <insert
+            id="insertKakaoUser"
+            parameterType="com.theantiquersroom.myapp.domain.UserDTO">
+
+        <![CDATA[
+            INSERT INTO users(USER_ID, NICKNAME, PHONE, USER_TYPE, KAKAO_UNIQUE_ID)
+            VALUES (#{userId}, #{nickName}, #{phone}, 3, #{kakaoUniqueId})
+        ]]>
+    </insert>
 </mapper>
