@@ -34,7 +34,6 @@
 			</thead>
 
 			<tbody>
-				<!-- BoardVO를 여러개 담고 있는 리스트 객체를 가지고 목록을 만들어 줘야 합니다 -->
 
 				<c:forEach items="${list}" var="board">
 					<tr>
