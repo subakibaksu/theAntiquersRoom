@@ -4,6 +4,9 @@ target
 .classpath
 .project
 
+root-context.xml
+servlet-context.xml
+
 # Created by https://www.toptal.com/developers/gitignore/api/intellij,eclipse,java
 # Edit at https://www.toptal.com/developers/gitignore?templates=intellij,eclipse,java
 
@@ -19,8 +22,7 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-root-context.xml
-servlet-context.xml
+
 # External tool builders
 .externalToolBuilders/
 
