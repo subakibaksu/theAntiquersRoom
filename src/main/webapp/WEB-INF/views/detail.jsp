@@ -64,18 +64,19 @@
                     <tr>
                         <th>입찰 금액</th>
                         <td id="bidTd">
-                            <button id="upBtn" type="button" onclick='changeBid("up")'>
-                                <i class="fas fa-chevron-circle-up" ></i>
-                            </button>
-                            <input type="text" id="bidPrice" name="bidPrice" value="${product.bidIncrement}">원
-                            <button id="downBtn" type="button" onclick='changeBid("down")'>
-                                <i class="fas fa-chevron-circle-down" ></i>
-                            </button>
-
                             <form id="bidForm" action="#">
-                                <input hidden id="bidPriceForBid" name="bidPrice" value=""/>
-                                <input hidden id="productIdForBid" name="pId" value="${product.PId}"/>
+                                <button id="upBtn" type="button" onclick='changeBid("up")'>
+                                    <i class="fas fa-chevron-circle-up" ></i>
+                                </button>
+                                <input name="bidAt" value="">
+                                <input name="userId" value="">
+                                <input name="pId" value="${pId}">
+                                <input type="text" id="bidPrice" name="bidPrice" value="${product.bidIncrement}">원
+                                <button id="downBtn" type="button" onclick='changeBid("down")'>
+                                    <i class="fas fa-chevron-circle-down" ></i>
+                                </button>
                             </form>
+
                             <button type="button" id="bidBtn">입찰</button>
                             <p id="bidResult"></p>
                         </td>
@@ -134,8 +135,9 @@
 
             $("#bidBtn").click(function (){
 
-                $("#bidPriceForBid").val($("#bidPrice").val());
                 var data  = $("#bidForm").serializeObject();
+
+                console.log(data);
 
                 $.ajax({
 
@@ -143,7 +145,7 @@
                     type : 'POST',
                     data : JSON.stringify(data),
                     url : "/product/bid",
-                    contentType: 'application/json',
+                    contentType: "application/json",
 
                     success : function (result) {
 

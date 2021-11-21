@@ -144,17 +144,29 @@ public class ProductController {
 
     /*입찰정보 DB전달*/
     @PostMapping("/bid")
-    public @ResponseBody Map<Object,Object> bid(@RequestBody BidHistoryDTO bidHistoryDTO, Model model, HttpSession session) {
+    public @ResponseBody Map<Object,Object> bid(@RequestBody Map<String,Object> map, HttpSession session) {
 
         log.debug("bid invoked()");
-        log.info((String)session.getAttribute(LoginController.authKey));
-//        String userId = (String)session.getAttribute(LoginController.authKey);
-        bidHistoryDTO.setUserId((String)session.getAttribute(LoginController.authKey));
-        boolean isBided = service.bid(bidHistoryDTO);
-
-
         Map<Object,Object> resultMap = new HashMap<>();
-        resultMap.put("bidCheck",isBided);
+        if(session.getAttribute(LoginController.authKey) != null){
+
+            UserDTO userDTO = (UserDTO) session.getAttribute(LoginController.authKey);
+            BidHistoryDTO bidHistoryDTO = new BidHistoryDTO();
+            bidHistoryDTO.setUserId(userDTO.getUserId());
+            bidHistoryDTO.setBidPrice(Integer.parseInt((String) map.get("bidPrice")));
+            bidHistoryDTO.setPId(Integer.parseInt((String)map.get("pId")));
+
+            log.debug(bidHistoryDTO.toString());
+            boolean isBided = service.bid(bidHistoryDTO);
+
+
+            resultMap.put("bidCheck",isBided);
+
+        }else {
+
+            resultMap.put("bidCheck",false);
+
+        }
 
         return resultMap;
 
