@@ -8,6 +8,6 @@ public interface BoardService {
 
 	public abstract boolean registerQnA(QnADTO dto);
 	
-	public abstract List<QnADTO> getList();
+	public abstract List<QnADTO> getQnAList();
 
 }
