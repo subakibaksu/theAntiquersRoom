@@ -1,6 +1,4 @@
 package com.theantiquersroom.myapp.controller;
-
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,10 +41,10 @@ public class BoardController {
     public void getReviewDetail(Integer b_num, Model model ) {
         log.debug("getReviewDetail() invoked.");
 
-//		BoardVO board = this.service.getDetailReview(b_num);
-//		log.info("\t+ board: {}" , board);
+//      BoardVO board = this.service.getDetailReview(b_num);
+//      log.info("\t+ board: {}" , board);
 
-//		model.addAttribute("board", board);
+//      model.addAttribute("board", board);
 
     } // getReviewDetail
 
@@ -62,8 +60,8 @@ public class BoardController {
     public String registerReview(BoardDTO board, RedirectAttributes rttrs) {
         log.debug("registerReview()_ invoked.");
 
-//		boolean result = this.service.registerReview(board);
-//		rttrs.addAttribute("result", result);
+//      boolean result = this.service.registerReview(board);
+//      rttrs.addAttribute("result", result);
 
         return "redirect:/board/review";
     } // registerReview  작성된 리뷰정보 DB전달
@@ -80,11 +78,11 @@ public class BoardController {
     public String modify(BoardDTO board, RedirectAttributes rttrs) {
         log.debug("modify({}) invoked." , board);
 
-//		boolean result = this.service.modifyReview(board);
+//      boolean result = this.service.modifyReview(board);
 
         // 이동되는 화면으로 전송해줘야할 파라미터가 있으면,
         // rttrs 를 사용해야 한다!!!
-//		rttrs.addAttribute("result", result);
+//      rttrs.addAttribute("result", result);
 
         return  "redirect:/board/review"; // 이동된 화면 직전에 수행했던게 양식이라면(?) redirect
 
@@ -95,8 +93,8 @@ public class BoardController {
     public String removeReview(@RequestParam("b_num") Integer b_num, RedirectAttributes rttrs) {
         log.debug("remove({}) invoked." , b_num);
 
-//		boolean result = this.service.removeReview(b_num);
-//		rttrs.addAttribute("result" ,result);
+//      boolean result = this.service.removeReview(b_num);
+//      rttrs.addAttribute("result" ,result);
 
         return  "redirect:/board/review";
     } // removeReview
@@ -110,9 +108,9 @@ public class BoardController {
     public void getQnA(Model model) {	// 문의사항 게시판으로 이동
         log.debug("list() invoked.");
 
-        List<QnADTO> list = this.service.getList();
+        List<QnADTO> list = this.service.getQnAList();
 		log.info("\t+ list size: {}", list.size());
-
+assert list != null;
 		model.addAttribute("list",list);
 
     } // getQnA

@@ -22,6 +22,15 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 	
 	@Setter(onMethod_= {@Autowired} )
 	private BoardMapper mapper;
+	
+	@Override
+	public List<QnADTO> getQnAList() {
+		log.debug("getQnAList() invoked.");
+		
+		return this.mapper.getQnAList();
+
+	} // 문의사항 등록
+	
 
 	@Override
 	public boolean registerQnA(QnADTO dto) {
@@ -32,16 +41,10 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 		
 		return affectedRows==1;
 		
-	}
+	} // 문의사항 리스트 보기
 	
-	@Override
-	public List<QnADTO> getQnAList() {
-		log.debug("getQnAList() invoked.");
-		
-		return this.mapper.getList();
 
-		
-	}
+
 	
 	
 //=============================//

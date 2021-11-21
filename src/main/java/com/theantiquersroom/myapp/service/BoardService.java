@@ -10,4 +10,5 @@ public interface BoardService {
 	
 	public abstract List<QnADTO> getQnAList();
 
+
 }

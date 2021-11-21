@@ -6,7 +6,8 @@
 
 <mapper namespace="com.theantiquersroom.myapp.mapper.BoardMapper">
 
-	<select
+
+    <select
         id="getQnAList"
         resultType="com.theantiquersroom.myapp.domain.QnADTO">
         
@@ -63,5 +64,8 @@
             )
         ]]>
     </insert>
-
+    
+    
 </mapper>
+
+
