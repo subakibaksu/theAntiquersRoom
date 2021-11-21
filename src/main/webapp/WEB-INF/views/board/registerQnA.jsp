@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>modifyQnA.jsp</title>
 
-	<link rel="stylesheet" href="../../../resources/css/registerQnA.css">
+	<link rel="stylesheet" href="/resources/css/registerQnA.css">
 
 
 </head>
