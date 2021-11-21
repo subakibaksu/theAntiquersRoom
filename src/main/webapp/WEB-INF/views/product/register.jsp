@@ -5,16 +5,13 @@
 <html>
 <head>
     <title>/product/register.jsp</title>
-</head>
-<%--<script>--%>
-<%--    // 첨부파일 관련된 처리를 할 수 있도록 기본 동작을 막음--%>
-<%--    $(document).ready(function (e){--%>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<%--        let formObj = $("form[role='form']");--%>
-<%--        $("button[type='submit']").on("click", function (e){--%>
-<%--            e.preventDefault();--%>
-<%--            console.log("submit clicked");--%>
-<%--            let str = "";--%>
+<%--    <script>--%>
+<%--        $(function () {--%>
+<%--            $( "#startDatepicker").datepicker({--%>
 
 <%--            $(".uploadResult ul li").each(function(i, obj){--%>
 
@@ -36,57 +33,48 @@
 <%--            formObj.append(str).submit();--%>
 <%--        });--%>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.datepicker.setDefaults($.datepicker.regional['ko']);
+            $( "#startDate" ).datepicker({
+                showOn: "both",
+                changeMonth: true,
+                changeYear: true,
+                nextText: '다음 달',
+                prevText: '이전 달',
+                dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+                monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                dateFormat: "yyyy-MM-dd",
+                maxDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이후 날짜 선택 불가)
+                onClose: function( selectedDate ) {
+                    //시작일(startDate) datepicker가 닫힐때
+                    //종료일(endDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+                    $("#endDate").datepicker( "option", "minDate", selectedDate );
+                }
 
-<%--        let regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");--%>
-<%--        let maxSize = 5242880; //5MB--%>
+            });
+            $( "#endDate" ).datepicker({
+                changeMonth: true,
+                changeYear: true,
+                nextText: '다음 달',
+                prevText: '이전 달',
+                dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+                monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+                dateFormat: "yyyy-MM-dd",
+                maxDate: 0,                       // 선택할수있는 최대날짜, ( 0 : 오늘 이후 날짜 선택 불가)
+                onClose: function( selectedDate ) {
+                    // 종료일(endDate) datepicker가 닫힐때
+                    // 시작일(startDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 시작일로 지정
+                    $("#startDate").datepicker( "option", "maxDate", selectedDate );
+                }
 
-<%--        function checkExtension(fileName, fileSize){--%>
-
-<%--            if(fileSize >= maxSize){--%>
-<%--                alert("파일 사이즈 초과");--%>
-<%--                return false;--%>
-<%--            }--%>
-
-<%--            if(regex.test(fileName)){--%>
-<%--                alert("해당 종류의 파일은 업로드할 수 없습니다.");--%>
-<%--                return false;--%>
-<%--            }--%>
-<%--            return true;--%>
-<%--        }--%>
-
-<%--        let csrfHeaderName ="${_csrf.headerName}";--%>
-<%--        let csrfTokenValue="${_csrf.token}";--%>
-
-<%--// input type='file'의 내용이 변경되는 것을 감지하여 처리--%>
-<%--        $("input[type='file']").change(function(e){--%>
-
-<%--            let formData = new FormData();--%>
-
-<%--            let inputFile = $("input[name='uploadFile']");--%>
-
-<%--            let files = inputFile[0].files;--%>
-
-<%--            for(let i = 0; i < files.length; i++){--%>
-
-<%--                if(!checkExtension(files[i].name, files[i].size) ){--%>
-<%--                    return false;--%>
-<%--                }--%>
-<%--                formData.append("uploadFile", files[i]);--%>
-<%--            }--%>
-
-<%--            $.ajax({--%>
-<%--                url: '/uploadAjaxAction',--%>
-<%--                processData: false,--%>
-<%--                contentType: false,--%>
-<%--                beforeSend: function(xhr) {--%>
-<%--                    xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);--%>
-<%--                },--%>
-<%--                data:formData,--%>
-<%--                type: 'POST',--%>
-<%--                dataType:'json',--%>
-<%--                success: function(result){--%>
-<%--                    console.log(result);--%>
-<%--                    showUploadResult(result); //업로드 결과 처리 함수--%>
+            });
+        });
+    </script>
 
 <%--                }--%>
 <%--            }); //$.ajax--%>
