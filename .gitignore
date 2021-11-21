@@ -19,7 +19,8 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-
+root-context.xml
+servlet-context.xml
 # External tool builders
 .externalToolBuilders/
 
