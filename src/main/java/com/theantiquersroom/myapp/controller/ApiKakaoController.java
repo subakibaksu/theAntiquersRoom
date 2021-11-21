@@ -50,7 +50,7 @@ public class ApiKakaoController {
         
         String kakaoUniqueId = (String) session.getAttribute("kakaoUniqueId");
        
-        if(kakaoUniqueId != null) {
+        if(kakaoUniqueId != null) { //카카오로 로그인했다면, 카카오계정 로그아웃도 함께 진행
         	log.debug("===== kakao logout");
         	
             String logout_redirect_uri = "http://localhost:8090";
@@ -65,10 +65,11 @@ public class ApiKakaoController {
             
             return reqUrl;
             
-        }else {
+        }else { //일반회원 로그아웃 시 세션 초기화
+        	log.debug("===== 일반회원 logout");
             session.invalidate();
             
-            return "redirect:/";
+            return "/";
         }
     } //logout
    

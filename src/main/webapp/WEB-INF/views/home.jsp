@@ -86,7 +86,7 @@
     function logout() {
 
         $.ajax({
-            url: '/logout',
+            url: '/users/logout',
             type: 'get',
             async: false,
             dataType: 'text',

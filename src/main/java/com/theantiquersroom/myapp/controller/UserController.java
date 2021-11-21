@@ -78,13 +78,13 @@ public class UserController {
         return map;
     } // confirmEmail
 
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request, HttpSession session) {	// 로그아웃 실행
+    @RequestMapping("/logout")
+    public @ResponseBody String logout(HttpServletRequest request, HttpSession session) {	// 로그아웃 실행
         log.debug("logout() invoked.");
         
         String kakaoUniqueId = (String) session.getAttribute("kakaoUniqueId");
        
-        if(kakaoUniqueId != null) {
+        if(kakaoUniqueId != null) { //카카오로 로그인했다면, 카카오계정 로그아웃도 함께 진행
         	log.debug("===== kakao logout");
         	
             String logout_redirect_uri = "http://localhost:8090";
@@ -95,12 +95,15 @@ public class UserController {
             		+ "&logout_redirect_uri="
             		+ logout_redirect_uri;
             
-            return reqUrl;
-            
-        }else {
             session.invalidate();
             
-            return "redirect:/";
+            return reqUrl;
+            
+        }else { //일반회원 로그아웃 시 세션 초기화
+        	log.debug("===== 일반회원 logout");
+            session.invalidate();
+            
+            return "/";
         }
     } //logout
 
