@@ -1,9 +1,4 @@
 package com.theantiquersroom.myapp.controller;
-
-
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,13 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.theantiquersroom.myapp.domain.BoardDTO;
-import com.theantiquersroom.myapp.domain.QnADTO;
-import com.theantiquersroom.myapp.service.BoardService;
-
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 
@@ -28,8 +18,8 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class BoardController {
 
-    @Setter(onMethod_= { @Autowired} )
-    private BoardService service;
+//    @Setter(onMethod_= { @Autowired} )
+//    private BoardService service;
 
 
     @GetMapping("/review")
@@ -114,8 +104,11 @@ public class BoardController {
         log.info("\t+ list size: {}", list.size());
 
         model.addAttribute("list",list);
+    public void getQnA() {	// 문의사항 게시판으로 이동
+        log.debug("getQnA() invoked.");
 
-    } // getQnA
+
+    } // list
 
     @GetMapping("/getQnADetail")
     public void getQnADetail() {    // 문의사항 상세페이지로 이동
@@ -134,6 +127,8 @@ public class BoardController {
         log.debug("registerQnA({}) invoked.", dto);
         
         this.service.registerQnA(dto);
+
+
 
         return  "redirect:/board/QnA";
     } // registerQnA
