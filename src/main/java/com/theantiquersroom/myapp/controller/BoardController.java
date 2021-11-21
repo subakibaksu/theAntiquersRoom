@@ -110,7 +110,7 @@ public class BoardController {
 
         List<QnADTO> list = this.service.getQnAList();
 		log.info("\t+ list size: {}", list.size());
-
+assert list != null;
 		model.addAttribute("list",list);
 
     } // getQnA
