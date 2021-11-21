@@ -35,8 +35,8 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 	}
 	
 	@Override
-	public List<QnADTO> getList() {
-		log.debug("getList() invoked.");
+	public List<QnADTO> getQnAList() {
+		log.debug("getQnAList() invoked.");
 		
 		return this.mapper.getList();
 
