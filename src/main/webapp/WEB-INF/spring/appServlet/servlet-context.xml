@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -27,8 +25,8 @@
 
 	<beans:bean id="mailsender" class="com.theantiquersroom.myapp.utils.Mailsender"/>
 	<beans:bean id="userService" class="com.theantiquersroom.myapp.service.UserService" abstract="true"/>
-	<beans:bean id="boardService" class="com.theantiquersroom.myapp.service.BoardService" abstract="true"/>
 	<beans:bean id="productService" class="com.theantiquersroom.myapp.service.ProductService" abstract="true"/>
+	<beans:bean id="boardService" class="com.theantiquersroom.myapp.service.BoardService" abstract="true"/>
 	<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
 	<interceptors>
@@ -58,8 +56,8 @@
 
 
 	<beans:bean id="credential" class="com.amazonaws.auth.BasicAWSCredentials">
-		<beans:constructor-arg name="accessKey" value="-" />
-		<beans:constructor-arg name="secretKey" value="-" />
+		<beans:constructor-arg name="accessKey" value="" />
+		<beans:constructor-arg name="secretKey" value="" />
 	</beans:bean>
 
 	<beans:bean id="s3client" class="com.amazonaws.services.s3.AmazonS3Client">
