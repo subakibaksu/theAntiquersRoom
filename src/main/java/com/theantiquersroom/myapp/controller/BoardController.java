@@ -117,7 +117,7 @@ assert list != null;
 
     @GetMapping("/getQnADetail")
     public void getQnADetail() {	// 문의사항 상세페이지로 이동
-        log.debug("listPerPage() invoked.");
+        log.debug("getQnADetail() invoked.");
 
     } // getQnADetail
 
