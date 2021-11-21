@@ -25,8 +25,8 @@
 
 	<beans:bean id="mailsender" class="com.theantiquersroom.myapp.utils.Mailsender"/>
 	<beans:bean id="userService" class="com.theantiquersroom.myapp.service.UserService" abstract="true"/>
-	<beans:bean id="boardService" class="com.theantiquersroom.myapp.service.BoardService" abstract="true"/>
 	<beans:bean id="productService" class="com.theantiquersroom.myapp.service.ProductService" abstract="true"/>
+	<beans:bean id="boardService" class="com.theantiquersroom.myapp.service.BoardService" abstract="true"/>
 	<beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
 	<interceptors>
@@ -56,8 +56,8 @@
 
 
 	<beans:bean id="credential" class="com.amazonaws.auth.BasicAWSCredentials">
-		<beans:constructor-arg name="accessKey" value="-" />
-		<beans:constructor-arg name="secretKey" value="-" />
+		<beans:constructor-arg name="accessKey" value="AKIAY7E2ZWQTFXIDKZY6" />
+		<beans:constructor-arg name="secretKey" value="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" />
 	</beans:bean>
 
 	<beans:bean id="s3client" class="com.amazonaws.services.s3.AmazonS3Client">
