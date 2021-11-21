@@ -8,6 +8,6 @@ public interface BoardMapper {
 	
 	public Integer registerQnA(QnADTO dto);
 
-	public List<QnADTO> getList();
+	public List<QnADTO> getQnAList();
 	
 }
