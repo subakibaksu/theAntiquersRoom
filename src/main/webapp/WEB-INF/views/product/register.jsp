@@ -172,32 +172,41 @@
      <%--    상품 등록--%>
         <form action="/product/register" method="post" enctype="multipart/form-data">
 
-            <table>
-                <tr>
-                    <th>상품명</th>
-                    <td><input type="text" name="name" placeholder="상품명을 입력해주세요"></td>
-                </tr>
-                <tr>
-                    <th>상세정보</th>
-                    <td><input type="text" name="content" placeholder="상세정보를 입력해주세요"></td>
-                </tr>
-                <tr>
-                    <th>상품종류</th>
-                    <td><input type="text" name="categoryId" placeholder="상품의 종류를 선택해주세요"></td>
-                </tr>
-                <tr>
-                    <th>경매기간</th>
-                    <td><input type="text" name="startedAt" placeholder="시작시간을 선택해주세요 "></td>
-                    <td><input type="text" name="endedAt" placeholder="종료시간을 선택해주세요 "></td>
-                </tr>
-                <tr>
-                    <th>시작 가격</th>
-                    <td><input type="text" name="startedPrice" placeholder="시작가격을 입력해주세요"></td>
-                </tr>
-                <tr>
-                    <th>입찰단위금액</th>
-                    <td><input type="text" name="bidIncrement" placeholder="입찰 단위금액을 선택해주세요"></td>
-                </tr>
+                    <table id="infoTable">
+                        <tr>
+                            <th>상품명</th>
+                            <td><input type="text" name="name" placeholder="상품명을 입력해주세요"></td>
+                        </tr>
+                        <tr>
+                            <th>상세정보</th>
+                            <td><input type="text" name="content" placeholder="상세정보를 입력해주세요"></td>
+                        </tr>
+                        <tr>
+                            <th>상품종류</th>
+                            <td><input type="text" name="categoryId" placeholder="상품의 종류를 선택해주세요"></td>
+                        </tr>
+                        <tr>
+                            <th>경매기간</th>
+                            <input type="text" id="startDate" name="startedAt">
+                            <input type="text" id="endDate" name="endedAt">
+                        </tr>
+                        <tr>
+                            <th>시작 가격</th>
+                            <td><input type="text" name="startedPrice" placeholder="시작가격을 입력해주세요"></td>
+                        </tr>
+                        <tr>
+                            <th>입찰단위금액</th>
+                            <td>
+                                <select name="bidIncrement">
+                                    <option value="none">입찰 단위금액을 선택해주세요</option>
+                                    <option value="1000">1,000원</option>
+                                    <option value="5000">5,000원</option>
+                                    <option value="10000">10,000원</option>
+                                    <option value="100000">100,000원</option>
+                                </select>
+                            </td>
+
+                        </tr>
 
                 <tr>
                     <th>상품 이미지</th>
