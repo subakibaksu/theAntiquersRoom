@@ -1,6 +1,9 @@
 package com.theantiquersroom.myapp.controller;
 
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.theantiquersroom.myapp.domain.BoardDTO;
+import com.theantiquersroom.myapp.domain.QnADTO;
+import com.theantiquersroom.myapp.service.BoardService;
 
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 
@@ -22,8 +28,8 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class BoardController {
 
-//    @Setter(onMethod_= { @Autowired} )
-//    private BoardService service;
+    @Setter(onMethod_= { @Autowired} )
+    private BoardService service;
 
 
     @GetMapping("/review")
@@ -101,11 +107,15 @@ public class BoardController {
 //---------------------------------------------QnA=============================================
 
     @GetMapping("/QnA")
-    public void getQnA() {	// 문의사항 게시판으로 이동
-        log.debug("getQnA() invoked.");
+    public void getQnA(Model model) {	// 문의사항 게시판으로 이동
+        log.debug("list() invoked.");
 
+        List<QnADTO> list = this.service.getList();
+		log.info("\t+ list size: {}", list.size());
 
-    } // list
+		model.addAttribute("list",list);
+
+    } // getQnA
 
     @GetMapping("/getQnADetail")
     public void getQnADetail() {	// 문의사항 상세페이지로 이동
@@ -120,12 +130,12 @@ public class BoardController {
     } // registerQnA
 
     @PostMapping("/registerQnA")
-    public String registerQnA(Model model) { //작성된 문의사항 DB전달
-        log.debug("registerQnA({}) invoked.", model);
+    public String registerQnA(QnADTO dto) { //작성된 문의사항 DB전달
+    	log.debug("registerQnA({}) invoked.", dto);
+    	
+    	this.service.registerQnA(dto);
 
-        // DTO -> VO 변환
-
-        return  "redirect:/board/QnA";
+    	return  "redirect:/board/QnA";
     } // registerQnA
 
     @GetMapping("/modifyQnA")
