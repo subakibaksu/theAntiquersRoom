@@ -7,7 +7,7 @@
 <mapper namespace="com.theantiquersroom.myapp.mapper.BoardMapper">
 
 	<select
-        id="getList"
+        id="getQnAList"
         resultType="com.theantiquersroom.myapp.domain.QnADTO">
         
         <![CDATA[
