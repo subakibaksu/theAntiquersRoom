@@ -1,4 +1,10 @@
+<%@page import="java.time.LocalDate"%>
+<%@page import="java.time.format.DateTimeFormatter"%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 
 <!DOCTYPE html>
@@ -39,24 +45,22 @@
 	                <th>경매기간</th>
 	            </tr>
 	        </thead>
-	
-	        <tbody>    
-	                <tr>
-	                    <td><img alt="" src="https://live.staticflickr.com/2827/10767844126_63b11d6c53_b.jpg" height="100px" width="100px"></td>
-	                    <td>productName</td>
-	                    <td>categoryName</td>
-	                    <td>startedPrice</td>
-	                    <td>현재가격</td>
-	            		<td>
-	                    <b>시작</b> MM월 dd일 HH시<br>
-	                    <b>종료</b> MM월 dd일 HH시
-	                    </td>
-	                </tr>
-	        </tbody>
-	
-	        <tfoot>
-	
-	        </tfoot>
+			<tbody>    
+				<c:forEach items="${requestedList}" var="reqProduct">
+					<tr>
+						<td><a href="/product/getDetail?pId=${reqProduct.pId}"><img alt="" src="https://live.staticflickr.com/2827/10767844126_63b11d6c53_b.jpg" height="100px" width="100px"></a></td>
+						<td><a href="/product/getDetail?pId=${reqProduct.pId}"><c:out value="${reqProduct.name}"/></a></td>
+						<td><c:out value="${reqProduct.categoryName}"/></td>
+						<td><c:out value="${reqProduct.nickname}"/></td>
+						<td><c:out value="${reqProduct.startedPrice}"/></td>
+						<td>
+						<b>시작</b> ${reqProduct.startedAt.format(DateTimeFormatter.ofPattern("MM월 dd일 HH시"))}<br>
+						<b>종료</b> ${reqProduct.endedAt.format(DateTimeFormatter.ofPattern("MM월 dd일 HH시"))}
+						</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+	       
 	    </table>
 	
 	    <p>&nbsp;</p>

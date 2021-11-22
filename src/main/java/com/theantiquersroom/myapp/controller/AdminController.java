@@ -1,13 +1,25 @@
 package com.theantiquersroom.myapp.controller;
 
 
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.theantiquersroom.myapp.domain.MyPageDTO;
+import com.theantiquersroom.myapp.domain.MypageCriteria;
+import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.service.AdminService;
+
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 
@@ -17,21 +29,34 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/admin")
 @Controller
 public class AdminController {
+	
+    @Setter(onMethod_= {@Autowired})
+    private AdminService service;
 
-    @GetMapping("/main")
-    public String getMain() {
-        log.debug("getMain() invoked.");
-
-        return "/admin/main";
+    @GetMapping({"/main", "/requestedList"}) //승인요청상품 리스트로 이동(어드민 메인)
+    public String getRequestedProductList(
+    		HttpSession session,
+    		@ModelAttribute("cri") MypageCriteria cri,
+    		Model model
+    		) {
+        log.debug("getRequestedProductList({}, {}) invoked.", cri, model);
+        
+        List<ProductDTO> requestedList = this.service.getRequestedList(cri);
+ 		log.info("\t+ requestedList size: {}", requestedList.size());
+ 		
+ 		model.addAttribute("requestedList",requestedList);
+ 		
+ 		//페이징 처리
+ 		Integer totalAmount = this.service.getRequestedListTotal();
+		
+		MyPageDTO pageDTO = new MyPageDTO(cri, totalAmount);
+		
+		model.addAttribute("pageMaker", pageDTO);
+ 		
+        return "/admin/requestedList";
     } // getRequestedProductList()
+
     
-    @GetMapping("/getRequestedProductList")
-    public String getRequestedProductList() {
-        log.debug("getRequestedProductList() invoked.");
-
-        return null;
-    } // getRequestedProductList()
-
     @PostMapping("/confirmRequestedProduct")
     public String confirmRequestedProduct() {
         log.debug("confirmRequestedProduct() invoked.");

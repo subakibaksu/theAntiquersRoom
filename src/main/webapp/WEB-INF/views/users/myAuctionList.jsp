@@ -101,10 +101,7 @@
                         </tr>
                     </c:forEach>
                 </tbody>
-    
-                <tfoot>
-    
-                </tfoot>
+
             </table>
     
             <p>&nbsp;</p>
