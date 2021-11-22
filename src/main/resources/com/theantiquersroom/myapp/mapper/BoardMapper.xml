@@ -6,4 +6,66 @@
 
 <mapper namespace="com.theantiquersroom.myapp.mapper.BoardMapper">
 
+
+    <select
+        id="getQnAList"
+        resultType="com.theantiquersroom.myapp.domain.QnADTO">
+        
+        <![CDATA[
+
+            SELECT
+				bindex,
+				created_at as createdAt,
+				updated_at as updatedAt,
+				title,
+				content,
+				ref,
+				depth,
+				step,
+				author,
+				p_id as pId
+
+            FROM board
+
+        ]]>
+    </select>
+    
+    <insert
+    		 id="registerQnA" 
+    		 parameterType="com.theantiquersroom.myapp.domain.QnADTO">
+    		 
+        <![CDATA[
+            INSERT INTO board
+            (
+				bindex,
+				created_at,
+				updated_at,
+				title,
+				content,
+				ref,
+				depth,
+				step,
+				author,
+				p_id 
+            )
+            VALUES
+            (
+               #{bindex},
+                now(),
+             	now(),
+                #{title},
+                #{content},
+                #{ref},
+                #{depth},
+                #{step},
+                #{author},
+                #{pId}
+
+            )
+        ]]>
+    </insert>
+    
+    
 </mapper>
+
+

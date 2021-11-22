@@ -8,18 +8,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.theantiquersroom.myapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.theantiquersroom.myapp.domain.MyPageDTO;
@@ -84,13 +78,33 @@ public class UserController {
         return map;
     } // confirmEmail
 
-    @GetMapping("/logout")
-    public String logout(HttpServletRequest request) {	// 로그아웃 실행
+    @RequestMapping("/logout")
+    public @ResponseBody String logout(HttpServletRequest request, HttpSession session) {	// 로그아웃 실행
         log.debug("logout() invoked.");
-        HttpSession session = request.getSession();
-        session.invalidate();
         
-        return "redirect:/";
+        String kakaoUniqueId = (String) session.getAttribute("kakaoUniqueId");
+       
+        if(kakaoUniqueId != null) { //카카오로 로그인했다면, 카카오계정 로그아웃도 함께 진행
+        	log.debug("===== kakao logout");
+        	
+            String logout_redirect_uri = "http://localhost:8090";
+
+            String reqUrl = 
+            		"https://kauth.kakao.com/oauth/logout?client_id="
+            		+ ApiKakaoController.REST_API_KEY
+            		+ "&logout_redirect_uri="
+            		+ logout_redirect_uri;
+            
+            session.invalidate();
+            
+            return reqUrl;
+            
+        }else { //일반회원 로그아웃 시 세션 초기화
+        	log.debug("===== 일반회원 logout");
+            session.invalidate();
+            
+            return "/";
+        }
     } //logout
 
     @GetMapping("/resetPwd")

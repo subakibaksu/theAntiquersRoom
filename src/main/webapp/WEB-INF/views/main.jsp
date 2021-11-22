@@ -7,34 +7,35 @@
     <meta charset="UTF-8">
     <title>main.jsp</title>
 
+    <link rel="stylesheet" href="resources/css/main.css">
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
-
-    <script>
-        $(function(){
-            console.clear;
-            console.log('jquery started..');
-
-            $('#logoutBtn').click(function(){
-                console.log('click event triggered..');
-
-                self.location='/users/logout';
-            }); //onclick
-        }); //.jq
-    </script>
     
 </head>
 <body>
 
-    <h3>/WEB-INF/views/main.jsp</h3>
+    <div>
+        <jsp:include page="common/header.jsp"></jsp:include>
+    </div>
 
-    <hr>
+    <div id="mainWrapper">
+        <section id="mainBanner">
 
-    <h3>${sessionScope.__AUTH_ANTIQUE__}</h3>
+        </section>
 
-    <hr>
+        <section id="newProduct">
 
-    <button type="button" id="logoutBtn">로그아웃</button>
+        </section>
+
+        <section id="endSoonP">
+            
+        </section>
+    </div>
+
+    <div>
+        <jsp:include page="common/footer.jsp"></jsp:include>
+    </div>
 
 </body>
 </html>

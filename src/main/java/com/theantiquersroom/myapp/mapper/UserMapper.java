@@ -73,6 +73,8 @@ public interface UserMapper {
     //카카오계정 ID 조회
 	public abstract UserDTO getKakaoUser(String kakaoUniqueId);
 	
-
+	// 카카오 회원가입
+	public abstract Integer insertKakaoUser(UserDTO user);
+	
 
 } // end interface

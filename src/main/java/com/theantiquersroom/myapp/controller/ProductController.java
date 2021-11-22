@@ -1,6 +1,9 @@
 package com.theantiquersroom.myapp.controller;
 
 import com.theantiquersroom.myapp.domain.*;
+import com.theantiquersroom.myapp.domain.ProductFormDTO;
+
+import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.service.ProductService;
 
 import lombok.NoArgsConstructor;
@@ -9,6 +12,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.UserDTO;
+import com.theantiquersroom.myapp.domain.ProductCommand;
 import com.theantiquersroom.myapp.service.ProductService;
 import com.theantiquersroom.myapp.utils.ProductPageMaker;
 import lombok.Setter;
@@ -37,7 +42,7 @@ import javax.servlet.http.HttpSession;
 public class ProductController {
 
 	
-	@Setter(onMethod_ = {@Autowired} )
+	@Setter(onMethod_= {@Autowired})
 	private ProductService service;
 	
 	
@@ -75,12 +80,15 @@ public class ProductController {
     /*상품 등록정보 DB전달*/
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public String register(ProductFormDTO product, @SessionAttribute("userId") String userId) {
+    public String register(
+       ProductFormDTO product,
+       @SessionAttribute(LoginController.authKey) UserDTO user
+    ) throws Exception{
 
-        product.setUserId(userId);
+        product.setUserId(user.getUserId());
+
         this.service.registerProduct(product);
-
-        return "/main"; // 추후 완료 alert으로 변경
+        return "/product/list"; // 추후 완료 alert으로 변경
     } // Post register()
 
     /*유찰된 상품 재등록 페이지로 이동*/
@@ -109,8 +117,12 @@ public class ProductController {
 
     /*상품 삭제*/
     @PostMapping("/remove")
-    public void remove(Model model) {
+    public String remove(Integer pId) {
+    	log.debug("remove({}) invoked.", pId);
 
+    	boolean isRemoved = this.service.removeProduct(pId);
+
+    	return "/productList";
     } // Post remove()
 
     /*상품 검색*/
@@ -127,11 +139,10 @@ public class ProductController {
     	ProductDTO dto = this.service.getDetail(pId);
     	log.info("/t+ dto: {}", dto);
     	assert dto != null;
-
+    	
     	model.addAttribute("product", dto);
-    	model.addAttribute("pId",pId);
 
-//    String detailPage = "detail?pId="+pId;
+//    String detailPage = "detail?pId="+pId; //최종적으로는 pId 전달해야되므로, 해당 주석 지우지 말아주세요!
 
     	return "/detail";
     } // getDetail()
