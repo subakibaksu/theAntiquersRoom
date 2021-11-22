@@ -50,7 +50,7 @@
         <button type="submit">click</button>
     </form>
 
-
+    <a href="/confirmEmail">temp</a>
     <a href="/users/resetPwd">resetPwd</a>
 
     <hr>

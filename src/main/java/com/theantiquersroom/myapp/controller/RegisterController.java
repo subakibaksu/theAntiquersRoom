@@ -1,5 +1,6 @@
 package com.theantiquersroom.myapp.controller;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -90,6 +91,43 @@ public class RegisterController {
         return resultMap;
         
     } //checkPhone
+
+    @GetMapping("/confirmEmail")
+    public void confirmEmail(){
+        log.debug("confirmEmail() invoked");
+
+    } // confirmEmail
+
+    @PostMapping("/sendEmail")
+    public @ResponseBody Map<Object,Object> sendEmail(@RequestBody Map<String,String> userMap) throws Exception {    //입력받은 이메일로 인증코드 발송
+
+        log.debug("confirmEmail() invoked. userid : {}",userMap.get("userId"));
+
+        //Ajax의 결과값을 Json으로 받기 위해 Map객체를 생성
+        Map<Object,Object> map = new HashMap<Object, Object>();
+
+        boolean mailSendResult = service.sendEmail(userMap.get("userId"));
+        log.debug("result : {}", mailSendResult);
+        map.put("check",mailSendResult);
+
+        return map;
+    } // sendEmail
+
+    @PostMapping("/confirmEmail")
+    public @ResponseBody Map<Object, Object> confirmEmail(
+            @RequestBody Map<String, String> auth) throws ParseException {    //DB인증코드 입력받은 인증코드를 비교
+
+        log.debug("confirmEmail() invoked. userId : {} auth : {}" ,auth.get("userId"));
+
+        //Ajax의 결과값을 Json으로 받기 위해 Map객체를 생성
+        Map<Object, Object> map = new HashMap<Object, Object>();
+
+        boolean confirmResult = service.confirmEmail(auth.get("userId") ,auth.get("auth"));
+        log.debug("confirmResult : {}", confirmResult);
+        map.put("confirmResult",confirmResult);
+
+        return map;
+    } // confirmEmail
 	
 	
 	
