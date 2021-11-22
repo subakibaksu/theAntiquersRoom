@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.theantiquersroom.myapp.domain.BoardDTO;
+import com.theantiquersroom.myapp.domain.BoardQnACriteria;
 import com.theantiquersroom.myapp.domain.QnADTO;
+import com.theantiquersroom.myapp.domain.QnAPageMakeDTO;
 import com.theantiquersroom.myapp.service.BoardService;
 
 import lombok.NoArgsConstructor;
@@ -104,16 +106,31 @@ public class BoardController {
 
 //---------------------------------------------QnA=============================================
 
-    @GetMapping("/QnA")
-    public void getQnA(Model model) {	// 문의사항 게시판으로 이동
-        log.debug("list() invoked.");
+//    @GetMapping("/QnA")
+//    public void getQnA(Model model) {	
+//        log.debug("list() invoked.");
+//
+//        List<QnADTO> list = this.service.getQnAList();
+//		log.info("\t+ list size: {}", list.size());
+//		assert list != null;
+//		model.addAttribute("list",list);
+//
+//    } // getQnA
+    
+  @GetMapping("/QnA")
+  public void getQnA(Model model, BoardQnACriteria cri) {	
 
-        List<QnADTO> list = this.service.getQnAList();
-		log.info("\t+ list size: {}", list.size());
-assert list != null;
-		model.addAttribute("list",list);
+	  log.debug("getQnA() invoked.");
+	  
+		model.addAttribute("list",service.getQnAListPaging(cri));
+		
+		int total = service.getQnATotal();
+		
+		QnAPageMakeDTO pageMake = new QnAPageMakeDTO(cri, total);
+		
+		model.addAttribute("pageMaker", pageMake);
 
-    } // getQnA
+  } // getQnA 페이징처리
 
     @GetMapping("/getQnADetail")
     public void getQnADetail() {	// 문의사항 상세페이지로 이동

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.theantiquersroom.myapp.domain.BoardQnACriteria;
 import com.theantiquersroom.myapp.domain.QnADTO;
 import com.theantiquersroom.myapp.mapper.BoardMapper;
 
@@ -23,15 +24,16 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 	@Setter(onMethod_= {@Autowired} )
 	private BoardMapper mapper;
 	
+	/* 문의게시판 목록 */
 	@Override
 	public List<QnADTO> getQnAList() {
 		log.debug("getQnAList() invoked.");
 		
 		return this.mapper.getQnAList();
 
-	} // 문의사항 등록
+	} 
 	
-
+	/* 문의게시판 등록 */
 	@Override
 	public boolean registerQnA(QnADTO dto) {
 		log.debug("registerQnA({}) invoked.", dto);
@@ -41,11 +43,22 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 		
 		return affectedRows==1;
 		
-	} // 문의사항 리스트 보기
+	} 
 	
-
-
+	/* 문의게시판 목록(페이징 적용) */
+	@Override
+	public List<QnADTO> getQnAListPaging(BoardQnACriteria cri) {
+		
+		return mapper.getQnAListPaging(cri);
+	}
 	
+    /* 문의게시물 총 갯수 */
+	@Override
+	public int getQnATotal() {
+
+		return mapper.getQnATotal();
+	}
+
 	
 //=============================//
 	@Override
@@ -59,6 +72,10 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
+
 
 
 

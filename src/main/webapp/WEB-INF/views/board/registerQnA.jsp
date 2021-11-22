@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>modifyQnA.jsp</title>
+<title>registerQnA.jsp</title>
 
 	<link rel="stylesheet" href="/resources/css/registerQnA.css">
 

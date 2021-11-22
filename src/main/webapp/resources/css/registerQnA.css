@@ -1,0 +1,24 @@
+@charset "UTF-8";
+
+    #wrapper {
+
+        width: 810px;
+        height: 600px;
+
+
+
+        background: #FFFFFF;
+        border: 1px solid #C2B1B1;
+        box-sizing: border-box;
+        border-radius: 50px;
+
+        margin: 6rem auto;
+    
+    }
+    
+    
+    #title {
+    
+            text-align: center;
+    
+    }
