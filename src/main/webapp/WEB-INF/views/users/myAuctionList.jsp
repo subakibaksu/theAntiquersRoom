@@ -19,9 +19,13 @@
     	
     </head>
     <body>
-        <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+   		<!-- header -->
+		<header>
+			<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	
+	        <jsp:include page="/WEB-INF/views/common/mypageHeader.jsp"/>
+        </header>
 
-        <jsp:include page="/WEB-INF/views/common/mypageHeader.jsp"/>
 
         <script>
             $(function(){

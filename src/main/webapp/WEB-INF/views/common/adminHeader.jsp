@@ -33,8 +33,8 @@
 
 <body>
 	<!-- header -->
-	<header id="header_container">
-		<div id="logoNsearch">
+	<header id="header_container" style="width: 100%;">
+		<div id="logo_container">
 			<!-- 사이트 로고-->
 			<div id="header_logo" role="banner">
 				<a href="#">
