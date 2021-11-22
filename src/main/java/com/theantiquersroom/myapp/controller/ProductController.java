@@ -37,7 +37,7 @@ import javax.servlet.http.HttpSession;
 public class ProductController {
 
 	
-	@Setter(onMethod_= {@Autowired})
+	@Setter(onMethod_ = {@Autowired} )
 	private ProductService service;
 	
 	
@@ -155,8 +155,6 @@ public class ProductController {
             bidHistoryDTO.setUserId(userDTO.getUserId());
             bidHistoryDTO.setBidPrice(Integer.parseInt((String) map.get("bidPrice")));
             bidHistoryDTO.setPId(Integer.parseInt((String)map.get("pId")));
-
-            log.debug(bidHistoryDTO.toString());
             boolean isBided = service.bid(bidHistoryDTO);
 
 
