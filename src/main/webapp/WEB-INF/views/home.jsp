@@ -25,6 +25,12 @@
 
                 self.location='/users/getMyAuctionList';
             }); //myAuctionBtn_onclick
+
+            $('#adminBtn').click(function(){
+                console.log('adminBtn click event triggered..');
+
+                self.location='/admin/main';
+            }); //myAuctionBtn_onclick
         }); //.jq
     </script>
 </head>
@@ -62,6 +68,9 @@
 
     <hr>
     <button type="button" id="myAuctionBtn">마이옥션리스트</button>
+
+    <hr>
+    <button type="button" id="adminBtn">어드민페이지</button>
 
 	<hr>
 	<a href="/product/getDetail">상세보기</a>

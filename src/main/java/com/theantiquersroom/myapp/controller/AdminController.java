@@ -18,6 +18,13 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class AdminController {
 
+    @GetMapping("/main")
+    public String getMain() {
+        log.debug("getMain() invoked.");
+
+        return "/admin/main";
+    } // getRequestedProductList()
+    
     @GetMapping("/getRequestedProductList")
     public String getRequestedProductList() {
         log.debug("getRequestedProductList() invoked.");

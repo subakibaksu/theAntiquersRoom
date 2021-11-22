@@ -5,9 +5,21 @@
     padding: 0;
 }
 
+/* 1. html, body의 최소 높이를 지정 */
+html,
+body {
+    min-height: 100vh;
+}
+
 body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+}
+
+/* 2. header, footer 사이에 본문 내용이 들어갈 div에 flex-grow설정 */
+/* 해당 설정은 body에 display: flex 해주었을때만 가능! */
+#mainWrapper {
+    flex-grow: calc(100vh-238px);
 }
