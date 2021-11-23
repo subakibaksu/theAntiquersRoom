@@ -69,7 +69,7 @@
                                 <button id="upBtn" type="button" onclick='changeBid("up")'>
                                     <i class="fas fa-chevron-circle-up" ></i>
                                 </button>
-                                <input hidden name="pId" value="${pId}">
+                                <input hidden name="pId" value="${product.pId}">
                                 <input type="text" id="bidPrice" name="bidPrice" value="${product.bidIncrement}">원
                                 <button id="downBtn" type="button" onclick='changeBid("down")'>
                                     <i class="fas fa-chevron-circle-down" ></i>
