@@ -5,7 +5,19 @@
     padding: 0;
 }
 
-#wrapper {
+html,
+body {
+    min-height: 100vh;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+}
+
+#detail_wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -79,7 +91,8 @@
 }
 
 #bidTd {
-    text-align: end !important;
+    display: flex;
+    justify-content: flex-end;
 }
 
 #bidPrice {

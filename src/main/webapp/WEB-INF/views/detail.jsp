@@ -7,20 +7,37 @@
     <meta charset="UTF-8">
     <title>detail.jsp</title>
     
-    <link rel="stylesheet" href="../../../resources/css/detail.css">
+    <link rel="stylesheet" href="/resources/css/detail.css">
 
     <!-- fontAwdome for icons -->
     <script src="https://kit.fontawesome.com/91815d1378.js" crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
-    <script src="../../../resources/js/detail.js"></script>
+    <script src="/resources/js/detail.js"></script>
+
+    <script>
+        $(function(){
+            // 첫 로드 시, 첫번째 사진 포커스
+            var firstFocusImg = $('#pImg_1').attr('src');
+            $('#focusedImg').attr('src', firstFocusImg);
+
+            // 이후, 작은 사진들 클릭하는 대로 포커스 변경
+            $('.pImg').on("click", function(){
+                var FocusImg = $(this).attr('src');
+
+                $('#focusedImg').attr('src', FocusImg);
+            });
+        });
+    </script>
 
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-	
-    <div id="wrapper">
+    <header>
+        <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+    </header>
+
+    <div id="detail_wrapper">
         <section id="pInfo">
             <div id="pImgDiv">
                 <table id="pImgTable">
@@ -29,12 +46,12 @@
 
                     <tr>
                         <td colspan="3">
-                            <img id="focusedImg" src="../../../resources/images/testCat.png" alt="">
+                            <img id="focusedImg" src="" alt="">
                         </td>
                     </tr>
                     <tr>
-                        <c:forEach var="imgUrl" items="${product.imageUrls}">
-                            <td><img class="pImg" src="${imgUrl}" alt=""></td>
+                        <c:forEach var="imgUrl" items="${product.imageUrls}" varStatus="status">
+                            <td><img class="pImg" id="pImg_${status.count}" src="${imgUrl}" alt=""></td>
                         </c:forEach>
                         
                     </tr>
@@ -126,8 +143,11 @@
                 </tr>
             </table>
         </section>
-
     </div>
+
+    <footer id="footerBox">
+        <jsp:include page="common/footer.jsp"></jsp:include>
+    </footer>
 
 
     <!-- jQuery/script -->
