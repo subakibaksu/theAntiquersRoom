@@ -105,17 +105,6 @@ public class BoardController {
 
 
 //---------------------------------------------QnA=============================================
-
-//    @GetMapping("/QnA")
-//    public void getQnA(Model model) {	
-//        log.debug("list() invoked.");
-//
-//        List<QnADTO> list = this.service.getQnAList();
-//		log.info("\t+ list size: {}", list.size());
-//		assert list != null;
-//		model.addAttribute("list",list);
-//
-//    } // getQnA
     
   @GetMapping("/QnA")
   public void getQnA(Model model, BoardQnACriteria cri) {	
