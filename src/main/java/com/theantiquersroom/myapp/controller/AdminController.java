@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.theantiquersroom.myapp.domain.MyPageDTO;
 import com.theantiquersroom.myapp.domain.MypageCriteria;
@@ -33,7 +35,8 @@ public class AdminController {
     @Setter(onMethod_= {@Autowired})
     private AdminService service;
 
-    @GetMapping({"/main", "/requestedList"}) //승인요청상품 리스트로 이동(어드민 메인)
+    //승인요청상품 리스트로 이동(어드민 메인)
+    @GetMapping({"/main", "/requestedList"}) 
     public String getRequestedProductList(
     		HttpSession session,
     		@ModelAttribute("cri") MypageCriteria cri,
@@ -55,14 +58,29 @@ public class AdminController {
  		
         return "/admin/requestedList";
     } // getRequestedProductList()
-
     
-    @PostMapping("/confirmRequestedProduct")
-    public String confirmRequestedProduct() {
-        log.debug("confirmRequestedProduct() invoked.");
+    //판매요청 경매상품 승인
+ 	@PostMapping("/confirmRequest")
+ 	public String confirmRequestedProduct(@RequestParam(value="checkBoxArr[]") Integer[] confirmArr, RedirectAttributes rttrs) {
+ 		log.debug("confirmRequestedProduct({}, {}) invoked.", confirmArr,rttrs);
 
-        return "redirect:/admin/getRequestedProductList";
-    } // confirmRequestedProduct()
+// 		String pids = "";
+// 		for(int i = 0; i< confirmArr.length; i++) {
+// 			pids += "'" + confirmArr[i] + "'";
+// 			if(i < confirmArr.length-1) {
+// 				pids += ",";
+// 			}
+// 		}
+ 		
+ 		log.info(confirmArr);
+ 		
+ 		for(int i = 0; i< confirmArr.length; i++) {
+ 	 		boolean result=this.service.modifyStatus(confirmArr[i]);
+ 		}
+ 			
+ 		return "redirect:/admin/main";
+ 	} //confirmRequestedProduct
+    
 
     @GetMapping("/auctionProductList")
     public void auctionProductList() {

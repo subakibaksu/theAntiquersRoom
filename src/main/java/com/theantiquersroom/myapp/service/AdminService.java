@@ -16,5 +16,8 @@ public interface AdminService {
     
     // 승인 요청 리스트 총 레코드 개수 반환
   	public abstract Integer getRequestedListTotal();
+  	
+  	// 경매 승인
+  	public abstract Boolean modifyStatus(Integer pId);
     
 } // end interface

@@ -50,5 +50,17 @@
         ]]>
     </select>   
     
+    <!-- 승인요청 상품 경매상태 변경 -->
+    <update id="updateStatus">
+    
+
+        UPDATE product
+        SET 
+            status='승인완료'
+        WHERE
+            p_id = #{pId}
+
+    </update>
+    
     
 </mapper>
