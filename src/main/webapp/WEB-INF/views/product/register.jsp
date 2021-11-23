@@ -4,100 +4,100 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html>
-<head>
-    <title>/product/register.jsp</title>
+    <head>
+        <title>/product/register.jsp</title>
 
-    <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+        <%--        header--%>
+        <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
-    <%--    datepicker 관련--%>
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <%--        css--%>
+        <link rel="stylesheet" href="/resources/css/product/register.css">
 
-    <%--    summernote 관련--%>
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath}/resources/js/summernote/summernote-lite.js"></script>
-    <script type="text/javascript"
-            src="${pageContext.request.contextPath}/resources/js/summernote/lang/summernote-ko-KR.js"></script>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/summernote/summernote-lite.css">
+        <%--    datetimepicker 관련 --%>
+        <link rel="stylesheet" href="/resources/jquery.datetimepicker.min.css">
+        <script type="text/javascript"
+                src="/resources/jquery.datetimepicker.full.min.js"></script>
 
-<%--            });--%>
+        <%--    summernote 관련 --%>
+        <script type="text/javascript"
+                src="${pageContext.request.contextPath}/resources/js/summernote/summernote-lite.js"></script>
+        <script type="text/javascript"
+                src="${pageContext.request.contextPath}/resources/js/summernote/lang/summernote-ko-KR.js"></script>
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/summernote/summernote-lite.css">
 
-    <script>
-        //datepicker 관련
-        $(document).ready(function () {
-            $.datepicker.setDefaults($.datepicker.regional['ko']);
-            $("#startDate").datepicker({
-                changeMonth: true,
-                changeYear: true,
-                nextText: '다음 달',
-                prevText: '이전 달',
-                dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-                monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-                monthNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-                dateFormat: "yy-MM-dd 00:00:00",
-                minDate: 0,                       // 선택할수있는 최소날짜, ( 0 : 오늘 이전 날짜 선택 불가)
-                onClose: function (selectedDate) {
-                    //시작일(startDate) datepicker가 닫힐때
-                    //종료일(endDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
-                    $("#endDate").datepicker("option", "minDate", selectedDate);
-                }
-
+        <script type="text/javascript">
+            <%--    datetimepicker --%>
+            $(document).ready(function () {
+                productSubmitDate()
             });
-            $("#endDate").datepicker({
-                changeMonth: true,
-                changeYear: true,
-                nextText: '다음 달',
-                prevText: '이전 달',
-                dayNames: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
-                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-                monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-                monthNames: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'],
-                dateFormat: "yy-MM-dd 00:00:00",
-                minDate: 0,                       // 선택할수있는 최날짜, ( 0 : 오늘 이전 날짜 선택 불가)
-                onClose: function (selectedDate) {
-                    // 종료일(endDate) datepicker가 닫힐때
-                    // 시작일(startDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 시작일로 지정
-                    $("#startDate").datepicker("option", "maxDate", selectedDate);
-                }
 
-            });
-        });
-    </script>
+            function productSubmitDate() {
+                $.datetimepicker.setLocale('ko'); // 언어 설정
+                let $startDate = $('#startDate');
+                let $endDate = $('#endDate');
 
-    <script type="text/javascript">
-                $(document)
-                    .ready(
-                        function () {
-                            let namecheck = false;
-                            let categoryIdcheck = false;
-                            let startedPricechcheck = false;
-                            let bidIncrementcheck = false;
-                            let startedAtcheck = false;
-                            let endedAtcheck = false;
-                            let contentcheck = false;
-                            // let imagescheck = false;
+                $startDate.datetimepicker({
+                    timepicker: true,
+                    minDate: 0, // 최소 날짜
+                    lang: 'ko',
+                    format: 'Y-m-d H:00:00',
+                    scrollMonth: false,
+                    scrollInput: false,
+                    onShow: function (ct) {
+                        this.setOptions({
+                            maxDate: $endDate.val() ? $endDate.val() : false
+                        })
+                    },
+                });
+
+                $endDate.datetimepicker({
+                    timepicker: true,
+                    minDate: 0, // 최소 날짜
+                    lang: 'ko',
+                    format: 'Y-m-d H:00:00',
+                    scrollMonth: false,
+                    scrollInput: false,
+
+                    onShow: function (ct) {
+                        this.setOptions({
+                            minDate: $startDate.val() ? $startDate.val() : false
+                        })
+                    }
+                });
+            }
+
+            <%-- 빈값 찾기 --%>
+            $(document)
+                .ready(
+                    function () {
+                        let namecheck = false;
+                        let categoryIdcheck = false;
+                        let startedPricecheck = false;
+                        let bidIncrementcheck = false;
+                        let startedAtcheck = false;
+                        let endedAtcheck = false;
+                        let contentcheck = false;
+                        let imagescheck = false;
 
                             $('#register').click(function (){
                                 Checkform();
                                 buttonlive();
                             });
 
-                            // 제출버튼 활성화 함수
-                            function buttonlive() {
-                                if (namecheck && categoryIdcheck && startedPricecheck
-                                    && bidIncrementcheck && startedAtcheck && endedAtcheck
-                                    && contentcheck) {
-                                    console.log("buttonlive true");
-                                    $("#register").click(function () {
-                                        alert("성공적으로 경매가 요청되었습니다.");
-                                    });
-                                } else {
-                                    alert("입력칸을 모두 채워주세요.");
-                                    $("#register").prop("disabled", true);
-                                }
+                        // 제출버튼 활성화 함수
+                        function buttonlive() {
+                            if (namecheck && categoryIdcheck && startedPricecheck
+                                && bidIncrementcheck && startedAtcheck && endedAtcheck
+                                && contentcheck && imagescheck) {
+                                console.log("buttonlive true");
+                                $("#register").click(function () {
+                                    alert("성공적으로 경매가 요청되었습니다.");
+                                });
+                            } else {
+                                alert("입력칸을 모두 채워주세요.");
+                                $("#register").prop("disabled", true);
                             }
+                        }
 
                             // 입력 값 체크
                             function Checkform() {
@@ -129,115 +129,28 @@
                                     $('#summernote').focus();
                                 } else contentcheck = true;
 
-                                // if ($('#images').val() == "") {
-                                //     $('#images').focus();
-                                // } else imagescheck = true;
-                            }
-                        });
+                            if ($('#image1').val() == "") {
+                                $('#image1').focus();
+                            } else imagescheck = true;
+                        }
+                    });
+        </script>
+    </head>
 
-    </script>
-
-
-    <style>
-        #wrapper {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-
-            padding-top: 5rem;
-            padding-bottom: 5rem;
-        }
-
-        #pInfo {
-            display: flex;
-
-            margin-bottom: 3rem;
-        }
-
-        #infoDiv {
-            padding-top: 5em;
-            margin-left: 2em;
-        }
-
-        #infoTable {
-            border-collapse: collapse;
-            /*border-spacing: 0px 0px;*/
-            margin-left: auto;
-            margin-right: auto;
-            width: 50rem;
-        }
-
-        #infoTable tr {
-            border-block: 1px solid rgba(194, 177, 177, 0.9);
-        }
-
-        #infoTable th,
-        #infoTable td {
-            text-align: left;
-            font-size: 1rem;
-            padding: 1rem 1rem;
-        }
-
-        #register {
-            color: rgba(194, 177, 177, 0.9);
-            font-weight: 800;
-
-            border: 2px solid rgba(194, 177, 177, 0.9);
-            background-color: rgba(255, 255, 255, 0.7);
-            border-radius: 8px;
-            text-align: center;
-
-            display: block;
-            width: 6rem;
-            height: 2.3rem;
-            padding-bottom: 0.2rem;
-            margin: auto;
-        }
-
-        #subject {
-            text-align: center;
-            line-height: 4rem;
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        input, select {
-            border: 1px solid rgba(194, 177, 177, 0.9);
-            width: 13rem;
-            height: 1.6rem;
-        }
-
-        #infoTable span {
-            font-size: 0.8rem;
-        }
-
-        .image2 {
-            padding-top: 1em;
-        }
-
-        .vali {
-            color: red;
-        }
-    </style>
-
-<body>
-
-
-<%--    summernote 관련 script--%>
-<script>
-    $(document).ready(function () {
-        $('#summernote').summernote({
-            height: 300,                 // 에디터 높이
-            minHeight: null,             // 최소 높이
-            maxHeight: null,             // 최대 높이
-            focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
-            lang: "ko-KR",					// 한글 설정
-            placeholder: '상품의 상세 설명을 적어주세요!(1000자 이내)'	//placeholder 설정
-        });
-    });
-
-</script>
+    <body>
+        <%--    summernote 관련 script--%>
+        <script>
+            $(document).ready(function () {
+                $('#summernote').summernote({
+                    height: 300,                 // 에디터 높이
+                    minHeight: null,             // 최소 높이
+                    maxHeight: null,             // 최대 높이
+                    focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
+                    lang: "ko-KR",					// 한글 설정
+                    placeholder: '상품의 상세 설명을 적어주세요!(1000자 이내)'	//placeholder 설정
+                });
+            });
+        </script>
 
 <div id="wrapper">
 
