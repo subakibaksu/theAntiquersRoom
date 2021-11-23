@@ -12,6 +12,13 @@ import org.apache.ibatis.annotations.Param;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
+import com.theantiquersroom.myapp.domain.ProductCommand;
+import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.ProductFormDTO;
+import com.theantiquersroom.myapp.domain.ProductImageDTO;
+
 
 @Mapper
 public interface ProductMapper {
@@ -38,11 +45,14 @@ public interface ProductMapper {
     // 입찰 히스토리 SELECT
     public List<BidHistoryDTO> getBidHistory(Integer pId);
 
-	// 상품번호에 따른 상품 상세정보 불러오기
-	public abstract ProductDTO getDetailByPId(Integer pId);
+    // 상품번호에 따른 상품 상세정보 불러오기
+    public abstract ProductDTO getDetailByPId(Integer pId);
 
-	//상품삭제
-	public abstract Integer deleteProduct(Integer pId);
+    // 상품번호에 따른 상품별 이미지 파일 불러오기
+    public abstract List<String> getProductImageUrls(Integer pId);
+
+    //상품삭제
+    public abstract Integer deleteProduct(Integer pId);
 
 } //end interface
 

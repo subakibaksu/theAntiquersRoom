@@ -54,10 +54,22 @@
             WHERE p_id=#{pId}
         ]]>
     </select>
+  
+    <select id="getProductImageUrls"
+            resultType="string">
+        
+        <![CDATA[ 
+            SELECT image_url
+            FROM product_image
+            WHERE p_id=#{pId}
+        ]]>
 
-    <select id="listCriteria"
-            resultType="com.theantiquersroom.myapp.domain.ProductDTO"
+    </select>
+
+    <select id="listCriteria" 
+            resultType="com.theantiquersroom.myapp.domain.ProductDTO" 
             parameterType="hashmap"> <!-- typeAlias를 지정했음으로 풀 네임 기재 필요 없음 -->
+      
             SELECT
                 p_id,
                 name,

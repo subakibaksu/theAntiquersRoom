@@ -1,7 +1,10 @@
 package com.theantiquersroom.myapp.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 
@@ -31,5 +34,7 @@ public class ProductDTO {
    private String nickname;
    private String categoryName;
    private Integer leftTime; // 경매종료까지 남은시간
+   
+   private List<String> imageUrls; // 파일별 등록된 이미지들의 주소
    
 } // end class

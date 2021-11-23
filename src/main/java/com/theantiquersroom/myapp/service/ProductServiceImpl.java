@@ -111,6 +111,8 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
       log.debug("getDetail({}) invoked.", pId);
 
       ProductDTO dto = this.mapper.getDetailByPId(pId);
+      dto.setImageUrls(this.mapper.getProductImageUrls(pId));
+      
       log.info("\t+ dto: {}", dto);
 
       return dto;

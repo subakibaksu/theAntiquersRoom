@@ -1,19 +1,22 @@
 package com.theantiquersroom.myapp.mapper;
 
-import com.theantiquersroom.myapp.domain.ProductFormDTO;
-import com.theantiquersroom.myapp.domain.ProductDTO;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j2;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.ProductFormDTO;
+
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
 
 
 @Log4j2
@@ -67,5 +70,15 @@ public class ProductMapperTests {
 		
 		log.info("\t+ dto: {}", dto);
 	} //testGetDetailByPId
+	
+	@Test
+	public void testGetProductImageUrls() {
+		log.debug("testGetProductImageUrls() invoked.");
+		
+		Integer pId = 76;
+		List<String> urls = this.mapper.getProductImageUrls(pId);
+		
+		log.info("\t+ urls: {}", urls);
+	} //testGetProductImageUrls
 	
 } //end class

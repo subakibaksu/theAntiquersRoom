@@ -33,9 +33,10 @@
                         </td>
                     </tr>
                     <tr>
-                        <td><img class="pImg" src="../../../resources/images/testCat.png" alt=""></td>
-                        <td><img class="pImg" src="../../../resources/images/testCat.png" alt=""></td>
-                        <td><img class="pImg" src="../../../resources/images/testCat.png" alt=""></td>
+                        <c:forEach var="imgUrl" items="${product.imageUrls}">
+                            <td><img class="pImg" src="${imgUrl}" alt=""></td>
+                        </c:forEach>
+                        
                     </tr>
                 </table>
             </div>
