@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 
@@ -50,7 +50,7 @@
 				<c:forEach items="${list}" var="board">
 					<tr>
 						<td><c:out value="${board.bindex}"/></td>
-						<td><c:out value="${board.title}"/></td>
+						<td> <a  href="/board/getQnADetail?bindex=${board.bindex}"><c:out value="${board.title}"/></a></td>
 						<td><c:out value="${board.author}"/></td>
 						<td><c:out value="${board.createdAt}"/></td>
 						<td><c:out value="${board.updatedAt}"/></td>
@@ -91,9 +91,7 @@
 
       <script>
       
-
   	let moveForm = $("#moveForm");
-
 	
 	$(".pageInfo a").on("click", function(e){
 		
@@ -103,7 +101,6 @@
 		moveForm.submit();
 		
 	});
-
 	</script>
 
 </body>

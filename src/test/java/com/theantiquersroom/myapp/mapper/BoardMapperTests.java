@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.theantiquersroom.myapp.domain.BoardQnACriteria;
+import com.theantiquersroom.myapp.domain.QnADTO;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -48,6 +49,30 @@ public class BoardMapperTests {
 	     List list = mapper.getQnAListPaging(cri);
 	     
 	     list.forEach(board -> log.info("" + board));
+	 }
+
+	 /* 문의게시판 조회 */
+	 @Test
+	 public void testGetQnADetail() {
+		 
+		 int bindex = 50;
+	     
+		 log.info("" + mapper.getQnADetail(bindex));
+
+	 }
+	 
+	 /* 문의게시글 수정 */
+	 @Test
+	 public void testModifyQnA() {
+		 
+         QnADTO dto = new QnADTO();
+         dto.setBindex(50);
+         dto.setTitle("수정 제목");
+         dto.setContent("수정 내용");
+         
+         int result = mapper.modifyQnA(dto);
+         log.info("result : " +result);
+
 	 }
 
 
