@@ -1,5 +1,8 @@
 package com.theantiquersroom.myapp.domain;
 
+import lombok.Getter;
+
+@Getter
 public class BoardQnACriteria {
 
     /* 현재 페이지 */
@@ -16,10 +19,7 @@ public class BoardQnACriteria {
         this(1,10);
         this.skip = 0;
     }
-    
-    public int getPageNum() {
-		return pageNum;
-	}
+
 
 	public void setPageNum(int pageNum) {
 		
@@ -28,9 +28,6 @@ public class BoardQnACriteria {
 		this.pageNum = pageNum;
 	}
 
-	public int getAmount() {
-		return amount;
-	}
 
 	public void setAmount(int amount) {
 		
@@ -40,9 +37,6 @@ public class BoardQnACriteria {
 	}
 
 
-	public int getSkip() {
-		return skip;
-	}
 
 	public void setSkip(int skip) {
 		this.skip = skip;
