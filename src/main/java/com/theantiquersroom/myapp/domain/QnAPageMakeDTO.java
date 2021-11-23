@@ -44,16 +44,8 @@ public class QnAPageMakeDTO {
         
         /* 마지막 페이지(endPage)값이 1보다 큰 경우 true */
         this.next = this.endPage < realEnd;
-        
-        
+            
     }
 
-
-
-	@Override
-	public String toString() {
-		return "QnAPageMakeDTO [startPage=" + startPage + ", endPage=" + endPage + ", prev=" + prev + ", next=" + next
-				+ ", total=" + total + ", cri=" + cri + "]";
-	}
 
 }
