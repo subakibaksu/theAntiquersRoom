@@ -37,7 +37,7 @@
             }); //.jq
         </script>
 
-        <div id="wrapper">
+        <div id="myPageWrapper">
 
             <table id="myAcutionTbl">
                 <caption>
@@ -133,5 +133,9 @@
                 </form>
             </div>
         </div>
+        
+    <footer>
+        <jsp:include page="../common/footer.jsp"></jsp:include>
+    </footer>
     </body>
 </html>
