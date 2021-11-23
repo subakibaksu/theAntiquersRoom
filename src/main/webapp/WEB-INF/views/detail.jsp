@@ -13,9 +13,9 @@
     <script src="https://kit.fontawesome.com/91815d1378.js" crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
-    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     <script src="../../../resources/js/detail.js"></script>
+
 </head>
 <body>
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -66,14 +66,19 @@
                     <tr>
                         <th>입찰 금액</th>
                         <td id="bidTd">
-                            <button id="upBtn" type="button" onclick='changeBid("up")'>
-                                <i class="fas fa-chevron-circle-up" ></i>
-                            </button>
-                            <input type="text" id="bidPrice" name="bidPrice" value="${product.bidIncrement}">원
-                            <button id="downBtn" type="button" onclick='changeBid("down")'>
-                                <i class="fas fa-chevron-circle-down" ></i>
-                            </button>
+                            <form id="bidForm" action="#">
+                                <button id="upBtn" type="button" onclick='changeBid("up")'>
+                                    <i class="fas fa-chevron-circle-up" ></i>
+                                </button>
+                                <input hidden name="pId" value="${product.pId}">
+                                <input type="text" id="bidPrice" name="bidPrice" value="${product.bidIncrement}">원
+                                <button id="downBtn" type="button" onclick='changeBid("down")'>
+                                    <i class="fas fa-chevron-circle-down" ></i>
+                                </button>
+                            </form>
+
                             <button type="button" id="bidBtn">입찰</button>
+                            <p id="bidResult"></p>
                         </td>
                     </tr>
                     <tr>
@@ -86,6 +91,21 @@
                     <tr>
                         <td colspan="2">
                             <button type="button" id="bidHistBtn">입찰 목록</button>
+
+                            <div id="bidHistory" hidden>
+                            <table>
+                                <th>이름</th>
+                                <th>입찰가</th>
+                                <th>입찰시간</th>
+                                    <c:forEach var="bidHistory" items="${bidHistoryList}">
+                                    <tr>
+                                        <td>${bidHistory.nickName}</td>
+                                        <td>${bidHistory.bidPrice}</td>
+                                        <td>${bidHistory.bidAt}</td>
+                                    </tr>
+                                    </c:forEach>
+                            </table>
+                            </div>
                         </td>
                     </tr>
                 </table>
@@ -157,7 +177,50 @@
             
             bidPrice.value = amount;
         }
+
+        $(document).ready(function (){
+
+            $("#bidHistBtn").click(function (){
+                $("#bidHistory").slideToggle("slow");
+
+            });
+
+            $("#bidBtn").click(function (){
+
+                var data  = $("#bidForm").serializeObject();
+
+                console.log(data);
+
+                $.ajax({
+
+                    async: true,
+                    type : 'POST',
+                    data : JSON.stringify(data),
+                    url : "/product/bid",
+                    contentType: "application/json",
+
+                    success : function (result) {
+
+                        if(result.bidCheck){
+                            $("#bidResult").text("입찰에 성공하였습니다.");
+                        }else{
+                            $("#bidResult").text("입찰에 실패하였습니다.");
+                        }
+
+                    },
+                    error : function (error) {
+
+                        console.log("error", error);
+
+                    },
+
+                });
+
+            });
+
+        });
     </script>
+    <script src="/resources/js/common/serializeObject.js"></script>
 
 </body>
 </html>

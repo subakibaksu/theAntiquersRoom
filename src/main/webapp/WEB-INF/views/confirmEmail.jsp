@@ -47,7 +47,7 @@
                     cache : false,
                     type : 'POST',
                     data : JSON.stringify(data),
-                    url : "/users/sendEmail",
+                    url : "/sendEmail",
                     contentType: 'application/json',
                     success : function (result) {
 
@@ -96,7 +96,7 @@
                     cache : false,
                     type : 'POST',
                     data : JSON.stringify(data),
-                    url : "/users/confirmEmail",
+                    url : "/confirmEmail",
                     contentType: 'application/json',
                     success : function (result) {
 
@@ -172,13 +172,13 @@
 <body>
 
     <%-- 메일전송 --%>
-    <form id = mailSendForAuthorizationForm action="#">
+    <form id = "mailSendForAuthorizationForm" action="#">
         <input type="email" id="userId" name="userId">
         <button type="button" id="sendMailBtn">send</button>
     </form>
 
     <%-- 인증번호 확인 --%>
-    <form id = checkAuthorizationKeyForm action="#">
+    <form id = "checkAuthorizationKeyForm" action="#">
         <input id="userIdForAuth" name="userId" hidden>
         <input name="auth">
         <button type="button" id="checkAuthBtn">check</button>
