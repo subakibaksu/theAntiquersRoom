@@ -19,6 +19,7 @@ body {
 
 #mainWrapper {
     flex-grow: 1;
+    font-family: "Nanum Gothic", sans-serif;
 }
 
 #mainBanner {
@@ -137,6 +138,10 @@ body {
     margin-bottom: 1.5rem;
 }
 
+.main_items_header h2 {
+    font-family: "Gowun Dodum", sans-serif;
+}
+
 .main_items_header div {
     display: flex;
     width: auto;
@@ -219,7 +224,11 @@ body {
     display: flex;
     flex-direction: column;
 
-    font-size: 0.8rem;
+    font-size: 0.7rem;
+}
+
+.main_item_description span {
+    margin: 0.2rem;
 }
 
 #footerBox {

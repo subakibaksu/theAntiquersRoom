@@ -13,7 +13,7 @@
 	<!-- google font -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Merriweather&family=Nanum+Gothic&display=swap" rel="stylesheet">
 
 	<!-- jQuery -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -43,7 +43,7 @@
 		<div id="logoNsearch">
 			<!-- 사이트 로고-->
 			<div id="header_logo" role="banner">
-				<a href="#">
+				<a href="/">
 					<img id="logoimg" src="" alt="" width="40" height="60">
 					<div class="logo">The</div>
 					<div class="logo">Antiquer's Room</div>
@@ -61,7 +61,7 @@
 
 							<!-- 회원가입버튼-->
 							<div class="menu_btn" id="signin_btn">
-								<a href="/WEB-INF/views/users/register.jsp" >Sign in</a>
+								<a href="/register" >Sign in</a>
 							</div>
 						</c:when>
 

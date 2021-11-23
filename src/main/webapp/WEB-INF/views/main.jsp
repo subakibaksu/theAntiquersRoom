@@ -87,7 +87,7 @@
                             <span>남은시간</span>
                         </div>
                     </li>
-                    <li class="main_item newItem">
+                    <li class="main_item">
                         <div class="main_item_img">
                             <img src="resources/images/testCat.png" alt="">
                         </div>
@@ -98,7 +98,7 @@
                             <span>남은시간</span>
                         </div>
                     </li>
-                    <li class="main_item newItem">
+                    <li class="main_item">
                         <div class="main_item_img">
                             <img src="resources/images/testCat.png" alt="">
                         </div>
@@ -109,7 +109,7 @@
                             <span>남은시간</span>
                         </div>
                     </li>
-                    <li class="main_item newItem">
+                    <li class="main_item">
                         <div class="main_item_img">
                             <img src="resources/images/testCat.png" alt="">
                         </div>
@@ -120,7 +120,7 @@
                             <span>남은시간</span>
                         </div>
                     </li>
-                    <li class="main_item newItem">
+                    <li class="main_item">
                         <div class="main_item_img">
                             <img src="resources/images/testCat.png" alt="">
                         </div>
@@ -131,7 +131,7 @@
                             <span>남은시간</span>
                         </div>
                     </li>
-                    <li class="main_item newItem">
+                    <li class="main_item">
                         <div class="main_item_img">
                             <img src="resources/images/testCat.png" alt="">
                         </div>
@@ -142,7 +142,7 @@
                             <span>남은시간</span>
                         </div>
                     </li>
-                    <li class="main_item newItem">
+                    <li class="main_item">
                         <div class="main_item_img">
                             <img src="resources/images/testCat.png" alt="">
                         </div>
@@ -153,7 +153,7 @@
                             <span>남은시간</span>
                         </div>
                     </li>
-                    <li class="main_item newItem">
+                    <li class="main_item">
                         <div class="main_item_img">
                             <img src="resources/images/testCat.png" alt="">
                         </div>
@@ -164,7 +164,7 @@
                             <span>남은시간</span>
                         </div>
                     </li>
-                    <li class="main_item newItem">
+                    <li class="main_item">
                         <div class="main_item_img">
                             <img src="resources/images/testCat.png" alt="">
                         </div>
@@ -175,7 +175,7 @@
                             <span>남은시간</span>
                         </div>
                     </li>
-                    <li class="main_item newItem">
+                    <li class="main_item">
                         <div class="main_item_img">
                             <img src="resources/images/testCat.png" alt="">
                         </div>
@@ -219,7 +219,7 @@
                             <span>남은시간</span>
                         </div>
                     </li>
-                    <li class="main_item endingItem">
+                    <li class="main_item">
                         <div class="main_item_img">
                             <img src="resources/images/testCat.png" alt="">
                         </div>
@@ -230,7 +230,7 @@
                             <span>남은시간</span>
                         </div>
                     </li>
-                    <li class="main_item endingItem">
+                    <li class="main_item">
                         <div class="main_item_img">
                             <img src="resources/images/testCat.png" alt="">
                         </div>
@@ -241,7 +241,7 @@
                             <span>남은시간</span>
                         </div>
                     </li>
-                    <li class="main_item endingItem">
+                    <li class="main_item">
                         <div class="main_item_img">
                             <img src="resources/images/testCat.png" alt="">
                         </div>
@@ -252,7 +252,7 @@
                             <span>남은시간</span>
                         </div>
                     </li>
-                    <li class="main_item endingItem">
+                    <li class="main_item">
                         <div class="main_item_img">
                             <img src="resources/images/testCat.png" alt="">
                         </div>
@@ -263,7 +263,7 @@
                             <span>남은시간</span>
                         </div>
                     </li>
-                    <li class="main_item endingItem">
+                    <li class="main_item">
                         <div class="main_item_img">
                             <img src="resources/images/testCat.png" alt="">
                         </div>
@@ -274,7 +274,7 @@
                             <span>남은시간</span>
                         </div>
                     </li>
-                    <li class="main_item endingItem">
+                    <li class="main_item">
                         <div class="main_item_img">
                             <img src="resources/images/testCat.png" alt="">
                         </div>
@@ -285,7 +285,7 @@
                             <span>남은시간</span>
                         </div>
                     </li>
-                    <li class="main_item endingItem">
+                    <li class="main_item">
                         <div class="main_item_img">
                             <img src="resources/images/testCat.png" alt="">
                         </div>
@@ -296,7 +296,7 @@
                             <span>남은시간</span>
                         </div>
                     </li>
-                    <li class="main_item endingItem">
+                    <li class="main_item">
                         <div class="main_item_img">
                             <img src="resources/images/testCat.png" alt="">
                         </div>
@@ -307,7 +307,7 @@
                             <span>남은시간</span>
                         </div>
                     </li>
-                    <li class="main_item endingItem">
+                    <li class="main_item">
                         <div class="main_item_img">
                             <img src="resources/images/testCat.png" alt="">
                         </div>

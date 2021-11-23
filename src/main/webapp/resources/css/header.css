@@ -18,7 +18,7 @@
     justify-content: space-between;
 
     padding: 0 20%;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .logo {
@@ -36,16 +36,15 @@
 
 #loginNout {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
 
     font-family: "Merriweather", serif;
 
-    padding: 0 1.3rem;
     margin-bottom: 0.8rem;
 }
 
 .menu_btn {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
 
     padding: 5px;
     margin-left: 10px;
@@ -85,7 +84,7 @@
     opacity: 60%;
     box-shadow: 2px 2px;
 
-    width: 13.5rem;
+    width: 11rem;
 }
 
 #search_bar {
@@ -94,7 +93,8 @@
     opacity: 75%;
     outline: none;
 
-    width: 10rem;
+    font-size: 0.7rem;
+    width: 9rem;
 
     padding: 5px;
     margin-left: 0.2rem;
@@ -117,6 +117,8 @@
     justify-content: center;
     align-items: center;
 
+    font-family: "Nanum Gothic", sans-serif;
+    font-size: 0.8rem;
     background-color: #d6b6b6;
     opacity: 70%;
 
