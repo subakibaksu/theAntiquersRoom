@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+@font-face {
+    font-family: 'ONE Mobile Title';
+    src: url('/resources/font/ONE Mobile Title.ttf') format('truetype');
+}
+
 * {
     text-decoration: none;
     color: black;
@@ -49,6 +54,9 @@
 
     padding: 5px;
     margin-left: 10px;
+    
+   	font-family: "Merriweather";
+    
 }
 
 #login_btn {
@@ -98,6 +106,8 @@
 
     padding: 5px;
     margin-left: 0.2rem;
+    
+    font-family: 'ONE Mobile Title';
 }
 
 .findIcon {
@@ -121,6 +131,8 @@
     opacity: 70%;
 
     height: 3rem;
+    
+   	font-family: 'ONE Mobile Title';
 }
 
 #navbar ul {
