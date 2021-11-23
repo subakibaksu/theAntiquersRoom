@@ -20,6 +20,12 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
     
     <script>
+
+	function getDetail(index){
+		$( '#detail_'+index ).slideToggle();
+	}
+	
+	
 	function requestConfirm() {
 
 		console.log("requestConfirm clicked");
@@ -72,10 +78,13 @@
 	            </tr>
 	        </thead>
 			<tbody>    
-				<c:forEach items="${requestedList}" var="reqProduct">
+				<c:forEach items="${requestedList}" var="reqProduct" varStatus="myIndex">
 					<tr>
-						<td><a href="/product/getDetail?pId=${reqProduct.pId}"><img alt="" src="https://live.staticflickr.com/2827/10767844126_63b11d6c53_b.jpg" height="100px" width="100px"></a></td>
-						<td><a href="/product/getDetail?pId=${reqProduct.pId}"><c:out value="${reqProduct.name}"/></a></td>
+						<td>
+							<img onclick="getDetail(${myIndex.index})" alt="" src="https://live.staticflickr.com/2827/10767844126_63b11d6c53_b.jpg" height="100px" width="100px">
+							<div hidden id="detail_${myIndex.index}"><c:out value="${reqProduct.content}"/></div>
+						</td>
+						<td><c:out value="${reqProduct.name}"/></td>
 						<td><c:out value="${reqProduct.categoryName}"/></td>
 						<td><c:out value="${reqProduct.nickname}"/></td>
 						<td><c:out value="${reqProduct.startedPrice}"/></td>
