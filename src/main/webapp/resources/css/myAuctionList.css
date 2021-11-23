@@ -9,7 +9,7 @@
 /* 1. html, body의 최소 높이를 지정 */
 html,
 body {
-    min-height: 100vh;
+    min-height: 1;
 }
 
 body {
@@ -74,6 +74,10 @@ header{
     text-align: center;
 	font-size: 24px;
     list-style: none;
+}
+
+#topmenu li:nth-child(3){
+    text-align: end !important;
 }
 
 #regBtn, #reqBtn{
