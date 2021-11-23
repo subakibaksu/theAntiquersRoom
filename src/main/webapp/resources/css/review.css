@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+#reviewcontainer {
+	padding-top: 100px;
+	padding-bottom: 50px;
+	flex-direction: column;
+	margin: auto;
+}
+
+#tableplace {
+	margin: auto;
+	border-collapse: collapse;
+	
+}
+
+td, th {
+	padding-right: 30px;
+	padding-left: 30px;
+	text-align: center;
+	align-items: center;
+	border-spacing: 0;
+	
+}
+
+tr {
+	border-block: 1px solid black;
+}
+
+th {
+	padding-bottom: 10px;
+	padding-top: 10px;
+}
+
+#tableContent {
+	width: 200px;
+}

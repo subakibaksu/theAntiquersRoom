@@ -24,6 +24,7 @@
 						  function buttonlive() {
 							if (idcheck && pwcheck && pwchcheck
 								&& niccheck && phonecheck) {
+								
 								$("#checkit").click(function(){
 								alert("성공적으로 가입되었습니다.");
 								});
@@ -226,7 +227,7 @@
 				<div id="subject">회원가입</div>
 			</div>
 
-			<form name="infoRegister" action="/users/register" method="post">
+			<form name="infoRegister" action="/registerCheck" method="post">
 
 				<!-- container -->
 				<div class="form-container">
@@ -274,7 +275,7 @@
 
 						<!-- 가입하기 버튼  -->
 						<div id="registerbtn">
-							<button type="submit" class="submitbtn" id="checkit">가입하기</button>
+							<button type="submit" class="submitbtn" id="checkit" >가입하기</button>
 						</div>
 					</div>
 				</div>
