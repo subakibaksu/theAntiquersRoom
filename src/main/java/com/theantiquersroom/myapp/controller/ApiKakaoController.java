@@ -44,36 +44,6 @@ public class ApiKakaoController {
     private static final String REDIRECT_URI = "http://localhost:8090/login/kakao";
     
 	
-    @RequestMapping("/logout")
-    public @ResponseBody String logout(HttpServletRequest request, HttpSession session) {	// 로그아웃 실행
-        log.debug("logout() invoked.");
-        
-        String kakaoUniqueId = (String) session.getAttribute("kakaoUniqueId");
-       
-        if(kakaoUniqueId != null) { //카카오로 로그인했다면, 카카오계정 로그아웃도 함께 진행
-        	log.debug("===== kakao logout");
-        	
-            String logout_redirect_uri = "http://localhost:8090";
-
-            String reqUrl = 
-            		"https://kauth.kakao.com/oauth/logout?client_id="
-            		+ ApiKakaoController.REST_API_KEY
-            		+ "&logout_redirect_uri="
-            		+ logout_redirect_uri;
-            
-            session.invalidate();
-            
-            return reqUrl;
-            
-        }else { //일반회원 로그아웃 시 세션 초기화
-        	log.debug("===== 일반회원 logout");
-            session.invalidate();
-            
-            return "/";
-        }
-    } //logout
-   
-    
 	//카카오 로그인창 호출
 	@RequestMapping("/login/getKakaoAuthUrl")
     public @ResponseBody String getKakaoAuthUrl(HttpServletRequest req) {	

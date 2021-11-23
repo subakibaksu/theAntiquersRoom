@@ -1,15 +1,38 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
-*{
-    margin: 0 auto;
+* {
+    margin: 0;
     padding: 0;
-    background-color: whithsmoke;
 }
 
-#wrapper{
+/* 1. html, body의 최소 높이를 지정 */
+html,
+body {
+    min-height: 1;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header{
+	width : 100%;
+}
+
+/* 2. header, footer 사이에 본문 내용이 들어갈 div에 flex-grow설정 */
+/* 해당 설정은 body에 display: flex 해주었을때만 가능! */
+#myPageWrapper{
+	flex-grow: 1;
+	
     width: 100%;
     margin: 5rem 0 10rem 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
@@ -53,7 +76,11 @@
     list-style: none;
 }
 
-#regBtn{
+#topmenu li:nth-child(3){
+    text-align: end !important;
+}
+
+#regBtn, #reqBtn{
     width: 80px;
     height: 38px;
 
@@ -115,7 +142,7 @@ input[type=submit] {
     color: #B1A2A2;
     font-size: 14px;
     float: right;
-    align-items: center;
+    justify-content: center;
     display: flex;
 }
 
