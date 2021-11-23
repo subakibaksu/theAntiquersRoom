@@ -1,69 +1,93 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+	<!DOCTYPE html>
+	<html>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	<head>
+		<meta charset="UTF-8">
+		<title>앤티커스 : 회원가입</title>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>Home</title>
+		<link rel="stylesheet" href="../../../resources/css/register.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	</head>
 
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
+	<body>
+	
+		<!-- 사이트 로고-->
+		<div class="basecontainer">
+			<div class="top-header">
+				<a href="#" class="logo">
+					<div class="logo">The</div>
+					<div class="logo">Antiquer's Room</div>
+				</a>
+			</div>
+			<div>
+				<div id="subject">추가정보 입력</div>
+				<h5>하기 정보를 입력해주셔야 가입이 완료됩니다.</h5>
+			</div>
 
-	<script>
-        $(function(){
-            $('#loginBtn').click(function(){
-                console.log('loginBtn click event triggered..');
+			<form name="infoRegister" action="/registerByKakao" method="post">
+                <input type="hidden" name="kakaoUniqueId" value="${kakaoUniqueId}">
 
-                self.location='/login';
-            }); //login_onclick
-            
-            $('#logoutBtn').click(function(){
-                console.log('click event triggered..');
+				<!-- container -->
+				<div class="form-container">
+					<div class="regbase">
 
-                self.location='/users/logout';
-            }); //logout_onclick
-        }); //.jq
-    </script>
-</head>
-<body>
-    <h1>KAKAO RESISTER</h1>
+						<!-- 이메일 입력 -->
+						<div class="regcontainer">
+							<div class="regconfirm">
 
-    <P>  The time on the server is ${serverTime}. </P>
+								<input class="registerEmail" id="email" type="text" name="userId" placeholder="이메일">
+								<input class="regbtn" id="emailbtn" type="button" value="중복확인">
+								<p id="idchecker"></p>
+							</div>
+							<button class="emailbtn" type="button" id="sendMailBtn">이메일 인증</button>
+						<%-- 타이머 --%>
 
-    <P>  Kakao Id : ${kakaoUniqueId}. </P>
-    <P>  Kakao usertype : ${usertype}. </P>
+						<%-- 인증결과 --%>
+							<div id="timer"></div>
+							<!--이메일 인증번호 입력 -->
+							<div class="emailconfirm">
+								<input class="registerEmail" id="authInput" placeholder="인증번호">
+								<input class="regbtn" type="button" id="checkAuthBtn" value="인증하기"/>
+							</div>
 
-    <img onclick="kakaoLogin();" style="cursor: pointer;" src="../../resources/images/kakao_login.png">
+						</div>
+						
+						<!-- 닉네임 입력  -->
+						<div class="regconfirm">
+							<input type="text" class="register" id="nickname" name="nickName" placeholder="닉네임">
+							<p class="nicknamecheck"></p>
+						</div>
 
-    <hr>
-    <a href="/users/resetPwd">resetPwd</a>
+						<!-- 핸드폰번호 입력 -->
+						<div class="regconfirm">
+							<input type="text" class="register" id="phonenumber" name="phone" placeholder="핸드폰번호 (-제외)">
+							<p class="phonenumbercheck"></p>
+						</div>
 
-    <hr>
-    <button type="button" id="loginBtn">로그인</button>
+						<!-- 가입하기 버튼  -->
+						<div id="registerbtn">
+							<button type="submit" class="submitbtn" id="checkit">가입하기</button>
+						</div>
+					</div>
+				</div>
 
-    <hr>
-	<h3>${sessionScope.__AUTH_ANTIQUE__}</h3>
-    <button type="button" id="logoutBtn">로그아웃</button>
+			</form>
+		</div>
 
-<!---------------- 카카오 로그인 ---------------->
-    <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-    <script>
-    function kakaoLogin() {
+		<%-- 메일전송 --%>
+		<form id = "mailSendForAuthorizationForm" action="#">
+			<input hidden type="email" id="userId" name="userId">
+		</form>
 
+		<%-- 인증번호 확인 --%>
+		<form id = "checkAuthorizationKeyForm" action="#">
+			<input id="userIdForAuth" name="userId" hidden>
+			<input name="auth" id="auth" hidden>
+		</form>
 
-        $.ajax({
-            url: '/login/getKakaoAuthUrl',
-            type: 'get',
-            async: false,
-            dataType: 'text',
-            success: function (res) {
-                location.href = res;
-            }
-        });
-    }
-    </script>
-</body>
-</html>
+        <script src="/resources/js/registerCheck.js"/>
+        <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+
+    </body>
+	</html>

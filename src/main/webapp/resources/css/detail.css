@@ -36,7 +36,6 @@
 }
 
 #focusedImg {
-
     border: 3px solid rgba(194, 177, 177, 0.9);
     border-image-outset: 1px;
 
@@ -48,7 +47,7 @@
 
 .pImg {
     border: 2px solid rgba(194, 177, 177, 0.9);
-  
+
     width: 6rem;
     height: 6rem;
 
@@ -161,4 +160,18 @@
     font-size: 0.8rem;
     text-decoration: none;
     color: black;
+}
+
+#contentBox {
+    font-size: 0.75rem;
+
+    padding: 2.5rem;
+}
+
+#bidHistory {
+    margin-top: 1rem;
+    border: solid 1px;
+    border-color: #d6b6b6;
+    border-radius: 1%;
+    height: 500px;
 }

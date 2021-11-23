@@ -10,17 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.client.RestTemplate;
 
 import com.theantiquersroom.myapp.domain.KakaoTokenVO;
 import com.theantiquersroom.myapp.domain.KakaoUserInfoVO;
+import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.service.UserService;
 
 import lombok.NoArgsConstructor;
@@ -36,8 +40,39 @@ public class ApiKakaoController {
     @Setter(onMethod_= {@Autowired})
     private UserService service;
 	
-    private static final String REST_API_KEY = "12a4433b06d9de4acedcd972fa6a3fa9";
+    public static final String REST_API_KEY = "12a4433b06d9de4acedcd972fa6a3fa9";
     private static final String REDIRECT_URI = "http://localhost:8090/login/kakao";
+    
+	
+    @RequestMapping("/logout")
+    public @ResponseBody String logout(HttpServletRequest request, HttpSession session) {	// 로그아웃 실행
+        log.debug("logout() invoked.");
+        
+        String kakaoUniqueId = (String) session.getAttribute("kakaoUniqueId");
+       
+        if(kakaoUniqueId != null) { //카카오로 로그인했다면, 카카오계정 로그아웃도 함께 진행
+        	log.debug("===== kakao logout");
+        	
+            String logout_redirect_uri = "http://localhost:8090";
+
+            String reqUrl = 
+            		"https://kauth.kakao.com/oauth/logout?client_id="
+            		+ ApiKakaoController.REST_API_KEY
+            		+ "&logout_redirect_uri="
+            		+ logout_redirect_uri;
+            
+            session.invalidate();
+            
+            return reqUrl;
+            
+        }else { //일반회원 로그아웃 시 세션 초기화
+        	log.debug("===== 일반회원 logout");
+            session.invalidate();
+            
+            return "/";
+        }
+    } //logout
+   
     
 	//카카오 로그인창 호출
 	@RequestMapping("/login/getKakaoAuthUrl")
@@ -86,6 +121,7 @@ public class ApiKakaoController {
 		    	return "redirect:/"; //메인 화면으로 이동
 		    	
 		    }else {
+//		    	return "redirect:/"; //테스트용
 		    	return "/registerByKakao"; //카카오-회원가입 페이지로 이동
 		    }//if-else
 		    
@@ -105,14 +141,15 @@ public class ApiKakaoController {
     } //register
 
     
-//    @PostMapping("/registerByKakao")
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public String registerByKakao(UserDTO user) { //회원가입 서비스 수행, 저장
-//        log.debug("register({}) invoked.", user);
-//
-//        this.service.registerUser(user);
-//        return "/";
-//    } //register
+    //카카오 통한 회원가입 서비스 수행, 저장
+    @PostMapping("/registerByKakao")
+    @ResponseStatus(HttpStatus.CREATED)
+    public String registerByKakao(UserDTO user) { 
+        log.debug("registerKakaoUser({}) invoked.", user);
+
+        this.service.registerKakaoUser(user);
+        return "/";
+    } //register
 	
 	
 	//액세스 토큰, 리프레시 토큰 받기

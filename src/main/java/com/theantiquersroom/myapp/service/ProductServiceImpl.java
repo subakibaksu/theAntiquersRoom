@@ -2,16 +2,15 @@ package com.theantiquersroom.myapp.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Consumer;
 
+import com.theantiquersroom.myapp.domain.*;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.theantiquersroom.myapp.domain.ProductCommand;
-import com.theantiquersroom.myapp.domain.ProductCriteria;
-import com.theantiquersroom.myapp.domain.ProductDTO;
-import com.theantiquersroom.myapp.domain.ProductFormDTO;
 import com.theantiquersroom.myapp.mapper.ProductMapper;
 import com.theantiquersroom.myapp.domain.ProductImageDTO;
 
@@ -78,6 +77,25 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
     } //totalCount()
 
     @Override
+    public Boolean bid(BidHistoryDTO bidHistoryDTO) {
+
+        log.debug("bid() invoked");
+        if(bidHistoryDTO.getUserId()!=null){
+
+            if(mapper.getMaxBid(bidHistoryDTO.getPId()) == null || mapper.getMaxBid(bidHistoryDTO.getPId()) < bidHistoryDTO.getBidPrice()){
+
+                mapper.insertBid(bidHistoryDTO);
+
+                return true;
+
+            }
+
+        }
+
+        return false;
+    }
+
+    @Override
     public void destroy() throws Exception {
 
     } //destroy()
@@ -106,5 +124,14 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
 		
 		return ((affectedProduct > 0)? true:false);
 	} //removeProduct
+
+    @Override
+    public List<BidHistoryDTO> getBidHistory(Integer pId) {
+
+        log.debug("getBidHistory({}) Invoked",pId);
+        List<BidHistoryDTO> bidHistoryDTOList = mapper.getBidHistory(pId);
+        return bidHistoryDTOList;
+
+    } // getBidHistory()
 
 } // end class

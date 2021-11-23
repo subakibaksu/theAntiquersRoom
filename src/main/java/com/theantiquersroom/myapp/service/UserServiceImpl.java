@@ -247,6 +247,20 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 		
 		return user;
 	}//getKakaoUser
+	
+    // DB에 회원정보 저장
+    @Override
+    public boolean registerKakaoUser(UserDTO user) {
+        log.debug("registerKakaoUser({}) invoked.", user);
+
+        Integer users = null;
+        
+        users = mapper.insertUser(user);
+        
+        int affectedRows = this.mapper.insertKakaoUser(user);
+
+        return affectedRows > 0;
+    }
     
 //---------------------------------------------------//
     @Override

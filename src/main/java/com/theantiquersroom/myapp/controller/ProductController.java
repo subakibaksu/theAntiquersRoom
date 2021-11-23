@@ -1,6 +1,8 @@
 package com.theantiquersroom.myapp.controller;
 
 import com.theantiquersroom.myapp.domain.*;
+import com.theantiquersroom.myapp.domain.ProductFormDTO;
+import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.service.ProductService;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,8 +16,13 @@ import com.theantiquersroom.myapp.utils.ProductPageMaker;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.*;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
+import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.service.ProductService;
+import javax.servlet.http.HttpSession;
 
 
 @Log4j2
@@ -104,9 +111,9 @@ public class ProductController {
     @PostMapping("/remove")
     public String remove(Integer pId) {
     	log.debug("remove({}) invoked.", pId);
-    	
+
     	boolean isRemoved = this.service.removeProduct(pId);
-    	
+
     	return "/productList";
     } // Post remove()
 
@@ -124,8 +131,11 @@ public class ProductController {
     	ProductDTO dto = this.service.getDetail(pId);
     	log.info("/t+ dto: {}", dto);
     	assert dto != null;
-    	
+
+    	List<BidHistoryDTO> bidHistoryDTOList = this.service.getBidHistory(pId);
+
     	model.addAttribute("product", dto);
+    	model.addAttribute("bidHistoryList",bidHistoryDTOList);
 
 //    String detailPage = "detail?pId="+pId; //최종적으로는 pId 전달해야되므로, 해당 주석 지우지 말아주세요!
 
@@ -136,11 +146,35 @@ public class ProductController {
     @GetMapping("/getBiddingHistory")
     public void getBiddingHistory() {
 
+
+
     } // getBiddingHistory()
 
     /*입찰정보 DB전달*/
     @PostMapping("/bid")
-    public void bid(Model model) {
+    public @ResponseBody Map<Object,Object> bid(@RequestBody Map<String,Object> map, HttpSession session) {
+
+        log.debug("bid invoked()");
+        Map<Object,Object> resultMap = new HashMap<>();
+        if(session.getAttribute(LoginController.authKey) != null){
+
+            UserDTO userDTO = (UserDTO) session.getAttribute(LoginController.authKey);
+            BidHistoryDTO bidHistoryDTO = new BidHistoryDTO();
+            bidHistoryDTO.setUserId(userDTO.getUserId());
+            bidHistoryDTO.setBidPrice(Integer.parseInt((String) map.get("bidPrice")));
+            bidHistoryDTO.setPId(Integer.parseInt((String)map.get("pId")));
+            boolean isBided = service.bid(bidHistoryDTO);
+
+
+            resultMap.put("bidCheck",isBided);
+
+        }else {
+
+            resultMap.put("bidCheck",false);
+
+        }
+
+        return resultMap;
 
     } // bid()
 
