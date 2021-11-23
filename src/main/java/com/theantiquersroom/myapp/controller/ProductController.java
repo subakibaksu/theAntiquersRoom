@@ -67,11 +67,6 @@ public class ProductController {
         model.addAttribute("productCommand",productCommand);
 
     } // productList()
-    @GetMapping("/temp")
-    public String temp() {
-        log.debug("temp");
-        return "confirmEmail";
-    }
 
     /*상품 등록 페이지로 이동*/
     @GetMapping("/register")

@@ -8,7 +8,6 @@
 
 		<link rel="stylesheet" href="../../../resources/css/register.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script language="javascript" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
 	</head>
 
 	<body>
@@ -87,7 +86,7 @@
 			<input name="auth" id="auth" hidden>
 		</form>
 
-        <script src="/resources/js/emailCheck.js"/>
+        <script src="/resources/js/registerCheck.js"/>
         <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 
     </body>

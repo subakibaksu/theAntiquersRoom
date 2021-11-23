@@ -92,12 +92,6 @@ public class RegisterController {
         
     } //checkPhone
 
-    @GetMapping("/confirmEmail")
-    public void confirmEmail(){
-        log.debug("confirmEmail() invoked");
-
-    } // confirmEmail
-
     @PostMapping("/sendEmail")
     public @ResponseBody Map<Object,Object> sendEmail(@RequestBody Map<String,String> userMap) throws Exception {    //입력받은 이메일로 인증코드 발송
 
