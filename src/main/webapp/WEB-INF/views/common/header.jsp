@@ -9,12 +9,12 @@
 	<title>Header</title>
 
 	<link rel="stylesheet" href="../../../resources/css/header.css">
-	
+
 	<!-- google font -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
-	
+
 	<!-- jQuery -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
@@ -26,14 +26,14 @@
 
 				self.location='/login';
 			}); //login_onclick
-			
+
 			$('#logout_btn').click(function(){
 				console.log('click event triggered..');
 
 				self.location='/users/logout';
 			}); //logout_onclick
 		}); //.jq
-		
+
 	</script>
 </head>
 
@@ -58,7 +58,7 @@
 							<div class="menu_btn">
 								<div id="login_btn" >Log in</div>
 							</div>
-							
+
 							<!-- 회원가입버튼-->
 							<div class="menu_btn" id="signin_btn">
 								<a href="/WEB-INF/views/users/register.jsp" >Sign in</a>
@@ -70,7 +70,7 @@
 							<div class="menu_btn">
 								<div id="logout_btn" >Log out</div>
 							</div>
-							
+
 							<!-- 마이페이지버튼-->
 							<div class="menu_btn" id="mypage_btn">
 								<a href="/users/mypage" >MyPage</a>
@@ -89,18 +89,21 @@
 		</div>
 
 		<!-- navbar -->
-		<nav id="navbar">
-			<ul>
-				<li class="menu"><a href="#chair">의자</a> </li>
-				<li class="menu"><a href="#desk">책상</a> </li>
-				<li class="menu"><a href="cupboard">수납장</a> </li>
-				<li class="menu"><a href="bed">침대</a> </li>
-				<li class="menu"><a href="wardrobe">옷장</a> </li>
-				<li class="menu"><a href="table">화장대</a> </li>
-				<li class="menu"><a href="etc">기타</a> </li>
-			</ul>
+		<nav>
+			<div id="navbar">
+				<ul class="base">
+					<li class="menu"><a href="/product/productList?category_id=0">의자</a> </li>
+					<li class="menu"><a href="/product/productList?category_id=1">책상</a> </li>
+					<li class="menu"><a href="/product/productList?category_id=2">수납장</a> </li>
+					<li class="menu"><a href="/product/productList?category_id=3">침대</a> </li>
+					<li class="menu"><a href="/product/productList?category_id=4">옷장</a> </li>
+					<li class="menu"><a href="/product/productList?category_id=5">화장대</a> </li>
+					<li class="menu"><a href="/product/productList?category_id=6">기타</a> </li>
+				</ul>
+			</div>
+
+
 		</nav>
-	</header>
 
 </body>
 
