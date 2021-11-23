@@ -90,6 +90,21 @@
                     <tr>
                         <td colspan="2">
                             <button type="button" id="bidHistBtn">입찰 목록</button>
+
+                            <div id="bidHistory" hidden>
+                            <table>
+                                <th>이름</th>
+                                <th>입찰가</th>
+                                <th>입찰시간</th>
+                                    <c:forEach var="bidHistory" items="${bidHistoryList}">
+                                    <tr>
+                                        <td>${bidHistory.nickName}</td>
+                                        <td>${bidHistory.bidPrice}</td>
+                                        <td>${bidHistory.bidAt}</td>
+                                    </tr>
+                                    </c:forEach>
+                            </table>
+                            </div>
                         </td>
                     </tr>
                 </table>
@@ -163,6 +178,11 @@
         }
 
         $(document).ready(function (){
+
+            $("#bidHistBtn").click(function (){
+                $("#bidHistory").slideToggle("slow");
+
+            });
 
             $("#bidBtn").click(function (){
 

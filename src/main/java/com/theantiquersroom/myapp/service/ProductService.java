@@ -28,5 +28,7 @@ public interface ProductService {
     //상품삭제
     public abstract boolean removeProduct(Integer pId);
 
+    public List<BidHistoryDTO> getBidHistory(Integer pId);
+
 } //end interface
 

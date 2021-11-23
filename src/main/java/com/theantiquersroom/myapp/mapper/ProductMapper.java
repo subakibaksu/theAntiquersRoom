@@ -35,8 +35,9 @@ public interface ProductMapper {
     // 입찰 등록
     public Integer insertBid(BidHistoryDTO bidHistoryDTO);
 
-	  // 상품번호에 따른 상품 상세정보 불러오기
-    // public abstract ProductDTO getDetailByPId(Integer pId);
+    // 입찰 히스토리 SELECT
+    public List<BidHistoryDTO> getBidHistory(Integer pId);
+
 	// 상품번호에 따른 상품 상세정보 불러오기
 	public abstract ProductDTO getDetailByPId(Integer pId);
 

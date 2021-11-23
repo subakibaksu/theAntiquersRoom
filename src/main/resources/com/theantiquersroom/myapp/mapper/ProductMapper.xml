@@ -129,6 +129,22 @@
 
     </select>
 
+    <select id="getBidHistory" resultType="com.theantiquersroom.myapp.domain.BidHistoryDTO" parameterType="Integer">
+
+        SELECT B.bid_at,
+               B.user_id,
+               B.bid_price,
+               B.p_id,
+               (SELECT nickname
+                FROM users as U
+                WHERE B.user_id=U.user_id) as nickname
+        FROM bid_history as B
+        WHERE p_id=#{pId}
+        ORDER BY bid_at DESC
+
+
+    </select>
+
     <!-- insert to bid_history -->
     <insert id="insertBid" parameterType="com.theantiquersroom.myapp.domain.BidHistoryDTO">
 

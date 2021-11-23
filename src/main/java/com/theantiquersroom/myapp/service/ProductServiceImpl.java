@@ -125,4 +125,13 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
 		return ((affectedProduct > 0)? true:false);
 	} //removeProduct
 
+    @Override
+    public List<BidHistoryDTO> getBidHistory(Integer pId) {
+
+        log.debug("getBidHistory({}) Invoked",pId);
+        List<BidHistoryDTO> bidHistoryDTOList = mapper.getBidHistory(pId);
+        return bidHistoryDTOList;
+
+    } // getBidHistory()
+
 } // end class

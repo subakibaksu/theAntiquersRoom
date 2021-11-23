@@ -144,8 +144,11 @@ public class ProductController {
     	ProductDTO dto = this.service.getDetail(pId);
     	log.info("/t+ dto: {}", dto);
     	assert dto != null;
-    	
+
+    	List<BidHistoryDTO> bidHistoryDTOList = this.service.getBidHistory(pId);
+
     	model.addAttribute("product", dto);
+    	model.addAttribute("bidHistoryList",bidHistoryDTOList);
 
 //    String detailPage = "detail?pId="+pId; //최종적으로는 pId 전달해야되므로, 해당 주석 지우지 말아주세요!
 
@@ -155,6 +158,8 @@ public class ProductController {
     /*해당 상품의 입찰 히스토리 조회*/
     @GetMapping("/getBiddingHistory")
     public void getBiddingHistory() {
+
+
 
     } // getBiddingHistory()
 
