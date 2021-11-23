@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+* {
+	margin : 0;
+    padding: 0;
+    text-decoration: none;
+    color: black;
+}
+
+#header_container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    margin-top: 3rem;
+}
+
+#logo_container {
+    display: flex;
+    justify-content: space-around;
+
+    font-family: "Merriweather", serif;
+
+    padding: 0 1.3rem;
+    margin-bottom: 0.8rem;
+}
+
+#header_logo{
+	align-content: center;
+}
+
+.logo {
+    color: black;
+    font-size: 1.1rem;
+    font-family: "Merriweather", serif;
+
+	line-height:60px;
+    padding-left: 3rem;
+}
+
+#logoimg {
+    float: left;
+}
+
+#navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #EACBCB;
+    opacity: 70%;
+
+    height: 5rem;
+}
+
+.menu {
+	float: left;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+	font-size: 17px;
+}
+
+.menu:hover {
+ 	cursor: pointer;
+}
+
+.menu.active {
+	background-color: aquamarine;
+}
+
+button#logout_btn {
+	float: right;
+	padding: 5px;
+    margin-left: 16rem;
+    
+    background: #C2B1B1;
+    border: none;	
+	border-radius: 10px;
+	
+	width : 90px;
+	height : 38px;
+    
+	font-size: 0.8rem;
+	color: white;
+}
+
+button#logout_btn:hover {
+    cursor: pointer;
+}

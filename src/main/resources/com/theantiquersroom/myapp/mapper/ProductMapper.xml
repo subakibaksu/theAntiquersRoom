@@ -25,7 +25,7 @@
         VALUES (#{imageUrl}, #{imageName}, #{pId})
         ]]>
     </insert>
-    
+
     <select id="getDetailByPId"
             resultType="com.theantiquersroom.myapp.domain.ProductDTO">
         
@@ -54,22 +54,34 @@
             WHERE p_id=#{pId}
         ]]>
     </select>
+  
+    <select id="getProductImageUrls"
+            resultType="string">
+        
+        <![CDATA[ 
+            SELECT image_url
+            FROM product_image
+            WHERE p_id=#{pId}
+        ]]>
+
+    </select>
 
     <select id="listCriteria" 
             resultType="com.theantiquersroom.myapp.domain.ProductDTO" 
             parameterType="hashmap"> <!-- typeAlias를 지정했음으로 풀 네임 기재 필요 없음 -->
-            SELECT 
+      
+            SELECT
                 p_id,
                 name,
                 created_at,
                 updated_at,
                 content,
                 category_id,
-                user_id, 
-                started_at, 
-                ended_at, 
-                started_price, 
-                bid_increment, 
+                user_id,
+                started_at,
+                ended_at,
+                started_price,
+                bid_increment,
                 status,
                 TIMESTAMPDIFF(SECOND,NOW(),ended_at) AS lefttime
             FROM product
@@ -85,10 +97,15 @@
             </where>
 
             <trim prefix="ORDER BY">
+
                 <if test="filter == 0 or filter == null">  p_id DESC </if>
+
                 <if test="filter == 1">  ended_at ASC </if>
+
                 <if test="filter == 2">  started_price ASC </if>
+
                 <if test="filter == 3">  started_price DESC </if>
+
             </trim>
 
             limit #{pageStart}, #{perPageNum}
@@ -96,8 +113,8 @@
     </select>
 
     <!-- 전체 게시글 수를 구하는 sql문 -->
-    <select id="getTotalCount" 
-            resultType="java.lang.Integer" 
+    <select id="getTotalCount"
+            resultType="java.lang.Integer"
             parameterType="com.theantiquersroom.myapp.domain.ProductCommand">
 
         SELECT count(*)
@@ -106,11 +123,49 @@
             <if test="category_id != null and category_id != ''">
                 AND category_id = #{category_id}
             </if>
+
             <if test="searchQuery != null and searchQuery != ''">
                 AND name LIKE CONCAT('%',#{searchQuery},'%')
             </if>
         </where>
 	</select>
+
+    <!-- 가장 높은 Bid값을 구하는 sql문 -->
+    <select id="getMaxBid" resultType="Integer" parameterType="Integer">
+
+        SELECT bid_price
+        FROM bid_history
+        WHERE p_id = #{pId}
+        ORDER BY bid_price DESC
+        LIMIT 1
+
+    </select>
+
+    <select id="getBidHistory" resultType="com.theantiquersroom.myapp.domain.BidHistoryDTO" parameterType="Integer">
+
+        SELECT B.bid_at,
+               B.user_id,
+               B.bid_price,
+               B.p_id,
+               (SELECT nickname
+                FROM users as U
+                WHERE B.user_id=U.user_id) as nickname
+        FROM bid_history as B
+        WHERE p_id=#{pId}
+        ORDER BY bid_at DESC
+
+
+    </select>
+
+    <!-- insert to bid_history -->
+    <insert id="insertBid" parameterType="com.theantiquersroom.myapp.domain.BidHistoryDTO">
+
+        INSERT
+        INTO bid_history
+        (bid_at,user_id, bid_price, p_id)
+        VALUES (NOW(),#{userId},#{bidPrice},#{pId})
+
+    </insert>
 
     <!-- 상품삭제 -->
     <delete id="deleteProduct">

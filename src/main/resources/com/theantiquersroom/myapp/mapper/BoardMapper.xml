@@ -6,7 +6,7 @@
 
 <mapper namespace="com.theantiquersroom.myapp.mapper.BoardMapper">
 
-
+    <!-- 문의게시판 목록 조회 -->
     <select
         id="getQnAList"
         resultType="com.theantiquersroom.myapp.domain.QnADTO">
@@ -30,6 +30,7 @@
         ]]>
     </select>
     
+    <!-- 문의게시글 등록 -->
     <insert
     		 id="registerQnA" 
     		 parameterType="com.theantiquersroom.myapp.domain.QnADTO">
@@ -65,7 +66,7 @@
         ]]>
     </insert>
     
-        <!-- 문의게시물 목록(페이징) -->
+    <!-- 문의게시물 목록(페이징) -->
     <select id="getQnAListPaging" resultType="com.theantiquersroom.myapp.domain.QnADTO">
     
         select * from (
@@ -76,12 +77,27 @@
     
     </select>
     
-        <!-- 문의게시물 총 갯수 -->
+    <!-- 문의게시물 총 갯수 -->
     <select id="getQnATotal" resultType="int">
     
         select count(*) from board
     
     </select>
+    
+    <!-- 문의게시물 조회 -->
+    <select id="getQnADetail" resultType="com.theantiquersroom.myapp.domain.QnADTO">
+    
+        select * from board where bindex = #{bindex}
+    
+    </select>
+    
+        <!-- 문의게시글 수정 -->
+    <select id="modifyQnA" resultType="Integer">
+    
+		update board set title=#{title}, content=#{content}, updated_at = now() where bindex = #{bindex};
+    
+    </select>
+    
     
     
 </mapper>

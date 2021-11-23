@@ -18,4 +18,10 @@ public interface BoardMapper {
 	
 	/* 문의게시판 총 갯수 */
 	public int getQnATotal();
+	
+	/* 문의게시판 조회 */
+	public QnADTO getQnADetail(int bindex);
+	
+	/* 문의게시판 수정 */
+	public Integer modifyQnA(QnADTO dto);
 }

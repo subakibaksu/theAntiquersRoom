@@ -19,9 +19,13 @@
     	
     </head>
     <body>
-        <jsp:include page="/WEB-INF/views/common/header.jsp"/>
+   		<!-- header -->
+		<header>
+			<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+	
+	        <jsp:include page="/WEB-INF/views/common/mypageHeader.jsp"/>
+        </header>
 
-        <jsp:include page="/WEB-INF/views/common/mypageHeader.jsp"/>
 
         <script>
             $(function(){
@@ -33,7 +37,7 @@
             }); //.jq
         </script>
 
-        <div id="wrapper">
+        <div id="myPageWrapper">
 
             <table id="myAcutionTbl">
                 <caption>
@@ -97,10 +101,7 @@
                         </tr>
                     </c:forEach>
                 </tbody>
-    
-                <tfoot>
-    
-                </tfoot>
+
             </table>
     
             <p>&nbsp;</p>
@@ -132,5 +133,9 @@
                 </form>
             </div>
         </div>
+        
+    <footer>
+        <jsp:include page="../common/footer.jsp"></jsp:include>
+    </footer>
     </body>
 </html>

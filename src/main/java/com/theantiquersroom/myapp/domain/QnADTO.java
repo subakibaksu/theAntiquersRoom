@@ -1,8 +1,6 @@
 package com.theantiquersroom.myapp.domain;
 
-import java.time.LocalDateTime;
-
-import org.springframework.format.annotation.DateTimeFormat;
+import java.sql.Timestamp;
 
 import lombok.Data;
 
@@ -17,10 +15,14 @@ public class QnADTO {
     private Integer ref; // 레퍼
     private Integer depth; // 뎁스
     private Integer step; // 스텝
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime createdAt;
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime updatedAt;
+//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+//    private LocalDateTime createdAt;
+//    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+//    private LocalDateTime updatedAt;
+//  private DateTime createdAt;
+//  private DateTime updatedAt;
+  private Timestamp createdAt;
+  private Timestamp updatedAt;
 
     
 } // end class

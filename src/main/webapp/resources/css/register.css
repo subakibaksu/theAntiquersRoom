@@ -91,6 +91,31 @@ input::placeholder {
 	background-color: #D6B6B6;
 }
 
+.emailbtn{
+	position: relative;
+	width: 100%;
+	align-items: right;
+	border-radius: 5px;
+	border: 1px solid #D6B6B6;
+	background-color: #9C0000;
+	color: #D6B6B6;
+	padding: 5px;
+}
+
+.emailbtn:hover {
+	color: white;
+	background-color: #D6B6B6;
+}
+
+.emailconfirm {
+	width: 390px;
+	height: 66px;
+	border: 1px solid lightgrey;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	background-color: #fff;
+}
+
 .inputbtn {
 	width: 300px;
 }
