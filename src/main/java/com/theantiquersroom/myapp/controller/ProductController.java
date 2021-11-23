@@ -1,9 +1,6 @@
 package com.theantiquersroom.myapp.controller;
 
 import com.theantiquersroom.myapp.domain.*;
-
-
-
 import com.theantiquersroom.myapp.service.ProductService;
 
 import lombok.NoArgsConstructor;
@@ -18,7 +15,6 @@ import com.theantiquersroom.myapp.utils.ProductPageMaker;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
