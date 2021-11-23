@@ -167,3 +167,11 @@
 
     padding: 2.5rem;
 }
+
+#bidHistory {
+    margin-top: 1rem;
+    border: solid 1px;
+    border-color: #d6b6b6;
+    border-radius: 1%;
+    height: 500px;
+}

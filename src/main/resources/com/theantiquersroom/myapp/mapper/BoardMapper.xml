@@ -65,6 +65,24 @@
         ]]>
     </insert>
     
+        <!-- 문의게시물 목록(페이징) -->
+    <select id="getQnAListPaging" resultType="com.theantiquersroom.myapp.domain.QnADTO">
+    
+        select * from (
+                select bindex, created_at as createdAt, updated_at as updatedAt, title, content, ref, depth, step, author, p_id as pId
+                from board order by bindex desc) as T1 
+        <!-- limit ((${pageNum}-1)*${amount}), ${amount} -->
+        limit #{skip},#{amount}
+    
+    </select>
+    
+        <!-- 문의게시물 총 갯수 -->
+    <select id="getQnATotal" resultType="int">
+    
+        select count(*) from board
+    
+    </select>
+    
     
 </mapper>
 

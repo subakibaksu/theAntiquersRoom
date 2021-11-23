@@ -103,7 +103,7 @@
         <ul id="productListContainer">
             <c:forEach items="${productList}" var="product">
 
-                <a href="/product/getDetail?${product.pId}">
+                <a href="/product/getDetail?pId=${product.pId}">
 
                 <li class="product">
 
