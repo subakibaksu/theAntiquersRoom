@@ -12,6 +12,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.theantiquersroom.myapp.domain.BoardQnACriteria;
+import com.theantiquersroom.myapp.domain.QnADTO;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -53,6 +54,30 @@ public class BoardServiceTests {
         
         
     }
+    
+    /* 문의게시판 조회 */
+    @Test
+    public void testGetQnADetail() {
+        
+    	int bindex = 50;
+
+        log.info("" + service.getQnADetail(bindex));
+        
+    }
+    
+	 /* 문의게시글 수정 */
+	 @Test
+	 public void testModifyQnA() {
+		 
+        QnADTO dto = new QnADTO();
+        dto.setBindex(50);
+        dto.setTitle("수정 제목3");
+        dto.setContent("수정 내용3");
+        
+        int result = service.modifyQnA(dto);
+        log.info("result : " +result);
+
+	 }
 
 	
 } //end class

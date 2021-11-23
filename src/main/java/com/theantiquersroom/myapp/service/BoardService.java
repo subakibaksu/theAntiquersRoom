@@ -14,9 +14,15 @@ public interface BoardService {
 	public abstract List<QnADTO> getQnAList();
 
 	 /* 문의게시판 목록(페이징 적용) */
-    	public List<QnADTO> getQnAListPaging(BoardQnACriteria cri);
+    public List<QnADTO> getQnAListPaging(BoardQnACriteria cri);
 
    	 /* 문의게시판 총 갯수 */
   	public int getQnATotal();
+  	
+  	/* 문의게시판 조회 */
+  	public QnADTO getQnADetail(int bindex);
+  	
+  	/* 문의게시글 수정 */
+  	public int modifyQnA(QnADTO dto);
 
 }

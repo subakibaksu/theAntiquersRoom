@@ -122,8 +122,10 @@ public class BoardController {
   } // getQnA 페이징처리
 
     @GetMapping("/getQnADetail")
-    public void getQnADetail() {	// 문의사항 상세페이지로 이동
+    public void getQnADetail(int bindex, Model model) {	// 문의사항 상세페이지로 이동
         log.debug("getQnADetail() invoked.");
+        
+        model.addAttribute("pageInfo", service.getQnADetail(bindex));
 
     } // getQnADetail
 
@@ -143,23 +145,30 @@ public class BoardController {
     } // registerQnA
 
     @GetMapping("/modifyQnA")
-    public void modifyQnA() { // 문의사항 수정페이지로 이동
+    public void modifyQnA(int bindex, Model model) { // 문의사항 수정페이지로 이동
         log.debug("modifyQnA() invoked.");
+        
+        model.addAttribute("pageInfo", service.getQnADetail(bindex));
 
     } // modifyQnA
 
-    @PostMapping("/modifyQnA()")
-    public String modifyQnA(Model model) { // 수정된 문의사항 DB전달
-        log.debug("modifyQnA()() invoked.", model);
+    @PostMapping("/modifyQnA")
+    public String modifyQnA(QnADTO dto, RedirectAttributes rttr) { // 수정된 문의사항 DB전달
+        log.debug("modifyQnA({})({}) invoked.", dto,rttr);
 
+        service.modifyQnA(dto);
+        
+        rttr.addFlashAttribute("result", "modify success");
+        
         return  "redirect:/board/QnA";
-    } // modifyQnA()
+        
+    } // modifyQnA
 
-    @PostMapping("/removeQnA()")
+    @PostMapping("/removeQnA")
     public void removeQnA() { // 문의게시글 삭제
         log.debug("removeQnA({}) invoked.");
 
-    } // removeQnA()
+    } // removeQnA
 
 
 
