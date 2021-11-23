@@ -79,10 +79,10 @@
                         let contentcheck = false;
                         let imagescheck = false;
 
-                            $('#register').click(function (){
-                                Checkform();
-                                buttonlive();
-                            });
+                        $('#register').click(function (){
+                            Checkform();
+                            buttonlive();
+                        });
 
                         // 제출버튼 활성화 함수
                         function buttonlive() {
@@ -99,35 +99,35 @@
                             }
                         }
 
-                            // 입력 값 체크
-                            function Checkform() {
-                                if ($('#name').val() == "") {
-                                    $('#name').focus();
-                                } else namecheck = true;
+                       // 입력 값 체크
+                        function Checkform() {
+                            if ($('#name').val() == "") {
+                                $('#name').focus();
+                            } else namecheck = true;
 
-                                if ($('#categoryId').val() == "") {
-                                    $('#categoryId').focus();
-                                } else categoryIdcheck = true;
+                            if ($('#categoryId').val() == "") {
+                                $('#categoryId').focus();
+                            } else categoryIdcheck = true;
 
-                                if ($('#startedPrice').val() == "") {
-                                    $('#startedPrice').focus();
-                                } else startedPricecheck = true;
+                            if ($('#startedPrice').val() == "") {
+                                $('#startedPrice').focus();
+                            } else startedPricecheck = true;
 
-                                if ($('#bidIncrement').val() == "") {
-                                    $('#bidIncrement').focus();
-                                } else bidIncrementcheck = true;
+                            if ($('#bidIncrement').val() == "") {
+                                $('#bidIncrement').focus();
+                            } else bidIncrementcheck = true;
 
-                                if ($('#startDate').val() == "") {
-                                    $('#startDate').focus();
-                                } else startedAtcheck = true;
+                            if ($('#startDate').val() == "") {
+                                $('#startDate').focus();
+                            } else startedAtcheck = true;
 
-                                if ($('#endDate').val() == "") {
-                                    $('#endDate').focus();
-                                } else endedAtcheck = true;
+                            if ($('#endDate').val() == "") {
+                                $('#endDate').focus();
+                            } else endedAtcheck = true;
 
-                                if ($('#summernote').val() == "") {
-                                    $('#summernote').focus();
-                                } else contentcheck = true;
+                            if ($('#summernote').val() == "") {
+                                $('#summernote').focus();
+                            } else contentcheck = true;
 
                             if ($('#image1').val() == "") {
                                 $('#image1').focus();
@@ -152,98 +152,102 @@
             });
         </script>
 
-<div id="wrapper">
+        <div id="wrapper">
+            <div id="subject">경매 상품 등록</div>
 
-    <div id="subject">경매 상품 등록</div>
-    <section id="pInfo">
-        <div id="infoDiv">
-            <%--    상품 등록--%>
-            <form id="productSubmit" action="/product/register" method="post" enctype="multipart/form-data">
-                <table id="infoTable">
-                    <tr>
-                        <th>상품명</th>
-                        <td>
-                            <input type="text" name="name" class="check" id="name" placeholder="상품명을 입력해주세요">
-                        </td>
-                    </tr>
+            <section id="pInfo">
+                <div id="infoDiv">
+                    <%--    상품 등록 form --%>
+                    <form id="productSubmit" action="/product/register" method="post" enctype="multipart/form-data">
+                        <table id="infoTable">
+                            <tr>
+                                <th>상품명</th>
+                                <td>
+                                    <input type="text" name="name" class="check" id="name" placeholder="상품명을 입력해주세요">
+                                </td>
+                            </tr>
 
-                    <tr>
-                        <th>카테고리</th>
-                        <td>
-                            <label>
-                                <select name="categoryId" class="check" id="categoryId">
-                                    <option value="none">상품의 종류를 선택해주세요</option>
-                                    <option value="0">의자</option>
-                                    <option value="1">책상</option>
-                                    <option value="2">수납장</option>
-                                    <option value="3">침대</option>
-                                    <option value="4">옷장</option>
-                                    <option value="5">화장대</option>
-                                    <option value="6">기타</option>
-                                </select>
-                                <p></p>
-                            </label>
-                        </td>
-                    </tr>
+                            <tr>
+                                <th>카테고리</th>
+                                <td>
+                                    <label>
+                                        <select name="categoryId" class="check" id="categoryId">
+                                            <option value="none">상품의 종류를 선택해주세요</option>
+                                            <option value="0">의자</option>
+                                            <option value="1">책상</option>
+                                            <option value="2">수납장</option>
+                                            <option value="3">침대</option>
+                                            <option value="4">옷장</option>
+                                            <option value="5">화장대</option>
+                                            <option value="6">기타</option>
+                                        </select>
+                                        <p></p>
+                                    </label>
+                                </td>
+                            </tr>
 
-                    <tr>
-                        <th>시작 가격</th>
-                        <td>
-                            <input type="text" id="startedPrice" class="check" name="startedPrice"
-                                   placeholder="시작가격을 입력해주세요">
-                        </td>
-                    </tr>
+                            <tr>
+                                <th>시작 가격</th>
+                                <td>
+                                    <input type="text" id="startedPrice" class="check" name="startedPrice"
+                                           placeholder="시작가격을 입력해주세요"> 원
+                                </td>
+                            </tr>
 
-                    <tr>
-                        <th>입찰단위금액</th>
-                        <td>
-                            <select name="bidIncrement" class="check" id="bidIncrement">
-                                <option value="none">입찰 단위금액을 선택해주세요</option>
-                                <option value="1000">1,000원</option>
-                                <option value="5000">5,000원</option>
-                                <option value="10000">10,000원</option>
-                                <option value="100000">100,000원</option>
-                            </select>
-                        </td>
-                    </tr>
+                            <tr>
+                                <th>입찰단위금액</th>
+                                <td>
+                                    <select name="bidIncrement" class="check" id="bidIncrement">
+                                        <option value="none">입찰 단위금액을 선택해주세요</option>
+                                        <option value="1000">1,000원</option>
+                                        <option value="5000">5,000원</option>
+                                        <option value="10000">10,000원</option>
+                                        <option value="100000">100,000원</option>
+                                    </select> 원
+                                </td>
+                            </tr>
 
-                    <tr>
-                        <th>경매기간</th>
-                        <td>
-                            <input type="text" class="check" id="startDate" name="startedAt">
-                                ~
-                            <input type="text" class="check" id="endDate" name="endedAt">
-                        </td>
-                    </tr>
+                            <tr>
+                                <th>경매기간</th>
+                                <td>
+                                    <input type="text" class="check" id="startDate" name="startedAt">
+                                     ~
+                                    <input type="text" class="check" id="endDate" name="endedAt">
+                                </td>
+                            </tr>
 
-                    <tr>
-                        <th>상품 설명</th>
-                        <td>
-                            <label>
-                                <textarea id="summernote" class="check" name="content"></textarea>
-                            </label>
-                        </td>
-                    </tr>
+                            <tr>
+                                <th>상품 설명</th>
+                                <td>
+                                    <label>
+                                        <textarea id="summernote" class="check" name="content"></textarea>
+                                    </label>
+                                </td>
+                            </tr>
 
-                    <tr>
-                        <th>이미지</th>
-                        <td>
-                            <input id="image1" class="check" type="file" name="images">
-                            <span>대표 사진(필수)</span>
-                            <div class="image2"><input type="file" name="images"></div>
-                            <div class="image2"><input type="file" name="images"></div>
-                        </td>
-                    </tr>
+                            <tr>
+                                <th>이미지</th>
+                                <td>
+                                    <input id="image1" class="check" type="file" name="images">
+                                    <span>대표 사진(필수)</span>
+                                    <div class="image2"><input type="file" name="images"></div>
+                                    <div class="image2"><input type="file" name="images"></div>
+                                </td>
+                            </tr>
 
-                    <tr>
-                        <td colspan="2">
-                            <button type="submit" id="register" >상품등록</button>
-                        </td>
-                    </tr>
-                </table>
-            </form>
+                            <tr>
+                                <td colspan="2">
+                                    <div id="register_page_button">
+                                        <button type="submit" class="register_page_button">상품등록</button>
+                                        <a href="/users/mypage" ><button type="button" class="register_page_button">취소</button></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </section>
         </div>
-    </section>
-</div>
-</body>
+        <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+    </body>
 </html>
