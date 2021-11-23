@@ -63,16 +63,6 @@ public class AdminController {
  	@PostMapping("/confirmRequest")
  	public String confirmRequestedProduct(@RequestParam(value="checkBoxArr[]") Integer[] confirmArr, RedirectAttributes rttrs) {
  		log.debug("confirmRequestedProduct({}, {}) invoked.", confirmArr,rttrs);
-
-// 		String pids = "";
-// 		for(int i = 0; i< confirmArr.length; i++) {
-// 			pids += "'" + confirmArr[i] + "'";
-// 			if(i < confirmArr.length-1) {
-// 				pids += ",";
-// 			}
-// 		}
- 		
- 		log.info(confirmArr);
  		
  		for(int i = 0; i< confirmArr.length; i++) {
  	 		boolean result=this.service.modifyStatus(confirmArr[i]);
