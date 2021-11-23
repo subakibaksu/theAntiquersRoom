@@ -44,7 +44,7 @@ public class ProductServiceTests {
 	public void testGetDetail() {
 		log.debug("testGetDetail() invoked.");
 
-		Integer pId = 30;
+		Integer pId = 76;
 
 		ProductDTO dto = this.service.getDetail(pId);
 		

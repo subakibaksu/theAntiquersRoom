@@ -1,14 +1,16 @@
 package com.theantiquersroom.myapp.mapper;
 
 
-import com.theantiquersroom.myapp.domain.ProductImageDTO;
-import com.theantiquersroom.myapp.domain.ProductFormDTO;
-import com.theantiquersroom.myapp.domain.ProductCommand;
-import com.theantiquersroom.myapp.domain.ProductDTO;
-import org.apache.ibatis.annotations.Mapper;
-
+import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import com.theantiquersroom.myapp.domain.ProductCommand;
+import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.ProductFormDTO;
+import com.theantiquersroom.myapp.domain.ProductImageDTO;
 
 
 @Mapper
@@ -29,6 +31,9 @@ public interface ProductMapper {
 
 	// 상품번호에 따른 상품 상세정보 불러오기
 	public abstract ProductDTO getDetailByPId(Integer pId);
+	
+	// 상품번호에 따른 상품별 이미지 파일 불러오기
+	public abstract List<String> getProductImageUrls(Integer pId);
 	
 	//상품삭제
 	public abstract Integer deleteProduct(Integer pId);
