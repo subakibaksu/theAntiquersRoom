@@ -1,9 +1,12 @@
 @charset "UTF-8";
 
+@font-face {
+    font-family: 'ONE Mobile Title';
+    src: url('/resources/font/ONE Mobile Title.ttf') format('truetype');
+	}
 
     #var {
 
-        opacity: 70%;
 		margin-right: 10%;
 		margin-left: 10%;
         background: #3C3C3C;
@@ -12,13 +15,21 @@
         color: white;
 
     }
-
-    #mypage {
+    
+    .mypage {
         padding: 2rem;
-       
-        
+       color: white;
+               
     }
-
+    
+    #menu1{
+    		font-family: "Merriweather";
+    }
+    
+    #menu2{
+           	font-family: 'ONE Mobile Title';
+    }
+    
     a {
         color: inherit; /* 링크의 색상 제거 */
         text-decoration: none; /* 링크의 밑줄 제거 */
