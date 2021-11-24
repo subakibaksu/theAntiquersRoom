@@ -30,7 +30,7 @@ header{
     flex-direction: column;
 
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 14px;
+    font-size: 0.8rem;
 }
 
 #myAcutionTbl {
@@ -67,7 +67,7 @@ header{
     height: 50px;
 
     text-align: center;
-	font-size: 24px;
+	font-size: 1.5rem;
     list-style: none;
 }
 
@@ -84,7 +84,7 @@ header{
     color: white;
     background-color: #9C0000;
 
-    font-size: 12px;
+    font-size: 0.8rem;
     font-weight: bold;
 
 	border-radius: 15px;
@@ -94,7 +94,7 @@ form{
 }
 
 input[type=submit] {
-    font-size: 12px;
+    font-size: 0.8rem;
   	cursor: pointer;
 }
 
@@ -134,7 +134,7 @@ input[type=submit] {
 #pagination{
     width: 95%;
     margin: 0 auto;
-    font-size: 12px;
+    font-size: 0.9rem;
     float: right;
     justify-content: center;
     display: flex;
