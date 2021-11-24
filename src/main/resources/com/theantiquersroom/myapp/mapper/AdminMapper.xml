@@ -44,7 +44,7 @@
                 (select category_name from category as C where C.category_id=A.category_id) as categoryName
             FROM product as A
             WHERE status='승인대기중' OR status='승인완료' OR status='승인반려'
-            ORDER BY A.created_at DESC
+            ORDER BY field(A.status, '승인대기중', '승인완료', '승인반려'), A.created_at DESC
             LIMIT #{pageStart}, #{amount}
 
         ]]>
