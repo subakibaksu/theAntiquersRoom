@@ -5,6 +5,10 @@
     padding: 0;
 }
 
+a{
+	text-decoration: none;
+}
+
 #header_container {
     width: 100%;
     display: flex;
@@ -57,9 +61,11 @@
 .menu {
 	float: left;
 	text-align: center;
-	padding: 14px 16px;
+	padding: 0 3rem;
 	text-decoration: none;
 	font-size: 17px;
+	color:black;
+	width: 8rem;
 }
 
 .menu:hover {

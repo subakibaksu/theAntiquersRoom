@@ -30,7 +30,7 @@ header{
     flex-direction: column;
 
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 #myAcutionTbl {
@@ -84,7 +84,7 @@ header{
     color: white;
     background-color: #9C0000;
 
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
 
 	border-radius: 15px;
@@ -94,7 +94,7 @@ form{
 }
 
 input[type=submit] {
-    font-size: 14px;
+    font-size: 12px;
   	cursor: pointer;
 }
 
@@ -134,7 +134,7 @@ input[type=submit] {
 #pagination{
     width: 95%;
     margin: 0 auto;
-    font-size: 14px;
+    font-size: 12px;
     float: right;
     justify-content: center;
     display: flex;
@@ -159,21 +159,26 @@ input[type=submit] {
     text-align : center;
     line-height: 25px;
     text-decoration: none;
-    margin: 8px 3px;
+    margin: 11px 5px;
     
-    border: 1px solid #B1A2A2;
-    border-radius: 15px;
+    border: 1px solid #C2B1B1;
+    border-radius: 10px;
     
-    background-color: #B1A2A2;
+    background-color: white;
 }
 
-a{
-    color: white!important;
+#pagination a{
+    color: #C2B1B1!important;
 	text-decoration:none;
 }
 
 #pagination li:hover{
-    background-color: #9C0000;
+    background-color: #D9CECE;
+}
+
+.active{
+    background-color: #D9CECE!important;
+    color:white;
 }
 
 .prev, .next{
