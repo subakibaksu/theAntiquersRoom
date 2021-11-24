@@ -239,7 +239,9 @@
                                 <td colspan="2">
                                     <div id="register_page_button">
                                         <button type="submit" class="register_page_button">상품등록</button>
-                                        <a href="/users/mypage" ><button type="button" class="register_page_button">취소</button></a>
+                                        <a href="/users/mypage">
+                                            <button type="button" class="register_page_button">취소</button>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
