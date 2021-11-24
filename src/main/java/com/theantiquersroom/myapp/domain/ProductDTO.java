@@ -37,5 +37,6 @@ public class ProductDTO {
    private Integer currPrice; // 현재가격
    
    private List<String> imageUrls; // 파일별 등록된 이미지들의 주소
+   private String imageUrl; // 파일별 등록된 대표이미지 주소
    
 } // end class

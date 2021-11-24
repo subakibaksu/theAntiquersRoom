@@ -103,7 +103,7 @@
 				<c:forEach items="${requestedList}" var="reqProduct" varStatus="myIndex">
 					<tr>
 						<td>
-							<img onclick="getDetail(${myIndex.index})" src="${reqProduct.imageUrls}" height="100px" width="100px">
+							<img onclick="getDetail(${myIndex.index})" src="${reqProduct.imageUrl}" height="100px" width="100px">
 							<div hidden id="detail_${myIndex.index}"><c:out value="${reqProduct.content}"/></div>
 						</td>
 						<td><c:out value="${reqProduct.name}"/></td>

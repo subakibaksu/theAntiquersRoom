@@ -62,7 +62,7 @@
                 <tbody>    
                     <c:forEach items="${myAuctionList}" var="myAuction">
                         <tr>
-                            <td><a href="/product/getDetail?pId=${myAuction.pId}"><img src="${myAuction.imageUrls}" height="100px" width="100px"></a></td>
+                            <td><a href="/product/getDetail?pId=${myAuction.pId}"><img src="${myAuction.imageUrl}" height="100px" width="100px"></a></td>
                             <td><a href="/product/getDetail?pId=${myAuction.pId}"><c:out value="${myAuction.name}"/></a></td>
                             <td><c:out value="${myAuction.categoryName}"/></td>
                             <td><c:out value="${myAuction.startedPrice}"/></td>
