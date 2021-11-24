@@ -245,4 +245,50 @@
             SELECT nickname FROM users WHERE user_id = #{userId}
         ]]>
     </select>
+
+    <!-- 마이페이지 게시판 총 목록개수 반환 -->
+    <select
+            id="getMyBidTotalCount"
+            resultType="int">
+
+        <![CDATA[
+
+        SELECT count(p_id)
+        FROM product
+        WHERE user_id=#{userId}
+
+        ]]>
+    </select>
+
+
+    <!-- 마이페이지-나의경매리스트 조회 -->
+    <select
+            id="getMyBidList"
+            resultType="com.theantiquersroom.myapp.domain.ProductDTO"
+            parameterType="hashmap">
+
+        <![CDATA[
+
+            SELECT
+                P.p_id as pId,
+                P.name,
+                P.created_at as createdAt,
+                P.updated_at as updatedAt,
+                P.content,
+                P.category_id as categoryId,
+                P.user_id as userId,
+                P.started_at as startedAt,
+                P.ended_at as endedAt,
+                P.started_price as startedPrice,
+                P.bid_increment as bidIncrement,
+                P.status
+            FROM product as P
+            WHERE P.p_id IN
+                  (SELECT p_id FROM bid_history WHERE user_id = 'sleptawake@gmail.com')
+            ORDER BY P.created_at DESC
+            LIMIT #{cri.pageStart}, #{cri.amount}
+
+
+        ]]>
+    </select>
 </mapper>

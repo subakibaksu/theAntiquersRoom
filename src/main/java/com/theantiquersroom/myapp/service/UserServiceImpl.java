@@ -220,24 +220,36 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 		
 		return list;
 	}//getMyAuctionList
-	
-	
+
 	@Override
 	public List<ProductDTO> getBidList(MypageCriteria cri) {
-		// TODO Auto-generated method stub
 		return null;
-	}//getBidList
-	
-	
+	}
+
 	@Override
 	public Integer getMyAuctionTotal(String userId) {
 		log.debug("getMyAuctionTotal({}) invoked.", userId);
 		
 		return this.mapper.getMyAuctionTotalCount(userId);
 	}//getTotal
-	
-	
-    // =====================카카오 로그인 API 관련===================== //
+
+	@Override
+	public List<ProductDTO> getMyBidList(HashMap<String, Object> map) {
+    	log.debug("getMyBidList({}) invoked.",map);
+    	List<ProductDTO> productDTOList = mapper.getMyBidList(map);
+
+		return productDTOList;
+	}
+
+	@Override
+	public Integer getMyBidTotal(String userId) {
+		log.debug("getMyBidTotal({}) invoked.", userId);
+
+		return mapper.getMyBidTotalCount(userId);
+	}
+
+
+	// =====================카카오 로그인 API 관련===================== //
 	
 	@Override
 	public UserDTO getKakaoUser(String kakaoUniqueId) {

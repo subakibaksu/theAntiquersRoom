@@ -175,5 +175,33 @@ public class UserController {
 		
 		return "redirect:/users/getUserList";
 	} //remove
-	
+
+	@GetMapping("/getMyBidList")
+	public String getMyBidList(
+			HttpSession session,
+			@ModelAttribute("cri") MypageCriteria cri,
+			Model model) {	// 나의 경매리스트 페이지로 이동
+		log.debug("getMyAuctionList({}, {}) invoked.", cri, model);
+
+		UserDTO user = (UserDTO) session.getAttribute(LoginController.authKey);
+		String userId = user.getUserId();
+
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("userId", userId);
+		map.put("cri", cri);
+
+		List<ProductDTO> myBidList = this.service.getMyAuctionList(map);
+
+		model.addAttribute("myBidList",myBidList);
+
+		//페이징 처리
+		Integer totalAmount = this.service.getMyBidTotal(userId);
+
+		MyPageDTO pageDTO = new MyPageDTO(cri, totalAmount);
+
+		model.addAttribute("pageMaker", pageDTO);
+
+		return "/users/myAuctionList";
+	} //getMyAuctionList
+
 }  //end class

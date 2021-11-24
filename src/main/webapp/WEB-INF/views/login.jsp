@@ -63,7 +63,7 @@
         </div>
         <div id="findIdPwd">
             <div>
-                <a class="signinLink" href="#">회원가입</a>
+                <a class="signinLink" href="/register">회원가입</a>
             </div>
             <div>
                 <a href="#">아이디 찾기</a>

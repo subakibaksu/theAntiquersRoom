@@ -28,9 +28,9 @@ public class RegisterController {
 	
 
     @GetMapping("/register")
-    public void register() {	//회원가입 화면 요청
+    public String register() {	//회원가입 화면 요청
         log.debug("register() invoked.");
-
+        return "register";
     } //register
 
     @PostMapping("/registerCheck")

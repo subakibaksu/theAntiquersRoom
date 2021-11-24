@@ -58,7 +58,7 @@
 
     <a href="/confirmEmail">temp</a>
     <a href="/resetPwd">resetPwd</a>
-
+    <a href="/product/main">main</a>
     <hr>
     <button type="button" id="loginBtn">로그인</button>
 

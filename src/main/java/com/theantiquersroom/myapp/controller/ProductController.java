@@ -187,5 +187,15 @@ public class ProductController {
 
     } // bid()
 
+    @GetMapping("/main")
+    public String main(Model model){
+        log.debug("main invoked()");
+        model.addAttribute("newProductList",service.getNewProduct());
+        model.addAttribute("endingProductList",service.getEndingProduct());
+        log.debug(service.getNewProduct());
+        log.debug(service.getEndingProduct());
+        return "main";
+    }
+
 
 } // end class
