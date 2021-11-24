@@ -6,7 +6,6 @@
     padding: 0;
 }
 
-/* 1. html, body의 최소 높이를 지정 */
 html,
 body {
     min-height: 1;
@@ -15,16 +14,12 @@ body {
 body {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
 }
 
 header{
 	width : 100%;
 }
 
-/* 2. header, footer 사이에 본문 내용이 들어갈 div에 flex-grow설정 */
-/* 해당 설정은 body에 display: flex 해주었을때만 가능! */
 #myPageWrapper{
 	flex-grow: 1;
 	
@@ -35,7 +30,7 @@ header{
     flex-direction: column;
 
     font-family: 'Noto Sans KR', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 #myAcutionTbl {
@@ -89,7 +84,7 @@ header{
     color: white;
     background-color: #9C0000;
 
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
 
 	border-radius: 15px;
@@ -99,7 +94,7 @@ form{
 }
 
 input[type=submit] {
-    font-size: 14px;
+    font-size: 12px;
   	cursor: pointer;
 }
 
@@ -139,8 +134,7 @@ input[type=submit] {
 #pagination{
     width: 95%;
     margin: 0 auto;
-    color: #B1A2A2;
-    font-size: 14px;
+    font-size: 12px;
     float: right;
     justify-content: center;
     display: flex;
@@ -165,22 +159,30 @@ input[type=submit] {
     text-align : center;
     line-height: 25px;
     text-decoration: none;
-    margin: 8px 3px;
+    margin: 11px 5px;
     
-    border: 1px solid #B1A2A2;
-    border-radius: 15px;
+    border: 1px solid #C2B1B1;
+    border-radius: 10px;
     
-    background-color: #B1A2A2;
-    color:white;
+    background-color: white;
+}
+
+#pagination a{
+    color: #C2B1B1!important;
+	text-decoration:none;
 }
 
 #pagination li:hover{
-    background-color: #9C0000;
+    background-color: #D9CECE;
+}
+
+.active{
+    background-color: #D9CECE!important;
+    color:white;
 }
 
 .prev, .next{
     width: 50px!important;
 
     color: white!important;
-    background-color: #B1A2A2;
 }

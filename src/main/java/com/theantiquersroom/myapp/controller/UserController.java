@@ -96,7 +96,7 @@ public class UserController {
 
     // ======================== MyPage =========================== //
     
-    @GetMapping("/getMyAuctionList")
+    @GetMapping("/myAuctionList")
     public String getMyAuctionList(
     		HttpSession session,
     		@ModelAttribute("cri") MypageCriteria cri,

@@ -23,7 +23,7 @@
             $('#myAuctionBtn').click(function(){
                 console.log('myAuctionBtn click event triggered..');
 
-                self.location='/users/getMyAuctionList';
+                self.location='/users/myAuctionList';
             }); //myAuctionBtn_onclick
 
             $('#adminBtn').click(function(){

@@ -123,19 +123,26 @@
  
                  <ul>
                      <!-- 1. 이전 이동여부표시(prev) -->
-                     <c:if test="${myAuction.status=='승인대기중'}">
-                         <li class="prev"><a class='prev' href="${pageMaker.startPage -1}">Prev</a></li>
+                        <c:if test="${pageMaker.prev}">
+                         <li class="prev"><a class='prev' href="requestedList?currPage=${pageMaker.startPage -1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">이전</a></li>
                      </c:if>
                      
                      <!-- 페이지번호목록 표시 -->
                      <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-                         <li><a href="/admin/requestedList?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">${pageNum}</a></li>
+              	        <c:choose>
+	                     	<c:when test="${pageMaker.cri.currPage == pageNum}">
+	                        	<li class="active">${pageNum}</li>
+	                        </c:when>
+	                        <c:otherwise>
+	                        	<li><a href="/admin/requestedList?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">${pageNum}</a></li>
+                     		</c:otherwise>
+                     	</c:choose>
                      </c:forEach>
  
                      <!-- 2. 다음 이동여부표시(next) -->
                      <c:if test="${pageMaker.next}">
-                         <li class="next"><a class='next' href="${pageMaker.endPage +1}">Next</a></li>
-                     </c:if>
+						<li class="next"><a class='next' href="requestedList?currPage=${pageMaker.endPage +1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">다음</a></li>
+					</c:if>
                  </ul>
  
              </form>

@@ -3,8 +3,10 @@
 * {
 	margin : 0;
     padding: 0;
-    text-decoration: none;
-    color: black;
+}
+
+a{
+	text-decoration: none;
 }
 
 #header_container {
@@ -13,6 +15,9 @@
     flex-direction: column;
 
     margin-top: 3rem;
+    
+    text-decoration: none;
+    color:black;
 }
 
 #logo_container {
@@ -56,9 +61,11 @@
 .menu {
 	float: left;
 	text-align: center;
-	padding: 14px 16px;
+	padding: 0 3rem;
 	text-decoration: none;
 	font-size: 17px;
+	color:black;
+	width: 8rem;
 }
 
 .menu:hover {
