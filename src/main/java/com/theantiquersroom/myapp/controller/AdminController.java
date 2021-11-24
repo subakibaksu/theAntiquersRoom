@@ -59,13 +59,6 @@ public class AdminController {
         return "/admin/requestedList";
     } // getRequestedProductList()
     
-    //판매중인 경매상품 리스트
-    @GetMapping("/auctionProductList")
-    public void auctionProductList() {
-        log.debug("getRequestedProductList() invoked.");
-
-    } // auctionProductList
-    
     //판매요청 경매상품 승인
  	@PostMapping("/confirmRequest")
  	public String confirmRequestedProduct(@RequestParam(value="checkBoxArr[]") Integer[] confirmArr, RedirectAttributes rttrs) {
@@ -77,6 +70,32 @@ public class AdminController {
  			
  		return "redirect:/admin/main";
  	} //confirmRequestedProduct
+ 	
+    //경매상품 리스트
+    @GetMapping("/auctionProductList")
+    public String getAuctionProductList(
+    		HttpSession session,
+    		@ModelAttribute("cri") MypageCriteria cri,
+    		Model model
+    		) {
+        log.debug("getAuctionProductList() invoked.");
+        
+        List<ProductDTO> onSaleProductList = this.service.getOnSaleProductList(cri);
+ 		log.info("\t+ OnSaleProductList size: {}", onSaleProductList.size());
+ 		
+ 		model.addAttribute("onSaleProductList",onSaleProductList);
+ 		
+ 		//페이징 처리
+ 		Integer totalAmount = this.service.getOnSaleTotal();
+		
+		MyPageDTO pageDTO = new MyPageDTO(cri, totalAmount);
+		
+		model.addAttribute("pageMaker", pageDTO);
+ 		
+        return "/admin/onSaleProductList";
+
+    } // getOnSaleProductList
+    
 
     @PostMapping("/confirmDiscontinuedProduct")
     public String confirmDiscontinuedProduct() {

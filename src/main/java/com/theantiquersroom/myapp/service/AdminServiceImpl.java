@@ -51,4 +51,21 @@ public class AdminServiceImpl implements AdminService {
 		return affectedRows>0;
 	}//modifyStatus
 
+	@Override
+	public List<ProductDTO> getOnSaleProductList(MypageCriteria cri) {
+		log.debug("getOnSaleProductList({}) invoked.",cri);
+		
+		List<ProductDTO> list=this.mapper.getOnSaleProductList(cri);
+		log.info("\t+ list size: {}", list.size());
+		
+		return list;
+	}//getOnSaleProductList
+
+	@Override
+	public Integer getOnSaleTotal() {
+		log.debug("getOnSaleTotal({}) invoked.");
+
+		return this.mapper.getOnSaleTotal();
+	}//getOnSaleTotal
+
 }//end class

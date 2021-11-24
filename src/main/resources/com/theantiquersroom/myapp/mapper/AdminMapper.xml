@@ -6,7 +6,7 @@
 
 <mapper namespace="com.theantiquersroom.myapp.mapper.AdminMapper">
 
-	<!-- 마이페이지 게시판 총 목록개수 반환 -->
+	<!-- 승인요청상품 게시판 총 목록개수 반환 -->
     <select
         id="getRequestedListTotal"
         resultType="int">
@@ -15,7 +15,7 @@
 
             SELECT count(p_id)
             FROM product
-            WHERE status='승인대기중' OR status='승인완료'
+            WHERE status='승인대기중' OR status='승인완료' OR status='반려'
 
         ]]>
     </select>
@@ -43,7 +43,7 @@
                 (select nickname from users as B where B.USER_ID=A.USER_ID) as nickname,
                 (select category_name from category as C where C.category_id=A.category_id) as categoryName
             FROM product as A
-            WHERE A.status='승인대기중' OR A.status='승인완료'
+            WHERE A.status='승인대기중' OR A.status='승인완료' OR status='반려'
             ORDER BY A.created_at DESC
             LIMIT #{pageStart}, #{amount}
 
@@ -61,6 +61,52 @@
             p_id = #{pId}
 
     </update>
+    
+    <!-- 판매중인 경매상품 총 목록개수 반환 -->
+    <select
+        id="getOnSaleTotal"
+        resultType="int">
+        
+        <![CDATA[
+
+            SELECT count(p_id)
+            FROM product
+            WHERE status NOT IN ('승인대기중', '승인완료', '반려')
+
+        ]]>
+    </select>
+
+    <!-- 관리자 경매상품 조회 -->
+    <select
+        id="getOnSaleProductList"
+        resultType="com.theantiquersroom.myapp.domain.ProductDTO">
+
+        <![CDATA[ 
+
+            SELECT
+            	A.p_id as pId,
+                A.name,
+                A.created_at as createdAt,
+                A.updated_at as updatedAt,
+                A.content,
+                A.category_id as categoryId,
+                A.user_id as userId,
+                A.started_at as startedAt,
+                A.ended_at as endedAt,
+                A.started_price as startedPrice,
+                A.bid_increment as bidIncrement,
+                A.status,
+                (select nickname from users as B where B.USER_ID=A.USER_ID) as nickname,
+                (select category_name from category as C where C.category_id=A.category_id) as categoryName,
+                (select image_url from product_image as D where D.p_id=A.p_id order by D.index limit 1) as imageUrls,
+                (select bid_price from bid_history as E where E.p_id=A.p_id order by E.bid_price desc limit 1) as bid_price
+            FROM product as A
+            WHERE A.status NOT IN ('승인대기중', '승인완료', '반려')
+            ORDER BY A.created_at DESC
+            LIMIT #{pageStart}, #{amount}
+
+        ]]>
+    </select>  
     
     
 </mapper>

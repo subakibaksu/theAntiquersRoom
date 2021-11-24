@@ -49,7 +49,7 @@
 		<!-- navbar -->
 		<nav id="navbar">
 			<a class="menu" href="/admin/main">승인요청상품</a> 
-			<a class="menu" href="#">경매상품</a> 
+			<a class="menu" href="/admin/onSaleProductList">경매상품</a> 
 			<a class="menu" href="#">판매종료상품</a> 
 			<a class="menu" href="#">회원목록</a> 
 			<button type="button" id="logout_btn" >Log out</button>
