@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="/resources/css/product/register.css">
 
     <%--    datetimepicker 관련 --%>
-    <link rel="stylesheet" href="/resources/jquery.datetimepicker.min.css">
+    <link rel="stylesheet" href="/resources/css/datetimepicker/jquery.datetimepicker.min.css">
     <script type="text/javascript"
-            src="/resources/jquery.datetimepicker.full.min.js"></script>
+            src="/resources/js/datetimepicker/jquery.datetimepicker.full.min.js"></script>
 
     <%--    summernote 관련 --%>
     <script type="text/javascript"
