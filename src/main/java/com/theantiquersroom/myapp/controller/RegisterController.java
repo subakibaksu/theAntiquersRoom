@@ -7,11 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 
 import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.service.UserService;
@@ -27,7 +23,6 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class RegisterController {
 
-		
 	@Setter(onMethod_= {@Autowired})
     private UserService service;
 	
@@ -122,7 +117,30 @@ public class RegisterController {
 
         return map;
     } // confirmEmail
-	
-	
-	
+
+    @GetMapping("/resetPwd")
+    public void resetPwd() {	// 비밀번호 재설정 페이지로 이동
+
+        log.debug("resetPwd() invoked.");
+
+    } //resetPwd
+
+    @PostMapping("/resetPwd")
+    public @ResponseBody Map<Object, Object> resetPwd(
+            @RequestParam("userId") String userId,
+            @RequestParam("nickName") String nickName) throws Exception {	// 비밀번호 재설정 실행
+
+        log.debug("resetPwd() invoked. model {} {} ", userId, nickName);
+
+        //Ajax의 결과값을 Json으로 받기 위해 Map객체를 생성
+        Map<Object,Object> map = new HashMap<Object, Object>();
+
+        boolean mailSentCheck = service.resetPwd(userId, nickName);
+        map.put("check",mailSentCheck);
+        log.debug("result : {}", mailSentCheck);
+
+        return map;
+
+    } //resetPwd
+
 }

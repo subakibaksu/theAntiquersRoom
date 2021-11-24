@@ -6,12 +6,14 @@
 <head>
     <meta charset="UTF-8">
     <title>login.jsp</title>
-        
-    <link rel="stylesheet" href="../../../resources/css/login.css">
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/resources/css/resetPassword.css">
+    <link rel="stylesheet" href="../../../resources/css/login.css">
+    <script src="/resources/js/resetPassword.js"/>
 </head>
 <body>
     <!-- 카카오 로그인 -->
@@ -65,7 +67,33 @@
             </div>
             <div>
                 <a href="#">아이디 찾기</a>
-                <a href="#">비밀번호 찾기</a>
+                <a data-toggle="modal" data-target="#exampleModalCenter" style="" >
+                    비밀번호찾기
+                </a>
+                <%-- 비밀번호 찾기 시 나오는 모달 --%>
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">비밀번호 찾기</h5>
+                            </div>
+                            <div class="modal-body">
+                                <form id="resetPasswordForm" action=#>
+                                    <input id="inputuserId" name="userId" placeholder="이메일을 입력하세요">
+                                    <input id="inputNickname" name="nickName" placeholder="닉네임을 입력하세요">
+                                    <button type="submit" id="resetPasswordFormSubmit" class="mybtn">재발급</button>
+                                </form>
+
+                            </div>
+                            <div class="modal-footer">
+                                <p id="mymsg"></p>
+                                <button type="button" class="mybtn" data-dismiss="modal">닫기</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
         <div>
