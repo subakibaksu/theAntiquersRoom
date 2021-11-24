@@ -123,8 +123,8 @@
  
                  <ul>
                      <!-- 1. 이전 이동여부표시(prev) -->
-                     <c:if test="${myAuction.status=='승인대기중'}">
-                         <li class="prev"><a class='prev' href="${pageMaker.startPage -1}">Prev</a></li>
+                        <c:if test="${pageMaker.prev}">
+                         <li class="prev"><a class='prev' href="requestedList?currPage=${pageMaker.startPage -1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">Prev</a></li>
                      </c:if>
                      
                      <!-- 페이지번호목록 표시 -->
@@ -134,8 +134,8 @@
  
                      <!-- 2. 다음 이동여부표시(next) -->
                      <c:if test="${pageMaker.next}">
-                         <li class="next"><a class='next' href="${pageMaker.endPage +1}">Next</a></li>
-                     </c:if>
+						<li class="next"><a class='next' href="requestedList?currPage=${pageMaker.endPage +1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">Next</a></li>
+					</c:if>
                  </ul>
  
              </form>

@@ -116,17 +116,17 @@
                     <ul>
                         <!-- 1. 이전 이동여부표시(prev) -->
                         <c:if test="${pageMaker.prev}">
-                            <li class="prev"><a class='prev' href="${pageMaker.startPage -1}">Prev</a></li>
+                            <li class="prev"><a class='prev' href="myAuctionList?currPage=${pageMaker.startPage -1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">Prev</a></li>
                         </c:if>
                         
                         <!-- 페이지번호목록 표시 -->
                         <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-                            <li><a href="/users/getMyAuctionList?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">${pageNum}</a></li>
+                            <li><a href="/users/myAuctionList?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">${pageNum}</a></li>
                         </c:forEach>
     
                         <!-- 2. 다음 이동여부표시(next) -->
                         <c:if test="${pageMaker.next}">
-                            <li class="next"><a class='next' href="${pageMaker.endPage +1}">Next</a></li>
+                            <li class="next"><a class='next' href="myAuctionList?currPage=${pageMaker.endPage +1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">Next</a></li>
                         </c:if>
                     </ul>
     

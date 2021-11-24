@@ -3,8 +3,6 @@
 * {
 	margin : 0;
     padding: 0;
-    text-decoration: none;
-    color: black;
 }
 
 #header_container {
@@ -13,6 +11,9 @@
     flex-direction: column;
 
     margin-top: 3rem;
+    
+    text-decoration: none;
+    color:black;
 }
 
 #logo_container {
