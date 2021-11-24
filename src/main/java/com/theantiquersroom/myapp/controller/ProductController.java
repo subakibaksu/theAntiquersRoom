@@ -1,29 +1,40 @@
 package com.theantiquersroom.myapp.controller;
 
-import com.theantiquersroom.myapp.domain.*;
-import com.theantiquersroom.myapp.domain.ProductFormDTO;
-import com.theantiquersroom.myapp.domain.ProductDTO;
-import com.theantiquersroom.myapp.service.ProductService;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import com.theantiquersroom.myapp.domain.ProductDTO;
-import com.theantiquersroom.myapp.domain.UserDTO;
-import com.theantiquersroom.myapp.domain.ProductCommand;
-import com.theantiquersroom.myapp.utils.ProductPageMaker;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import com.theantiquersroom.myapp.domain.ProductDTO;
-import com.theantiquersroom.myapp.service.ProductService;
+
 import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import com.theantiquersroom.myapp.domain.BidHistoryDTO;
+import com.theantiquersroom.myapp.domain.ProductCommand;
+import com.theantiquersroom.myapp.domain.ProductCriteria;
+import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.ProductFormDTO;
+import com.theantiquersroom.myapp.domain.UserDTO;
+import com.theantiquersroom.myapp.service.ProductService;
+import com.theantiquersroom.myapp.utils.ProductPageMaker;
+
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.extern.log4j.Log4j2;
 
 
 @Log4j2
