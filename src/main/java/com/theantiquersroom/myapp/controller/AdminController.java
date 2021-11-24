@@ -59,13 +59,6 @@ public class AdminController {
         return "/admin/requestedList";
     } // getRequestedProductList()
     
-    //판매중인 경매상품 리스트
-    @GetMapping("/auctionProductList")
-    public void auctionProductList() {
-        log.debug("getRequestedProductList() invoked.");
-
-    } // auctionProductList
-    
     //판매요청 경매상품 승인
  	@PostMapping("/confirmRequest")
  	public String confirmRequestedProduct(@RequestParam(value="checkBoxArr[]") Integer[] confirmArr, RedirectAttributes rttrs) {
@@ -77,6 +70,25 @@ public class AdminController {
  			
  		return "redirect:/admin/main";
  	} //confirmRequestedProduct
+ 	
+    //판매요청 경매상품 반려
+ 	@PostMapping("/rejectRequest")
+ 	public String rejectRequest(@RequestParam(value="checkBoxArr[]") Integer[] confirmArr, RedirectAttributes rttrs) {
+ 		log.debug("rejectRequest({}, {}) invoked.", confirmArr,rttrs);
+ 		
+ 		for(int i = 0; i< confirmArr.length; i++) {
+ 	 		boolean result=this.service.rejectRequest(confirmArr[i]);
+ 		}
+ 			
+ 		return "redirect:/admin/main";
+ 	} //rejectRequest
+    
+    //판매중인 경매상품 리스트
+    @GetMapping("/auctionProductList")
+    public void auctionProductList() {
+        log.debug("getRequestedProductList() invoked.");
+
+    } // auctionProductList
 
     @PostMapping("/confirmDiscontinuedProduct")
     public String confirmDiscontinuedProduct() {

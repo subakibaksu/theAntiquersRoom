@@ -19,5 +19,8 @@ public interface AdminService {
   	
   	// 경매 승인
   	public abstract Boolean modifyStatus(Integer pId);
+  	
+  	// 경매 승인 반려
+  	public abstract Boolean rejectRequest(Integer pId);
     
 } // end interface

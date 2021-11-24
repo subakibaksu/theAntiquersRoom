@@ -6,7 +6,7 @@
 
 <mapper namespace="com.theantiquersroom.myapp.mapper.AdminMapper">
 
-	<!-- 마이페이지 게시판 총 목록개수 반환 -->
+    <!-- 승인요청상품 게시판 총 목록개수 반환 -->
     <select
         id="getRequestedListTotal"
         resultType="int">
@@ -15,7 +15,7 @@
 
             SELECT count(p_id)
             FROM product
-            WHERE status='승인대기중' OR status='승인완료'
+            WHERE status='승인대기중' OR status='승인완료' OR status='승인반려'
 
         ]]>
     </select>
@@ -43,7 +43,7 @@
                 (select nickname from users as B where B.USER_ID=A.USER_ID) as nickname,
                 (select category_name from category as C where C.category_id=A.category_id) as categoryName
             FROM product as A
-            WHERE A.status='승인대기중' OR A.status='승인완료'
+            WHERE status='승인대기중' OR status='승인완료' OR status='승인반려'
             ORDER BY A.created_at DESC
             LIMIT #{pageStart}, #{amount}
 
@@ -57,6 +57,18 @@
         UPDATE product
         SET 
             status='승인완료'
+        WHERE
+            p_id = #{pId}
+
+    </update>
+    
+    <!-- 승인반려 상품 경매상태 변경 -->
+    <update id="rejectRequest">
+    
+
+        UPDATE product
+        SET 
+            status='승인반려'
         WHERE
             p_id = #{pId}
 

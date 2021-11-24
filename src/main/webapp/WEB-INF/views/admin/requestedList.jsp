@@ -25,7 +25,6 @@
 		$( '#detail_'+index ).slideToggle();
 	}
 	
-	
 	function requestConfirm() {
 
 		console.log("requestConfirm clicked");
@@ -47,6 +46,28 @@
 	    	}
 	    });
 	}
+
+	function rejectRequest() {
+
+	console.log("rejectRequest clicked");
+	var checkBoxArr = [];   
+	$("input[name='checkPId']:checked").each(function(i){	
+		checkBoxArr.push($(this).val());   
+	})
+
+	$.ajax({
+		url: '/admin/rejectRequest'
+		, type: 'post'
+		, dataType: 'text'
+		, data: {
+			checkBoxArr: checkBoxArr
+		}
+		, success: function(data){
+			alert("승인반려");
+			window.location.href='/admin/main';
+		}
+	});
+	}
 	</script>
 </head>
 <body>
@@ -62,7 +83,8 @@
 	            <ul id="topmenu">
 	                <li>&nbsp;</li>
 	                <li>승인 요청 상품</li>
-	                <li><button id="reqBtn" type="button" style="cursor: pointer" onclick="requestConfirm();">승인</button></li>
+	                <li><button id="reqBtn" type="button" style="cursor: pointer" onclick="requestConfirm();">승인</button>
+					<button id="rejBtn" type="button" style="cursor: pointer" onclick="rejectRequest();">반려</button></li>
 	            </ul>
 	        </caption>
 	        <thead>
@@ -81,7 +103,7 @@
 				<c:forEach items="${requestedList}" var="reqProduct" varStatus="myIndex">
 					<tr>
 						<td>
-							<img onclick="getDetail(${myIndex.index})" alt="" src="https://live.staticflickr.com/2827/10767844126_63b11d6c53_b.jpg" height="100px" width="100px">
+							<img onclick="getDetail(${myIndex.index})" src="${product.imageUrls}" height="100px" width="100px">
 							<div hidden id="detail_${myIndex.index}"><c:out value="${reqProduct.content}"/></div>
 						</td>
 						<td><c:out value="${reqProduct.name}"/></td>
@@ -100,8 +122,11 @@
 										<input type="checkbox" name="checkPId" id="myCheck" value="${reqProduct.pId}" >
 									</form>
 								</c:when>
-								<c:otherwise>
+								<c:when test="${reqProduct.status=='승인완료'}">
 									<i class="fas fa-check"></i>
+								</c:when>
+								<c:otherwise>
+									<i class="fas fa-times"></i>
 								</c:otherwise>
 							</c:choose>
 
