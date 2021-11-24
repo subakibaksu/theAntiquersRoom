@@ -44,7 +44,7 @@
                     <ul id="topmenu">
                         <li>&nbsp;</li>
                         <li>My Auction List</li>
-                        <li><button id="regBtn" type="button" style="cursor: pointer">판매등록</button></li>
+                        <li><button id="regBtn" type="button">판매등록</button></li>
                     </ul>
                 </caption>
                 <thead>
@@ -62,11 +62,11 @@
                 <tbody>    
                     <c:forEach items="${myAuctionList}" var="myAuction">
                         <tr>
-                            <td><a href="/product/getDetail?pId=${myAuction.pId}"><img alt="" src="https://live.staticflickr.com/2827/10767844126_63b11d6c53_b.jpg" height="100px" width="100px"></a></td>
+                            <td><a href="/product/getDetail?pId=${myAuction.pId}"><img src="${myAuction.imageUrls}" height="100px" width="100px"></a></td>
                             <td><a href="/product/getDetail?pId=${myAuction.pId}"><c:out value="${myAuction.name}"/></a></td>
                             <td><c:out value="${myAuction.categoryName}"/></td>
                             <td><c:out value="${myAuction.startedPrice}"/></td>
-                            <td><h3>현재가격</h3></td>
+                            <td><c:out value="${myAuction.currPrice}"/></td>
                     		<td>
                             <b>시작</b> ${myAuction.startedAt.format(DateTimeFormatter.ofPattern("MM월 dd일 HH시"))}<br>
                             <b>종료</b> ${myAuction.endedAt.format(DateTimeFormatter.ofPattern("MM월 dd일 HH시"))}

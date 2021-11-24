@@ -83,8 +83,8 @@
 	            <ul id="topmenu">
 	                <li>&nbsp;</li>
 	                <li>승인 요청 상품</li>
-	                <li><button id="reqBtn" type="button" style="cursor: pointer" onclick="requestConfirm();">승인</button>
-					<button id="rejBtn" type="button" style="cursor: pointer" onclick="rejectRequest();">반려</button></li>
+	                <li><button id="reqBtn" type="button" onclick="requestConfirm();">승인</button>
+					<button id="rejBtn" type="button" onclick="rejectRequest();">반려</button></li>
 	            </ul>
 	        </caption>
 	        <thead>
@@ -103,7 +103,7 @@
 				<c:forEach items="${requestedList}" var="reqProduct" varStatus="myIndex">
 					<tr>
 						<td>
-							<img onclick="getDetail(${myIndex.index})" src="${product.imageUrls}" height="100px" width="100px">
+							<img onclick="getDetail(${myIndex.index})" src="${reqProduct.imageUrls}" height="100px" width="100px">
 							<div hidden id="detail_${myIndex.index}"><c:out value="${reqProduct.content}"/></div>
 						</td>
 						<td><c:out value="${reqProduct.name}"/></td>

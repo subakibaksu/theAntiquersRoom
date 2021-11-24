@@ -204,7 +204,9 @@
                 A.bid_increment as bidIncrement,
                 A.status,
                 (select nickname from users as B where B.USER_ID=#{userId}) as nickname,
-                (select category_name from category as C where C.category_id=A.category_id) as categoryName
+                (select category_name from category as C where C.category_id=A.category_id) as categoryName,
+                (select image_url from product_image as D where D.p_id=A.p_id order by D.index limit 1) as imageUrls,
+                (select bid_price from bid_history as E where E.p_id=A.p_id order by E.bid_price desc limit 1) as currPrice
             FROM product as A
             WHERE A.user_id=#{userId}
             ORDER BY A.created_at DESC

@@ -34,6 +34,7 @@ public class ProductDTO {
    private String nickname;
    private String categoryName;
    private Integer leftTime; // 경매종료까지 남은시간
+   private Integer currPrice; // 현재가격
    
    private List<String> imageUrls; // 파일별 등록된 이미지들의 주소
    

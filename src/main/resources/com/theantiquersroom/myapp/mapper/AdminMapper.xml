@@ -41,7 +41,8 @@
                 A.bid_increment as bidIncrement,
                 A.status,
                 (select nickname from users as B where B.USER_ID=A.USER_ID) as nickname,
-                (select category_name from category as C where C.category_id=A.category_id) as categoryName
+                (select category_name from category as C where C.category_id=A.category_id) as categoryName,
+                (select image_url from product_image as D where D.p_id=A.p_id order by D.index limit 1) as imageUrls
             FROM product as A
             WHERE status='승인대기중' OR status='승인완료' OR status='승인반려'
             ORDER BY field(A.status, '승인대기중', '승인완료', '승인반려'), A.created_at DESC
