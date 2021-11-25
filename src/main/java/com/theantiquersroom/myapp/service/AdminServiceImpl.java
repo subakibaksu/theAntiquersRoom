@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.theantiquersroom.myapp.domain.MypageCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.mapper.AdminMapper;
 
 import lombok.AllArgsConstructor;
@@ -59,5 +60,21 @@ public class AdminServiceImpl implements AdminService {
 		
 		return affectedRows>0;
 	}//modifyStatus
+
+	@Override
+	public List<UserDTO> getUserList(MypageCriteria cri) {
+		log.debug("getUserList({}) invoked.", cri);
+		
+		List<UserDTO> users=this.mapper.selectUserList(cri);
+		
+		return users;
+	} //getUserList
+
+	@Override
+	public Integer getTotalUsersCount() {
+		log.debug("getTotalUsersCount() invoked.");
+		
+		return this.mapper.getTotalUsersCount();
+	} //getTotalUsersCount
 
 }//end class

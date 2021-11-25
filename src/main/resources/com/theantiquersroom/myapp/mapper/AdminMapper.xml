@@ -75,5 +75,23 @@
 
     </update>
     
-    
+    <!-- 회원 목록 조회 -->
+    <select id="selectUserList"
+            resultType="com.theantiquersroom.myapp.domain.UserDTO">
+        
+        <![CDATA[ 
+            SELECT *
+            FROM users
+            LIMIT #{pageStart}, #{amount}
+        ]]>
+    </select>
+
+    <!-- 전체 회원수 조회 -->
+    <select id="getTotalUsersCount">
+        
+        <![CDATA[ 
+            SELECT count(user_id) FROM users
+        ]]>
+    </select>
+
 </mapper>

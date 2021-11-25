@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.theantiquersroom.myapp.domain.MyPageDTO;
 import com.theantiquersroom.myapp.domain.MypageCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.service.AdminService;
 
 import lombok.NoArgsConstructor;
@@ -104,11 +105,24 @@ public class AdminController {
 
     } // discontinuedProductList()
 
-    @GetMapping("/getUserList")
-    public void getUserList(Model model) {
+    @GetMapping("/userList")
+    public void getUserList(
+    		@ModelAttribute("cri") MypageCriteria cri, Model model
+    ) {
         log.debug("getUserList() invoked.");
-
-
+        
+        cri.setAmount(10);
+        List<UserDTO> users = this.service.getUserList(cri);
+        
+        model.addAttribute("users", users);
+        
+      //페이징 처리
+ 		Integer totalUsers = this.service.getTotalUsersCount();
+		
+		MyPageDTO pageDTO = new MyPageDTO(cri, totalUsers);
+		
+		model.addAttribute("pageMaker", pageDTO);
+		
     } // getUserList()
 
     @GetMapping("/searchUser")
