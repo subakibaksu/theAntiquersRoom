@@ -80,11 +80,11 @@
                         <th>현재 금액</th>
                         <td>
                             <c:choose>
-                                <c:when test="${empty product.maxBid}">
+                                <c:when test="${empty product.currPrice}">
                                     <p>입찰내역이 없습니다.</p>
                                 </c:when>
                                 <c:otherwise>
-                                    <p>현재가 : ${product.maxBid}</p>
+                                    <p>현재가 : ${product.currPrice}</p>
                                 </c:otherwise>
                             </c:choose>
                         </td>

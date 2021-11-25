@@ -8,15 +8,13 @@
     <meta charset="UTF-8">
     <title>main.jsp</title>
 
-    <link rel="stylesheet" href="resources/css/main.css">
+    <link rel="stylesheet" href="/resources/css/main.css">
 
     <!-- fontawsome -->
     <script src="https://kit.fontawesome.com/91815d1378.js" crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
-
-    <link rel="stylesheet" href="/resources/css/main.css">
 
     <script>
         // main_item prev/next Btn
@@ -141,11 +139,11 @@
                                 <span>상품명 : ${newProduct.name}</span>
                                 <span>시작가 : ${newProduct.startedPrice}</span>
                                 <c:choose>
-                                    <c:when test="${empty newProduct.maxBid}">
+                                    <c:when test="${empty newProduct.currPrice}">
                                         <p>입찰내역이 없습니다.</p>
                                     </c:when>
                                     <c:otherwise>
-                                        <p>현재가 : ${newProduct.maxBid}</p>
+                                        <p>현재가 : ${newProduct.currPrice}</p>
                                     </c:otherwise>
                                 </c:choose>
                                 <span>남은시간 : <p hidden class="leftTimeTimer">${newProduct.leftTime}</p></span>
@@ -186,11 +184,11 @@
                                 <span>시작가 : ${endingProduct.startedPrice}</span>
                                 <span>
                                     <c:choose>
-                                        <c:when test="${empty endingProduct.maxBid}">
+                                        <c:when test="${empty endingProduct.currPrice}">
                                             <p>입찰내역이 없습니다.</p>
                                         </c:when>
                                         <c:otherwise>
-                                            <p>현재가 : ${endingProduct.maxBid}</p>
+                                            <p>현재가 : ${endingProduct.currPrice}</p>
                                         </c:otherwise>
                                     </c:choose>
                                 </span>

@@ -54,7 +54,7 @@
                  FROM bid_history AS B
                  WHERE B.p_id = P.p_id
                  ORDER BY B.bid_price DESC
-                 LIMIT 1) AS maxBid
+                 LIMIT 1) AS currPrice
             FROM product as P
             WHERE p_id=#{pId}
         ]]>
@@ -97,7 +97,7 @@
                 FROM bid_history AS B
                 WHERE B.p_id = P.p_id
                 ORDER BY B.bid_price DESC
-                LIMIT 1) AS maxBid
+                LIMIT 1) AS currPrice
             FROM product AS P
 
             <where>
@@ -212,7 +212,7 @@
                 FROM bid_history AS B
                 WHERE B.p_id = P.p_id
                 ORDER BY B.bid_price DESC
-                LIMIT 1) AS maxBid
+                LIMIT 1) AS currPrice
         FROM product as P
         ORDER BY created_at DESC
         LIMIT 1, 10
@@ -243,7 +243,7 @@
                 FROM bid_history AS B
                 WHERE B.p_id = P.p_id
                 ORDER BY B.bid_price DESC
-                LIMIT 1) AS maxBid
+                LIMIT 1) AS currPrice
         FROM product as P
         ORDER BY created_at ASC
         LIMIT 1, 10
