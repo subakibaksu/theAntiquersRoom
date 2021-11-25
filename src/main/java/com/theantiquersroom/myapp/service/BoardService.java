@@ -28,13 +28,6 @@ public interface BoardService {
   	/* 문의게시글 삭제 */
   	public int removeQnA(int bindex);
   	
-    /* 게시판 - 답글 정보  조회 */
-    public QnADTO getBoardReplyInfo(QnADTO dto);
-    
-    /* 게시판 - 답글의 순서 수정 */
-    public int updateBoardReSeq(QnADTO dto);
-    
     /* 게시판 - 답글 등록 */
-    public QnADTO registerReQnA(QnADTO dto);
-  	
+    public abstract boolean registerReQnA(QnADTO dto);  	
 } // end class

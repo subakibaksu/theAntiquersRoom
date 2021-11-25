@@ -80,35 +80,16 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 		return mapper.removeQnA(bindex);
 	}
 	
+	/* 문의글 답글 등록 */
 	@Override
-	public QnADTO registerReQnA(QnADTO dto) {
+	public boolean registerReQnA(QnADTO dto) {
 		
-		QnADTO qnaDto = new QnADTO();
+		int affectedRows=this.mapper.registerReQnA(dto);
+		log.info("\t+ affectedRows: {}", affectedRows);
 		
-		QnADTO boardReplayInfo = mapper.getBoardReplyInfo(dto);
-		
-		dto.setBindex(boardReplayInfo.getBindex());
-		dto.setDepth(boardReplayInfo.getDepth());
-		dto.setRef(boardReplayInfo.getRef());
-		dto.setStep(boardReplayInfo.getStep());
-		
-
-		return qnaDto;
+		return affectedRows==1;
 	}
 	
-	@Override
-	public QnADTO getBoardReplyInfo(QnADTO dto) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int updateBoardReSeq(QnADTO dto) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
 //=============================//
 	@Override
 	public void destroy() throws Exception {
@@ -121,9 +102,5 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 		// TODO Auto-generated method stub
 		
 	}
-
-
-
-
 
 } // end class

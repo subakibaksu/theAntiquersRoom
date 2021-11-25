@@ -4,7 +4,6 @@
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,13 +12,9 @@
 
 	<link rel="stylesheet" href="/resources/css/getQnADetail.css">
 
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
-    
 
-
-    
 </head>
 <body>
 <h1>조회 페이지</h1>
@@ -70,7 +65,7 @@
 	});	
 	
 	$("#reply_btn").on("click", function(e){
-		form.attr("action", "/board/registerReQnA");
+		form.attr("action", "/board/registerReQnA?bindex=${pageInfo.bindex}");
 		form.submit();
 	});	
 </script>	

@@ -49,8 +49,6 @@
 				title,
 				content,
 				ref,
-				depth,
-				step,
 				author,
 				p_id 
             )
@@ -62,8 +60,6 @@
                 #{title},
                 #{content},
                 #{ref},
-                #{depth},
-                #{step},
                 #{author},
                 #{pId}
 
@@ -109,60 +105,15 @@
     
     </delete>
     
-	<!--  게시글 답글 정보 조회 쿼리 -->
-	<select id="getBoardReplyInfo" parameterType="com.theantiquersroom.myapp.domain.QnADTO" resultType="com.theantiquersroom.myapp.domain.QnADTO">
-	    
-	    SELECT bindex
-	         , ref
-	         , depth
-	         , step
-	    FROM board
-	   WHERE bindex = #{parentBindex}
-	 
-	</select>
-    
-    <!-- 게시글 답글을 등록할 때 기존에 등록된 답글의 순서를 증가시키는 쿼리 -->
-    <delete id="updateBoardReSeq" parameterType="com.theantiquersroom.myapp.domain.QnADTO">
-    
-	    UPDATE board
-	       SET step = step + 1
-				updated_at = NOW()
-	    WHERE ref = #{ref} 
-	      AND step > #{step}
- 
-	</delete>
-	
 	<!-- 게시글 답글을 등록하는 쿼리 -->
 	<insert id="registerReQnA" parameterType="com.theantiquersroom.myapp.domain.QnADTO">
-    	
-            INSERT INTO board
-            (
-				bindex,
-				created_at,
-				updated_at,
-				title,
-				content,
-				ref,
-				depth,
-				step,
-				author,
-				p_id 
-            )
-            VALUES
-            (
-               #{bindex},
-                now(),
-             	now(),
-                #{title},
-                #{content},
-                #{ref},
-                #{depth} + 1,
-                #{step} + 1,
-                #{author},
-                #{pId}
-            )
- 
-</insert>
+	    	
+		insert into board
+		(created_at, updated_at, title, content,ref, depth, step, author, p_id)
+		VALUES
+		(now(), now(), #{title},#{content},#{ref},1,(SELECT count(*) from board as B where B.ref = #{ref}),#{author},#{pId});
+		 
+	</insert>
       
 </mapper>
 

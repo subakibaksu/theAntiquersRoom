@@ -84,6 +84,35 @@ public class BoardMapperTests {
         log.info("result : " + result);
         
     }
+    
+    /* 문의게시글 등록 */
+    @Test
+    public void testRegisterQnA() {
+        
+    	QnADTO dto = new QnADTO();
+    	
+    	dto.setTitle("mapper test");
+    	dto.setContent("mapper test");
+    	dto.setAuthor("Kingdindoo");
+    	dto.setPId(2);
+    	
+    	mapper.registerQnA(dto);
+        
+    }
+    
+    /* 답글 등록 */
+    public void testRegisterReQnA() {
+        
+    	QnADTO dto = new QnADTO();
+    	
+    	dto.setTitle("mapper test");
+    	dto.setContent("mapper test");
+    	dto.setAuthor("Kingdindoo");
+    	dto.setPId(2);
+    	
+    	mapper.registerReQnA(dto);
+        
+    }
 
     
 } //end class
