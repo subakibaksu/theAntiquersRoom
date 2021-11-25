@@ -33,17 +33,14 @@
 
 <body>
 	<!-- header -->
-	<header id="header_container" style="width: 100%;">
-		<div id="logo_container">
-			<!-- 사이트 로고-->
-			<div id="header_logo" role="banner">
-				<a href="#">
-					<img id="logoimg" src="" alt="" width="40" height="60">
-					<div class="logo">Antiquer's Admin Page</div>
-				</a>
-			</div>
-			<!-- rightside of header -->
-			
+	<header id="header_container">
+		<!-- 사이트 로고-->
+		<div id="logoNlogout" role="banner">
+			<a href="#">
+				<img id="logoimg" src="" alt="" width="40" height="60">
+				<div class="logo">Antiquer's Admin Page</div>
+			</a>
+			<button type="button" id="logout_btn" >Log out</button>
 		</div>
 
 		<!-- navbar -->
@@ -51,8 +48,7 @@
 			<a class="menu" href="/admin/main">승인요청상품</a> 
 			<a class="menu" href="#">경매상품</a> 
 			<a class="menu" href="#">판매종료상품</a> 
-			<a class="menu" href="#">회원목록</a> 
-			<button type="button" id="logout_btn" >Log out</button>
+			<a class="menu" href="/admin/userList">회원목록</a> 
 		</nav>
 	</header>
 

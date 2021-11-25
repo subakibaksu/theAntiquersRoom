@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    min-height: 100vh;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+}
+
+#userList_wrapper {
+    flex-grow: 1;
+    font-family: "Nanum Gothic", sans-serif;
+}

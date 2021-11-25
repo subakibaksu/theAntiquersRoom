@@ -87,7 +87,8 @@
     </select>
 
     <!-- 전체 회원수 조회 -->
-    <select id="getTotalUsersCount">
+    <select id="getTotalUsersCount"
+    		resultType="int">
         
         <![CDATA[ 
             SELECT count(user_id) FROM users
