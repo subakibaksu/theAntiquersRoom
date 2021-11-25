@@ -39,14 +39,14 @@
     float: left;
     list-style: none;
     position: relative;
-    width: 70%;
+    min-width: 70%;
     left: 15%;
 }
 
 .product{
 
     float: left;
-    width: 30%;
+    min-width: 30%;
     margin-right: 1.5%;
     margin-left: 1.5%;
     padding-top: 2%;

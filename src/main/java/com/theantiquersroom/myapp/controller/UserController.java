@@ -69,31 +69,6 @@ public class UserController {
         }
     } //logout
 
-    @GetMapping("/resetPwd")
-    public void resetPwd() {	// 비밀번호 재설정 페이지로 이동
-
-        log.debug("resetPwd() invoked.");
-
-    } //resetPwd
-
-    @PostMapping("/resetPwd")
-    public @ResponseBody Map<Object, Object> resetPwd(
-            @RequestParam("userId") String userId,
-            @RequestParam("nickName") String nickName) throws Exception {	// 비밀번호 재설정 실행
-
-        log.debug("resetPwd() invoked. model {} {} ", userId, nickName);
-
-        //Ajax의 결과값을 Json으로 받기 위해 Map객체를 생성
-        Map<Object,Object> map = new HashMap<Object, Object>();
-
-        boolean mailSentCheck = service.resetPwd(userId, nickName);
-        map.put("check",mailSentCheck);
-        log.debug("result : {}", mailSentCheck);
-
-        return map;
-
-    } //resetPwd
-
     // ======================== MyPage =========================== //
     
     @GetMapping("/myAuctionList")
@@ -200,5 +175,33 @@ public class UserController {
 		
 		return "redirect:/users/getUserList";
 	} //remove
-	
+
+	@GetMapping("/getMyBidList")
+	public String getMyBidList(
+			HttpSession session,
+			@ModelAttribute("cri") MypageCriteria cri,
+			Model model) {	// 나의 경매리스트 페이지로 이동
+		log.debug("getMyAuctionList({}, {}) invoked.", cri, model);
+
+		UserDTO user = (UserDTO) session.getAttribute(LoginController.authKey);
+		String userId = user.getUserId();
+
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("userId", userId);
+		map.put("cri", cri);
+
+		List<ProductDTO> myBidList = this.service.getMyAuctionList(map);
+
+		model.addAttribute("myBidList",myBidList);
+
+		//페이징 처리
+		Integer totalAmount = this.service.getMyBidTotal(userId);
+
+		MyPageDTO pageDTO = new MyPageDTO(cri, totalAmount);
+
+		model.addAttribute("pageMaker", pageDTO);
+
+		return "/users/myAuctionList";
+	} //getMyAuctionList
+
 }  //end class

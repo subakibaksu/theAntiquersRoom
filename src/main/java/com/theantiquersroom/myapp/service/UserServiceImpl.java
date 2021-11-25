@@ -155,7 +155,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
         log.debug("userId : {} nickname : {} ",userId,nickname);
 
         boolean mailSentCheck = false;
-
         String nick = mapper.selectUserNickname(userId);
         log.debug(nick);
 
@@ -163,8 +162,9 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
             // 새로운 비밀번호 생성후 이메일로 전송 , DB에 Insert
             String newpassword = Integer.toString((int)(Math.random()*3000+1));
+            log.debug(newpassword);
             mailsender.sendmail("your new password is : "+ newpassword,userId);
-            mapper.updatePassword(newpassword,userId);
+            mapper.updatePassword(passwordEncoder.encode(newpassword),userId);
             
             mailSentCheck = true;
         }
@@ -220,24 +220,36 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 		
 		return list;
 	}//getMyAuctionList
-	
-	
+
 	@Override
 	public List<ProductDTO> getBidList(MypageCriteria cri) {
-		// TODO Auto-generated method stub
 		return null;
-	}//getBidList
-	
-	
+	}
+
 	@Override
 	public Integer getMyAuctionTotal(String userId) {
 		log.debug("getMyAuctionTotal({}) invoked.", userId);
 		
 		return this.mapper.getMyAuctionTotalCount(userId);
 	}//getTotal
-	
-	
-    // =====================카카오 로그인 API 관련===================== //
+
+	@Override
+	public List<ProductDTO> getMyBidList(HashMap<String, Object> map) {
+    	log.debug("getMyBidList({}) invoked.",map);
+    	List<ProductDTO> productDTOList = mapper.getMyBidList(map);
+
+		return productDTOList;
+	}
+
+	@Override
+	public Integer getMyBidTotal(String userId) {
+		log.debug("getMyBidTotal({}) invoked.", userId);
+
+		return mapper.getMyBidTotalCount(userId);
+	}
+
+
+	// =====================카카오 로그인 API 관련===================== //
 	
 	@Override
 	public UserDTO getKakaoUser(String kakaoUniqueId) {
