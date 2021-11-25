@@ -67,6 +67,14 @@ public interface UserMapper {
 	
     //특정 회원 ID 통한 경매 리스트 조회
     public abstract List<ProductDTO> getMyAuctionList(HashMap<String, Object> map);
+
+    // MyBidList 총 게시물 개수 반환
+    public abstract Integer getMyBidTotalCount(@Param("userId") String userId);
+
+    //특정 회원 ID 통한 입찰 리스트 조회
+    public abstract List<ProductDTO> getMyBidList(HashMap<String, Object> map);
+
+    //특정 회원의
 	
     // =====================카카오 로그인 API 관련===================== //
 	

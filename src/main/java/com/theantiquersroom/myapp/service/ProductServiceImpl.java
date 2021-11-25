@@ -136,4 +136,19 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
 
     } // getBidHistory()
 
+    @Override
+    public List<ProductDTO> getNewProduct() {
+
+        List<ProductDTO> productDTOList = mapper.getNewProduct();
+        return productDTOList;
+    }
+
+    @Override
+    public List<ProductDTO> getEndingProduct() {
+
+        List<ProductDTO> productDTOList = mapper.getEndingProduct();
+        return productDTOList;
+
+    }
+
 } // end class
