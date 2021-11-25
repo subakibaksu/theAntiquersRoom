@@ -35,6 +35,5 @@ public interface BoardService {
     public int updateBoardReSeq(QnADTO dto);
     
     /* 게시판 - 답글 등록 */
-    public QnADTO registerReQnA(QnADTO dto);
-  	
+    public abstract boolean registerReQnA(QnADTO dto);  	
 } // end class

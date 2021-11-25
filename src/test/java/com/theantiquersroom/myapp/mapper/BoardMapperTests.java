@@ -84,6 +84,33 @@ public class BoardMapperTests {
         log.info("result : " + result);
         
     }
+    
+    @Test
+    public void testRegisterQnA() {
+        
+    	QnADTO dto = new QnADTO();
+    	
+    	dto.setTitle("mapper test");
+    	dto.setContent("mapper test");
+    	dto.setAuthor("Kingdindoo");
+    	dto.setPId(2);
+    	
+    	mapper.registerQnA(dto);
+        
+    }
+    
+    public void testRegisterReQnA() {
+        
+    	QnADTO dto = new QnADTO();
+    	
+    	dto.setTitle("mapper test");
+    	dto.setContent("mapper test");
+    	dto.setAuthor("Kingdindoo");
+    	dto.setPId(2);
+    	
+    	mapper.registerReQnA(dto);
+        
+    }
 
     
 } //end class

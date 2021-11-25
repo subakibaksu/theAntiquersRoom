@@ -1,24 +1,44 @@
 @charset "UTF-8";
 
-    #wrapper {
+	* {
+		margin:0;
+		padding:0;
+	}
+	
+     #wrapper {
 
-        width: 810px;
-        height: 600px;
+        width: 50.625rem;
+        height: 37.5rem;
 
 
 
         background: #FFFFFF;
-        border: 1px solid #C2B1B1;
         box-sizing: border-box;
-        border-radius: 50px;
 
-        margin: 6rem auto;
+		float:right;
+        margin-top: 5rem;
+        margin-right:3rem;
     
-    }
+    } 
     
+/*      #registerTable {
+    	margin-right: 15rem;
+    	margin-top: 2rem;
+    	
+    }  */
     
-    #title {
+     #info {
+   		padding-right:2rem;
+    	margin-bottom: 2rem;
+    	
+    } 
     
-            text-align: center;
+    /*
+    #wrapper {
+       	float:right;
+    	margin-right: 22rem;
+    	margin-top: 2rem;
+    	margin-bottom: 2rem;
     
-    }
+    } */
+

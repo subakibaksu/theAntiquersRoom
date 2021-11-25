@@ -81,19 +81,12 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 	}
 	
 	@Override
-	public QnADTO registerReQnA(QnADTO dto) {
+	public boolean registerReQnA(QnADTO dto) {
 		
-		QnADTO qnaDto = new QnADTO();
+		int affectedRows=this.mapper.registerReQnA(dto);
+		log.info("\t+ affectedRows: {}", affectedRows);
 		
-		QnADTO boardReplayInfo = mapper.getBoardReplyInfo(dto);
-		
-		dto.setBindex(boardReplayInfo.getBindex());
-		dto.setDepth(boardReplayInfo.getDepth());
-		dto.setRef(boardReplayInfo.getRef());
-		dto.setStep(boardReplayInfo.getStep());
-		
-
-		return qnaDto;
+		return affectedRows==1;
 	}
 	
 	@Override

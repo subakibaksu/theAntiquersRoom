@@ -70,7 +70,7 @@
 	});	
 	
 	$("#reply_btn").on("click", function(e){
-		form.attr("action", "/board/registerReQnA");
+		form.attr("action", "/board/registerReQnA?bindex=${pageInfo.bindex}");
 		form.submit();
 	});	
 </script>	

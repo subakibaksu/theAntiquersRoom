@@ -134,32 +134,32 @@ public class BoardController {
     } // registerQnA
 
     @PostMapping("/registerQnA")
-    public String registerQnA(Model model, QnADTO dto,@RequestParam(defaultValue = "0") int step, @RequestParam(defaultValue = "0") int depth) { 
+    public String registerQnA(QnADTO dto) { 
     	log.debug("registerQnA({}) invoked.", dto);
     	
     	this.service.registerQnA(dto);
-    	
-		model.addAttribute("step",step);
-		model.addAttribute("depth",depth);
-
+    
     	return  "redirect:/board/QnA";
+    	
     } // registerQnA
     
     
     @GetMapping("/registerReQnA")
-    public void registerReQnA() {		
+    public void registerReQnA(int bindex, Model model) {		
         log.debug("registerReQnA() invoked.");
-
+        
+        model.addAttribute("pageInfo", service.getQnADetail(bindex));
     } // registerQnA 
     
     @PostMapping("/registerReQnA")
     public String registerReQnA(QnADTO dto) { 
-    	log.debug("registerQnA({}) invoked.", dto);
+    	log.debug("registerReQnA({}) invoked.", dto);
     	
-    	this.service.registerQnA(dto);
+    	this.service.registerReQnA(dto);
     	
     	return  "redirect:/board/QnA";
-    } // registerQnA
+    	
+    } // registerReQnA
 
     
     @GetMapping("/modifyQnA")
