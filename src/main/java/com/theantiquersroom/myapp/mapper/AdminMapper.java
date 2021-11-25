@@ -22,4 +22,7 @@ public interface AdminMapper {
     //경매상태를 "승인완료"로 변경
     public abstract Integer updateStatus(@Param("pId") Integer pId);
     
+    //경매상태를 "승인반려"로 변경
+    public abstract Integer rejectRequest(@Param("pId") Integer pId);
+    
 }// end interface

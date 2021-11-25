@@ -15,7 +15,7 @@
         <div>© Copyright 감동희조 2021 All rights reserved.
             <a href="https://github.com/antiquers/theAntiquersRoom">
                 <span class="findGit">
-                    <i class="fab fa-github" style="color:black"></i>
+                    <i class="fab fa-github"></i>
                 </span>
             </a>
         </div>
