@@ -35,6 +35,7 @@ public class AdminController {
     @Setter(onMethod_= {@Autowired})
     private AdminService service;
 
+    //=============승인요청상품 리스트=============
     //승인요청상품 리스트로 이동(어드민 메인)
     @GetMapping({"/main", "/requestedList"}) 
     public String getRequestedProductList(
@@ -71,7 +72,21 @@ public class AdminController {
  		return "redirect:/admin/main";
  	} //confirmRequestedProduct
  	
-    //경매상품 리스트
+    //판매요청 경매상품 반려
+ 	@PostMapping("/rejectRequest")
+ 	public String rejectRequest(@RequestParam(value="checkBoxArr[]") Integer[] confirmArr, RedirectAttributes rttrs) {
+ 		log.debug("rejectRequest({}, {}) invoked.", confirmArr,rttrs);
+ 		
+ 		for(int i = 0; i< confirmArr.length; i++) {
+ 	 		boolean result=this.service.rejectRequest(confirmArr[i]);
+ 		}
+ 			
+ 		return "redirect:/admin/main";
+ 	} //rejectRequest
+ 	
+ 	
+ 	//=============경매상품 리스트=============
+    //경매상품 리스트 조회
     @GetMapping("/auctionProductList")
     public String getAuctionProductList(
     		HttpSession session,
@@ -96,6 +111,8 @@ public class AdminController {
 
     } // getOnSaleProductList
     
+
+   
 
     @PostMapping("/confirmDiscontinuedProduct")
     public String confirmDiscontinuedProduct() {

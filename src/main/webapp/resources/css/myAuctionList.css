@@ -80,6 +80,7 @@ header{
     height: 38px;
 
     border: 0;
+    border-radius: 15px;
 
     color: white;
     background-color: #9C0000;
@@ -87,8 +88,26 @@ header{
     font-size: 0.8rem;
     font-weight: bold;
 
-	border-radius: 15px;
+	cursor: pointer;
 }
+
+#rejBtn{
+    width: 80px;
+    height: 38px;
+	
+	margin-left:0.8rem;
+    border: 1px solid #9C0000;
+    border-radius: 15px;
+
+    color: #9C0000;
+    background-color: white;
+
+    font-size: 0.8rem;
+    font-weight: bold;
+
+	cursor: pointer;
+}
+
 form{
 	display:inline;
 }

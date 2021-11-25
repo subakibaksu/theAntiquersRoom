@@ -44,8 +44,17 @@ public class AdminServiceImpl implements AdminService {
 	public Boolean modifyStatus(Integer pId) {
 		log.debug("modifyStatus({}) invoked.", pId);
 		
-		// 비즈니스 로직 수행에 필요한 경우, 영속성 계층의 메소드를 호출
 		int affectedRows=this.mapper.updateStatus(pId);
+		log.info("\t+ affectedRows: {}", affectedRows);
+		
+		return affectedRows>0;
+	}
+
+	@Override
+	public Boolean rejectRequest(Integer pId) {
+		log.debug("rejectRequest({}) invoked.", pId);
+		
+		int affectedRows=this.mapper.rejectRequest(pId);
 		log.info("\t+ affectedRows: {}", affectedRows);
 		
 		return affectedRows>0;
