@@ -57,8 +57,7 @@
     </form>
 
     <a href="/confirmEmail">temp</a>
-    <a href="/users/resetPwd">resetPwd</a>
-
+    <a href="/resetPwd">resetPwd</a>
     <hr>
     <button type="button" id="loginBtn">로그인</button>
 

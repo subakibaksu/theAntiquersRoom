@@ -54,5 +54,11 @@ public interface ProductMapper {
     //상품삭제
     public abstract Integer deleteProduct(Integer pId);
 
+    // 새로 들어온 상품 조회
+    public List<ProductDTO> getNewProduct();
+
+    // 마감 임박 상품 조회
+    public List<ProductDTO> getEndingProduct();
+
 } //end interface
 

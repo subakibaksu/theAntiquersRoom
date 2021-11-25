@@ -68,6 +68,12 @@ public interface UserService {
 	
     // 나의 경매리스트 총 레코드 개수 반환
   	public abstract Integer getMyAuctionTotal(String userId);
+
+  	// 나의 입찰리스트
+    public abstract List<ProductDTO> getMyBidList(HashMap<String,Object> map);
+
+    // 나의 입찰리스트 총 레코드 개수 반환
+    public abstract Integer getMyBidTotal(String userId);
     
     
     // =====================카카오 로그인 API 관련===================== //
