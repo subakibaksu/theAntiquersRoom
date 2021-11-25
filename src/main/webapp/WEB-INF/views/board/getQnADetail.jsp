@@ -41,15 +41,16 @@
 	</div>
 	<div class="input_wrap">
 		<label>게시판 등록일</label>
-		<input name="regdater" readonly="readonly"  value='<c:out value = "${pageInfo.createdAt}"/>' >
+		<input name=createdAt readonly="readonly"  value='<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${pageInfo.createdAt}"/>'>
 	</div>
 	<div class="input_wrap">
 		<label>게시판 수정일</label>
-		<input name="updateDate" readonly="readonly"  value='<c:out value = "${pageInfo.updatedAt}"/>' >
+		<input name=updatedAt readonly="readonly"  value='<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${pageInfo.updatedAt}"/>'>
 	</div>		
 	<div class="btn_wrap">
 		<a class="btn" id="list_btn">목록 페이지</a> 
 		<a class="btn" id="modify_btn">수정 하기</a>
+		<a class="btn" id="reply_btn">답글 달기</a>
 	</div>
 	<form id="infoForm" action="/board/modify" method="get">
 		<input type="hidden" id="bindex" name="bindex" value='<c:out value="${pageInfo.bindex}"/>'>
@@ -65,6 +66,11 @@
 	
 	$("#modify_btn").on("click", function(e){
 		form.attr("action", "/board/modifyQnA");
+		form.submit();
+	});	
+	
+	$("#reply_btn").on("click", function(e){
+		form.attr("action", "/board/registerReQnA");
 		form.submit();
 	});	
 </script>	

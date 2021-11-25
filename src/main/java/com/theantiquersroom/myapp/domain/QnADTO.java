@@ -24,7 +24,6 @@ public class QnADTO {
   private Timestamp createdAt;
   private Timestamp updatedAt;
 
+  private int parentBIndex;
     
 } // end class
-
-

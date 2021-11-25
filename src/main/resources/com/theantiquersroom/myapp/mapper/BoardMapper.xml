@@ -26,7 +26,7 @@
 				p_id as pId
 
             FROM board
-
+			order by ref desc, step asc
         ]]>
     </select>
     
@@ -34,6 +34,11 @@
     <insert
     		 id="registerQnA" 
     		 parameterType="com.theantiquersroom.myapp.domain.QnADTO">
+    		 
+    	<selectKey resultType="int" keyProperty="ref" order="BEFORE">
+    		SELECT IFNULL(MAX(ref),0) + 1
+    		FROM board
+    	</selectKey>
     		 
         <![CDATA[
             INSERT INTO board
@@ -69,9 +74,8 @@
     <!-- 문의게시물 목록(페이징) -->
     <select id="getQnAListPaging" resultType="com.theantiquersroom.myapp.domain.QnADTO">
     
-        select * from (
                 select bindex, created_at as createdAt, updated_at as updatedAt, title, content, ref, depth, step, author, p_id as pId
-                from board order by bindex desc) as T1 
+                from board order by ref desc, step asc
         <!-- limit ((${pageNum}-1)*${amount}), ${amount} -->
         limit #{skip},#{amount}
     
@@ -91,15 +95,75 @@
     
     </select>
     
-        <!-- 문의게시글 수정 -->
-    <select id="modifyQnA" resultType="Integer">
+     <!-- 문의게시글 수정 -->
+    <update id="modifyQnA" >
     
-		update board set title=#{title}, content=#{content}, updated_at = now() where bindex = #{bindex};
+		update board set title=#{title}, content=#{content}, updated_at = now() where bindex = #{bindex}
     
-    </select>
+    </update>
     
+     <!-- 문의게시글 삭제 -->
+    <delete id="removeQnA">
     
+        delete from board where bindex = #{bindex}
     
+    </delete>
+    
+	<!--  게시글 답글 정보 조회 쿼리 -->
+	<select id="getBoardReplyInfo" parameterType="com.theantiquersroom.myapp.domain.QnADTO" resultType="com.theantiquersroom.myapp.domain.QnADTO">
+	    
+	    SELECT bindex
+	         , ref
+	         , depth
+	         , step
+	    FROM board
+	   WHERE bindex = #{parentBindex}
+	 
+	</select>
+    
+    <!-- 게시글 답글을 등록할 때 기존에 등록된 답글의 순서를 증가시키는 쿼리 -->
+    <delete id="updateBoardReSeq" parameterType="com.theantiquersroom.myapp.domain.QnADTO">
+    
+	    UPDATE board
+	       SET step = step + 1
+				updated_at = NOW()
+	    WHERE ref = #{ref} 
+	      AND step > #{step}
+ 
+	</delete>
+	
+	<!-- 게시글 답글을 등록하는 쿼리 -->
+	<insert id="registerReQnA" parameterType="com.theantiquersroom.myapp.domain.QnADTO">
+    	
+            INSERT INTO board
+            (
+				bindex,
+				created_at,
+				updated_at,
+				title,
+				content,
+				ref,
+				depth,
+				step,
+				author,
+				p_id 
+            )
+            VALUES
+            (
+               #{bindex},
+                now(),
+             	now(),
+                #{title},
+                #{content},
+                #{ref},
+                #{depth} + 1,
+                #{step} + 1,
+                #{author},
+                #{pId}
+            )
+ 
+</insert>
+      
 </mapper>
 
 

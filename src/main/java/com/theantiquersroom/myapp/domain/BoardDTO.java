@@ -15,7 +15,7 @@ public class BoardDTO {
     private Integer score; // 별점
     private String title; // 제목
     private Integer reference; // 레퍼
-    private Integer depth; // 뎁스
-    private Integer step; // 스텝
+    private Integer depth = 0; // 뎁스
+    private Integer step = 0; // 스텝
 
 } //end class

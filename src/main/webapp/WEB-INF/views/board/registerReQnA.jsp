@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>registerQnA.jsp</title>
+<title>registerReQnA.jsp</title>
 
 	<link rel="stylesheet" href="/resources/css/registerQnA.css">
 
@@ -18,9 +18,9 @@
    <div id="wrapper">
 
       <!-- 게시판에 신규 게시물을 등록하는 양식 -->
-      <form action="/board/registerQnA" method="post">
+      <form action="/board/registerReQnA" method="post">
          <table >
-         <h1>문의사항 작성</h1>
+         <h1>문의사항 답글 작성</h1>
             <tr>
                <td>제목</td>
                <td><input type="text" name="title" placeholder="제목을 입력하세요"></td>
@@ -34,15 +34,7 @@
                <td><input type="text" name="author" value="${sessionScope.__AUTH_ANTIQUE__.userId}" readonly="readonly"></td>
             </tr>
 
-            <tr>
-               <td><input type="hidden" name="ref" ></td>
-            </tr>
-             <tr>
-               <td><input type="hidden" name="step"></td>
-            </tr>
-             <tr>
-               <td><input type="hidden" name="depth"></td>
-            </tr>            
+           
             <tr>
                <td><input type="hidden" name="pId" value="${sessionScope.__AUTH_ANTIQUE__.userType}"></td>
             </tr>

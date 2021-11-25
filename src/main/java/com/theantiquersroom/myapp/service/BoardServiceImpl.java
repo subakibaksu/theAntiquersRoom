@@ -69,13 +69,46 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 	/* 문의게시글 수정 */
 	@Override
 	public int modifyQnA(QnADTO dto) {
-
-		log.debug("jinsoo"+mapper.modifyQnA(dto));
 		
-		return 1;
+		return mapper.modifyQnA(dto);
+	}
+	
+	/* 문의게시글 삭제 */
+	@Override
+	public int removeQnA(int bindex) {
+
+		return mapper.removeQnA(bindex);
+	}
+	
+	@Override
+	public QnADTO registerReQnA(QnADTO dto) {
+		
+		QnADTO qnaDto = new QnADTO();
+		
+		QnADTO boardReplayInfo = mapper.getBoardReplyInfo(dto);
+		
+		dto.setBindex(boardReplayInfo.getBindex());
+		dto.setDepth(boardReplayInfo.getDepth());
+		dto.setRef(boardReplayInfo.getRef());
+		dto.setStep(boardReplayInfo.getStep());
+		
+
+		return qnaDto;
+	}
+	
+	@Override
+	public QnADTO getBoardReplyInfo(QnADTO dto) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	
+	@Override
+	public int updateBoardReSeq(QnADTO dto) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
 //=============================//
 	@Override
 	public void destroy() throws Exception {
@@ -93,12 +126,4 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 
 
 
-
-
-
-
-
-
-
-
-}
+} // end class

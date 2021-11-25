@@ -1,6 +1,4 @@
 package com.theantiquersroom.myapp.controller;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -122,7 +120,7 @@ public class BoardController {
   } // getQnA 페이징처리
 
     @GetMapping("/getQnADetail")
-    public void getQnADetail(int bindex, Model model) {	// 문의사항 상세페이지로 이동
+    public void getQnADetail(int bindex, Model model) {	
         log.debug("getQnADetail() invoked.");
         
         model.addAttribute("pageInfo", service.getQnADetail(bindex));
@@ -130,20 +128,40 @@ public class BoardController {
     } // getQnADetail
 
     @GetMapping("/registerQnA")
-    public void registerQnA() {		// 문의사항 작성페이지로 이동
+    public void registerQnA() {		
         log.debug("registerQnA() invoked.");
 
     } // registerQnA
 
     @PostMapping("/registerQnA")
-    public String registerQnA(QnADTO dto) { //작성된 문의사항 DB전달
+    public String registerQnA(Model model, QnADTO dto,@RequestParam(defaultValue = "0") int step, @RequestParam(defaultValue = "0") int depth) { 
     	log.debug("registerQnA({}) invoked.", dto);
     	
     	this.service.registerQnA(dto);
+    	
+		model.addAttribute("step",step);
+		model.addAttribute("depth",depth);
 
     	return  "redirect:/board/QnA";
     } // registerQnA
+    
+    
+    @GetMapping("/registerReQnA")
+    public void registerReQnA() {		
+        log.debug("registerReQnA() invoked.");
 
+    } // registerQnA 
+    
+    @PostMapping("/registerReQnA")
+    public String registerReQnA(QnADTO dto) { 
+    	log.debug("registerQnA({}) invoked.", dto);
+    	
+    	this.service.registerQnA(dto);
+    	
+    	return  "redirect:/board/QnA";
+    } // registerQnA
+
+    
     @GetMapping("/modifyQnA")
     public void modifyQnA(int bindex, Model model) { // 문의사항 수정페이지로 이동
         log.debug("modifyQnA() invoked.");
@@ -165,11 +183,15 @@ public class BoardController {
     } // modifyQnA
 
     @PostMapping("/removeQnA")
-    public void removeQnA() { // 문의게시글 삭제
+    public String removeQnA(int bindex, RedirectAttributes rttr) { // 문의게시글 삭제
         log.debug("removeQnA({}) invoked.");
+        
+        service.removeQnA(bindex);
+        
+        rttr.addFlashAttribute("result", "delete success");
+        
+        return "redirect:/board/QnA";
 
     } // removeQnA
-
-
 
 } // end class

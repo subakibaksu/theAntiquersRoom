@@ -49,6 +49,7 @@ public class BoardMapperTests {
 	     List list = mapper.getQnAListPaging(cri);
 	     
 	     list.forEach(board -> log.info("" + board));
+	     
 	 }
 
 	 /* 문의게시판 조회 */
@@ -66,15 +67,23 @@ public class BoardMapperTests {
 	 public void testModifyQnA() {
 		 
          QnADTO dto = new QnADTO();
-         dto.setBindex(50);
-         dto.setTitle("수정 제목");
-         dto.setContent("수정 내용");
+         dto.setBindex(48);
+         dto.setTitle("수정 제목3");
+         dto.setContent("수정 내용3");
          
          int result = mapper.modifyQnA(dto);
          log.info("result : " +result);
 
 	 }
+	 
+	 /* 문의게시글 삭제 */
+    @Test
+    public void testRemoveQnA() {
+        
+        int result = mapper.removeQnA(50);
+        log.info("result : " + result);
+        
+    }
 
-
-	
+    
 } //end class

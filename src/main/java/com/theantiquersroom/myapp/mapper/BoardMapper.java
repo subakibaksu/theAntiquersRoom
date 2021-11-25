@@ -24,4 +24,17 @@ public interface BoardMapper {
 	
 	/* 문의게시판 수정 */
 	public Integer modifyQnA(QnADTO dto);
-}
+	
+	/* 문의게시판 수정 */
+	public Integer removeQnA(int bindex);
+	
+    /* 게시판 - 답글 정보  조회 */
+    public QnADTO getBoardReplyInfo(QnADTO dto);
+    
+    /* 게시판 - 답글의 순서 수정 */
+    public int updateBoardReSeq(QnADTO dto);
+    
+    /* 게시판 - 답글 등록 */
+    public int registerReQnA(QnADTO dto);
+
+} // end class

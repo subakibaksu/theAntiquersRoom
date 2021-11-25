@@ -13,12 +13,8 @@
 
 	<link rel="stylesheet" href="/resources/css/QnA.css">
 
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
-    
-
-
     
 </head>
 <body>
@@ -26,7 +22,6 @@
 	<div id="wrapper">
 
 		<table border="1">
-		
 			<caption>
 				<ul >
 					<li>&nbsp;</li>
@@ -37,29 +32,31 @@
 			
 			<thead>
 				<tr>
-					<th>bindex</th>
+					<th>bindex</th>  
 					<th>title</th>
 					<th>writer</th>
+					<th>ref</th>
+					<th>step</th>
+					<th>depth</th>
 					<th>insert_ts</th>
 					<th>update_ts</th>
 				</tr>
 			</thead>
 
 			<tbody>
-
 				<c:forEach items="${list}" var="board">
 					<tr>
 						<td><c:out value="${board.bindex}"/></td>
 						<td> <a  href="/board/getQnADetail?bindex=${board.bindex}"><c:out value="${board.title}"/></a></td>
 						<td><c:out value="${board.author}"/></td>
-						<td><c:out value="${board.createdAt}"/></td>
-						<td><c:out value="${board.updatedAt}"/></td>
+						<td><c:out value="${board.ref}"/></td>
+						<td><c:out value="${board.step}"/></td>
+						<td><c:out value="${board.depth}"/></td>
+						<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${board.createdAt}"/></td>
+						<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${board.updatedAt}"/></td>
 					</tr>
 				</c:forEach>
-
 			</tbody>
-
-
 		</table>
 		
 	<div class="pageInfo_wrap" >
