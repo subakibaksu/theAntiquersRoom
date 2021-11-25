@@ -27,10 +27,12 @@ public interface AdminMapper {
     
 
     //경매상품 총 게시물 개수를 반환
-	public abstract Integer getOnSaleTotal();
+	public abstract Integer getAuctionTotal();
 	
     //경매 상품 리스트 반환
-    public abstract List<ProductDTO> getOnSaleProductList(MypageCriteria cri);
+    public abstract List<ProductDTO> getAuctionProductList(MypageCriteria cri);
 
+    //경매상태를 "판매종료"로 변경
+    public abstract Integer stopSale(@Param("pId") Integer pId);
     
 }// end interface

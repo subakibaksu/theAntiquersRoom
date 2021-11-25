@@ -95,31 +95,31 @@ public class AdminController {
     		) {
         log.debug("getAuctionProductList() invoked.");
         
-        List<ProductDTO> onSaleProductList = this.service.getOnSaleProductList(cri);
- 		log.info("\t+ OnSaleProductList size: {}", onSaleProductList.size());
+        List<ProductDTO> auctionProductList = this.service.getAuctionProductList(cri);
+ 		log.info("\t+ auctionProductList size: {}", auctionProductList.size());
  		
- 		model.addAttribute("onSaleProductList",onSaleProductList);
+ 		model.addAttribute("auctionProductList",auctionProductList);
  		
  		//페이징 처리
- 		Integer totalAmount = this.service.getOnSaleTotal();
+ 		Integer totalAmount = this.service.getAuctionTotal();
 		
 		MyPageDTO pageDTO = new MyPageDTO(cri, totalAmount);
 		
 		model.addAttribute("pageMaker", pageDTO);
  		
-        return "/admin/onSaleProductList";
+        return "/admin/auctionProductList";
 
-    } // getOnSaleProductList
+    } // getAuctionProductList
     
-
-   
-
-    @PostMapping("/confirmDiscontinuedProduct")
-    public String confirmDiscontinuedProduct() {
-        log.debug("confirmDiscontinuedProduct() invoked.");
-
-        return "redirect:/admin/discontinuedProductList";
-    } // confirmDiscontinuedProduct()
+    //경매상품 판매중단
+ 	@PostMapping("/stopSale")
+ 	public String stopSale(@RequestParam(value="pId") Integer pId, RedirectAttributes rttrs) {
+ 		log.debug("stopSale({}, {}) invoked.", pId,rttrs);
+ 		
+ 	 	boolean result=this.service.stopSale(pId);
+ 			
+ 		return "redirect:/admin/auctionProductList";
+ 	} //stopSale
 
 
     @GetMapping("/discontinuedProductList")
