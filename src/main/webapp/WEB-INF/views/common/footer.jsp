@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="resources/css/footer.css">
+    <link rel="stylesheet" href="/resources/css/footer.css">
 
     <!-- fontawsome -->
     <script src="https://kit.fontawesome.com/91815d1378.js" crossorigin="anonymous"></script>

@@ -44,7 +44,7 @@
                     <ul id="topmenu">
                         <li>&nbsp;</li>
                         <li>My Auction List</li>
-                        <li><button id="regBtn" type="button" style="cursor: pointer">판매등록</button></li>
+                        <li><button id="regBtn" type="button">판매등록</button></li>
                     </ul>
                 </caption>
                 <thead>
@@ -62,11 +62,11 @@
                 <tbody>    
                     <c:forEach items="${myAuctionList}" var="myAuction">
                         <tr>
-                            <td><a href="/product/getDetail?pId=${myAuction.pId}"><img alt="" src="https://live.staticflickr.com/2827/10767844126_63b11d6c53_b.jpg" height="100px" width="100px"></a></td>
+                            <td><a href="/product/getDetail?pId=${myAuction.pId}"><img src="${myAuction.imageUrl}" height="100px" width="100px"></a></td>
                             <td><a href="/product/getDetail?pId=${myAuction.pId}"><c:out value="${myAuction.name}"/></a></td>
                             <td><c:out value="${myAuction.categoryName}"/></td>
                             <td><c:out value="${myAuction.startedPrice}"/></td>
-                            <td><h3>현재가격</h3></td>
+                            <td><c:out value="${myAuction.currPrice}"/></td>
                     		<td>
                             <b>시작</b> ${myAuction.startedAt.format(DateTimeFormatter.ofPattern("MM월 dd일 HH시"))}<br>
                             <b>종료</b> ${myAuction.endedAt.format(DateTimeFormatter.ofPattern("MM월 dd일 HH시"))}
@@ -116,17 +116,24 @@
                     <ul>
                         <!-- 1. 이전 이동여부표시(prev) -->
                         <c:if test="${pageMaker.prev}">
-                            <li class="prev"><a class='prev' href="${pageMaker.startPage -1}">Prev</a></li>
+                            <li class="prev"><a class='prev' href="myAuctionList?currPage=${pageMaker.startPage -1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">이전</a></li>
                         </c:if>
                         
                         <!-- 페이지번호목록 표시 -->
                         <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-                            <li><a href="/users/getMyAuctionList?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">${pageNum}</a></li>
+                        	<c:choose>
+   	                        	<c:when test="${pageMaker.cri.currPage == pageNum}">
+                                	<li class="active">${pageNum}</li>
+                                </c:when>
+                        		<c:otherwise>
+                          			<li><a href="/users/myAuctionList?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">${pageNum}</a></li>
+								</c:otherwise>
+							</c:choose>
                         </c:forEach>
     
                         <!-- 2. 다음 이동여부표시(next) -->
                         <c:if test="${pageMaker.next}">
-                            <li class="next"><a class='next' href="${pageMaker.endPage +1}">Next</a></li>
+                            <li class="next"><a class='next' href="myAuctionList?currPage=${pageMaker.endPage +1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">다음</a></li>
                         </c:if>
                     </ul>
     

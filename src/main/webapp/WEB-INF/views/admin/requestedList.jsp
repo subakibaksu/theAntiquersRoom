@@ -11,7 +11,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>main.jsp</title>
+    <title>requestedList.jsp</title>
 
     <link rel="stylesheet" href="/resources/css/myAuctionList.css"> 
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -24,7 +24,6 @@
 	function getDetail(index){
 		$( '#detail_'+index ).slideToggle();
 	}
-	
 	
 	function requestConfirm() {
 
@@ -47,6 +46,28 @@
 	    	}
 	    });
 	}
+
+	function rejectRequest() {
+
+	console.log("rejectRequest clicked");
+	var checkBoxArr = [];   
+	$("input[name='checkPId']:checked").each(function(i){	
+		checkBoxArr.push($(this).val());   
+	})
+
+	$.ajax({
+		url: '/admin/rejectRequest'
+		, type: 'post'
+		, dataType: 'text'
+		, data: {
+			checkBoxArr: checkBoxArr
+		}
+		, success: function(data){
+			alert("승인반려");
+			window.location.href='/admin/main';
+		}
+	});
+	}
 	</script>
 </head>
 <body>
@@ -62,7 +83,8 @@
 	            <ul id="topmenu">
 	                <li>&nbsp;</li>
 	                <li>승인 요청 상품</li>
-	                <li><button id="reqBtn" type="button" style="cursor: pointer" onclick="requestConfirm();">승인</button></li>
+	                <li><button id="reqBtn" type="button" onclick="requestConfirm();">승인</button>
+					<button id="rejBtn" type="button" onclick="rejectRequest();">반려</button></li>
 	            </ul>
 	        </caption>
 	        <thead>
@@ -81,7 +103,7 @@
 				<c:forEach items="${requestedList}" var="reqProduct" varStatus="myIndex">
 					<tr>
 						<td>
-							<img onclick="getDetail(${myIndex.index})" alt="" src="https://live.staticflickr.com/2827/10767844126_63b11d6c53_b.jpg" height="100px" width="100px">
+							<img onclick="getDetail(${myIndex.index})" src="${reqProduct.imageUrl}" height="100px" width="100px">
 							<div hidden id="detail_${myIndex.index}"><c:out value="${reqProduct.content}"/></div>
 						</td>
 						<td><c:out value="${reqProduct.name}"/></td>
@@ -100,8 +122,11 @@
 										<input type="checkbox" name="checkPId" id="myCheck" value="${reqProduct.pId}" >
 									</form>
 								</c:when>
-								<c:otherwise>
+								<c:when test="${reqProduct.status=='승인완료'}">
 									<i class="fas fa-check"></i>
+								</c:when>
+								<c:otherwise>
+									<i class="fas fa-times"></i>
 								</c:otherwise>
 							</c:choose>
 
@@ -123,19 +148,26 @@
  
                  <ul>
                      <!-- 1. 이전 이동여부표시(prev) -->
-                     <c:if test="${myAuction.status=='승인대기중'}">
-                         <li class="prev"><a class='prev' href="${pageMaker.startPage -1}">Prev</a></li>
+                        <c:if test="${pageMaker.prev}">
+                         <li class="prev"><a class='prev' href="requestedList?currPage=${pageMaker.startPage -1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">이전</a></li>
                      </c:if>
                      
                      <!-- 페이지번호목록 표시 -->
                      <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-                         <li><a href="/admin/requestedList?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">${pageNum}</a></li>
+              	        <c:choose>
+	                     	<c:when test="${pageMaker.cri.currPage == pageNum}">
+	                        	<li class="active">${pageNum}</li>
+	                        </c:when>
+	                        <c:otherwise>
+	                        	<li><a href="/admin/requestedList?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">${pageNum}</a></li>
+                     		</c:otherwise>
+                     	</c:choose>
                      </c:forEach>
  
                      <!-- 2. 다음 이동여부표시(next) -->
                      <c:if test="${pageMaker.next}">
-                         <li class="next"><a class='next' href="${pageMaker.endPage +1}">Next</a></li>
-                     </c:if>
+						<li class="next"><a class='next' href="requestedList?currPage=${pageMaker.endPage +1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">다음</a></li>
+					</c:if>
                  </ul>
  
              </form>

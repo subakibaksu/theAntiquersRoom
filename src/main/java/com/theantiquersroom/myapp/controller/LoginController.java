@@ -49,12 +49,12 @@ public class LoginController {
         		log.info("========당신은 관리자인가요?");
         		log.info(user.getUserId());
         		model.addAttribute(LoginController.authKey, user);
-            	return "/admin/main";
+            	return "/admin/requestedList";
         	}else { //일반회원은 메인으로 이동
         		log.info("========당신은 일반회원인가요?");
         		log.info(user.getUserId());
         		model.addAttribute(LoginController.authKey, user);
-            	return "/home";
+            	return "/main";
         	}//if-else
         }else {
             return "/login";

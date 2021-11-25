@@ -1,0 +1,88 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+}
+
+#pInfo {
+    display: flex;
+    margin-bottom: 3rem;
+}
+
+#infoDiv {
+    padding-top: 5em;
+    margin-left: 2em;
+}
+
+#infoTable {
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50rem;
+}
+
+#infoTable th,
+#infoTable td {
+    text-align: left;
+    font-size: 1rem;
+
+    padding: 1rem 1rem;
+}
+
+#infoTable th {
+    width: 6rem;
+}
+
+#infoTable tr {
+    border-block: 1px solid rgba(194, 177, 177, 0.9);
+}
+
+.register_page_button {
+    color: rgba(194, 177, 177, 0.9);
+    font-weight: 800;
+
+    border: 2px solid rgba(194, 177, 177, 0.9);
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 8px;
+    text-align: center;
+
+    width: 6rem;
+    height: 2.3rem;
+    padding-bottom: 0.2rem;
+}
+
+#register_page_button {
+    text-align: center;
+}
+
+#subject {
+    text-align: center;
+    line-height: 4rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+input, select {
+    border: 1px solid rgba(194, 177, 177, 0.9);
+    width: 13rem;
+    height: 1.6rem;
+}
+
+#infoTable span {
+    font-size: 0.8rem;
+}
+
+.image2 {
+    padding-top: 1em;
+}
