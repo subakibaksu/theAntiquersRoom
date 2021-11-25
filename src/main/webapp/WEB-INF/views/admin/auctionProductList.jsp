@@ -11,7 +11,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>requestedList.jsp</title>
+    <title>auctionProductList.jsp</title>
 
     <link rel="stylesheet" href="/resources/css/myAuctionList.css"> 
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
@@ -24,50 +24,7 @@
 	function getDetail(index){
 		$( '#detail_'+index ).slideToggle();
 	}
-	
-	function requestConfirm() {
 
-		console.log("requestConfirm clicked");
-	    var checkBoxArr = [];   
-	    $("input[name='checkPId']:checked").each(function(i){	
-	    	checkBoxArr.push($(this).val());   
-		})
-	 
-	    $.ajax({
-	        url: '/admin/confirmRequest'
-	        , type: 'post'
-	        , dataType: 'text'
-	        , data: {
-	        	checkBoxArr: checkBoxArr
-	        }
-	    	, success: function(data){
-	    		alert("승인완료");
-				window.location.href='/admin/main';
-	    	}
-	    });
-	}
-
-	function rejectRequest() {
-
-	console.log("rejectRequest clicked");
-	var checkBoxArr = [];   
-	$("input[name='checkPId']:checked").each(function(i){	
-		checkBoxArr.push($(this).val());   
-	})
-
-	$.ajax({
-		url: '/admin/rejectRequest'
-		, type: 'post'
-		, dataType: 'text'
-		, data: {
-			checkBoxArr: checkBoxArr
-		}
-		, success: function(data){
-			alert("승인반려");
-			window.location.href='/admin/main';
-		}
-	});
-	}
 	</script>
 </head>
 <body>
@@ -82,9 +39,7 @@
 	        <caption>
 	            <ul id="topmenu">
 	                <li>&nbsp;</li>
-	                <li>승인 요청 상품</li>
-	                <li><button id="reqBtn" type="button" onclick="requestConfirm();">승인</button>
-					<button id="rejBtn" type="button" onclick="rejectRequest();">반려</button></li>
+	                <li>경매상품</li>
 	            </ul>
 	        </caption>
 	        <thead>
@@ -93,43 +48,36 @@
 	                <th>상품명</th>
 	                <th>카테고리</th>
 	                <th>판매자</th>
+					<th>현재가격</th>
 	                <th>시작가격</th>
 	                <th>경매기간</th>
-	                <th>승인상태</th>
-	                <th>승인/반려</th>
+	                <th>경매상태</th>
 	            </tr>
 	        </thead>
 			<tbody>    
-				<c:forEach items="${requestedList}" var="reqProduct" varStatus="myIndex">
+				<c:forEach items="${auctionProductList}" var="aucProduct" varStatus="myIndex">
 					<tr>
 						<td>
-							<img onclick="getDetail(${myIndex.index})" src="${reqProduct.imageUrl}" height="100px" width="100px">
-							<div hidden id="detail_${myIndex.index}"><c:out value="${reqProduct.content}"/></div>
+							<img onclick="getDetail(${myIndex.index})" src="${aucProduct.imageUrl}" height="100px" width="100px">
+							<div hidden id="detail_${myIndex.index}"><c:out value="${aucProduct.content}"/></div>
 						</td>
-						<td><c:out value="${reqProduct.name}"/></td>
-						<td><c:out value="${reqProduct.categoryName}"/></td>
-						<td><c:out value="${reqProduct.nickname}"/></td>
-						<td><c:out value="${reqProduct.startedPrice}"/></td>
+						<td><c:out value="${aucProduct.name}"/></td>
+						<td><c:out value="${aucProduct.categoryName}"/></td>
+						<td><c:out value="${aucProduct.nickname}"/></td>
+						<td><c:out value="${aucProduct.currPrice}"/></td>
+						<td><c:out value="${aucProduct.startedPrice}"/></td>
 						<td>
-						<b>시작</b> ${reqProduct.startedAt.format(DateTimeFormatter.ofPattern("MM월 dd일 HH시"))}<br>
-						<b>종료</b> ${reqProduct.endedAt.format(DateTimeFormatter.ofPattern("MM월 dd일 HH시"))}
+						<b>시작</b> ${aucProduct.startedAt.format(DateTimeFormatter.ofPattern("MM월 dd일 HH시"))}<br>
+						<b>종료</b> ${aucProduct.endedAt.format(DateTimeFormatter.ofPattern("MM월 dd일 HH시"))}
 						</td>
-						<td><c:out value="${reqProduct.status}"/></td>
 						<td>
-							<c:choose>
-								<c:when test="${reqProduct.status=='승인대기중'}">
-									<form action="/admin/confirmRequest" method="post">
-										<input type="checkbox" name="checkPId" id="myCheck" value="${reqProduct.pId}" >
-									</form>
-								</c:when>
-								<c:when test="${reqProduct.status=='승인완료'}">
-									<i class="fas fa-check"></i>
-								</c:when>
-								<c:otherwise>
-									<i class="fas fa-times"></i>
-								</c:otherwise>
-							</c:choose>
-
+							<c:out value="${aucProduct.status}"/><br>
+							<c:if test="${aucProduct.status!='판매취소' and aucProduct.status!='낙찰완료' and aucProduct.status!='미낙찰' and aucProduct.status!='경매종료'}">
+								<form action="/admin/stopSale" method="post">
+									<input type="hidden" id="pId" name="pId" value="${aucProduct.pId}">
+									<input type="submit" id="stopBtn" value="판매중단">
+								</form>	
+							</c:if>
 						</td>
 					</tr>
 				</c:forEach>
@@ -149,7 +97,7 @@
                  <ul>
                      <!-- 1. 이전 이동여부표시(prev) -->
                         <c:if test="${pageMaker.prev}">
-                         <li class="prev"><a class='prev' href="requestedList?currPage=${pageMaker.startPage -1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">이전</a></li>
+                         <li class="prev"><a class='prev' href="auctionProductList?currPage=${pageMaker.startPage -1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">이전</a></li>
                      </c:if>
                      
                      <!-- 페이지번호목록 표시 -->
@@ -159,14 +107,14 @@
 	                        	<li class="active">${pageNum}</li>
 	                        </c:when>
 	                        <c:otherwise>
-	                        	<li><a href="/admin/requestedList?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">${pageNum}</a></li>
+	                        	<li><a href="/admin/auctionProductList?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">${pageNum}</a></li>
                      		</c:otherwise>
                      	</c:choose>
                      </c:forEach>
  
                      <!-- 2. 다음 이동여부표시(next) -->
                      <c:if test="${pageMaker.next}">
-						<li class="next"><a class='next' href="requestedList?currPage=${pageMaker.endPage +1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">다음</a></li>
+						<li class="next"><a class='next' href="auctionProductList?currPage=${pageMaker.endPage +1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">다음</a></li>
 					</c:if>
                  </ul>
  
