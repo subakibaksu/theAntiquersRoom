@@ -12,11 +12,11 @@
         resultType="int">
         
         <![CDATA[
-
+        
             SELECT count(p_id)
             FROM product
             WHERE status='승인대기중' OR status='승인완료' OR status='승인반려'
-
+            
         ]]>
     </select>
 
@@ -53,7 +53,6 @@
     
     <!-- 승인요청 상품 경매상태 변경 -->
     <update id="updateStatus">
-    
 
         UPDATE product
         SET 
@@ -65,7 +64,6 @@
     
     <!-- 승인반려 상품 경매상태 변경 -->
     <update id="rejectRequest">
-    
 
         UPDATE product
         SET 
@@ -75,5 +73,62 @@
 
     </update>
     
+    
+    <!-- 경매상품 총 목록개수 반환 -->
+    <select
+        id="getAuctionTotal"
+        resultType="int">
+        
+        <![CDATA[
+
+            SELECT count(p_id)
+            FROM product
+            WHERE status NOT IN ('승인대기중', '승인반려')
+
+        ]]>
+    </select>
+
+    <!-- 관리자 경매상품 조회 -->
+    <select
+        id="getAuctionProductList"
+        resultType="com.theantiquersroom.myapp.domain.ProductDTO">
+
+        <![CDATA[ 
+
+            SELECT
+            	A.p_id as pId,
+                A.name,
+                A.created_at as createdAt,
+                A.updated_at as updatedAt,
+                A.content,
+                A.category_id as categoryId,
+                A.user_id as userId,
+                A.started_at as startedAt,
+                A.ended_at as endedAt,
+                A.started_price as startedPrice,
+                A.bid_increment as bidIncrement,
+                A.status,
+                (select nickname from users as B where B.USER_ID=A.USER_ID) as nickname,
+                (select category_name from category as C where C.category_id=A.category_id) as categoryName,
+                (select image_url from product_image as D where D.p_id=A.p_id order by D.index limit 1) as imageUrl,
+                (select bid_price from bid_history as E where E.p_id=A.p_id order by E.bid_price desc limit 1) as currPrice
+            FROM product as A
+            WHERE A.status NOT IN ('승인대기중', '승인반려')
+            ORDER BY A.created_at DESC
+            LIMIT #{pageStart}, #{amount}
+
+        ]]>
+    </select>  
+    
+    <!-- 경매상품 판매종료로 상태 변경 -->
+    <update id="stopSale">
+    
+        UPDATE product
+        SET 
+            status='판매취소'
+        WHERE
+            p_id = #{pId}
+
+    </update>
     
 </mapper>

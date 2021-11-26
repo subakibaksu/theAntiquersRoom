@@ -33,7 +33,8 @@ public class HomeController {
         model.addAttribute("endingProductList",service.getEndingProduct());
         log.debug(service.getNewProduct());
         log.debug(service.getEndingProduct());
-        return "main";
+//        return "main";
+        return "home";//test
 
     }
 }
