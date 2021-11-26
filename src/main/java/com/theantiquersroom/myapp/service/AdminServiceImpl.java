@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.theantiquersroom.myapp.domain.MypageCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.UserDTO;
+import com.theantiquersroom.myapp.domain.UserVO;
 import com.theantiquersroom.myapp.mapper.AdminMapper;
 
 import lombok.AllArgsConstructor;
@@ -59,5 +61,55 @@ public class AdminServiceImpl implements AdminService {
 		
 		return affectedRows>0;
 	}//modifyStatus
+  
+  @Override
+	public List<ProductDTO> getAuctionProductList(MypageCriteria cri) {
+		log.debug("getAuctionProductList({}) invoked.",cri);
+		
+		List<ProductDTO> list=this.mapper.getAuctionProductList(cri);
+		log.info("\t+ list size: {}", list.size());
+		
+		return list;
+	}//getAuctionProductList
+
+	@Override
+	public Integer getAuctionTotal() {
+		log.debug("getAuctionTotal() invoked.");
+
+		return this.mapper.getAuctionTotal();
+	}//getAuctionTotal
+
+	@Override
+	public Boolean stopSale(Integer pId) {
+		log.debug("stopSale({}) invoked.",pId);
+		
+		int affectedRows=this.mapper.stopSale(pId);
+		log.info("\t+ affectedRows: {}", affectedRows);
+		
+		return affectedRows>0;
+	}//stopSale
+  
+  @Override
+	public List<UserDTO> getUserList(MypageCriteria cri) {
+		log.debug("getUserList({}) invoked.", cri);
+		
+		List<UserDTO> users=this.mapper.selectUserList(cri);
+		
+		return users;
+	} //getUserList
+
+	@Override
+	public Integer getTotalUsersCount() {
+		log.debug("getTotalUsersCount() invoked.");
+		
+		return this.mapper.getTotalUsersCount();
+	} //getTotalUsersCount
+
+	@Override
+	public List<UserVO> searchUser(String nickName) {
+		log. debug("serchUser({}) invoked.", nickName);
+		
+		return this.mapper.selectUserByNick(nickName);
+	} //searchUser
 
 }//end class

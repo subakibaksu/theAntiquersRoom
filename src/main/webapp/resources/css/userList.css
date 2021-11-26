@@ -1,0 +1,180 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    min-height: 100vh;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#adminHeader,
+#adminFooter {
+    width: 100%;
+}
+
+#userList_wrapper {
+    flex-grow: 1;
+    font-family: "Nanum Gothic", sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+
+    width: 60%;
+    margin: 5rem 0 3rem 0;
+}
+
+#userList_wrapper h2 {
+    text-align: center;
+    font-family: "Gowun Dodum", sans-serif;
+
+    margin-bottom: 1.5rem;
+}
+
+#nickSearchBox {
+    text-align: right;
+
+    padding-right: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+#nickSearch {
+    border: none;
+    border-bottom: 1.5px solid #c2b1b1;
+    font-size: 0.8rem;
+
+    width: 8rem;
+    padding: 0.2rem 0.4rem;
+}
+
+#nickSearch:hover,
+#nickSearch:focus {
+    outline: none;
+    border: 1.5px solid #c2b1b1;
+    border-radius: 6px;
+}
+
+#nickSearchBtn {
+    font-family: "Nanum Gothic", sans-serif;
+    color: whitesmoke;
+    background-color: #c2b1b1;
+    border: none;
+    border-radius: 6px;
+
+    width: 2.3rem;
+    height: 1.5rem;
+}
+
+#nickSearchBtn:hover,
+#nickSearchBtn:active {
+    background-color: white;
+    border: 1.5px solid #c2b1b1;
+    border-radius: 6px;
+    color: rgba(0, 0, 0, 0.65);
+}
+
+#totalUsers {
+    margin-bottom: 0.7rem;
+    padding-left: 0.7rem;
+}
+
+#totalUsers p {
+    font-family: "Nanum Gothic", sans-serif;
+    font-size: 0.8rem;
+}
+
+#userList {
+    border-collapse: collapse;
+}
+
+#userList tr {
+    border-block: 1px solid #eacbcb;
+}
+
+#userList thead {
+    background-color: #eacbcb;
+}
+
+#userList th,
+#userList td {
+    font-family: "Nanum Gothic", sans-serif;
+    font-size: 0.9rem;
+    padding: 1rem;
+}
+
+#userList td {
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+#UserSearchResult {
+    display: contents;
+}
+
+#pagination {
+    width: 100%;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: center;
+
+    margin-top: 2rem;
+}
+
+#paginationForm {
+    width: 18rem;
+}
+
+#pagination ul {
+    display: flex;
+    justify-content: center;
+}
+
+#pagination li {
+    float: left;
+
+    width: 20px;
+    height: 25px;
+
+    list-style: none;
+    text-align: center;
+    line-height: 25px;
+    text-decoration: none;
+    margin: 11px 5px;
+
+    border: 1px solid #c2b1b1;
+    border-radius: 8px;
+
+    background-color: white;
+}
+
+#pagination a {
+    color: #c2b1b1 !important;
+    text-decoration: none;
+}
+
+#pagination li:hover {
+    background-color: #d9cece;
+}
+
+.active {
+    background-color: #d9cece !important;
+    color: white;
+}
+
+.prev,
+.next {
+    width: 50px !important;
+
+    color: white !important;
+}

@@ -17,11 +17,18 @@ public interface BoardMapper {
 	public List<QnADTO> getQnAListPaging(BoardQnACriteria cri);
 	
 	/* 문의게시판 총 갯수 */
-	public int getQnATotal();
+	public Integer getQnATotal();
 	
 	/* 문의게시판 조회 */
 	public QnADTO getQnADetail(int bindex);
 	
 	/* 문의게시판 수정 */
 	public Integer modifyQnA(QnADTO dto);
-}
+	
+	/* 문의게시판 수정 */
+	public Integer removeQnA(int bindex);
+    
+   	/* 게시판 - 답글 등록 */
+   	public Integer registerReQnA(QnADTO dto);
+
+} // end class
