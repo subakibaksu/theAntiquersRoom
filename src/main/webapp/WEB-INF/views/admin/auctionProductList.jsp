@@ -34,20 +34,16 @@
     </header>
     
 	<div id="myPageWrapper">
-	
-	     <table id="myAcutionTbl">
-	        <caption>
-	            <ul id="topmenu">
-	                <li>&nbsp;</li>
-	                <li>경매상품</li>
-	            </ul>
-	        </caption>
-			<div id="top_search">
-				<input id="searchBar" type="text" maxlength="100" placeholder="'판매자 닉네임' 또는 '상품명'을 입력하세요">
-				<button class="findIcon" type="submit">
+         <h2>경매상품</h2>
+         <div class="search-container">
+         	<form action="/admin/searchItems">
+	            <input id="searchBar" type="text" placeholder="'닉네임' 또는 '상품명'">
+				<button class="searchBtn" type="submit">
 					<i class="fas fa-search"></i>
 				</button>
-			</div>
+         	</form>
+         </div>
+	     <table id="myAcutionTbl">
 	        <thead>
 	            <tr>
 	                <th></th>
