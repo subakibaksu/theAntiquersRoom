@@ -148,7 +148,7 @@ public class BoardController {
         log.debug("registerReQnA() invoked.");
         
         model.addAttribute("pageInfo", service.getQnADetail(bindex));
-    } // registerQnA 
+    } // registerReQnA 
     
     @PostMapping("/registerReQnA")
     public String registerReQnA(QnADTO dto) { // 문의게시글 답글 작성
