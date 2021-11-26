@@ -19,6 +19,13 @@
         </selectKey>
     </insert>
 
+    <delete id="deleteProductImage" parameterType="Integer">
+        <![CDATA[
+            delete from product_image
+            where p_id = #{pId}
+        ]]>
+    </delete>
+
     <insert id="insertProductImage"
             parameterType="com.theantiquersroom.myapp.domain.ProductImageDTO">
     <![CDATA[

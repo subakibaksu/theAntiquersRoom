@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
+import com.theantiquersroom.myapp.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -23,12 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import com.theantiquersroom.myapp.domain.BidHistoryDTO;
-import com.theantiquersroom.myapp.domain.ProductCommand;
-import com.theantiquersroom.myapp.domain.ProductCriteria;
-import com.theantiquersroom.myapp.domain.ProductDTO;
-import com.theantiquersroom.myapp.domain.ProductFormDTO;
-import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.service.ProductService;
 import com.theantiquersroom.myapp.utils.ProductPageMaker;
 

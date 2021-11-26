@@ -138,13 +138,14 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
     public Integer modify(ProductFormDTO product) throws Exception {
         log.debug("modify({}) invoked.", product);
 
+        this.mapper.deleteProductImage(product.getPId());
         for (MultipartFile img: product.getImages()) {
             String url = uploadService.upload(img, PRODUCT_IMAGE_DIR);
             ProductImageDTO imageDto = new ProductImageDTO();
             imageDto.setPId(product.getPId());
             imageDto.setImageUrl(url);
             imageDto.setImageName(img.getOriginalFilename());
-            this.mapper.updateProductImage(imageDto);
+            this.mapper.insertProductImage(imageDto);
         }
 
 //        int affectedRows =

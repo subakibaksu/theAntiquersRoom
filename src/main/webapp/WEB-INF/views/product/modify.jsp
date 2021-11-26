@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://antiquersroom.com/functions" prefix="f" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <html>
@@ -31,6 +32,15 @@
         $(document).ready(function () {
             productSubmitDate()
         });
+
+        function getBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = error => reject(error);
+            });
+        }
 
         function productSubmitDate() {
             $.datetimepicker.setLocale('ko'); // 언어 설정
@@ -78,6 +88,12 @@
                     let endedAtcheck = false;
                     let contentcheck = false;
                     let imagescheck = false;
+
+                    $('.upload').change(async (e) => {
+                        const file = e.target.files[0]
+                        const imageUrl = await getBase64(file)
+                        $(e.target).parent().find('img').attr('src', imageUrl)
+                    })
 
                     $('#register').click(function () {
                         Checkform();
@@ -137,7 +153,6 @@
 
         // 기존 이미지 출력
         let bookId = '<c:out value="${product.imageUrls}"/>';
-        let uploadResult = ${"#uploadResult"};
     </script>
 </head>
 
@@ -236,16 +251,16 @@
                             <th>이미지</th>
                             <td>
                                 <img src="${product.imageUrls[0]}" width="150px" height="150px class=">
-                                <input id="image1" class="check" type="file" width="" name="images">
+                                <input id="image1" class="upload" type="file" width="" name="images">
                                 <div id="thumbnailtext">대표사진(필수)</div>
                             </td>
                             <td>
                                 <img src="${product.imageUrls[1]}" width="150px" height="150px">
-                                <input id="image2" type="file" name="images">
+                                <input id="image2" class="upload" type="file" name="images">
                             </td>
                             <td>
                                 <img src="${product.imageUrls[2]}" width="150px" height="150px">
-                                <input id="image3" type="file" name="images">
+                                <input id="image3" class="upload" type="file" name="images">
                             </td>
                         </tr>
 
