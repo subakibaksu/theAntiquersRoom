@@ -109,7 +109,13 @@ public class ProductController {
 
     /*상품 수정 페이지로 이동*/
     @GetMapping("/modify")
-    public void modify() {
+    public String modify(Integer pId, Model model) {
+        log.debug("get({}, {}) invoked." , pId, model);
+
+        ProductModifyDTO product = this.service.getModify(pId);
+
+        model.addAttribute("product", product);
+        return "/product/modify";
 
     } // Get modify()
 

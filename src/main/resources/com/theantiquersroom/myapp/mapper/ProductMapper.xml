@@ -178,16 +178,19 @@
             resultType="com.theantiquersroom.myapp.domain.ProductModifyDTO">
 
         SELECT
-            p_id,
-            name,
-            content,
-            category_id,
-            started_at,
-            ended_at,
-            started_price,
-            bid_increment
-        FROM product
-        where p_id=#{pId}
+            product.p_id as pId,
+            product.name,
+            product.content,
+            product.category_id,
+            product.started_at,
+            product.ended_at,
+            product.started_price,
+            product.bid_increment,
+            category.category_name
+            FROM product
+            join category
+            on product.category_id = category.category_id
+            where p_id=#{pId}
         </select>
 
     <!--    상품 정보 수정-->
