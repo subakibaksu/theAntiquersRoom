@@ -52,7 +52,6 @@ public class BoardServiceTests {
         
         list.forEach(board -> log.info("" + board));
         
-        
     }
     
     /* 문의게시판 조회 */
@@ -70,14 +69,22 @@ public class BoardServiceTests {
 	 public void testModifyQnA() {
 		 
         QnADTO dto = new QnADTO();
-        dto.setBindex(50);
-        dto.setTitle("수정 제목3");
-        dto.setContent("수정 내용3");
+        dto.setBindex(25);
+        dto.setTitle("수정 제목4");
+        dto.setContent("수정 내용4");
         
         int result = service.modifyQnA(dto);
         log.info("result : " +result);
 
 	 }
-
-	
+	 
+	    /* 게시판 삭제 */
+     @Test
+     public void testRemoveQnA() {
+         
+         int result = service.removeQnA(49);
+         log.info("result : " + result);
+         
+     }
+     
 } //end class

@@ -23,8 +23,5 @@ public class QnADTO {
 //  private DateTime updatedAt;
   private Timestamp createdAt;
   private Timestamp updatedAt;
-
     
 } // end class
-
-
