@@ -15,7 +15,6 @@
         background: #FFFFFF;
         box-sizing: border-box;
 
-		float:right;
         margin-top: 5rem;
         margin-right:3rem;
     
@@ -28,7 +27,8 @@
     }  */
     
      #info {
-   		padding-right:2rem;
+	     
+   	padding-right:2rem;
     	margin-bottom: 2rem;
     	
     } 
