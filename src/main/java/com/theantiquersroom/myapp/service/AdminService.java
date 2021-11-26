@@ -24,8 +24,17 @@ public interface AdminService {
   	
   	// 경매 승인 반려
   	public abstract Boolean rejectRequest(Integer pId);
+  	
+    // 경매 상품 조회
+    public abstract List<ProductDTO> getAuctionProductList(MypageCriteria cri);
     
-  	// 회원 목록 조회
+    // 경매상품 리스트 총 레코드 개수 반환
+  	public abstract Integer getAuctionTotal();
+  	
+  	// 경매상품 판매중단
+  	public abstract Boolean stopSale(Integer pId);
+  
+    	// 회원 목록 조회
   	public abstract List<UserDTO> getUserList(MypageCriteria cri);
   	
   	// 전체 회원수 조회

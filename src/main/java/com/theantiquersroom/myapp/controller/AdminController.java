@@ -39,6 +39,7 @@ public class AdminController {
     @Setter(onMethod_= {@Autowired})
     private AdminService service;
 
+    //=============승인요청상품 리스트=============
     //승인요청상품 리스트로 이동(어드민 메인)
     @GetMapping({"/main", "/requestedList"}) 
     public String getRequestedProductList(
@@ -86,20 +87,43 @@ public class AdminController {
  			
  		return "redirect:/admin/main";
  	} //rejectRequest
-    
-    //판매중인 경매상품 리스트
+ 	
+ 	
+ 	//=============경매상품 리스트=============
+    //경매상품 리스트 조회
     @GetMapping("/auctionProductList")
-    public void auctionProductList() {
-        log.debug("getRequestedProductList() invoked.");
+    public String getAuctionProductList(
+    		HttpSession session,
+    		@ModelAttribute("cri") MypageCriteria cri,
+    		Model model
+    		) {
+        log.debug("getAuctionProductList() invoked.");
+        
+        List<ProductDTO> auctionProductList = this.service.getAuctionProductList(cri);
+ 		log.info("\t+ auctionProductList size: {}", auctionProductList.size());
+ 		
+ 		model.addAttribute("auctionProductList",auctionProductList);
+ 		
+ 		//페이징 처리
+ 		Integer totalAmount = this.service.getAuctionTotal();
+		
+		MyPageDTO pageDTO = new MyPageDTO(cri, totalAmount);
+		
+		model.addAttribute("pageMaker", pageDTO);
+ 		
+        return "/admin/auctionProductList";
 
-    } // auctionProductList
-
-    @PostMapping("/confirmDiscontinuedProduct")
-    public String confirmDiscontinuedProduct() {
-        log.debug("confirmDiscontinuedProduct() invoked.");
-
-        return "redirect:/admin/discontinuedProductList";
-    } // confirmDiscontinuedProduct()
+    } // getAuctionProductList
+    
+    //경매상품 판매중단
+ 	@PostMapping("/stopSale")
+ 	public String stopSale(@RequestParam(value="pId") Integer pId, RedirectAttributes rttrs) {
+ 		log.debug("stopSale({}, {}) invoked.", pId,rttrs);
+ 		
+ 	 	boolean result=this.service.stopSale(pId);
+ 			
+ 		return "redirect:/admin/auctionProductList";
+ 	} //stopSale
 
 
     @GetMapping("/discontinuedProductList")
