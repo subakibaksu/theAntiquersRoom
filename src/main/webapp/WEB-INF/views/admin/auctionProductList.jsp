@@ -42,6 +42,12 @@
 	                <li>경매상품</li>
 	            </ul>
 	        </caption>
+			<div id="top_search">
+				<input id="searchBar" type="text" maxlength="100" placeholder="'판매자 닉네임' 또는 '상품명'을 입력하세요">
+				<button class="findIcon" type="submit">
+					<i class="fas fa-search"></i>
+				</button>
+			</div>
 	        <thead>
 	            <tr>
 	                <th></th>
