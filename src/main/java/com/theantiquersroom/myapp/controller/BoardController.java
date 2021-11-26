@@ -105,7 +105,7 @@ public class BoardController {
 //---------------------------------------------QnA=============================================
     
   @GetMapping("/QnA")
-  public void getQnA(Model model, BoardQnACriteria cri) {	
+  public void getQnA(Model model, BoardQnACriteria cri) { // 문의게시글 불러오기	
 
 	  log.debug("getQnA() invoked.");
 	  
@@ -120,7 +120,7 @@ public class BoardController {
   } // getQnA 페이징처리
 
     @GetMapping("/getQnADetail")
-    public void getQnADetail(int bindex, Model model) {	
+    public void getQnADetail(int bindex, Model model) {	// 상세 문의게시글 보기
         log.debug("getQnADetail() invoked.");
         
         model.addAttribute("pageInfo", service.getQnADetail(bindex));
@@ -134,7 +134,7 @@ public class BoardController {
     } // registerQnA
 
     @PostMapping("/registerQnA")
-    public String registerQnA(QnADTO dto) { 
+    public String registerQnA(QnADTO dto) { // 문의게시글 작성
     	log.debug("registerQnA({}) invoked.", dto);
     	
     	this.service.registerQnA(dto);
@@ -150,7 +150,7 @@ public class BoardController {
     } // registerQnA 
     
     @PostMapping("/registerReQnA")
-    public String registerReQnA(QnADTO dto) { 
+    public String registerReQnA(QnADTO dto) { // 문의게시글 답글 작성
     	log.debug("registerReQnA({}) invoked.", dto);
     	
     	this.service.registerReQnA(dto);
@@ -168,12 +168,11 @@ public class BoardController {
     } // modifyQnA
 
     @PostMapping("/modifyQnA")
-    public String modifyQnA(QnADTO dto, RedirectAttributes rttr) { // 수정된 문의사항 DB전달
+    public String modifyQnA(QnADTO dto, RedirectAttributes rttr) { // 문의게시글 수정
         log.debug("modifyQnA({})({}) invoked.", dto,rttr);
 
-        service.modifyQnA(dto);
-        
-        rttr.addFlashAttribute("result", "modify success");
+        int result = this.service.modifyQnA(dto);
+        rttr.addAttribute("result", result);
         
         return  "redirect:/board/QnA";
         
@@ -183,9 +182,8 @@ public class BoardController {
     public String removeQnA(int bindex, RedirectAttributes rttr) { // 문의게시글 삭제
         log.debug("removeQnA({}) invoked.");
         
-        service.removeQnA(bindex);
-        
-        rttr.addFlashAttribute("result", "delete success");
+        int result = this.service.removeQnA(bindex);
+        rttr.addAttribute("result", result);
         
         return "redirect:/board/QnA";
 

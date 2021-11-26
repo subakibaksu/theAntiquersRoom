@@ -45,7 +45,7 @@
 	<div class="btn_wrap">
 		<a class="btn" id="list_btn">목록 페이지</a> 
 		<a class="btn" id="modify_btn">수정 하기</a>
-		<a class="btn" id="reply_btn">답글 달기</a>
+		<a class="btn" id="reply_btn">답글</a>
 	</div>
 	<form id="infoForm" action="/board/modify" method="get">
 		<input type="hidden" id="bindex" name="bindex" value='<c:out value="${pageInfo.bindex}"/>'>

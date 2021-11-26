@@ -14,20 +14,21 @@ public interface BoardService {
 	public abstract List<QnADTO> getQnAList();
 
 	 /* 문의게시판 목록(페이징 적용) */
-    public List<QnADTO> getQnAListPaging(BoardQnACriteria cri);
+    	public List<QnADTO> getQnAListPaging(BoardQnACriteria cri);
 
    	 /* 문의게시판 총 갯수 */
-  	public int getQnATotal();
+  	public Integer getQnATotal();
   	
   	/* 문의게시판 조회 */
   	public QnADTO getQnADetail(int bindex);
   	
   	/* 문의게시글 수정 */
-  	public int modifyQnA(QnADTO dto);
+  	public Integer modifyQnA(QnADTO dto);
 
   	/* 문의게시글 삭제 */
-  	public int removeQnA(int bindex);
+  	public Integer removeQnA(int bindex);
   	
-    /* 게시판 - 답글 등록 */
-    public abstract boolean registerReQnA(QnADTO dto);  	
+    	/* 게시판 - 답글 등록 */
+   	public abstract boolean registerReQnA(QnADTO dto);  	
+	
 } // end class
