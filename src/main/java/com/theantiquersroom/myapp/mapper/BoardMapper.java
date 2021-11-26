@@ -29,6 +29,6 @@ public interface BoardMapper {
 	public Integer removeQnA(int bindex);
     
     /* 게시판 - 답글 등록 */
-    public int registerReQnA(QnADTO dto);
+    public Integer registerReQnA(QnADTO dto);
 
 } // end class
