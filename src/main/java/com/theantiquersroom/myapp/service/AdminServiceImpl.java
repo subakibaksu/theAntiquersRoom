@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.theantiquersroom.myapp.domain.MypageCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.UserDTO;
+import com.theantiquersroom.myapp.domain.UserVO;
 import com.theantiquersroom.myapp.mapper.AdminMapper;
 
 import lombok.AllArgsConstructor;
@@ -59,8 +61,8 @@ public class AdminServiceImpl implements AdminService {
 		
 		return affectedRows>0;
 	}//modifyStatus
-
-	@Override
+  
+  @Override
 	public List<ProductDTO> getAuctionProductList(MypageCriteria cri) {
 		log.debug("getAuctionProductList({}) invoked.",cri);
 		
@@ -86,5 +88,28 @@ public class AdminServiceImpl implements AdminService {
 		
 		return affectedRows>0;
 	}//stopSale
+  
+  @Override
+	public List<UserDTO> getUserList(MypageCriteria cri) {
+		log.debug("getUserList({}) invoked.", cri);
+		
+		List<UserDTO> users=this.mapper.selectUserList(cri);
+		
+		return users;
+	} //getUserList
+
+	@Override
+	public Integer getTotalUsersCount() {
+		log.debug("getTotalUsersCount() invoked.");
+		
+		return this.mapper.getTotalUsersCount();
+	} //getTotalUsersCount
+
+	@Override
+	public List<UserVO> searchUser(String nickName) {
+		log. debug("serchUser({}) invoked.", nickName);
+		
+		return this.mapper.selectUserByNick(nickName);
+	} //searchUser
 
 }//end class

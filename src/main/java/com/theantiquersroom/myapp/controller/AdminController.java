@@ -11,13 +11,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.theantiquersroom.myapp.domain.MyPageDTO;
 import com.theantiquersroom.myapp.domain.MypageCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.UserDTO;
+import com.theantiquersroom.myapp.domain.UserVO;
 import com.theantiquersroom.myapp.service.AdminService;
 
 import lombok.NoArgsConstructor;
@@ -128,18 +132,34 @@ public class AdminController {
 
     } // discontinuedProductList()
 
-    @GetMapping("/getUserList")
-    public void getUserList(Model model) {
-        log.debug("getUserList() invoked.");
+    @GetMapping("/userList")
+    public void getUserList(
+    		@ModelAttribute("cri") MypageCriteria cri, Model model
+    ) {
+        cri.setAmount(10);
+        List<UserDTO> users = this.service.getUserList(cri);
+        
+        model.addAttribute("users", users);
+        
+      //페이징 처리
+ 		Integer totalUsers = this.service.getTotalUsersCount();
+		MyPageDTO pageDTO = new MyPageDTO(cri, totalUsers);
+		
+		model.addAttribute("pageMaker", pageDTO);
+		
+    } // getUserList
 
-
-    } // getUserList()
-
-    @GetMapping("/searchUser")
-    public void searchUser() {
-        log.debug("searchUser() invoked.");
-
-    } // searchUser() 조회회원보여주는 페이지로 이동
+    @PostMapping("/searchUser")
+    public @ResponseBody List<UserVO> searchUser(@RequestBody String nickName, Model model) {
+        log.debug("searchUser({}) invoked.", nickName);
+        
+        List<UserVO> users=this.service.searchUser(nickName);
+        log.info("\t+ users: {}", users);
+        model.addAttribute("users", users);
+        
+//        return "redirect:/admin/userList";
+        return this.service.searchUser(nickName);
+    } // searchUser
 
 
 
