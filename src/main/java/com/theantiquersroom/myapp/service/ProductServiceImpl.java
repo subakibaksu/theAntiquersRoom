@@ -148,19 +148,20 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
         }
 
 //        int affectedRows =
-              return  this.mapper.updateProduct(product);
+              return this.mapper.updateProduct(product);
 //               return mapper.updateProduct(product);
 //        log.info("\t+ affectedRows: {}", affectedRows);
 
 //        return affectedRows > 1;
     }
 
-    // 상품 수정 전 상세보기
+    // 상품 수정 정보 가져오기
     @Override
     public ProductModifyDTO getModify(Integer pId) {
         log.debug("getDetail({}) invoked.", pId);
 
         ProductModifyDTO product = this.mapper.getupdateByPId(pId);
+        // 이미지 가져오기
         product.setImageUrls(this.mapper.getProductImageUrls(pId));
 
         log.info("\t+ dto: {}", product);
