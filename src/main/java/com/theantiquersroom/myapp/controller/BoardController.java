@@ -140,15 +140,13 @@ public class BoardController {
     	this.service.registerQnA(dto);
     
     	return  "redirect:/board/QnA";
-    	
     } // registerQnA
     
     
     @GetMapping("/registerReQnA")
-    public void registerReQnA(int bindex, Model model) {		
+    public void registerReQnA() {		
         log.debug("registerReQnA() invoked.");
-        
-        model.addAttribute("pageInfo", service.getQnADetail(bindex));
+
     } // registerQnA 
     
     @PostMapping("/registerReQnA")
@@ -158,7 +156,6 @@ public class BoardController {
     	this.service.registerReQnA(dto);
     	
     	return  "redirect:/board/QnA";
-    	
     } // registerReQnA
 
     
