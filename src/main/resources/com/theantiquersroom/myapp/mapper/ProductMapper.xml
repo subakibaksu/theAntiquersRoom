@@ -193,6 +193,17 @@
             where p_id=#{pId}
         </select>
 
+    <!--    수정할 상품 이미지 정보 불러오기-->
+    <select id="getProductImage"
+            resultType="com.theantiquersroom.myapp.domain.ProductImageDTO">
+
+        SELECT
+            image_url,
+            image_name
+        FROM product_image
+        where p_id=#{pId}
+    </select>
+
     <!--    상품 정보 수정-->
     <update id="updateProduct" parameterType="com.theantiquersroom.myapp.domain.ProductFormDTO">
         <![CDATA[
