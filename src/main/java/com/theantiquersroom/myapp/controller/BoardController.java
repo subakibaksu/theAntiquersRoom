@@ -174,9 +174,8 @@ public class BoardController {
     public String modifyQnA(QnADTO dto, RedirectAttributes rttr) { // 문의게시글 수정
         log.debug("modifyQnA({})({}) invoked.", dto,rttr);
 
-        service.modifyQnA(dto);
-        
-        rttr.addFlashAttribute("result", "modify success");
+        int result = this.service.modifyQnA(dto);
+        rttr.addAttribute("result", result);
         
         return  "redirect:/board/QnA";
         
@@ -186,9 +185,8 @@ public class BoardController {
     public String removeQnA(int bindex, RedirectAttributes rttr) { // 문의게시글 삭제
         log.debug("removeQnA({}) invoked.");
         
-        service.removeQnA(bindex);
-        
-        rttr.addFlashAttribute("result", "delete success");
+        int result = this.service.removeQnA(bindex);
+        rttr.addAttribute("result", result);
         
         return "redirect:/board/QnA";
 
