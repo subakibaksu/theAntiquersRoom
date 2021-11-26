@@ -144,9 +144,10 @@ public class BoardController {
     
     
     @GetMapping("/registerReQnA")
-    public void registerReQnA() {		
+    public void registerReQnA(int bindex, Model model) {		
         log.debug("registerReQnA() invoked.");
-
+        
+        model.addAttribute("pageInfo", service.getQnADetail(bindex));
     } // registerQnA 
     
     @PostMapping("/registerReQnA")
