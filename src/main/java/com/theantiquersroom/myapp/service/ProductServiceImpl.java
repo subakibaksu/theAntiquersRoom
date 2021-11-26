@@ -2,8 +2,6 @@ package com.theantiquersroom.myapp.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
 
 import com.theantiquersroom.myapp.domain.*;
 import org.springframework.beans.factory.DisposableBean;
@@ -17,8 +15,6 @@ import com.theantiquersroom.myapp.domain.ProductImageDTO;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -135,5 +131,41 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
         return bidHistoryDTOList;
 
     } // getBidHistory()
+
+    // 상품 정보 수정
+    @Transactional
+    @Override
+    public Integer modify(ProductFormDTO product) throws Exception {
+        log.debug("modify({}) invoked.", product);
+
+        for (MultipartFile img: product.getImages()) {
+            String url = uploadService.upload(img, PRODUCT_IMAGE_DIR);
+            ProductImageDTO imageDto = new ProductImageDTO();
+            imageDto.setPId(product.getPId());
+            imageDto.setImageUrl(url);
+            imageDto.setImageName(img.getOriginalFilename());
+            this.mapper.updateProductImage(imageDto);
+        }
+
+//        int affectedRows =
+              return  this.mapper.updateProduct(product);
+//               return mapper.updateProduct(product);
+//        log.info("\t+ affectedRows: {}", affectedRows);
+
+//        return affectedRows > 1;
+    }
+
+    // 상품 수정 전 상세보기
+    @Override
+    public ProductModifyDTO getModify(Integer pId) {
+        log.debug("getDetail({}) invoked.", pId);
+
+        ProductModifyDTO product = this.mapper.getupdateByPId(pId);
+        product.setImageUrls(this.mapper.getProductImageUrls(pId));
+
+        log.info("\t+ dto: {}", product);
+
+        return product;
+    } //getDetail
 
 } // end class

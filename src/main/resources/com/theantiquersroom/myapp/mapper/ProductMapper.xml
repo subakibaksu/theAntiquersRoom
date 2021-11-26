@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -172,4 +173,49 @@
         DELETE FROM product WHERE p_id=#{pId}
     </delete>
 
+    <!--    수정할 상품 정보 불러오기-->
+    <select id="getupdateByPId"
+            resultType="com.theantiquersroom.myapp.domain.ProductModifyDTO">
+
+        SELECT
+            p_id,
+            name,
+            content,
+            category_id,
+            started_at,
+            ended_at,
+            started_price,
+            bid_increment
+        FROM product
+        where p_id=#{pId}
+        </select>
+
+    <!--    상품 정보 수정-->
+    <update id="updateProduct" parameterType="com.theantiquersroom.myapp.domain.ProductFormDTO">
+        <![CDATA[
+        update product set
+                           name=#{name},
+                           content=#{content},
+                           category_id=#{categoryId},
+                           started_at=#{startedAt},
+                           ended_at=#{endedAt},
+                           started_price=#{startedPrice},
+                           bid_increment=#{bidIncrement},
+                           status="승인대기중"
+--                            ,
+--                             updated_at = new()
+        where p_id=#{pId};
+        ]]>
+    </update>
+
+    <!--    이미지 정보 수정-->
+    <insert id="updateProductImage"
+            parameterType="com.theantiquersroom.myapp.domain.ProductImageDTO">
+    <![CDATA[
+        update product_image set
+                                 image_url=#{imageUrl},
+                                 image_name=#{imageUrl}
+          where p_id=#{pId}
+        ]]>
+    </insert>
 </mapper>

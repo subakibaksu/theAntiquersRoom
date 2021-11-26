@@ -6,6 +6,7 @@
 
 <mapper namespace="com.theantiquersroom.myapp.mapper.ImageMapper">
 
+<!--    이미지 등록-->
     <insert id="insertImage"
             parameterType="com.theantiquersroom.myapp.domain.ProductImageDTO">
     <![CDATA[
@@ -14,13 +15,13 @@
         ]]>
     </insert>
 
-    <delete id="delete">
-        delete from image where image_id = #{imageId}
-    </delete>
-
-    <select id="findByPId"
+    <update id="updateImage"
             parameterType="com.theantiquersroom.myapp.domain.ProductImageDTO">
-        select * from image where p_id = #{pId}
-    </select>
-
+        <![CDATA[
+            update image set
+                 image_name=#{imageName},
+                 upload_path=#{uploadPath},
+            where p_id=#{pId}
+        ]]>
+    </update>
 </mapper>

@@ -115,8 +115,15 @@ public class ProductController {
 
     /*수정된 상품 정보 DB전달*/
     @PostMapping("/modify")
-    public void modify(Model model) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public String modify(ProductFormDTO product) throws Exception {
 
+        product.setImages(product.getImages().stream().filter(img -> !img.isEmpty()).collect(Collectors.toList()));
+        product.setPId(product.getPId());
+
+        this.service.modify(product);
+
+        return "redirect:/product/productList";
     } // Post modify()
 
     /*상품 삭제*/

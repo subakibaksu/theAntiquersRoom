@@ -30,5 +30,11 @@ public interface ProductService {
 
     public List<BidHistoryDTO> getBidHistory(Integer pId);
 
+    // 상품 정보 가져오기
+    public ProductModifyDTO getModify(Integer pId);
+
+    // 상품 정보 수정
+    public Integer modify(ProductFormDTO product) throws Exception;
+
 } //end interface
 

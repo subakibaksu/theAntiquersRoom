@@ -54,5 +54,14 @@ public interface ProductMapper {
     //상품삭제
     public abstract Integer deleteProduct(Integer pId);
 
+    // 상품 수정 정보 불러오기
+    public ProductModifyDTO getupdateByPId(Integer pId);
+
+    // 상품 정보 수정
+    public Integer updateProduct(ProductFormDTO product);
+
+    // 상품 이미지 수정
+    public Integer updateProductImage(ProductImageDTO image);
+
 } //end interface
 
