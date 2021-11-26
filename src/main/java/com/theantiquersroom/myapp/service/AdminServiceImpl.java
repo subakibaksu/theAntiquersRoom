@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.theantiquersroom.myapp.domain.MypageCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.domain.UserDTO;
+import com.theantiquersroom.myapp.domain.UserVO;
 import com.theantiquersroom.myapp.mapper.AdminMapper;
 
 import lombok.AllArgsConstructor;
@@ -76,5 +77,12 @@ public class AdminServiceImpl implements AdminService {
 		
 		return this.mapper.getTotalUsersCount();
 	} //getTotalUsersCount
+
+	@Override
+	public List<UserVO> searchUser(String nickName) {
+		log. debug("serchUser({}) invoked.", nickName);
+		
+		return this.mapper.selectUserByNick(nickName);
+	} //serchUser
 
 }//end class

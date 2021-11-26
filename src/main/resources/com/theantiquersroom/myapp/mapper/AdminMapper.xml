@@ -95,4 +95,15 @@
         ]]>
     </select>
 
+    <select id="selectUserByNick"
+            parameterType="string"
+            resultType="com.theantiquersroom.myapp.domain.UserVO">
+        
+        <![CDATA[
+            SELECT user_id, nickname as nickName, phone 
+            FROM users
+            WHERE nickname
+            LIKE CONCAT('%',#{nickName},'%')
+        ]]>
+    </select>
 </mapper>

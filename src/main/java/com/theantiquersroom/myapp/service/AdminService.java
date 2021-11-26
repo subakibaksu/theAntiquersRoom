@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.theantiquersroom.myapp.domain.MypageCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.domain.UserDTO;
+import com.theantiquersroom.myapp.domain.UserVO;
 
 
 @Service
@@ -29,5 +30,8 @@ public interface AdminService {
   	
   	// 전체 회원수 조회
   	public abstract Integer getTotalUsersCount();
+  	
+  	// 닉네임으로 회원 검색
+  	public abstract List<UserVO> searchUser(String nickName);
   	
 } // end interface

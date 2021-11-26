@@ -74,7 +74,6 @@ public interface UserMapper {
     //특정 회원 ID 통한 입찰 리스트 조회
     public abstract List<ProductDTO> getMyBidList(HashMap<String, Object> map);
 
-    //특정 회원의
 	
     // =====================카카오 로그인 API 관련===================== //
 	
