@@ -69,7 +69,7 @@
 
                     <!-- 2. 다음 이동여부표시(next) -->
                     <c:if test="${pageMaker.next}">
-                        <li class="next"><a class='next' href="ruserList?currPage=${pageMaker.endPage +1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">다음</a></li>
+                        <li class="next"><a class='next' href="userList?currPage=${pageMaker.endPage +1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">다음</a></li>
                     </c:if>
                 </ul>
 
