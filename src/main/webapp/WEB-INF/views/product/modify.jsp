@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@page import="java.time.format.DateTimeFormatter"%>
 
 <html>
 <head>
@@ -26,7 +27,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/summernote/summernote-lite.css">
 
     <script type="text/javascript">
-        <%--    datetimepicker --%>
+
+        // 파일업로드 관련
         $(document).ready(function () {
             productSubmitDate()
         });
@@ -40,6 +42,7 @@
             });
         }
 
+        <%--    datetimepicker --%>
         function productSubmitDate() {
             $.datetimepicker.setLocale('ko'); // 언어 설정
             let $startDate = $('#startDate');
@@ -171,7 +174,7 @@
 
 
     <div id="wrapper">
-        <div id="subject">경매 상품 등록</div>
+        <div id="subject">경매 상품 수정</div>
 
         <section id="pInfo">
             <div id="infoDiv">
@@ -230,9 +233,9 @@
                         <tr>
                             <th>경매기간</th>
                             <td>
-                                <input type="text" class="check" id="startDate" name="startedAt" value="${product.startedAt}">
+                                <input type="text" class="check" id="startDate" name="startedAt" value="${product.startedAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))}">
                                 ~
-                                <input type="text" class="check" id="endDate" name="endedAt" value="${product.endedAt}">
+                                <input type="text" class="check" id="endDate" name="endedAt" value="${product.endedAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))}">
                             </td>
                         </tr>
 
@@ -246,18 +249,23 @@
                         </tr>
 
                         <tr>
-                            <th>이미지</th>
+                            <th>대표이미지(필수)</th>
                             <td>
-                                <img src="${product.imageUrls[0]}" width="150px" height="150px class=">
-                                <input id="image1" class="upload" type="file" width="" name="images">
-                                <div id="thumbnailtext">대표사진(필수)</div>
+                                <img src="${product.imageUrls[0]}" class="productimg">
+                                <input id="image1" class="upload" type="file" name="images">
                             </td>
+                        </tr>
+                        <tr>
+                            <th>이미지(선택)</th>
                             <td>
-                                <img src="${product.imageUrls[1]}" width="150px" height="150px">
+                                <img src="${product.imageUrls[1]}" class="productimg">
                                 <input id="image2" class="upload" type="file" name="images">
                             </td>
+                        </tr>
+                        <tr>
+                            <th>이미지(선택)</th>
                             <td>
-                                <img src="${product.imageUrls[2]}" width="150px" height="150px">
+                                <img src="${product.imageUrls[2]}" class="productimg">
                                 <input id="image3" class="upload" type="file" name="images">
                             </td>
                         </tr>

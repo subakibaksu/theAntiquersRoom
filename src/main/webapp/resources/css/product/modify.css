@@ -41,11 +41,11 @@
 }
 
 #infoTable th {
-    width: 6rem;
+    width: 7rem;
 }
 
 #infoTable tr {
-    border-block: 1px solid rgba(194, 177, 177, 0.9);
+    border-top: 1px solid rgba(194, 177, 177, 0.9);
 }
 
 .register_page_button {
@@ -83,6 +83,11 @@ input, select {
     font-size: 0.8rem;
 }
 
-.image2 {
-    padding-top: 1em;
+#image2, #image3 {
+    border-top: none !important;
+}
+
+.productimg {
+    width: 11rem;
+    height: 8rem;
 }
