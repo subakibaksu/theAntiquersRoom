@@ -10,7 +10,7 @@
     <insert id="insertImage"
             parameterType="com.theantiquersroom.myapp.domain.ProductImageDTO">
     <![CDATA[
-        insert into image(index, image_name, upload_path, p_id)
+        INSERT INTO image(index, image_name, upload_path, p_id)
         VALUES (#{index} ,#{imageName}, #{uploadPath}, #{pId})
         ]]>
     </insert>
@@ -18,10 +18,10 @@
     <update id="updateImage"
             parameterType="com.theantiquersroom.myapp.domain.ProductImageDTO">
         <![CDATA[
-            update image set
+            UPDATE image SET
                  image_name=#{imageName},
                  upload_path=#{uploadPath},
-            where p_id=#{pId}
+            WHERE p_id=#{pId}
         ]]>
     </update>
 </mapper>
