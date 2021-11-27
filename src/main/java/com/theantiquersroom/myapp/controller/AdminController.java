@@ -99,13 +99,15 @@ public class AdminController {
     		) {
         log.debug("getAuctionProductList() invoked.");
         
+        String keyword="";
+        
         List<ProductDTO> auctionProductList = this.service.getAuctionProductList(cri);
  		log.info("\t+ auctionProductList size: {}", auctionProductList.size());
  		
  		model.addAttribute("auctionProductList",auctionProductList);
  		
  		//페이징 처리
- 		Integer totalAmount = this.service.getAuctionTotal();
+ 		Integer totalAmount = this.service.getAuctionTotal(keyword);
 		
 		MyPageDTO pageDTO = new MyPageDTO(cri, totalAmount);
 		
@@ -126,11 +128,30 @@ public class AdminController {
  	} //stopSale
 
 
-    @GetMapping("/discontinuedProductList")
-    public void discontinuedProductList() {
-        log.debug("discontinuedProductList() invoked.");
+    //경매상품 리스트 조회
+    @RequestMapping("/searchItemList")
+    public String getSearchItems(
+    		HttpSession session,
+    		@ModelAttribute("cri") MypageCriteria cri,
+    		Model model
+    		) {
+        log.debug("getSearchItems({},{}) invoked.", cri, model);
+        
+        List<ProductDTO> auctionProductList = this.service.getAuctionProductList(cri);
+ 		log.info("\t+ auctionProductList size: {}", auctionProductList.size());
+ 		
+ 		model.addAttribute("auctionProductList",auctionProductList);
+ 		
+ 		//페이징 처리
+ 		Integer totalAmount = this.service.getAuctionTotal(cri.getKeyword());
+		
+		MyPageDTO pageDTO = new MyPageDTO(cri, totalAmount);
+		
+		model.addAttribute("pageMaker", pageDTO);
+ 		
+        return "/admin/auctionProductList";
 
-    } // discontinuedProductList()
+    } // getSearchItems
 
     @GetMapping("/userList")
     public void getUserList(

@@ -71,6 +71,13 @@ header{
   	background-color: #ccc;
 }
 
+#total{
+	width: 100%;
+    text-align: end;
+    margin-right: 30%;
+    margin-bottom: 1rem;
+}
+
 .dropdown {
 	font-size:0.8rem;
 }
@@ -106,7 +113,7 @@ header{
 }
 
 .dropdown:hover .dropbtn {
-  background-color: #3e8e41;
+  color: #670000;
 }
 
 #myAcutionTbl {
@@ -259,6 +266,7 @@ input[type=submit] {
 #pagination ul {
     float : right;
     margin-right : 15%;
+    width: max-content;
 }
 
 #pagination li{	
