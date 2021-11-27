@@ -127,8 +127,7 @@ public class AdminController {
  		return "redirect:/admin/auctionProductList";
  	} //stopSale
 
-
-    //경매상품 리스트 조회
+    //경매상품 키워드 검색 조회
     @RequestMapping("/searchItemList")
     public String getSearchItems(
     		HttpSession session,
@@ -153,6 +152,7 @@ public class AdminController {
 
     } // getSearchItems
 
+    
     @GetMapping("/userList")
     public void getUserList(
     		@ModelAttribute("cri") MypageCriteria cri, Model model
