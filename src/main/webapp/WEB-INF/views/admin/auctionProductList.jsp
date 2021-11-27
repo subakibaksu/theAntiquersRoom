@@ -37,11 +37,13 @@
          <h2>경매상품</h2>
          <div class="search-container">
          	<form action="/admin/searchItems">
-	            <input id="searchBar" type="text" placeholder="'닉네임' 또는 '상품명'">
-				<button class="searchBtn" type="submit">
-					<i class="fas fa-search"></i>
-				</button>
-         	</form>
+         		<div id=searchKwdBox>
+		            <input id="searchBar" type="text" placeholder="'닉네임' 또는 '상품명'">
+					<button class="searchBtn" type="submit">
+						<i class="fas fa-search"></i>
+					</button>
+				</div>
+			</form>
          </div>
 	     <table id="myAcutionTbl">
 	        <thead>
@@ -53,7 +55,21 @@
 					<th>현재가격</th>
 	                <th>시작가격</th>
 	                <th>경매기간</th>
-	                <th>경매상태</th>
+	                <th>
+		                <div class="dropdown">
+		                	<button class="dropbtn">경매상태 &nbsp; <i class="fas fa-caret-down"></i></button>
+							<div class="dropdown-content">
+								 <a href="#">전체보기</a>
+								 <a href="#">승인완료</a>
+								 <a href="#">판매취소</a>
+								 <a href="#">경매중</a>
+								 <a href="#">낙찰완료</a>
+								 <a href="#">미낙찰</a>
+								 <a href="#">유찰중</a>
+								 <a href="#">경매종료</a>
+							</div>
+						</div>
+	                </th>
 	            </tr>
 	        </thead>
 			<tbody>    
