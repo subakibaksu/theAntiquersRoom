@@ -57,7 +57,12 @@
                 (SELECT category_name
                 FROM category as C
                 WHERE C.category_id=P.category_id) as categoryName,
-                TIMESTAMPDIFF(SECOND, NOW(), ended_at) as lefttime
+                TIMESTAMPDIFF(SECOND, NOW(), ended_at) as lefttime,
+                (SELECT B.bid_price
+                 FROM bid_history AS B
+                 WHERE B.p_id = P.p_id
+                 ORDER BY B.bid_price DESC
+                 LIMIT 1) AS currPrice
             FROM product as P
             WHERE p_id=#{pId}
         ]]>
@@ -76,31 +81,40 @@
 
     <select id="listCriteria" 
             resultType="com.theantiquersroom.myapp.domain.ProductDTO" 
-            parameterType="hashmap"> <!-- typeAlias를 지정했음으로 풀 네임 기재 필요 없음 -->
+            parameterType="hashmap">
       
             SELECT
-                p_id,
-                name,
-                created_at,
-                updated_at,
-                content,
-                category_id,
-                user_id,
-                started_at,
-                ended_at,
-                started_price,
-                bid_increment,
-                status,
-                TIMESTAMPDIFF(SECOND,NOW(),ended_at) AS lefttime
-            FROM product
+                P.p_id,
+                P.name,
+                P.created_at,
+                P.updated_at,
+                P.content,
+                P.category_id,
+                P.user_id,
+                P.started_at,
+                P.ended_at,
+                P.started_price,
+                P.bid_increment,
+                P.status,
+                TIMESTAMPDIFF(SECOND,NOW(),ended_at) AS lefttime,
+                (SELECT PI.image_url
+                FROM product_image AS PI
+                WHERE PI.p_id = P.p_id
+                LIMIT 1) AS imageUrl,
+                (SELECT B.bid_price
+                FROM bid_history AS B
+                WHERE B.p_id = P.p_id
+                ORDER BY B.bid_price DESC
+                LIMIT 1) AS currPrice
+            FROM product AS P
 
             <where>
                 <if test="category_id != null and category_id != ''">
-                    AND category_id = #{category_id}
+                    AND P.category_id = #{category_id}
                 </if>
 
                 <if test="searchQuery != null and searchQuery != ''">
-                    AND name LIKE CONCAT('%',#{searchQuery},'%')
+                    AND P.name LIKE CONCAT('%',#{searchQuery},'%')
                 </if>
             </where>
 
@@ -226,4 +240,69 @@
         WHERE p_id=#{pId};
         ]]>
     </update>
+
+    <!-- 새로 들어온 상품 조회 -->
+    <select
+            id="getNewProduct"
+            resultType="com.theantiquersroom.myapp.domain.ProductDTO">
+
+        SELECT P.p_id,
+               P.name,
+               P.created_at,
+               P.updated_at,
+               P.content,
+               P.category_id,
+               P.user_id,
+               P.started_at,
+               P.ended_at,
+               P.started_price,
+               P.bid_increment,
+               P.status,
+               TIMESTAMPDIFF(SECOND,NOW(),ended_at) AS lefttime,
+               (SELECT PI.image_url
+                FROM product_image AS PI
+                WHERE PI.p_id = P.p_id
+                LIMIT 1) AS imageUrl,
+                (SELECT B.bid_price
+                FROM bid_history AS B
+                WHERE B.p_id = P.p_id
+                ORDER BY B.bid_price DESC
+                LIMIT 1) AS currPrice
+        FROM product as P
+        ORDER BY created_at DESC
+        LIMIT 1, 10
+    </select>
+
+    <select
+            id="getEndingProduct"
+            resultType="com.theantiquersroom.myapp.domain.ProductDTO">
+
+        SELECT P.p_id,
+               P.name,
+               P.created_at,
+               P.updated_at,
+               P.content,
+               P.category_id,
+               P.user_id,
+               P.started_at,
+               P.ended_at,
+               P.started_price,
+               P.bid_increment,
+               P.status,
+               TIMESTAMPDIFF(SECOND,NOW(),ended_at) AS lefttime,
+               (SELECT PI.image_url
+                FROM product_image AS PI
+                WHERE PI.p_id = P.p_id
+                LIMIT 1) AS imageUrl,
+                (SELECT B.bid_price
+                FROM bid_history AS B
+                WHERE B.p_id = P.p_id
+                ORDER BY B.bid_price DESC
+                LIMIT 1) AS currPrice
+        FROM product as P
+        ORDER BY created_at ASC
+        LIMIT 1, 10
+
+    </select>
+
 </mapper>

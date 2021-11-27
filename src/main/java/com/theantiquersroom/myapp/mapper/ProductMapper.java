@@ -53,14 +53,16 @@ public interface ProductMapper {
     // 상품 수정 정보 불러오기
     public ProductModifyDTO getupdateByPId(Integer pId);
 
-    // 상품 수정 이미지 불러오기
-//    public List<String> getProductImage(Integer pId);
-
     // 상품 정보 수정
     public Integer updateProduct(ProductFormDTO product);
 
     public void deleteProductImage(@Param("pId") Integer pId);
 
+    // 새로 들어온 상품 조회
+    public List<ProductDTO> getNewProduct();
+
+    // 마감 임박 상품 조회
+    public List<ProductDTO> getEndingProduct();
 
 } //end interface
 

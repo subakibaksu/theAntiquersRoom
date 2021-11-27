@@ -50,7 +50,7 @@
                     $.ajax({
                         async: true,
                         type : 'POST',
-                        url : "/users/resetPwd?" + requestdata,
+                        url : "/resetPwd?" + requestdata,
                         dataType : "json",
                         contentType: "application/json; charset=UTF-8",
                         success : function (result) {
@@ -142,22 +142,19 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLongTitle">비밀번호 찾기</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
                 </div>
                 <div class="modal-body">
                     <form id="resetPasswordForm" action=#>
                         <input id="inputuserId" name="userId" placeholder="email">
                         <input id="inputNickname" name="nickName" placeholder="type your nickname">
-                        <button type="submit" id="resetPasswordFormSubmit" class="btn btn-secondary mybtn">click this</button>
+                        <button type="submit" id="resetPasswordFormSubmit" class="btn-secondary mybtn">click this</button>
                     </form>
 
                 </div>
                 <div class="modal-footer">
                     <p id="mymsg"></p>
 
-                    <button type="button" class="btn btn-secondary mybtn" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn mybtn" data-dismiss="modal">Close</button>
                 </div>
 
             </div>

@@ -54,7 +54,7 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 	
     /* 문의게시물 총 갯수 */
 	@Override
-	public int getQnATotal() {
+	public Integer getQnATotal() {
 
 		return mapper.getQnATotal();
 	}
@@ -68,13 +68,27 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 	
 	/* 문의게시글 수정 */
 	@Override
-	public int modifyQnA(QnADTO dto) {
-
-		log.debug("jinsoo"+mapper.modifyQnA(dto));
+	public Integer modifyQnA(QnADTO dto) {
 		
-		return 1;
+		return mapper.modifyQnA(dto);
 	}
+	
+	/* 문의게시글 삭제 */
+	@Override
+	public Integer removeQnA(int bindex) {
 
+		return mapper.removeQnA(bindex);
+	}
+	
+	/* 문의글 답글 등록 */
+	@Override
+	public boolean registerReQnA(QnADTO dto) {
+		
+		int affectedRows=this.mapper.registerReQnA(dto);
+		log.info("\t+ affectedRows: {}", affectedRows);
+		
+		return affectedRows==1;
+	}
 	
 //=============================//
 	@Override
@@ -89,16 +103,4 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 		
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-}
+} // end class

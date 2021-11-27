@@ -78,7 +78,16 @@
                     </tr>
                     <tr>
                         <th>현재 금액</th>
-                        <td>2000원</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${empty product.currPrice}">
+                                    <p>입찰내역이 없습니다.</p>
+                                </c:when>
+                                <c:otherwise>
+                                    <p>현재가 : ${product.currPrice} 원</p>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
                     </tr>
                     <tr>
                         <th>입찰 금액</th>

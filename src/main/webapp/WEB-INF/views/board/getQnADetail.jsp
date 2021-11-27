@@ -4,7 +4,6 @@
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,13 +12,9 @@
 
 	<link rel="stylesheet" href="/resources/css/getQnADetail.css">
 
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
-    
 
-
-    
 </head>
 <body>
 <h1>조회 페이지</h1>
@@ -41,15 +36,16 @@
 	</div>
 	<div class="input_wrap">
 		<label>게시판 등록일</label>
-		<input name="regdater" readonly="readonly"  value='<c:out value = "${pageInfo.createdAt}"/>' >
+		<input name=createdAt readonly="readonly"  value='<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${pageInfo.createdAt}"/>'>
 	</div>
 	<div class="input_wrap">
 		<label>게시판 수정일</label>
-		<input name="updateDate" readonly="readonly"  value='<c:out value = "${pageInfo.updatedAt}"/>' >
+		<input name=updatedAt readonly="readonly"  value='<fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${pageInfo.updatedAt}"/>'>
 	</div>		
 	<div class="btn_wrap">
 		<a class="btn" id="list_btn">목록 페이지</a> 
 		<a class="btn" id="modify_btn">수정 하기</a>
+		<a class="btn" id="reply_btn">답글</a>
 	</div>
 	<form id="infoForm" action="/board/modify" method="get">
 		<input type="hidden" id="bindex" name="bindex" value='<c:out value="${pageInfo.bindex}"/>'>
@@ -65,6 +61,11 @@
 	
 	$("#modify_btn").on("click", function(e){
 		form.attr("action", "/board/modifyQnA");
+		form.submit();
+	});	
+	
+	$("#reply_btn").on("click", function(e){
+		form.attr("action", "/board/registerReQnA?bindex=${pageInfo.bindex}");
 		form.submit();
 	});	
 </script>	

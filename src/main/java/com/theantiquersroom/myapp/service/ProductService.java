@@ -36,5 +36,11 @@ public interface ProductService {
     // 상품 정보 수정
     public Integer modify(ProductFormDTO product) throws Exception;
 
+    // 새로 들어온 상품 조회
+    public List<ProductDTO> getNewProduct();
+
+    // 마감 임박 상품 조회
+    public List<ProductDTO> getEndingProduct();
+
 } //end interface
 

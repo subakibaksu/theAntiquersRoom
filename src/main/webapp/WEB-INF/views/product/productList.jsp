@@ -15,7 +15,6 @@
         $(document).ready(function (){
 
             var timearr = [];
-            $(".leftTimeTimer").hide();
 
             $(".leftTimeTimer").each(function (){
 
@@ -27,12 +26,11 @@
 
             setInterval(function (){
 
-                $(".leftTimeTimer").show();
+                $(".leftTimeTimer").fadeIn();
                 var count = 0;
 
                 $(".leftTimeTimer").each(function (){
 
-                    console.log("hi");
                     timearr[count] = timearr[count]-1
                     $(this).text(convertSeconds(timearr[count]));
                     count++;
@@ -107,19 +105,19 @@
 
                 <li class="product">
 
-                    <img class="img" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7l2yA1G_b4-kI_Pc8uh4esNvynw6NYealww&usqp=CAU">
+                    <img class="img" src="${product.imageUrl}">
                     <p id="productName">${product.name}</p>
                     <p>경매 시작가 : ${product.startedPrice}</p>
-                    <p>현재가 : ${product.startedPrice}</p>
-
                     <c:choose>
-                        <c:when test="${product.leftTime < 0}">
-                            <p>경매가 종료되었습니다.</p>
+                        <c:when test="${empty product.currPrice}">
+                            <p>입찰내역이 없습니다.</p>
                         </c:when>
                         <c:otherwise>
-                            <p class="leftTimeTimer">${product.leftTime}</p>
+                            <p>현재가 : ${product.currPrice} 원</p>
                         </c:otherwise>
                     </c:choose>
+
+                    <p hidden class="leftTimeTimer">${product.leftTime}</p>
 
                 </li>
 
