@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
 
+import com.theantiquersroom.myapp.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -23,12 +24,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import com.theantiquersroom.myapp.domain.BidHistoryDTO;
-import com.theantiquersroom.myapp.domain.ProductCommand;
-import com.theantiquersroom.myapp.domain.ProductCriteria;
-import com.theantiquersroom.myapp.domain.ProductDTO;
-import com.theantiquersroom.myapp.domain.ProductFormDTO;
-import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.service.ProductService;
 import com.theantiquersroom.myapp.utils.ProductPageMaker;
 
@@ -109,14 +104,27 @@ public class ProductController {
 
     /*상품 수정 페이지로 이동*/
     @GetMapping("/modify")
-    public void modify() {
+    public String modify(Integer pId, Model model) {
+        log.debug("get({}, {}) invoked." , pId, model);
+
+        ProductModifyDTO product = this.service.getModify(pId);
+
+        model.addAttribute("product", product);
+        return "/product/modify";
 
     } // Get modify()
 
     /*수정된 상품 정보 DB전달*/
     @PostMapping("/modify")
-    public void modify(Model model) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public String modify(ProductFormDTO product) throws Exception {
 
+        product.setImages(product.getImages().stream().filter(img -> !img.isEmpty()).collect(Collectors.toList()));
+        product.setPId(product.getPId());
+
+        this.service.modify(product);
+
+        return "/users/myAuctionList";
     } // Post modify()
 
     /*상품 삭제*/

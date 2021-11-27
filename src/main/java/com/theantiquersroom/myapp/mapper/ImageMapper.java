@@ -9,10 +9,12 @@ import java.util.List;
 public interface ImageMapper {
 
     // 상품 이미지 등록
-    public abstract Integer insertImage(ProductImageDTO image);
-    // 이미지 삭제
-    public void delete(Integer imageId);
+    public Integer insertImage(ProductImageDTO image);
+
     // 특정 게시물 번호로 이미지파일 찾기
-    public abstract List<ProductImageDTO> findByPId(Integer pId);
+    public List<ProductImageDTO> findByPId(Integer pId);
+
+    // 이미지 수정
+    public Integer updateImage(ProductImageDTO image);
 
 }

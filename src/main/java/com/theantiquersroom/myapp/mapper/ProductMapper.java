@@ -1,11 +1,7 @@
 package com.theantiquersroom.myapp.mapper;
 
 
-import com.theantiquersroom.myapp.domain.BidHistoryDTO;
-import com.theantiquersroom.myapp.domain.ProductImageDTO;
-import com.theantiquersroom.myapp.domain.ProductFormDTO;
-import com.theantiquersroom.myapp.domain.ProductCommand;
-import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.*;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -53,6 +49,14 @@ public interface ProductMapper {
 
     //상품삭제
     public abstract Integer deleteProduct(Integer pId);
+
+    // 상품 수정 정보 불러오기
+    public ProductModifyDTO getupdateByPId(Integer pId);
+
+    // 상품 정보 수정
+    public Integer updateProduct(ProductFormDTO product);
+
+    public void deleteProductImage(@Param("pId") Integer pId);
 
     // 새로 들어온 상품 조회
     public List<ProductDTO> getNewProduct();
