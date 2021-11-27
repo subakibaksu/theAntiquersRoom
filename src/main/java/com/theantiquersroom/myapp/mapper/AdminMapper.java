@@ -8,6 +8,8 @@ import org.apache.ibatis.annotations.Param;
 
 import com.theantiquersroom.myapp.domain.MypageCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.UserDTO;
+import com.theantiquersroom.myapp.domain.UserVO;
 
 
 @Mapper
@@ -24,5 +26,23 @@ public interface AdminMapper {
     
     //경매상태를 "승인반려"로 변경
     public abstract Integer rejectRequest(@Param("pId") Integer pId);
+
+    //경매상품 총 게시물 개수를 반환
+	public abstract Integer getAuctionTotal();
+	
+    //경매 상품 리스트 반환
+    public abstract List<ProductDTO> getAuctionProductList(MypageCriteria cri);
+
+    //경매상태를 "판매종료"로 변경
+    public abstract Integer stopSale(@Param("pId") Integer pId);
+  
+    //회원 목록 조회
+    public abstract List<UserDTO> selectUserList(MypageCriteria cri);
+    
+    //전체 회원수 조회
+    public abstract Integer getTotalUsersCount();
+    
+    //닉네임으로 회원 검색
+    public abstract List<UserVO> selectUserByNick(String nickName);
     
 }// end interface
