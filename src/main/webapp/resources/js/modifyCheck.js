@@ -79,10 +79,12 @@ $(document).ready(function (){
                 }
             });
 
+
     $('#modifyBtn').click(function() {
 
         buttonlive();
     });
+
 
     function buttonlive() {
         if (idcheck && niccheck && phonecheck) {
