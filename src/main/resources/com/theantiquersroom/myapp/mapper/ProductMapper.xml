@@ -195,9 +195,9 @@
             product.bid_increment,
             category.category_name
             FROM product
-            join category
-            on product.category_id = category.category_id
-            where p_id=#{pId}
+            JOIN category
+            ON product.category_id = category.category_id
+            WHERE p_id=#{pId}
         </select>
 
     <!--    수정할 상품 이미지 정보 불러오기-->
@@ -208,25 +208,22 @@
             image_url,
             image_name
         FROM product_image
-        where p_id=#{pId}
+        WHERE p_id=#{pId}
     </select>
 
     <!--    상품 정보 수정-->
     <update id="updateProduct" parameterType="com.theantiquersroom.myapp.domain.ProductFormDTO">
         <![CDATA[
-        update product set
-                           name=#{name},
-                           content=#{content},
-                           category_id=#{categoryId},
-                           started_at=#{startedAt},
-                           ended_at=#{endedAt},
-                           started_price=#{startedPrice},
-                           bid_increment=#{bidIncrement},
-                           status="승인대기중"
---                            ,
---                             updated_at = new()
-        where p_id=#{pId};
+        UPDATE product SET
+               name=#{name},
+               content=#{content},
+               category_id=#{categoryId},
+               started_at=#{startedAt},
+               ended_at=#{endedAt},
+               started_price=#{startedPrice},
+               bid_increment=#{bidIncrement},
+               status="승인대기중"
+        WHERE p_id=#{pId};
         ]]>
     </update>
-
 </mapper>

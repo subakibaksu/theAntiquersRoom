@@ -148,12 +148,7 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
             this.mapper.insertProductImage(imageDto);
         }
 
-//        int affectedRows =
-              return this.mapper.updateProduct(product);
-//               return mapper.updateProduct(product);
-//        log.info("\t+ affectedRows: {}", affectedRows);
-
-//        return affectedRows > 1;
+          return this.mapper.updateProduct(product);
     }
 
     // 상품 수정 정보 가져오기
@@ -164,8 +159,6 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
         ProductModifyDTO product = this.mapper.getupdateByPId(pId);
         // 이미지 가져오기
         product.setImageUrls(this.mapper.getProductImageUrls(pId));
-
-        log.info("\t+ dto: {}", product);
 
         return product;
     } //getDetail

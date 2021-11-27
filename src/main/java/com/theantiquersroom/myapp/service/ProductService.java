@@ -23,10 +23,10 @@ public interface ProductService {
     public Boolean bid(BidHistoryDTO bidHistoryDTO);
 
     //상품 상세 보기
-    public abstract ProductDTO getDetail(Integer pId);
+    public ProductDTO getDetail(Integer pId);
 
     //상품삭제
-    public abstract boolean removeProduct(Integer pId);
+    public boolean removeProduct(Integer pId);
 
     public List<BidHistoryDTO> getBidHistory(Integer pId);
 
