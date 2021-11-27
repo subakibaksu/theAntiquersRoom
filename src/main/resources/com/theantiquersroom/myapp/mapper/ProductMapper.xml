@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
+
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -10,13 +11,20 @@
             parameterType="com.theantiquersroom.myapp.domain.ProductFormDTO">
 
     <![CDATA[
-            insert into product(name, content, category_id, user_id, started_at, ended_at, started_price, bid_increment, status)
-            VALUES (#{name}, #{content}, #{categoryId}, #{userId}, #{startedAt}, #{endedAt}, #{startedPrice}, #{bidIncrement}, "승인대기중")
+            insert into product(name, content, category_id, user_id, started_at, ended_at, started_price, bid_increment, created_at, status)
+            VALUES (#{name}, #{content}, #{categoryId}, #{userId}, #{startedAt}, #{endedAt}, #{startedPrice}, #{bidIncrement}, now(),"승인대기중")
         ]]>
         <selectKey resultType="int" keyProperty="pId" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
+
+    <delete id="deleteProductImage" parameterType="Integer">
+        <![CDATA[
+            delete from product_image
+            where p_id = #{pId}
+        ]]>
+    </delete>
 
     <insert id="insertProductImage"
             parameterType="com.theantiquersroom.myapp.domain.ProductImageDTO">
@@ -185,6 +193,53 @@
     <delete id="deleteProduct">
         DELETE FROM product WHERE p_id=#{pId}
     </delete>
+
+    <!--    수정할 상품 정보 불러오기-->
+    <select id="getupdateByPId"
+            resultType="com.theantiquersroom.myapp.domain.ProductModifyDTO">
+
+        SELECT
+            product.p_id as pId,
+            product.name,
+            product.content,
+            product.category_id,
+            product.started_at,
+            product.ended_at,
+            product.started_price,
+            product.bid_increment,
+            category.category_name
+            FROM product
+            JOIN category
+            ON product.category_id = category.category_id
+            WHERE p_id=#{pId}
+        </select>
+
+    <!--    수정할 상품 이미지 정보 불러오기-->
+    <select id="getProductImage"
+            resultType="com.theantiquersroom.myapp.domain.ProductImageDTO">
+
+        SELECT
+            image_url,
+            image_name
+        FROM product_image
+        WHERE p_id=#{pId}
+    </select>
+
+    <!--    상품 정보 수정-->
+    <update id="updateProduct" parameterType="com.theantiquersroom.myapp.domain.ProductFormDTO">
+        <![CDATA[
+        UPDATE product SET
+               name=#{name},
+               content=#{content},
+               category_id=#{categoryId},
+               started_at=#{startedAt},
+               ended_at=#{endedAt},
+               started_price=#{startedPrice},
+               bid_increment=#{bidIncrement},
+               status="승인대기중"
+        WHERE p_id=#{pId};
+        ]]>
+    </update>
 
     <!-- 새로 들어온 상품 조회 -->
     <select

@@ -23,19 +23,24 @@ public interface ProductService {
     public Boolean bid(BidHistoryDTO bidHistoryDTO);
 
     //상품 상세 보기
-    public abstract ProductDTO getDetail(Integer pId);
+    public ProductDTO getDetail(Integer pId);
 
     //상품삭제
-    public abstract boolean removeProduct(Integer pId);
+    public boolean removeProduct(Integer pId);
 
     public List<BidHistoryDTO> getBidHistory(Integer pId);
+
+    // 상품 정보 가져오기
+    public ProductModifyDTO getModify(Integer pId);
+
+    // 상품 정보 수정
+    public Integer modify(ProductFormDTO product) throws Exception;
 
     // 새로 들어온 상품 조회
     public List<ProductDTO> getNewProduct();
 
     // 마감 임박 상품 조회
     public List<ProductDTO> getEndingProduct();
-
 
 } //end interface
 
