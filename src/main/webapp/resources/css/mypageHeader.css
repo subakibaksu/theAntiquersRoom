@@ -1,37 +1,35 @@
 @charset "UTF-8";
 
 @font-face {
-    font-family: 'ONE Mobile Title';
-    src: url('/resources/font/ONE Mobile Title.ttf') format('truetype');
-	}
+	font-family: 'ONE Mobile Title';
+	src: url('/resources/font/ONE Mobile Title.ttf') format('truetype');
+}
 
-    #var {
+#var {
+	background: #3C3C3C;
+	text-align: center;
+	color: white;
+}
 
-        background: #3C3C3C;
-        
-        text-align: center;
-        color: white;
+.mypage {
+	padding: 2rem;
+	color: white;
+}
 
-    }
-    
-    .mypage {
-        padding: 2rem;
-       color: white;
-               
-    }
-    
-    #menu1{
-    		font-family: "Merriweather";
-    }
-    
-    #menu2{
-           	font-family: 'ONE Mobile Title';
-    }
-    
-    a {
-        color: inherit; /* 링크의 색상 제거 */
-        text-decoration: none; /* 링크의 밑줄 제거 */
-    }
+#menu1 {
+	font-family: "Merriweather";
+}
 
+#menu2 {
+	font-family: 'ONE Mobile Title';
+}
 
-    
+a {
+	color: inherit; /* 링크의 색상 제거 */
+	text-decoration: none; /* 링크의 밑줄 제거 */
+}
+
+.mypageP {
+	word-spacing: 60px; /* 단어 사이 간격 */
+	color: white;
+}

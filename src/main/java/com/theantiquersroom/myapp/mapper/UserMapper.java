@@ -58,7 +58,7 @@ public interface UserMapper {
 	public abstract Integer delete(String userId);
 	
     // 아이디 찾기
-    public abstract UserDTO findId(UserDTO dto);
+    public abstract UserDTO findId(String phone);
     
     // =====================마이페이지 관련===================== //
     

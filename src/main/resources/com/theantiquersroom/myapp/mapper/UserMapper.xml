@@ -137,12 +137,12 @@
        ]]>
     </select>
     
-       <!-- 닉네임, 전화번호로 아이디찾기  -->
+       <!-- 전화번호로 아이디찾기  -->
     <select
             id="findId"
             resultType="com.theantiquersroom.myapp.domain.UserDTO">
             
-		SELECT * FROM users WHERE nickname=#{nickName} AND phone=#{phone}    
+		SELECT * FROM users WHERE  phone=#{phone}    
 	</select>
 
         <!-- 회원 정보 삭제 -->

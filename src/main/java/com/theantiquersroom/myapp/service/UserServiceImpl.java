@@ -144,8 +144,8 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     
     
     @Override
-	public UserDTO findId(UserDTO dto) {
-		return mapper.findId(dto);
+	public UserDTO findId(String phone) {
+		return mapper.findId(phone);
 	} //findId
 
     
