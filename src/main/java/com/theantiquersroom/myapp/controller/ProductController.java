@@ -132,7 +132,7 @@ public class ProductController {
 
     	boolean isRemoved = this.service.removeProduct(pId);
 
-    	return "/productList";
+    	return "redirect:/users/myAuctionList";
     } // Post remove()
 
     /*상품 검색*/

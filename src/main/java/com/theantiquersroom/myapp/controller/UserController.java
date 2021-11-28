@@ -108,18 +108,6 @@ public class UserController {
         return "/user/myBidList";
     } //getBidList
     
-    
-
- // 전체회원 목록조회
-//  	@GetMapping("/getUserList") // 추후 관리자 페이지에서
-//  	public void list(Model model) {	
-//  		log.debug("list() invoked.");
- 		
-//  		List<UserVO> list=this.service.getUserList();
-//  		log.info("\t+ list size: {}", list.size());
- 		
-//  		model.addAttribute("list",list);
-//  	} //list
  	
  	@GetMapping({"/modify" , "/mypage"})
  	public void get(String userId, Model model) {         
