@@ -39,9 +39,9 @@ public class UserController {
     @Setter(onMethod_= {@Autowired})
     private UserService service;
 
-
-    @RequestMapping("/logout")
-    public @ResponseBody String logout(HttpServletRequest request, HttpSession session) {	// 로그아웃 실행
+    
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request, HttpSession session) {	// 로그아웃 실행
         log.debug("logout() invoked.");
         
         String kakaoUniqueId = (String) session.getAttribute("kakaoUniqueId");
@@ -65,7 +65,7 @@ public class UserController {
         	log.debug("===== 일반회원 logout");
             session.invalidate();
             
-            return "/";
+            return "redirect:/";
         }
     } //logout
 
@@ -110,14 +110,14 @@ public class UserController {
     
     
 
- // 전체회원 목록조회
+//  전체회원 목록조회
 //  	@GetMapping("/getUserList") // 추후 관리자 페이지에서
 //  	public void list(Model model) {	
 //  		log.debug("list() invoked.");
- 		
+// 		
 //  		List<UserVO> list=this.service.getUserList();
 //  		log.info("\t+ list size: {}", list.size());
- 		
+// 		
 //  		model.addAttribute("list",list);
 //  	} //list
  	
@@ -165,7 +165,7 @@ public class UserController {
     
 	@PostMapping("/remove")
 	public String remove(
-			@RequestParam("userId") String userId,
+			String userId,
 			RedirectAttributes rttrs) 
 	{
 		log.debug("remove({}) invoked.", userId);
@@ -173,7 +173,7 @@ public class UserController {
 		boolean result=this.service.remove(userId);
 		rttrs.addAttribute("result", result);
 		
-		return "redirect:/users/getUserList";
+		return "/";
 	} //remove
 
 	@GetMapping("/getMyBidList")

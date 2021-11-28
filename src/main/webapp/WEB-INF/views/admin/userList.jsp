@@ -110,6 +110,7 @@
                             $('#UserSearchResult').append(result);
                         }
                         $('#UserSearchResult').show();
+                        $('#pagination').hide();
                     }
                 });
             }else{

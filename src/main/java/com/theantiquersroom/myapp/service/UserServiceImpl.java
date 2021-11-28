@@ -192,7 +192,15 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	public boolean modify(modifyDTO user) {
 		log.debug("modify({}) invoked.", user);
 		
+		// 회원 비밀번호를 인코딩하기 위한 객체 선언
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		//회원 비밀번호를 암호화하여 user 객체에 다시 저장
+		String securePw = encoder.encode(user.getPassword());
+		user.setPassword(securePw);
+		
 		int affectedRows=this.mapper.update(user);
+			
 		log.info("\t+ affectedRows: {}", affectedRows);
 		
 		return affectedRows==1;		

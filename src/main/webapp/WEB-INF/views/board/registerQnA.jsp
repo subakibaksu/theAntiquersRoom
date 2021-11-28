@@ -12,15 +12,15 @@
 
 <body>
 
-<header>
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-</header>
+    <header id="registerQnA_headerBox">
+        <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+    </header>
 
-<div id = "wrapper">
+<div id="registerQnA_wrapper">
 
- <!-- 게시판에 신규 게시물을 등록하는 양식 -->
-      <form class="registerQnAform" action="/board/registerQnA" method="post">
-         <table id="registerTable" >
+      <form action="/board/registerQnA" method="post">
+      
+         <table >
          <h2 id="registerQnAH2">문의사항 작성</h2>
             <tr>
                <td>제목</td>
@@ -39,20 +39,19 @@
             </tr>
             <tr>
                <td colspan="2">
-                  <button class="registerQnAButton" id="cancleButton" type="button" id="listBtn"><a href="javascript:history.back();">취소</a></button>
+                  <button class="registerQnAButton" id="cancleButton" type="button">취소</button>
                   <button class="registerQnAButton" id="registerButton" type="submit">등록</button>
                </td>
             </tr>
          </table>
+         
       </form>
       
-</form>
-
 </div>
 
 
 <footer>
-
+        <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </footer>
 
 </body>
