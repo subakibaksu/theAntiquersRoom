@@ -178,4 +178,12 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
 
     }
 
+    // 유찰 등록
+    @Transactional
+    @Override
+    public void reRegister(ProductReRegisterDTO reRegister) {
+
+        this.mapper.reRegister(reRegister);
+    }
+
 } // end class
