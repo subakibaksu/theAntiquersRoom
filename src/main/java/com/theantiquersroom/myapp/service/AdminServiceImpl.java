@@ -73,10 +73,10 @@ public class AdminServiceImpl implements AdminService {
 	}//getAuctionProductList
 
 	@Override
-	public Integer getAuctionTotal(String keyword) {
-		log.debug("getAuctionTotal({}) invoked.", keyword);
+	public Integer getAuctionTotal(String keyword, String status) {
+		log.debug("getAuctionTotal({}, {}) invoked.", keyword, status);
 
-		return this.mapper.getAuctionTotal(keyword);
+		return this.mapper.getAuctionTotal(keyword, status);
 	}//getAuctionTotal
 
 	@Override

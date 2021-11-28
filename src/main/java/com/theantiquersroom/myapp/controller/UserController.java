@@ -36,9 +36,8 @@ public class UserController {
     @Setter(onMethod_= {@Autowired})
     private UserService service;
 
-	@Setter(onMethod_= {@Autowired})
-    private ChatService chatService;
-
+    @Setter(onMethod_= {@Autowired})
+      private ChatService chatService;
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpSession session) {	// 로그아웃 실행
@@ -100,16 +99,13 @@ public class UserController {
 		return "/users/myAuctionList";
     } //getMyAuctionList
 
- // 전체회원 목록조회
-//  	@GetMapping("/getUserList") // 추후 관리자 페이지에서
-//  	public void list(Model model) {	
-//  		log.debug("list() invoked.");
- 		
-//  		List<UserVO> list=this.service.getUserList();
-//  		log.info("\t+ list size: {}", list.size());
- 		
-//  		model.addAttribute("list",list);
-//  	} //list
+
+    @GetMapping("/getBidList")
+    public String getBidList() {	// 나의 입찰리스트 페이지로 이동
+        log.debug("getBidList() invoked.");
+
+        return "/user/myBidList";
+    } //getBidList
  	
  	@GetMapping({"/modify" , "/mypage"})
  	public void get(String userId, Model model) {         

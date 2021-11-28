@@ -21,4 +21,7 @@ public class MypageCriteria {
 	//5. 키워드 검색
 	public String keyword;
 	
+	//6. 경매상태 필터
+	public String status;
+	
 } // end class
