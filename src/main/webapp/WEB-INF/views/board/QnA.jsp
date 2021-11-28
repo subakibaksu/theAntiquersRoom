@@ -31,7 +31,7 @@
 					<th>제목</th>
 					<th>내용</th>
 					<th>작성자</th>
-					<th>글쓴시간</th>
+					<th>작성일</th>
 				</tr>
 			</thead>
 
