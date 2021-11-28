@@ -22,6 +22,52 @@
     font-size: 0.8rem;
 }
 
-.findGit i { 
-	color: black; 
+.findGit i {
+    color: black;
+}
+
+/* SweetAlert2 */
+.swal2-container.swal2-center > .swal2-popup {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: center;
+    justify-self: center;
+    width: 25rem;
+    height: 15rem;
+}
+
+.swal2-title {
+    position: relative;
+    max-width: 100%;
+    margin: 0;
+    padding: 0.8em 1em 0;
+    color: #595959;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    text-transform: none;
+    word-wrap: break-word;
+}
+
+.swal2-styled.swal2-confirm {
+    border: 0;
+    border-radius: 0.25em;
+    background: initial;
+    background-color: #7066e0;
+    color: #fff;
+    font-size: 1em;
+    width: 3rem;
+}
+
+.swal2-icon {
+	width: 4rem;
+	height: 4rem;
+}
+
+.swal2-styled {
+    margin: .3125em;
+    padding: 0.5rem;
+    transition: box-shadow .1s;
+    box-shadow: 0 0 0 3px transparent;
+    font-weight: 500;
 }

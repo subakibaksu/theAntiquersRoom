@@ -139,7 +139,7 @@ $(document).ready(function (){
                 }//if ( arr ) {
             }
         } catch (e) {
-            alert(e.message);
+            Swal.fire(e.message);
         } finally {
         }
 
@@ -302,10 +302,10 @@ $(document).ready(function (){
         if (idcheck && pwcheck && pwchcheck
             && niccheck && phonecheck && emailconfirmcheck) {
             $("#checkit").click(function(){
-                alert("성공적으로 가입되었습니다.");
+                Swal.fire('성공적으로 가입되었습니다.','','success');
             });
         } else {
-            alert("입력칸을 모두 채워주세요.");
+            Swal.fire('입력칸을 모두 채워주세요.','','warning');
             $("#checkit").prop("disabled", true);
         }
     }
