@@ -8,43 +8,85 @@
     <meta charset="UTF-8">
     <title>Chating</title>
     <style>
+
         *{
             margin:0;
             padding:0;
         }
-        .container{
-            width: 500px;
-            margin: 0 auto;
-            padding: 25px
-        }
         .container h1{
             text-align: left;
             padding: 5px 5px 5px 15px;
-            color: #FFBB00;
-            border-left: 3px solid #FFBB00;
+            color: #0a0a0a;
+            border-left: 3px solid #0a0a0a;
             margin-bottom: 20px;
         }
         .chating{
-            background-color: #000;
-            width: 500px;
+            border: 1px solid #d6b6b6;
+            position: relative;
+            left: 38%;
+            width: 24%;
+            min-width: 25rem;
             height: 500px;
             overflow: auto;
         }
+        .chating .mydiv{
+            float: right;
+            margin-left: 18rem;
+        }
         .chating .me{
-            color: #F6F6F6;
+            background-color: #e2cccc;
+            border: 1px solid #d6b6b6;
+            border-radius: 10px;
+            color: #0a0a0a;
             text-align: right;
+            margin: 0.5rem;
+            padding: 0.3rem;
+            position: relative;
+            width: auto;
         }
+
+        .chating .othersdiv{
+            float: left;
+            margin-right: 18rem;
+        }
+
         .chating .others{
-            color: #FFE400;
+            border: 1px solid #d6b6b6;
+            border-radius: 10px;
+            color: #0a0a0a;
             text-align: left;
+            margin: 0.5rem;
+            padding: 0.3rem;
+            position: relative;
+            width: auto;
         }
+
+        #inputBox{
+            position: relative;
+            width: 24%;
+            left: 38%;
+        }
+
+        #sendBtn{
+            background-color: brown;
+            position: relative;
+            width: 5rem;
+            height: 2rem;
+            color: white;
+            border-radius: 3%;
+            border: none;
+            margin-left: 1.75rem;
+        }
+
+        #sendBtn:hover{
+            background-color: #868e96;
+        }
+
         input{
             width: 330px;
             height: 25px;
         }
-        #yourMsg{
 
-        }
     </style>
 </head>
 
@@ -77,9 +119,9 @@
                     }
                 }else if(d.type == "message"){
                     if(d.sessionId == $("#sessionId").val()){
-                        $("#chating").append("<p class='me'>나 :" + d.msg + "</p>");
+                        $("#chating").append("<div class='mydiv'><p class='me'>나 :" + d.msg + "</p></div>");
                     }else{
-                        $("#chating").append("<p class='others'>" + d.userName + " :" + d.msg + "</p>");
+                        $("#chating").append("<div class='othersdiv'><p class='others'>" + d.userName + " :" + d.msg + "</p></div>");
                     }
 
                 }else{
@@ -108,35 +150,39 @@
     }
 </script>
 <body>
-<div id="container" class="container">
+    <header>
+        <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+    </header>
     <h1>${productId}번 상품 채팅방</h1>
     <input type="hidden" id="sessionId" value="${sessionScope.__AUTH_ANTIQUE__.userId}">
     <input type="hidden" id="roomNumber" value="${productId}">
     <input type="hidden" id="userName" value="${userId}">
-    <p>${sessionScope.__AUTH_ANTIQUE__.userId}</p>
+
     <div id="chating" class="chating">
         <c:forEach items="${chatList}" var="chat">
             <c:choose>
                 <c:when test="${chat.userId eq sessionScope.__AUTH_ANTIQUE__.userId}">
-                    <p class="me"> ${chat.userId} : ${chat.msg}</p>
+                    <div class="mydiv"><p class="me"> 나 : ${chat.msg}</p></div>
                 </c:when>
                 <c:otherwise>
-                    <p class="others"> ${chat.userId} : ${chat.msg}</p>
+                    <div class="othersdiv"><p class="others"> ${chat.userId} : ${chat.msg}</p></div>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
-        <p class="me">${userId}님 환영
     </div>
-
-    <div id="yourMsg">
-        <table class="inputTable">
-            <tr>
-                <th>메시지</th>
-                <th><input id="chat" placeholder="보내실 메시지를 입력하세요."></th>
-                <th><button onclick="send()" id="sendBtn">보내기</button></th>
-            </tr>
-        </table>
+    <br>
+    <div id="inputBox">
+        <div id="yourMsg">
+            <table class="inputTable">
+                <tr>
+                    <th><input id="chat" placeholder="보내실 메시지를 입력하세요."></th>
+                    <th><button onclick="send()" id="sendBtn">보내기</button></th>
+                </tr>
+            </table>
+        </div>
     </div>
-</div>
+    <footer id="footerBox">
+        <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+    </footer>
 </body>
 </html>
