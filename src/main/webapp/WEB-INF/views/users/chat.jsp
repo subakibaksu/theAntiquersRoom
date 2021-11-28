@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -109,11 +110,21 @@
 <body>
 <div id="container" class="container">
     <h1>${productId}번 상품 채팅방</h1>
-    <input type="hidden" id="sessionId" value="">
+    <input type="hidden" id="sessionId" value="${sessionScope.__AUTH_ANTIQUE__.userId}">
     <input type="hidden" id="roomNumber" value="${productId}">
     <input type="hidden" id="userName" value="${userId}">
-
+    <p>${sessionScope.__AUTH_ANTIQUE__.userId}</p>
     <div id="chating" class="chating">
+        <c:forEach items="${chatList}" var="chat">
+            <c:choose>
+                <c:when test="${chat.userId eq sessionScope.__AUTH_ANTIQUE__.userId}">
+                    <p class="me"> ${chat.userId} : ${chat.msg}</p>
+                </c:when>
+                <c:otherwise>
+                    <p class="others"> ${chat.userId} : ${chat.msg}</p>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
         <p class="me">${userId}님 환영
     </div>
 

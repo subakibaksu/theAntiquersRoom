@@ -35,6 +35,8 @@ public class UserController {
 	
     @Setter(onMethod_= {@Autowired})
     private UserService service;
+
+	@Setter(onMethod_= {@Autowired})
     private ChatService chatService;
 
 
