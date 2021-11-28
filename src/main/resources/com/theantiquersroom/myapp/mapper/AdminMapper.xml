@@ -79,19 +79,31 @@
         resultType="int">
         
         <![CDATA[
-
             SELECT count(p_id)
             FROM product as A
             LEFT OUTER JOIN users B ON A.user_id=B.user_id
-            WHERE status NOT IN ('승인대기중', '승인반려')
         ]]>   
         
-            <if test="keyword != null">
-                AND nickname LIKE CONCAT('%',#{keyword},'%') OR name LIKE CONCAT('%',#{keyword},'%')
-            </if>
-                
-        <![CDATA[   
-        ]]>
+       		<choose>
+       			<when test ="(status == null or status.equals('')) and (keyword == null or keyword.equals(''))">
+           			WHERE status NOT IN ('승인대기중', '승인반려')
+       			</when>
+	       		<when test = "(status != null or !status.equals('')) and (keyword !=null or !keyword.equals(''))">
+	       			WHERE status = #{status}
+	       			AND (nickname LIKE CONCAT('%',#{keyword},'%') OR name LIKE CONCAT('%',#{keyword},'%'))
+	       		</when>
+	       		<when test = "(status != null or !status.equals('')) and (keyword == null or keyword.equals(''))">
+	       			WHERE status = #{status}
+	       		</when>
+	       		<when test = "(status == null or status.equals('')) and (keyword !=null or !keyword.equals(''))">
+	      			WHERE status NOT IN ('승인대기중', '승인반려')
+	       			AND (nickname LIKE CONCAT('%',#{keyword},'%') OR name LIKE CONCAT('%',#{keyword},'%'))
+	       		</when>
+	       		<otherwise>
+           			WHERE status NOT IN ('승인대기중', '승인반려')
+	       		</otherwise>
+       		</choose>
+            
     </select>
 
     <!-- 관리자 경매상품 조회 -->
@@ -100,7 +112,6 @@
         resultType="com.theantiquersroom.myapp.domain.ProductDTO">
 
         <![CDATA[ 
-
             SELECT
             	A.p_id as pId,
                 A.name,
@@ -120,17 +131,30 @@
                 (select bid_price from bid_history as E where E.p_id=A.p_id order by E.bid_price desc limit 1) as currPrice
             FROM product as A
             LEFT OUTER JOIN users B ON A.user_id=B.user_id
-            WHERE A.status NOT IN ('승인대기중', '승인반려')
-        ]]>   
-        
-                <if test="keyword != null">
-                    AND nickname LIKE CONCAT('%',#{keyword},'%') OR name LIKE CONCAT('%',#{keyword},'%')
-                </if>
+        ]]>  
+       		<choose>
+       			<when test ="(status == null or status.equals('')) and (keyword == null or keyword.equals(''))">
+           			WHERE status NOT IN ('승인대기중', '승인반려')
+       			</when>
+	       		<when test = "(status != null or !status.equals('')) and (keyword !=null or !keyword.equals(''))">
+	       			WHERE status = #{status}
+	       			AND (nickname LIKE CONCAT('%',#{keyword},'%') OR name LIKE CONCAT('%',#{keyword},'%'))
+	       		</when>
+	       		<when test = "(status != null or !status.equals('')) and (keyword == null or keyword.equals(''))">
+	       			WHERE status = #{status}
+	       		</when>
+	       		<when test = "(status == null or status.equals('')) and (keyword !=null or !keyword.equals(''))">
+	      			WHERE status NOT IN ('승인대기중', '승인반려')
+	       			AND (nickname LIKE CONCAT('%',#{keyword},'%') OR name LIKE CONCAT('%',#{keyword},'%'))
+	       		</when>
+	       		<otherwise>
+           			WHERE status NOT IN ('승인대기중', '승인반려')
+	       		</otherwise>
+       		</choose>
                 
         <![CDATA[                 
             ORDER BY created_at DESC
             LIMIT #{pageStart}, #{amount}
-
         ]]>
     </select>  
     

@@ -100,6 +100,9 @@ public class AdminController {
         log.debug("getAuctionProductList() invoked.");
         
         String keyword="";
+        String status="";
+        cri.setKeyword(keyword);
+        cri.setStatus(status);
         
         List<ProductDTO> auctionProductList = this.service.getAuctionProductList(cri);
  		log.info("\t+ auctionProductList size: {}", auctionProductList.size());
@@ -107,7 +110,7 @@ public class AdminController {
  		model.addAttribute("auctionProductList",auctionProductList);
  		
  		//페이징 처리
- 		Integer totalAmount = this.service.getAuctionTotal(keyword);
+ 		Integer totalAmount = this.service.getAuctionTotal(keyword, status);
 		
 		MyPageDTO pageDTO = new MyPageDTO(cri, totalAmount);
 		
@@ -142,7 +145,7 @@ public class AdminController {
  		model.addAttribute("auctionProductList",auctionProductList);
  		
  		//페이징 처리
- 		Integer totalAmount = this.service.getAuctionTotal(cri.getKeyword());
+ 		Integer totalAmount = this.service.getAuctionTotal(cri.getKeyword(), cri.getStatus());
 		
 		MyPageDTO pageDTO = new MyPageDTO(cri, totalAmount);
 		
