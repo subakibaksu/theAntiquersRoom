@@ -45,7 +45,7 @@
 	         			<option value="경매중">경매중</option>
 	         			<option value="낙찰완료">낙찰완료</option>
 	         			<option value="미낙찰">미낙찰</option>
-	         			<option value="유찰중">유찰중</option>
+	         			<option value="재경매중">재경매중</option>
 	         			<option value="경매종료">경매종료</option>
 	         		</select>
 		            <input id="searchBar" type="text" name="keyword" placeholder="'닉네임' 또는 '상품명'">
