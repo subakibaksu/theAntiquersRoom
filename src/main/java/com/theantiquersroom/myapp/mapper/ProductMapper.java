@@ -64,5 +64,8 @@ public interface ProductMapper {
     // 마감 임박 상품 조회
     public List<ProductDTO> getEndingProduct();
 
+    // 유찰 등록
+    public Integer reRegister(ProductReRegisterDTO reRegister);
+
 } //end interface
 

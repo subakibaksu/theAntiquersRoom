@@ -305,4 +305,17 @@
 
     </select>
 
+    <update id="reRegister"
+            parameterType="com.theantiquersroom.myapp.domain.ProductReRegisterDTO">
+        <![CDATA[
+        UPDATE product as a
+        SET
+               started_at=now(),
+               ended_at=date_add(now(), INTERVAL + 7 DAY),
+               started_price  = a.started_price *0.9,
+               status="재경매중"
+        WHERE p_id=#{pid};
+        ]]>
+    </update>
+
 </mapper>
