@@ -39,7 +39,7 @@ public class UserController {
     @Setter(onMethod_= {@Autowired})
     private UserService service;
 
-
+    
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpSession session) {	// 로그아웃 실행
         log.debug("logout() invoked.");
