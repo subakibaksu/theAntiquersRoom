@@ -29,7 +29,7 @@ public interface AdminService {
     public abstract List<ProductDTO> getAuctionProductList(MypageCriteria cri);
     
     // 경매상품 리스트 총 레코드 개수 반환
-  	public abstract Integer getAuctionTotal();
+  	public abstract Integer getAuctionTotal(String keyword, String status);
   	
   	// 경매상품 판매중단
   	public abstract Boolean stopSale(Integer pId);
