@@ -41,7 +41,7 @@ public class UserController {
 
 
     @RequestMapping("/logout")
-    public @ResponseBody String logout(HttpServletRequest request, HttpSession session) {	// 로그아웃 실행
+    public String logout(HttpServletRequest request, HttpSession session) {	// 로그아웃 실행
         log.debug("logout() invoked.");
         
         String kakaoUniqueId = (String) session.getAttribute("kakaoUniqueId");
