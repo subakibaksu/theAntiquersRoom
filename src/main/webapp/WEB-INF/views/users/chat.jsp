@@ -1,50 +1,131 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: KBS
-  Date: 11/28/2021
-  Time: 오후 4:23
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <meta charset="UTF-8">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.5/sockjs.min.js"></script>
+    <title>Chating</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+        .container{
+            width: 500px;
+            margin: 0 auto;
+            padding: 25px
+        }
+        .container h1{
+            text-align: left;
+            padding: 5px 5px 5px 15px;
+            color: #FFBB00;
+            border-left: 3px solid #FFBB00;
+            margin-bottom: 20px;
+        }
+        .chating{
+            background-color: #000;
+            width: 500px;
+            height: 500px;
+            overflow: auto;
+        }
+        .chating .me{
+            color: #F6F6F6;
+            text-align: right;
+        }
+        .chating .others{
+            color: #FFE400;
+            text-align: left;
+        }
+        input{
+            width: 330px;
+            height: 25px;
+        }
+        #yourMsg{
 
+        }
+    </style>
 </head>
-<body>
-<input type="text" id="message" />
-<input type="button" id="sendBtn" value="submit"/>
-<div id="messageArea"></div>
-</body>
+
 <script type="text/javascript">
-    $("#sendBtn").click(function() {
-        sendMessage();
-        $('#message').val('')
+    var ws;
+
+    $(document).ready(function (){
+        wsOpen();
     });
-
-    let sock = new SockJS("/echo");
-    sock.onmessage = onMessage;
-    sock.onclose = onClose;
-    // 메시지 전송
-    function sendMessage() {
-        sock.send($("#message").val());
+    function wsOpen(){
+        //웹소켓 전송시 현재 방의 번호를 넘겨서 보낸다.
+        ws = new WebSocket("ws://" + location.host + "/chating/"+$("#roomNumber").val());
+        wsEvt();
     }
-    // 서버로부터 메시지를 받았을 때
-    function onMessage(msg) {
-        var data = msg.data;
-        $("#messageArea").append(data + "<br/>");
-    }
-    // 서버와 연결을 끊었을 때
-    function onClose(evt) {
-        $("#messageArea").append("연결 끊김");
 
+    function wsEvt() {
+        ws.onopen = function(data){
+            //소켓이 열리면 동작
+        }
+
+        ws.onmessage = function(data) {
+            //메시지를 받으면 동작
+            var msg = data.data;
+            if(msg != null && msg.trim() != ''){
+                var d = JSON.parse(msg);
+                if(d.type == "getId"){
+                    var si = d.sessionId != null ? d.sessionId : "";
+                    if(si != ''){
+                        $("#sessionId").val(si);
+                    }
+                }else if(d.type == "message"){
+                    if(d.sessionId == $("#sessionId").val()){
+                        $("#chating").append("<p class='me'>나 :" + d.msg + "</p>");
+                    }else{
+                        $("#chating").append("<p class='others'>" + d.userName + " :" + d.msg + "</p>");
+                    }
+
+                }else{
+                    console.warn("unknown type!")
+                }
+            }
+        }
+
+        document.addEventListener("keypress", function(e){
+            if(e.keyCode == 13){ //enter press
+                send();
+            }
+        });
+    }
+
+    function send() {
+        var option ={
+            type: "message",
+            roomNumber: $("#roomNumber").val(),
+            sessionId : $("#sessionId").val(),
+            userName : $("#userName").val(),
+            msg : $("#chat").val()
+        }
+        ws.send(JSON.stringify(option))
+        $('#chat').val("");
     }
 </script>
+<body>
+<div id="container" class="container">
+    <h1>${productId}번 상품 채팅방</h1>
+    <input type="hidden" id="sessionId" value="">
+    <input type="hidden" id="roomNumber" value="${productId}">
+    <input type="hidden" id="userName" value="${userId}">
+
+    <div id="chating" class="chating">
+        <p class="me">${userId}님 환영
+    </div>
+
+    <div id="yourMsg">
+        <table class="inputTable">
+            <tr>
+                <th>메시지</th>
+                <th><input id="chat" placeholder="보내실 메시지를 입력하세요."></th>
+                <th><button onclick="send()" id="sendBtn">보내기</button></th>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
 </html>
