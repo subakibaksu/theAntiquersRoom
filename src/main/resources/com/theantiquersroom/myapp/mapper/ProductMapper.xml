@@ -313,7 +313,7 @@
                started_at=now(),
                ended_at=date_add(now(), INTERVAL + 7 DAY),
                started_price  = a.started_price *0.9,
-               status="유찰중"
+               status="재경매중"
         WHERE p_id=#{pid};
         ]]>
     </update>
