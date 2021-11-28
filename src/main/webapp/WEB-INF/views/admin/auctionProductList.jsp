@@ -34,14 +34,29 @@
     </header>
     
 	<div id="myPageWrapper">
-	
+         <h2>경매상품</h2>
+         <div class="search-container">
+         	<form action="/admin/searchItemList" method="post">
+         		<div id=searchKwdBox>
+		            <input id="searchBar" type="text" name="keyword" placeholder="'닉네임' 또는 '상품명'">
+					<button class="searchBtn" type="submit">
+						<i class="fas fa-search"></i>
+					</button>
+				</div>
+			</form>
+         </div>
+         <div id="total">
+	         <c:choose>
+		    	<c:when test="${ null eq pageMaker.cri.keyword}">
+			            <p>총 상품수 : ${pageMaker.totalAmount}개</p>
+		        </c:when>
+		        <c:otherwise>
+			            <p>"${pageMaker.cri.keyword}" 검색 결과 : ${pageMaker.totalAmount}개</p>
+		        </c:otherwise>
+         </c:choose>
+         </div>
+
 	     <table id="myAcutionTbl">
-	        <caption>
-	            <ul id="topmenu">
-	                <li>&nbsp;</li>
-	                <li>경매상품</li>
-	            </ul>
-	        </caption>
 	        <thead>
 	            <tr>
 	                <th></th>
@@ -51,7 +66,21 @@
 					<th>현재가격</th>
 	                <th>시작가격</th>
 	                <th>경매기간</th>
-	                <th>경매상태</th>
+	                <th>
+		                <div class="dropdown">
+		                	<button class="dropbtn">경매상태 &nbsp; <i class="fas fa-caret-down"></i></button>
+							<div class="dropdown-content">
+								 <a href="/admin/auctionProductList">전체보기</a>
+								 <a href="#">승인완료</a>
+								 <a href="#">판매취소</a>
+								 <a href="#">경매중</a>
+								 <a href="#">낙찰완료</a>
+								 <a href="#">미낙찰</a>
+								 <a href="#">유찰중</a>
+								 <a href="#">경매종료</a>
+							</div>
+						</div>
+	                </th>
 	            </tr>
 	        </thead>
 			<tbody>    
@@ -87,39 +116,78 @@
 	
 	    <p>&nbsp;</p>
 	    
-         <!-- 현재화면 하단부에 페이징 처리기준에 맞게, 페이지번호목록 표시 -->
-         <div id="pagination">
-             <form action="#" id="paginationForm">
-                 <input type="hidden" name="currPage">
-                 <input type="hidden" name="amount">
-                 <input type="hidden" name="pagesPerPage">
- 
-                 <ul>
-                     <!-- 1. 이전 이동여부표시(prev) -->
-                        <c:if test="${pageMaker.prev}">
-                         <li class="prev"><a class='prev' href="auctionProductList?currPage=${pageMaker.startPage -1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">이전</a></li>
-                     </c:if>
-                     
-                     <!-- 페이지번호목록 표시 -->
-                     <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
-              	        <c:choose>
-	                     	<c:when test="${pageMaker.cri.currPage == pageNum}">
-	                        	<li class="active">${pageNum}</li>
-	                        </c:when>
-	                        <c:otherwise>
-	                        	<li><a href="/admin/auctionProductList?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">${pageNum}</a></li>
-                     		</c:otherwise>
-                     	</c:choose>
-                     </c:forEach>
- 
-                     <!-- 2. 다음 이동여부표시(next) -->
-                     <c:if test="${pageMaker.next}">
-						<li class="next"><a class='next' href="auctionProductList?currPage=${pageMaker.endPage +1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">다음</a></li>
-					</c:if>
-                 </ul>
- 
-             </form>
-         </div>
+	    <c:choose>
+	    	<c:when test="${ null eq pageMaker.cri.keyword}">
+		         <!-- 전체 경매상품 페이징 표시 -->
+		         <div id="pagination">
+		             <form action="#" id="paginationForm">
+		                 <input type="hidden" name="currPage">
+		                 <input type="hidden" name="amount">
+		                 <input type="hidden" name="pagesPerPage">
+		 
+		                 <ul>
+		                     <!-- 이전 이동여부표시 -->
+		                        <c:if test="${pageMaker.prev}">
+		                         <li class="prev"><a class='prev' href="auctionProductList?currPage=${pageMaker.startPage -1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">이전</a></li>
+		                     </c:if>
+		                     
+		                     <!-- 페이지번호목록 표시 -->
+		                     <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
+		              	        <c:choose>
+			                     	<c:when test="${pageMaker.cri.currPage == pageNum}">
+			                        	<li class="active">${pageNum}</li>
+			                        </c:when>
+			                        <c:otherwise>
+			                        	<li><a href="auctionProductList?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">${pageNum}</a></li>
+		                     		</c:otherwise>
+		                     	</c:choose>
+		                     </c:forEach>
+		 
+		                     <!-- 다음 이동여부표시 -->
+		                     <c:if test="${pageMaker.next}">
+								<li class="next"><a class='next' href="auctionProductList?currPage=${pageMaker.endPage +1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}">다음</a></li>
+							</c:if>
+		                 </ul>
+		             </form>
+		         </div>	    	
+	    	</c:when>
+	    	
+	    	<c:otherwise>
+	    	     <!-- 검색 결과 페이징 표시 -->
+		         <div id="pagination">
+		             <form action="#" id="paginationForm">
+		                 <input type="hidden" name="currPage" value="${pageMaker.cri.currPage}">
+		                 <input type="hidden" name="amount" value="${pageMaker.cri.currPage}">
+		                 <input type="hidden" name="pagesPerPage" value="${pageMaker.cri.pagesPerPage}">
+		                 <input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+		 
+		                 <ul>
+		                     <!-- 이전 이동여부표시 -->
+		                        <c:if test="${pageMaker.prev}">
+		                         <li class="prev"><a class='prev' href="searchItemList?currPage=${pageMaker.startPage -1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&keyword=${pageMaker.cri.keyword}">이전</a></li>
+		                     </c:if>
+		                     
+		                     <!-- 페이지번호목록 표시 -->
+		                     <c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="pageNum">
+		              	        <c:choose>
+			                     	<c:when test="${pageMaker.cri.currPage == pageNum}">
+			                        	<li class="active">${pageNum}</li>
+			                        </c:when>
+			                        <c:otherwise>
+			                        	<li><a href="searchItemList?currPage=${pageNum}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&keyword=${pageMaker.cri.keyword}">${pageNum}</a></li>
+		                     		</c:otherwise>
+		                     	</c:choose>
+		                     </c:forEach>
+		 
+		                     <!-- 다음 이동여부표시 -->
+		                     <c:if test="${pageMaker.next}">
+								<li class="next"><a class='next' href="searchItemList?currPage=${pageMaker.endPage +1}&amount=${pageMaker.cri.amount}&pagesPerPage=${pageMaker.cri.pagesPerPage}&keyword=${pageMaker.cri.keyword}">다음</a></li>
+							</c:if>
+		                 </ul>
+		             </form>
+		         </div>
+	    	</c:otherwise>
+	    </c:choose>
 
     </div>
 

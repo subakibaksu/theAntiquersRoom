@@ -2,8 +2,11 @@ package com.theantiquersroom.myapp.service;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
+import com.theantiquersroom.myapp.domain.ProductFormDTO;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -62,5 +65,26 @@ public class ProductServiceTests {
 		
 		log.info("\t+ isRemoved: {}", isRemoved);
 	} //testRemove
+
+	// 상품 수정 테스트
+	@Test
+	public void testModify() throws Exception {
+
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+		ProductFormDTO product = new ProductFormDTO();
+		product.setPId(5);
+		product.setUserId("asdfasdf@gmail.com");
+		product.setName("바뀌어라이름이름");
+		product.setContent("금요일이당");
+		product.setCategoryId(1);
+		product.setStartedAt(LocalDateTime.parse("2021-11-26 02:16:17",formatter));
+		product.setEndedAt(LocalDateTime.parse("2021-11-28 02:16:17",formatter));
+		product.setStartedPrice(300);
+		product.setBidIncrement(5000);
+		product.setStatus("승인대기중");
+
+		Integer result = service.modify(product);
+		log.info("result :" + result);
+	}
 	
 } //end class

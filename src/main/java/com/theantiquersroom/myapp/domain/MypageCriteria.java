@@ -18,4 +18,7 @@ public class MypageCriteria {
 	//4. limit 구문에서 시작 부분에 필요한 값을 반환(mybatis에서 사용)
 	public Integer getPageStart() {return (this.currPage -1) * this.amount;}
 	
+	//5. 키워드 검색
+	public String keyword;
+	
 } // end class

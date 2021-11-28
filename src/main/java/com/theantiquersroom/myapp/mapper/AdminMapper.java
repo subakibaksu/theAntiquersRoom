@@ -28,7 +28,7 @@ public interface AdminMapper {
     public abstract Integer rejectRequest(@Param("pId") Integer pId);
 
     //경매상품 총 게시물 개수를 반환
-	public abstract Integer getAuctionTotal();
+	public abstract Integer getAuctionTotal(@Param("keyword") String keyword);
 	
     //경매 상품 리스트 반환
     public abstract List<ProductDTO> getAuctionProductList(MypageCriteria cri);
