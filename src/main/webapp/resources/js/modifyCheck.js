@@ -6,6 +6,8 @@ $(document).ready(function (){
 	let pwcheck = false;
 	let chpwcheck = false;
 	
+	
+
     //닉네임 체크
     $('#nickname').keyup(function () {
         if ($('#nickname').val() == "") {
@@ -129,6 +131,7 @@ $(document).ready(function (){
 
         buttonlive();
     });
+
 
     // 제출버튼 활성화 함수
     function buttonlive() {
