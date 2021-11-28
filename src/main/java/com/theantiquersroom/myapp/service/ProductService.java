@@ -42,5 +42,8 @@ public interface ProductService {
     // 마감 임박 상품 조회
     public List<ProductDTO> getEndingProduct();
 
+    // 유찰 등록
+    public void reRegister(ProductReRegisterDTO product);
+
 } //end interface
 

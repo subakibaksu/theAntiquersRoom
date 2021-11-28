@@ -90,16 +90,14 @@ public class ProductController {
         return "/product/list"; // 추후 완료 alert으로 변경
     } // Post register()
 
-    /*유찰된 상품 재등록 페이지로 이동*/
-    @GetMapping("/reRegister")
-    public void reRegister() {
-
-    } // Get reRegister()
-
     /*유찰된 상품 재등록 정보 DB전달*/
     @PostMapping("/reRegister")
-    public void reRegister(Model model) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public String reRegister(ProductReRegisterDTO product) {
 
+            product.setPid(product.getPid());
+            this.service.reRegister(product);
+        return "/";
     } // Post reRegister()
 
     /*상품 수정 페이지로 이동*/
