@@ -46,7 +46,6 @@
             });
         }
 
-
         $(document).ready(function () {
             productSubmitDate()
             setupBaseImage()
@@ -182,7 +181,6 @@
         });
     </script>
 
-
     <div id="wrapper">
         <div id="subject">경매 상품 수정</div>
 
@@ -259,7 +257,7 @@
                         </tr>
 
                         <tr>
-                            <th>이미지</th>
+                            <th>대표이미지(필수)</th>
                             <td>
                                 <img src="${product.imageUrls[0]}" class="productimg">
                                 <input id="image1" class="upload" type="file" name="images">

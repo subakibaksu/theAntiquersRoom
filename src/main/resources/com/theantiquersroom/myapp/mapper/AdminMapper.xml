@@ -81,9 +81,16 @@
         <![CDATA[
 
             SELECT count(p_id)
-            FROM product
+            FROM product as A
+            LEFT OUTER JOIN users B ON A.user_id=B.user_id
             WHERE status NOT IN ('승인대기중', '승인반려')
-
+        ]]>   
+        
+            <if test="keyword != null">
+                AND nickname LIKE CONCAT('%',#{keyword},'%') OR name LIKE CONCAT('%',#{keyword},'%')
+            </if>
+                
+        <![CDATA[   
         ]]>
     </select>
 
@@ -107,13 +114,21 @@
                 A.started_price as startedPrice,
                 A.bid_increment as bidIncrement,
                 A.status,
-                (select nickname from users as B where B.USER_ID=A.USER_ID) as nickname,
+                B.nickname,
                 (select category_name from category as C where C.category_id=A.category_id) as categoryName,
                 (select image_url from product_image as D where D.p_id=A.p_id order by D.index limit 1) as imageUrl,
                 (select bid_price from bid_history as E where E.p_id=A.p_id order by E.bid_price desc limit 1) as currPrice
             FROM product as A
+            LEFT OUTER JOIN users B ON A.user_id=B.user_id
             WHERE A.status NOT IN ('승인대기중', '승인반려')
-            ORDER BY A.created_at DESC
+        ]]>   
+        
+                <if test="keyword != null">
+                    AND nickname LIKE CONCAT('%',#{keyword},'%') OR name LIKE CONCAT('%',#{keyword},'%')
+                </if>
+                
+        <![CDATA[                 
+            ORDER BY created_at DESC
             LIMIT #{pageStart}, #{amount}
 
         ]]>

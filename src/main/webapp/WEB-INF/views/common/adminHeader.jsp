@@ -48,7 +48,6 @@
 			<a class="menu" href="/admin/main">승인요청상품</a> 
 			<a class="menu" href="/admin/auctionProductList">경매상품</a> 
 			<a class="menu" href="/admin/userList">회원목록</a> 
-			<button type="button" id="logout_btn" >Log out</button>
 		</nav>
 	</header>
 
