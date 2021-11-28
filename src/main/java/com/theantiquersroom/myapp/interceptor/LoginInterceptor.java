@@ -73,7 +73,11 @@ public class LoginInterceptor
             
             res.sendRedirect(originRequest);
          } else { // 원래의 요청URI가 없는 경우
-            res.sendRedirect("/"); // 메인화면으로 이동
+        	 if(user.getUserId().equals("admin@antiquers.com")) {
+        		 res.sendRedirect("/admin/main");
+        	 }else {
+        		 res.sendRedirect("/"); // 메인화면으로 이동 
+        	 }
          } // if-else
          
       } else {  // 로그인 실패

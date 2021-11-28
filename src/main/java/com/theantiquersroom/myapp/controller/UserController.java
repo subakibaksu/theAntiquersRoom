@@ -39,8 +39,8 @@ public class UserController {
     @Setter(onMethod_= {@Autowired})
     private UserService service;
 
-
-    @RequestMapping("/logout")
+    
+    @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpSession session) {	// 로그아웃 실행
         log.debug("logout() invoked.");
         
@@ -65,7 +65,7 @@ public class UserController {
         	log.debug("===== 일반회원 logout");
             session.invalidate();
             
-            return "/";
+            return "redirect:/";
         }
     } //logout
 

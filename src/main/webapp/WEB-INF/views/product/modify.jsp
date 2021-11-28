@@ -28,11 +28,15 @@
 
     <script type="text/javascript">
 
-        // 파일업로드 관련
-        $(document).ready(function () {
-            productSubmitDate()
-        });
+        // 기본 이미지 ( 3개의 .productimg 값 중 ""값인 곳에 BASE_IMAGE_SRC를 넣어줌
+        const BASE_IMAGE_SRC = "https://antiquers.s3.ap-northeast-2.amazonaws.com/baseImage.png";
+        function setupBaseImage() {
+            $('.productimg').each((idx, el) => {
+                $(el).attr('src', $(el).attr('src') || BASE_IMAGE_SRC)
+            })
+        }
 
+        // 파일업로드 관련
         function getBase64(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -41,6 +45,11 @@
                 reader.onerror = error => reject(error);
             });
         }
+
+        $(document).ready(function () {
+            productSubmitDate()
+            setupBaseImage()
+        });
 
         <%--    datetimepicker --%>
         function productSubmitDate() {
@@ -77,7 +86,6 @@
             });
         }
 
-        <%-- 빈값 찾기 --%>
         $(document)
             .ready(
                 function () {
@@ -99,6 +107,7 @@
                     $('#register').click(function () {
                         Checkform();
                         buttonlive();
+                        baseSrc();
                     });
 
                     // 제출버튼 활성화 함수
@@ -172,7 +181,6 @@
         });
     </script>
 
-
     <div id="wrapper">
         <div id="subject">경매 상품 수정</div>
 
@@ -183,15 +191,15 @@
                     <input hidden name="pId" value="${product.PId}">
                     <table id="infoTable">
                         <tr>
-                            <th>상품명</th>
-                            <td>
+                            <th width="200px">상품명</th>
+                            <td colspan="3">
                                 <input type="text" name="name" class="check" id="name" value="${product.name}" placeholder="상품명을 입력해주세요">
                             </td>
                         </tr>
 
                         <tr>
                             <th>카테고리</th>
-                            <td>
+                            <td colspan="3">
                                 <label>
                                     <select name="categoryId" class="check" id="categoryId" >
                                         <option value="${product.categoryId}">${product.categoryName}</option>
@@ -210,7 +218,7 @@
 
                         <tr>
                             <th>시작 가격</th>
-                            <td>
+                            <td colspan="3">
                                 <input type="text" id="startedPrice" class="check" name="startedPrice" value="${product.startedPrice}"
                                        placeholder="시작가격을 입력해주세요"> 원
                             </td>
@@ -218,7 +226,7 @@
 
                         <tr>
                             <th>입찰단위금액</th>
-                            <td>
+                            <td colspan="3">
                                 <select name="bidIncrement" class="check" id="bidIncrement" value="${product.bidIncrement}">
                                     <option value="${product.startedPrice}">${product.startedPrice}</option>
                                     <option value="none">입찰 단위금액을 선택해주세요</option>
@@ -232,7 +240,7 @@
 
                         <tr>
                             <th>경매기간</th>
-                            <td>
+                            <td colspan="3">
                                 <input type="text" class="check" id="startDate" name="startedAt" value="${product.startedAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))}">
                                 ~
                                 <input type="text" class="check" id="endDate" name="endedAt" value="${product.endedAt.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"))}">
@@ -241,7 +249,7 @@
 
                         <tr>
                             <th>상품 설명</th>
-                            <td>
+                            <td colspan="3">
                                 <label>
                                     <textarea id="summernote" class="check" name="content">${product.content}</textarea>
                                 </label>
@@ -253,25 +261,20 @@
                             <td>
                                 <img src="${product.imageUrls[0]}" class="productimg">
                                 <input id="image1" class="upload" type="file" name="images">
+                                <div>대표이미지(필수)</div>
                             </td>
-                        </tr>
-                        <tr>
-                            <th>이미지(선택)</th>
-                            <td>
+                            <td id="image2td">
                                 <img src="${product.imageUrls[1]}" class="productimg">
                                 <input id="image2" class="upload" type="file" name="images">
                             </td>
-                        </tr>
-                        <tr>
-                            <th>이미지(선택)</th>
-                            <td>
+                            <td id="image3td">
                                 <img src="${product.imageUrls[2]}" class="productimg">
                                 <input id="image3" class="upload" type="file" name="images">
                             </td>
                         </tr>
 
                         <tr>
-                            <td colspan="2">
+                            <td colspan="4">
                                 <div id="register_page_button">
                                     <button type="submit" class="register_page_button">수정하기</button>
                                     <a href="/users/mypage">

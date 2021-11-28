@@ -1,22 +1,57 @@
 @charset "UTF-8";
 
-    .btnset { /* 버튼 중앙 정렬 */
-        width: 10rem;
-        margin:auto;
-    }
+* {
+    margin: 0;
+    padding: 0;
+}
 
-    #modifyBtn, #cancleBtn {
-        border: 1px solid #C2B1B1;
-        border-radius: 20px;
-        background-color: white;
-        color: #C2B1B1;
-    }
+html,
+body,
+#mypage_headerBox {
+    min-height: 100vh;
+}
 
-    #modifyBtn:hover, #cancleBtn:hover {
-        color: #9C0000;
-    }
+body,
+#mypage_headerBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+}
 
-    #info {
-        padding-top: 8rem;
-        text-align: center;
-    }
+#mypage_wrapper {
+    flex-grow: 1;
+    font-family: "Nanum Gothic", sans-serif;
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.btnset {
+    width: 100%;
+    margin-block: 3rem;
+    text-align: center;
+}
+
+#modifyBtn,
+#cancleBtn {
+    border: 1px solid #c2b1b1;
+    border-radius: 6px;
+    background-color: white;
+    color: #c2b1b1;
+
+    padding: 0.2rem 0.3rem;
+    margin: 1rem;
+}
+
+#modifyBtn:hover,
+#cancleBtn:hover {
+    background-color: #c2b1b1;
+    color: white;
+}
+
+#info {
+    padding-top: 8rem;
+    text-align: center;
+}

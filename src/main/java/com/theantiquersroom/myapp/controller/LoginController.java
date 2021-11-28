@@ -45,14 +45,12 @@ public class LoginController {
         log.info("\t+ user: {}", user);
         
         if(user != null) {
-        	if(user.getUserType() == 1){ //관리자 아이디는 관리자페이지로 이동
+        	if(user.getUserId().equals("admin@antiquers.com")){ //관리자 아이디는 관리자페이지로 이동
         		log.info("========당신은 관리자인가요?");
-        		log.info(user.getUserId());
         		model.addAttribute(LoginController.authKey, user);
             	return "/admin/requestedList";
         	}else { //일반회원은 메인으로 이동
         		log.info("========당신은 일반회원인가요?");
-        		log.info(user.getUserId());
         		model.addAttribute(LoginController.authKey, user);
             	return "/main";
         	}//if-else
