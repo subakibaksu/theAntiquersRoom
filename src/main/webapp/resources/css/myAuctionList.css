@@ -4,11 +4,12 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 html,
 body {
-    min-height: 1;
+    min-height: 100vh;
 }
 
 body {
@@ -25,12 +26,94 @@ header{
 	
     width: 100%;
     margin: 5rem 0 10rem 0;
+    
     display: flex;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
 
-    font-family: 'Noto Sans KR', sans-serif;
     font-size: 0.8rem;
+}
+
+#myPageWrapper h2{
+    text-align: center;
+	font-size:1.5rem;
+}
+
+.search-container{
+	width:100%;
+	margin-top: 2rem;
+	margin-bottom: 1rem;
+	margin-right: 30%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.search-container input[type=text]{
+	padding: 0.5rem;
+  	border: none;
+  	background-color: #FDF8F8;
+}
+
+#searchBar{
+	text-align: left;
+}
+
+.searchBtn{
+	float: right;
+  	padding: 0.4rem 0.6rem;
+  	background-color: #ddd;
+  	font-size: 1rem;
+  	border: none;
+  	cursor: pointer;
+}
+
+.searchBtn:hover{
+  	background-color: #ccc;
+}
+
+#total{
+	width: 100%;
+    text-align: end;
+    margin-right: 30%;
+    margin-bottom: 1rem;
+}
+
+.dropdown {
+	font-size:0.8rem;
+}
+
+.dropbtn {
+	background-color: #B1A2A2;
+	color: black;
+	border: none;
+    font-weight: bold;	
+	cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 0.7rem 1rem;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  color: #670000;
 }
 
 #myAcutionTbl {
@@ -183,6 +266,7 @@ input[type=submit] {
 #pagination ul {
     float : right;
     margin-right : 15%;
+    width: max-content;
 }
 
 #pagination li{	
