@@ -5,18 +5,13 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 
+import com.theantiquersroom.myapp.domain.*;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.theantiquersroom.myapp.domain.LoginDTO;
-import com.theantiquersroom.myapp.domain.MypageCriteria;
-import com.theantiquersroom.myapp.domain.ProductDTO;
-import com.theantiquersroom.myapp.domain.UserDTO;
-import com.theantiquersroom.myapp.domain.UserVO;
-import com.theantiquersroom.myapp.domain.modifyDTO;
 import com.theantiquersroom.myapp.mapper.UserMapper;
 import com.theantiquersroom.myapp.utils.Mailsender;
 
@@ -234,7 +229,9 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	}//getTotal
 
 	@Override
-	public List<ProductDTO> getMyBidList(HashMap<String, Object> map) {
+	public List<ProductDTO> getMyBidList(ProductCriteria cri, HashMap<String, Object> map) {
+		map.put("pageStart",cri.getPageStart());
+		map.put("perPageNum",cri.getPerPageNum());
     	log.debug("getMyBidList({}) invoked.",map);
     	List<ProductDTO> productDTOList = mapper.getMyBidList(map);
 

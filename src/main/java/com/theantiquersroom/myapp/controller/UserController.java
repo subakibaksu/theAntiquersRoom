@@ -8,7 +8,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.theantiquersroom.myapp.domain.*;
 import com.theantiquersroom.myapp.service.UserService;
+import com.theantiquersroom.myapp.utils.ProductPageMaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -16,12 +18,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.theantiquersroom.myapp.domain.MyPageDTO;
-import com.theantiquersroom.myapp.domain.MypageCriteria;
-import com.theantiquersroom.myapp.domain.ProductDTO;
-import com.theantiquersroom.myapp.domain.UserDTO;
-import com.theantiquersroom.myapp.domain.UserVO;
-import com.theantiquersroom.myapp.domain.modifyDTO;
 import com.theantiquersroom.myapp.service.UserService;
 
 import lombok.NoArgsConstructor;
@@ -100,16 +96,6 @@ public class UserController {
 		return "/users/myAuctionList";
     } //getMyAuctionList
 
-
-    @GetMapping("/getBidList")
-    public String getBidList() {	// 나의 입찰리스트 페이지로 이동
-        log.debug("getBidList() invoked.");
-
-        return "/user/myBidList";
-    } //getBidList
-    
-    
-
  // 전체회원 목록조회
 //  	@GetMapping("/getUserList") // 추후 관리자 페이지에서
 //  	public void list(Model model) {	
@@ -179,29 +165,48 @@ public class UserController {
 	@GetMapping("/getMyBidList")
 	public String getMyBidList(
 			HttpSession session,
-			@ModelAttribute("cri") MypageCriteria cri,
-			Model model) {	// 나의 경매리스트 페이지로 이동
+			@ModelAttribute("cri") ProductCriteria cri,
+			Model model) {	// 나의 입찰리스트 페이지로 이동
 		log.debug("getMyAuctionList({}, {}) invoked.", cri, model);
 
 		UserDTO user = (UserDTO) session.getAttribute(LoginController.authKey);
 		String userId = user.getUserId();
-
+		cri.setPerPageNum(7);
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("userId", userId);
 		map.put("cri", cri);
 
-		List<ProductDTO> myBidList = this.service.getMyAuctionList(map);
+		List<ProductDTO> myBidList = this.service.getMyBidList(cri,map);
 
 		model.addAttribute("myBidList",myBidList);
 
+		ProductPageMaker pageMaker =new ProductPageMaker();
 		//페이징 처리
-		Integer totalAmount = this.service.getMyBidTotal(userId);
+		pageMaker.setCri(cri);
+		Integer totalNum = this.service.getMyBidTotal(userId);
+		log.debug("totalNum {} ", totalNum);
+		pageMaker.setTotalCount(totalNum);
 
-		MyPageDTO pageDTO = new MyPageDTO(cri, totalAmount);
+		model.addAttribute("pageMaker", pageMaker);
 
-		model.addAttribute("pageMaker", pageDTO);
+		return "/users/myBidList";
+	} //getMyBidList
 
-		return "/users/myAuctionList";
-	} //getMyAuctionList
+	@GetMapping("/chat")
+	public String chat(@RequestParam("productId") Integer pId, Model model){
+
+    	//아이디 체크
+		//True or False 반환
+
+		//만약 True 이면 계속 진행
+
+    	//매퍼에서 기존 DB에 저장되어있던 채팅정보들을 가져옵니다..
+		// List<ChatDTO> list = service.getChat(pId);
+
+		//model에 지정해줍니다.
+		//model.addAtrribute("chatList",list);
+
+    	return "/users/chat";
+	}
 
 }  //end class

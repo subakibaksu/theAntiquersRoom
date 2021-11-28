@@ -25,7 +25,6 @@ public class ProductCriteria {
 
     }
 
-
     // getter setter
     public int getPage() {
         return page;

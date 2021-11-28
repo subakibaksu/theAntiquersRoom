@@ -34,7 +34,7 @@ public class HomeController {
         log.debug(service.getNewProduct());
         log.debug(service.getEndingProduct());
       
-//        return "main";
-        return "home";//test
+        return "main";
+//        return "home";//test
     }
 }
