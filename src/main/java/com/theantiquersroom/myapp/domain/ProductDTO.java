@@ -12,7 +12,7 @@ import lombok.Data;
 public class ProductDTO {
   
 
-   private Integer pId;
+   private Integer pid;
    private String name;
    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
    private LocalDateTime createdAt;

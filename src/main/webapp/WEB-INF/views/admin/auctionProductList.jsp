@@ -105,7 +105,7 @@
 							<c:out value="${aucProduct.status}"/><br>
 							<c:if test="${aucProduct.status!='판매취소' and aucProduct.status!='낙찰완료' and aucProduct.status!='미낙찰' and aucProduct.status!='경매종료'}">
 								<form action="/admin/stopSale" method="post">
-									<input type="hidden" id="pId" name="pId" value="${aucProduct.pId}">
+									<input type="hidden" id="pId" name="pId" value="${aucProduct.pid}">
 									<input type="submit" id="stopBtn" value="판매중단">
 								</form>	
 							</c:if>

@@ -119,7 +119,7 @@
 							<c:choose>
 								<c:when test="${reqProduct.status=='승인대기중'}">
 									<form action="/admin/confirmRequest" method="post">
-										<input type="checkbox" name="checkPId" id="myCheck" value="${reqProduct.pId}" >
+										<input type="checkbox" name="checkPId" id="myCheck" value="${reqProduct.pid}" >
 									</form>
 								</c:when>
 								<c:when test="${reqProduct.status=='승인완료'}">
