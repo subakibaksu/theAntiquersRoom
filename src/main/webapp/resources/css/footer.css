@@ -60,14 +60,24 @@
 }
 
 .swal2-icon {
-	width: 4rem;
-	height: 4rem;
+    width: 4rem;
+    height: 4rem;
 }
 
 .swal2-styled {
-    margin: .3125em;
+    margin: 0.3125em;
     padding: 0.5rem;
-    transition: box-shadow .1s;
+    transition: box-shadow 0.1s;
     box-shadow: 0 0 0 3px transparent;
     font-weight: 500;
+}
+
+.swal2-icon.swal2-error [class^="swal2-x-mark-line"] {
+    display: block;
+    position: absolute;
+    top: 2em;
+    width: 2em;
+    height: 0.3125em;
+    border-radius: 0.125em;
+    background-color: #f27474;
 }
