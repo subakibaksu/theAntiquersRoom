@@ -81,6 +81,10 @@ body {
     border-block: 1px solid rgba(194, 177, 177, 0.9);
 }
 
+#infoTable th {
+    width: 7rem;
+}
+
 #infoTable th,
 #infoTable td {
     text-align: center;
