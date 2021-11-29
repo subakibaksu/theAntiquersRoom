@@ -33,7 +33,7 @@ public interface UserService {
     public abstract UserDTO login(LoginDTO dto) throws Exception;
     
     // 폰번호로 아이디찾기
-    public abstract UserDTO findId(UserDTO dto);
+    public abstract UserDTO findId(String phone);
     
     // 비밀번호 재설정
     public abstract boolean resetPwd(String userId, String nickName) throws Exception;

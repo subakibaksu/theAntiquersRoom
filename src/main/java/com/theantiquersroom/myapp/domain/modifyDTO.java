@@ -1,8 +1,9 @@
 package com.theantiquersroom.myapp.domain;
 
+import lombok.Data;
 import lombok.Value;
 
-@Value
+@Data
 public class modifyDTO {
 
     private String userId;

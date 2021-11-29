@@ -48,7 +48,6 @@
                 <!-- 이름과 전화번호가 일치하지 않을 때-->
                <c:if test="${check == 1}">
                     <script>
-                        opener.document.findform.nickName.value = "";
                         opener.document.findform.phone.value = "";
                     </script>
                     <label >일치하는 정보가 존재하지 않습니다.</label>

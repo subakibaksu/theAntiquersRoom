@@ -136,8 +136,8 @@ public class UserController {
 	
     // 아이디 찾기 실행
 	@PostMapping("/findId")
-	public String findIdAction(UserDTO dto, Model model) {
-		UserDTO user = this.service.findId(dto);
+	public String findIdAction(String phone, Model model) {
+		UserDTO user = this.service.findId(phone);
 		
 		if(user == null) { 
 			model.addAttribute("check", 1);
@@ -152,7 +152,7 @@ public class UserController {
     
 	@PostMapping("/remove")
 	public String remove(
-			@RequestParam("userId") String userId,
+			String userId,
 			RedirectAttributes rttrs) 
 	{
 		log.debug("remove({}) invoked.", userId);
@@ -160,7 +160,7 @@ public class UserController {
 		boolean result=this.service.remove(userId);
 		rttrs.addAttribute("result", result);
 		
-		return "redirect:/users/getUserList";
+		return "/";
 	} //remove
 
 	@GetMapping("/getMyBidList")

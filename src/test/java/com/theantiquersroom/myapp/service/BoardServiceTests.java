@@ -48,7 +48,7 @@ public class BoardServiceTests {
         
     	BoardQnACriteria cri = new BoardQnACriteria();
         
-        List list = service.getQnAListPaging(cri);
+        List list = service.getQnAListByProductId(cri);
         
         list.forEach(board -> log.info("" + board));
         

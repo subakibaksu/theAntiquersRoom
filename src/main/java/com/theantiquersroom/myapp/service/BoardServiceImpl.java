@@ -13,6 +13,7 @@ import com.theantiquersroom.myapp.domain.BoardReviewCriteria;
 import com.theantiquersroom.myapp.domain.QnADTO;
 import com.theantiquersroom.myapp.domain.ReviewDTO;
 import com.theantiquersroom.myapp.mapper.BoardMapper;
+import com.theantiquersroom.myapp.mapper.ProductMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -29,11 +30,13 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 	
 	/* 문의게시판 목록 */
 	@Override
-	public List<QnADTO> getQnAList() {
+	public List<QnADTO>getQnAListByProductId(BoardQnACriteria cri) {
 		log.debug("getQnAList() invoked.");
 		
-		return this.mapper.getQnAList();
+		return this.mapper.getQnAListByProductId(cri);
+
 	} // getQnAList()
+
 	
 	/* 문의게시판 등록 */
 	@Override
@@ -47,11 +50,11 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 	} // registerQnA()
 	
 	/* 문의게시판 목록(페이징 적용) */
-	@Override
-	public List<QnADTO> getQnAListPaging(BoardQnACriteria cri) {
-		
-		return mapper.getQnAListPaging(cri);
-	} // getQnAListPaging()
+//	@Override
+//	public List<QnADTO> getQnAListPaging(BoardQnACriteria cri) {
+//		
+//		return mapper.getQnAListPaging(cri);
+//	}
 	
     /* 문의게시물 총 갯수 */
 	@Override

@@ -35,7 +35,7 @@ body,
 }
 
 #modifyBtn,
-#cancleBtn {
+#removeBtn {
     border: 1px solid #c2b1b1;
     border-radius: 6px;
     background-color: white;
@@ -46,7 +46,7 @@ body,
 }
 
 #modifyBtn:hover,
-#cancleBtn:hover {
+#removeBtn:hover {
     background-color: #c2b1b1;
     color: white;
 }

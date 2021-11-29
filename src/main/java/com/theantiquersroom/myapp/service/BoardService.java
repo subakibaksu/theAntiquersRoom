@@ -13,10 +13,10 @@ public interface BoardService {
 	public abstract boolean registerQnA(QnADTO dto);
 	
 	 /* 문의게시판 목록 */
-	public abstract List<QnADTO> getQnAList();
+//	public abstract List<QnADTO>  getQnAList(Integer pId);
 
 	 /* 문의게시판 목록(페이징 적용) */
-    	public List<QnADTO> getQnAListPaging(BoardQnACriteria cri);
+// public List<QnADTO> getQnAListPaging(BoardQnACriteria cri);
 
    	 /* 문의게시판 총 갯수 */
   	public Integer getQnATotal();
@@ -30,8 +30,11 @@ public interface BoardService {
   	/* 문의게시글 삭제 */
   	public Integer removeQnA(int bindex);
   	
-    	/* 게시판 - 답글 등록 */
-   	public abstract boolean registerReQnA(QnADTO dto);  	
+    /* 게시판 - 답글 등록 */
+   	public abstract boolean registerReQnA(QnADTO dto);
+
+   	/* 문의게시판 목록 */
+	public List<QnADTO> getQnAListByProductId(BoardQnACriteria cri);  	
 	
 //  ======== 리뷰게시판 =========
    	

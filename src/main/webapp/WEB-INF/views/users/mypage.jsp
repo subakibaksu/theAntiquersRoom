@@ -9,6 +9,9 @@
     <title>mypage</title>
 
 	<link rel="stylesheet" href="/resources/css/mypage.css">
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
 
 </head>
 <body>
@@ -26,14 +29,39 @@
         </div>
         
         <div class="btnset">
-            <button id="modifyBtn" ><a href="/users/modify?userId=${sessionScope.__AUTH_ANTIQUE__.userId}">수정하기</a></button>
-            <button id="cancleBtn">회원탈퇴</button>
+            <button id="modifyBtn" >수정하기</button>
+            <button id="removeBtn">회원탈퇴</button>
         </div>
     </div>
+    
+    <form id="modifyForm" action="/users/modify" method="get">
+		<input type="hidden" id="userId" name="userId" value="${sessionScope.__AUTH_ANTIQUE__.userId}"/>'>
+	</form>
+	
+	<form id="removeForm" action="/users/remove" method="post">
+		<input type="hidden" id="userId" name="userId" value="${sessionScope.__AUTH_ANTIQUE__.userId}"/>'>
+	</form>
+	
 
     <footer>
         <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
     </footer>
 
+      <script>
+      
+  		let mform = $("#modifyForm");
+  		let rform = $("#removeForm");
+
+  	    /* 삭제 버튼 */
+  	    $("#removeBtn").on("click", function(e){
+  	        rform.submit();
+  	    });
+  	    
+        /* 수정 하기 버튼 */
+        $("#modifyBtn").on("click", function(e){
+            mform.submit();
+        });
+        
+	</script>
 </body>
 </html>

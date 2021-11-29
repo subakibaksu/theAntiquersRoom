@@ -8,11 +8,10 @@
 
     <!-- 문의게시판 목록 조회 -->
     <select
-        id="getQnAList"
+        id="getQnAListByProductId"
         resultType="com.theantiquersroom.myapp.domain.QnADTO">
         
-        <![CDATA[
-
+        <![CDATA[      
             SELECT
 				bindex,
 				created_at as createdAt,
@@ -26,7 +25,9 @@
 				p_id as pId
 
             FROM board
+            WHERE p_id = #{pId}
 			ORDER BY ref DESC, step ASC
+			
         ]]>
     </select>
     
@@ -70,7 +71,7 @@
     <!-- 문의게시물 목록(페이징) -->
     <select id="getQnAListPaging" resultType="com.theantiquersroom.myapp.domain.QnADTO">
     
-                SELECT bindex, created_at as createdAt, updated_at as updatedAt, title, content, ref, depth, step, author, p_id as pId
+                SELECT bindex, content, author, p_id as pId, title, ref, depth, step, created_at as createdAt, updated_at as updatedAt
                 FROM board ORDER BY ref DESC, step ASC
         <!-- limit ((${pageNum}-1)*${amount}), ${amount} -->
         limit #{skip},#{amount}

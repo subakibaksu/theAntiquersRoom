@@ -10,48 +10,52 @@
 <meta charset="UTF-8">
 <title>registerReQnA.jsp</title>
 
-	<link rel="stylesheet" href="/resources/css/registerQnA.css">
+	<link rel="stylesheet" href="/resources/css/registerReQnA.css">
 
 </head>
 <body>
 
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+    <header id="registerReQnA_headerBox">
+        <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+    </header>
 
-   <div id="wrapper">
+   <div id="registerReQnA_wrapper">
    
-      <!-- 게시판에 신규 게시물을 등록하는 양식 -->
       <form action="/board/registerReQnA" method="post">
-         <table id>
-         <h1 >문의사항 답글작성</h1>
+      
+         <table >
+         <h2 id="registerReQnAH2">문의사항 답글</h2>
             <tr>
                <td>제목</td>
-               <td><input type="text" name="title" placeholder="제목을 입력하세요"></td>
+               <td><input class="registerReQnAInput" type="text" name="title" placeholder="제목을 입력하세요"></td>
             </tr>
             <tr>
                <td>내용</td>
-               <td><textarea name="content" cols="50" rows="10" placeholder="내용을 입력하세요"></textarea></td>
+               <td><textarea class="registerReQnAtextarea" name="content" cols="50" rows="10" placeholder="내용을 입력하세요"></textarea></td>
             </tr>
             <tr>
                <td>작성자</td>
-               <td><input type="text" name="author" value="${sessionScope.__AUTH_ANTIQUE__.userId}" readonly="readonly"></td>
+               <td><input class="registerReQnAInput" type="text" name="author" value="${sessionScope.__AUTH_ANTIQUE__.userId}" readonly="readonly"></td>
             </tr>
              <tr>
-               <td><input type="hidden" name="ref" value="${pageInfo.ref}"></td>
+               <td><input class="registerReQnAInput"  type="hidden" name="ref" value="${pageInfo.ref}"></td>
             </tr>   
             <tr>
-               <td><input type="hidden" name="pId" value="${sessionScope.__AUTH_ANTIQUE__.userType}"></td>
+               <td><input type="hidden" name="pId" value="${pageInfo.pId}"></td>
             </tr>
             <tr>
                <td colspan="2">
-                  <button type="submit">REGISTER</button>
-                  <button type="button" id="listBtn"><a href="/board/QnA">LIST</a></button>
+                  <button class="registerReQnAButton"  id="cancleButton"   type="button"><a href="/board/QnA">취소</a></button>
+                  <button class="registerReQnAButton"  id="registerButton" type="submit">등록</button>
                </td>
             </tr>
          </table>
       </form>
    </div>
-
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+   
+<footer>
+        <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+</footer>
 
 </body>
 </html>
