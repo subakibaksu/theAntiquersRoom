@@ -174,7 +174,7 @@
             <div>
                 <ul class="main_ul" id="endingItems">
                     <c:forEach var="endingProduct" items="${endingProductList}">
-                        <a href="/product/getDetail?pId=${newProduct.PId}">
+                        <a href="/product/getDetail?pId=${endingProduct.PId}">
                         <li class="main_item endingItem">
                             <div class="main_item_img">
                                 <img src="${endingProduct.imageUrl}" alt="">
@@ -192,7 +192,7 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </span>
-                                <span>남은시간 : <p hidden class="leftTimeTimer">${newProduct.leftTime}</p></span>
+                                <span>남은시간 : <p hidden class="leftTimeTimer">${endingProduct.leftTime}</p></span>
                             </div>
                         </li>
                         </a>
