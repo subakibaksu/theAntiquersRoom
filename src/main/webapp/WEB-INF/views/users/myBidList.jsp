@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: KBS
-  Date: 11/25/2021
-  Time: 오전 6:23
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@page import="java.time.LocalDate"%>
 <%@page import="java.time.format.DateTimeFormatter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>

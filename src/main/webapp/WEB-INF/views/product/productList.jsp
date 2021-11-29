@@ -70,7 +70,7 @@
     <div id="productListWraper">
         <div id="categoryTitle">
             <c:choose>
-                <c:when test="${productCommand.category_id eq 0}"><h1>Chair</h1></c:when>
+                <c:when test="${productCommand.category_id eq 0 && productCommand.category_id ne '' && productCommand.category_id ne null}"><h1>Chair</h1></c:when>
                 <c:when test="${productCommand.category_id eq 1}"><h1>Table</h1></c:when>
                 <c:when test="${productCommand.category_id eq 2}"><h1>Cabinet</h1></c:when>
                 <c:when test="${productCommand.category_id eq 3}"><h1>Bed</h1></c:when>
