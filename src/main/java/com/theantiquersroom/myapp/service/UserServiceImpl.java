@@ -5,18 +5,13 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 
+import com.theantiquersroom.myapp.domain.*;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.theantiquersroom.myapp.domain.LoginDTO;
-import com.theantiquersroom.myapp.domain.MypageCriteria;
-import com.theantiquersroom.myapp.domain.ProductDTO;
-import com.theantiquersroom.myapp.domain.UserDTO;
-import com.theantiquersroom.myapp.domain.UserVO;
-import com.theantiquersroom.myapp.domain.modifyDTO;
 import com.theantiquersroom.myapp.mapper.UserMapper;
 import com.theantiquersroom.myapp.utils.Mailsender;
 
@@ -47,7 +42,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
         int affectedRows = this.mapper.insertUser(user);
 
         return affectedRows > 0;
-    }
+    } // registerUser()
 
     @Override
     public boolean checkId(String userId) {
@@ -64,7 +59,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     	}else {
     		return false;
     	}
-    }
+    } // checkId()
 
     @Override
     public boolean checkNickName(String nickName) {
@@ -80,7 +75,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     	}else {
     		return false;
     	}
-    }
+    } // checkNickName()
 
     @Override
     public boolean checkPhone(String phone) {
@@ -94,7 +89,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     	}else {
     		return false;
     	}
-    }
+    } // checkPhone()
 
     @Override
     public boolean confirmEmail(String userId, String auth) throws ParseException {
@@ -112,7 +107,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
         return false;
 
-    } // confirmEmail
+    } // confirmEmail()
 
     @Override
     public boolean sendEmail(String userId) throws Exception {
@@ -129,7 +124,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
             return true;
         }
         return false;
-    }
+    } // sendEmail()
 
 
     @Override
@@ -140,7 +135,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
         log.info("\t+ user: {}", user);
         
         return (passwordEncoder.matches(dto.getPassword(), user.getPassword()))? user:null;
-	}
+	} // login()
     
     
     @Override
@@ -176,7 +171,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 		log.debug("getList() invoked.");
 		
 		return this.mapper.getUserList();
-	} // getList
+	} // getList()
 	
 	@Override
 	public UserDTO get(String userId) {
@@ -196,7 +191,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 		log.info("\t+ affectedRows: {}", affectedRows);
 		
 		return affectedRows==1;		
-	} // modify
+	} // modify()
 
 	@Override
 	public boolean remove(String userId) {
@@ -206,11 +201,8 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 		log.info("\t+ affectedRows: {}", affectedRows);
 		
 		return affectedRows==1;	
-	} // remove
-	
+	} // remove()
 
-    // =====================마이페이지 관련===================== //
-	
 	@Override
 	public List<ProductDTO> getMyAuctionList(HashMap<String, Object> map) {
 		log.debug("getMyAuctionList({}) invoked.",map);
@@ -234,7 +226,9 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	}//getTotal
 
 	@Override
-	public List<ProductDTO> getMyBidList(HashMap<String, Object> map) {
+	public List<ProductDTO> getMyBidList(ProductCriteria cri, HashMap<String, Object> map) {
+		map.put("pageStart",cri.getPageStart());
+		map.put("perPageNum",cri.getPerPageNum());
     	log.debug("getMyBidList({}) invoked.",map);
     	List<ProductDTO> productDTOList = mapper.getMyBidList(map);
 
@@ -248,9 +242,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 		return mapper.getMyBidTotalCount(userId);
 	}
 
-
-	// =====================카카오 로그인 API 관련===================== //
-	
 	@Override
 	public UserDTO getKakaoUser(String kakaoUniqueId) {
 		log.debug("checkKakaoId({}) invoked.", kakaoUniqueId);
@@ -272,18 +263,16 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
         int affectedRows = this.mapper.insertKakaoUser(user);
 
         return affectedRows > 0;
-    }
-    
-//---------------------------------------------------//
+    } // registerKakaoUser()
+
     @Override
     public void destroy() throws Exception {
     	// TODO Auto-generated method stub
-    }
-    
+    } // destroy()
+
     @Override
     public void afterPropertiesSet() throws Exception {
     	// TODO Auto-generated method stub
-    }
-
+    } // afterPropertiesSet()
 
 } // end class

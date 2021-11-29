@@ -105,12 +105,12 @@
 
                 <li class="product">
 
-                    <img class="img" src="${product.imageUrl}">
+                    <img class="img" src="${product.imageUrl}" alt="">
                     <p id="productName">${product.name}</p>
-                    <p>경매 시작가 : ${product.startedPrice}</p>
+                    <p>경매 시작가 : ${product.startedPrice} 원</p>
                     <c:choose>
                         <c:when test="${empty product.currPrice}">
-                            <p>입찰내역이 없습니다.</p>
+                            <p>현재가 : ${product.startedPrice} 원</p>
                         </c:when>
                         <c:otherwise>
                             <p>현재가 : ${product.currPrice} 원</p>

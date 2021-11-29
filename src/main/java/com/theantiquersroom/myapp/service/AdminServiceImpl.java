@@ -2,6 +2,7 @@ package com.theantiquersroom.myapp.service;
 
 import java.util.List;
 
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ import lombok.extern.log4j.Log4j2;
 
 
 @Log4j2
-@AllArgsConstructor
+@NoArgsConstructor
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -50,7 +51,7 @@ public class AdminServiceImpl implements AdminService {
 		log.info("\t+ affectedRows: {}", affectedRows);
 		
 		return affectedRows>0;
-	}
+	} // modifyStatus
 
 	@Override
 	public Boolean rejectRequest(Integer pId) {

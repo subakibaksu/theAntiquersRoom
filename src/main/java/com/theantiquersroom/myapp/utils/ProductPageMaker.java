@@ -5,12 +5,6 @@ import lombok.Data;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
-/**
- * Created by KBS.
- * User: KBS
- * Date: 11/15/2021
- * Time: 오전 12:01
- */
 
 @Data
 public class ProductPageMaker {

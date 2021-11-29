@@ -38,5 +38,6 @@ public class ProductDTO {
 
    private List<String> imageUrls; // 파일별 등록된 이미지들의 주소
    private String imageUrl; // 파일별 등록된 대표이미지 주소
-
+   private Integer myBidPrice; // 나의 입찰금액
+   private Boolean expiration;
 } // end class

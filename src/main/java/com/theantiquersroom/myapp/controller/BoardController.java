@@ -99,25 +99,20 @@ public class BoardController {
         return  "redirect:/board/review";
     } // removeReview
 
+      @GetMapping("/QnA")
+      public void getQnA(Model model, BoardQnACriteria cri) { // 문의게시글 불러오기
 
+          log.debug("getQnA() invoked.");
 
+            model.addAttribute("list",service.getQnAListPaging(cri));
 
-//---------------------------------------------QnA=============================================
-    
-  @GetMapping("/QnA")
-  public void getQnA(Model model, BoardQnACriteria cri) { // 문의게시글 불러오기	
+            int total = service.getQnATotal();
 
-	  log.debug("getQnA() invoked.");
-	  
-		model.addAttribute("list",service.getQnAListPaging(cri));
-		
-		int total = service.getQnATotal();
-		
-		QnAPageMakeDTO pageMake = new QnAPageMakeDTO(cri, total);
-		
-		model.addAttribute("pageMaker", pageMake);
+            QnAPageMakeDTO pageMake = new QnAPageMakeDTO(cri, total);
 
-  } // getQnA 페이징처리
+            model.addAttribute("pageMaker", pageMake);
+
+      } // getQnA 페이징처리
 
     @GetMapping("/getQnADetail")
     public void getQnADetail(int bindex, Model model) {	// 상세 문의게시글 보기

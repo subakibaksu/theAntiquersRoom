@@ -15,5 +15,5 @@ public class FileUploadServiceImpl implements FileUploadService {
     @Override
     public String upload(MultipartFile file, String dirName) throws Exception {
         return uploader.upload(file, dirName);
-    }
+    } // upload()
 }

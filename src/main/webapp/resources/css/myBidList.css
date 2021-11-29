@@ -1,0 +1,101 @@
+#categoryTitle{
+
+    font-family: Merriweather;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    text-align: center;
+
+}
+
+ul{
+
+    padding-inline-start: 0;
+
+}
+
+#myPageWrapper{
+    flex-grow: 1;
+
+    width: 100%;
+    margin: 5rem 0 10rem 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.8rem;
+}
+
+#myBidTbl {
+    position: relative;
+    max-width: 70%;
+    text-align: center;
+}
+
+#myBidTbl th{
+    background-color: #B1A2A2;
+    color: white;
+    padding: 8px;
+    border-top-right-radius: 5%;
+    border-top-left-radius: 5%;
+}
+
+#myBidTbl td{
+    padding: 4px;
+}
+
+#myBidTbl tr{
+    border-block: 1px solid #B1A2A2;
+}
+
+#myBidTbl tr:hover{
+    background-color:aliceblue;
+}
+
+#leftTimeTableHead{
+    min-width: 16rem;
+}
+
+#pagingnationContainer{
+
+    float: left;
+    width: 100%;
+    text-align: center;
+
+}
+
+.pagination{
+
+    padding-inline-start: 0px;
+    margin-bottom: 5%;
+
+}
+
+#currPage{
+
+    border: solid 0.1rem;
+    border-color: #c2b1b1;
+    background-color: #c2b1b1;
+    text-decoration: none;
+    color: white;
+    padding-right: 0.8rem;
+    padding-left: 0.8rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    border-radius: 20%;
+
+}
+
+.page{
+
+    border: solid 0.1rem;
+    border-color: #c2b1b1;
+    text-decoration: none;
+    color: #3C3C3C;
+    padding-right: 0.8rem;
+    padding-left: 0.8rem;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+    border-radius: 20%;
+
+}

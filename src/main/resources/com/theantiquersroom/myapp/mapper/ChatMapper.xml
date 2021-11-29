@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.theantiquersroom.myapp.mapper.ChatMapper">
+    <insert
+            id="insertChat"
+            parameterType="com.theantiquersroom.myapp.domain.ChatDTO">
+        INSERT INTO chat
+        (p_id, user_id, msg)
+        VALUES (#{pid}, #{userId}, #{msg})
+
+    </insert>
+
+    <select
+            id="selectChatByProductId"
+            parameterType="Integer"
+            resultType="com.theantiquersroom.myapp.domain.ChatDTO">
+
+        SELECT p_id as pid,user_id,msg,sended_at
+        FROM chat
+        WHERE p_id = #{pId}
+
+    </select>
+</mapper>
