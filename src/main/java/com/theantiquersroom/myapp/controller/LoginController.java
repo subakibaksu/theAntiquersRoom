@@ -31,7 +31,6 @@ public class LoginController {
 	
 	@GetMapping("/login")
     public void login() {	// 로그인 페이지로 이동
-        log.debug("login() invoked.");
 
     } //login
 	
@@ -39,20 +38,18 @@ public class LoginController {
     public String login(
     		LoginDTO dto, Model model
     		) throws Exception {
-        log.debug("login({}) invoked.", dto);
         
         UserDTO user=this.service.login(dto);
-        log.info("\t+ user: {}", user);
         
         if(user != null) {
         	if(user.getUserId().equals("admin@antiquers.com")){ //관리자 아이디는 관리자페이지로 이동
-        		log.info("========당신은 관리자인가요?");
         		model.addAttribute(LoginController.authKey, user);
             	return "/admin/requestedList";
+            	
         	}else { //일반회원은 메인으로 이동
-        		log.info("========당신은 일반회원인가요?");
         		model.addAttribute(LoginController.authKey, user);
             	return "/main";
+            	
         	}//if-else
         }else {
             return "/login";
