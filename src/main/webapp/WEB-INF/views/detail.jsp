@@ -53,7 +53,6 @@
                         <c:forEach var="imgUrl" items="${product.imageUrls}" varStatus="status">
                             <td><img class="pImg" id="pImg_${status.count}" src="${imgUrl}" alt=""></td>
                         </c:forEach>
-                        
                     </tr>
                 </table>
             </div>

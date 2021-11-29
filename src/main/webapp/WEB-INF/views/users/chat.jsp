@@ -13,13 +13,6 @@
             margin:0;
             padding:0;
         }
-        .container h1{
-            text-align: left;
-            padding: 5px 5px 5px 15px;
-            color: #0a0a0a;
-            border-left: 3px solid #0a0a0a;
-            margin-bottom: 20px;
-        }
         .chating{
             border: 1px solid #d6b6b6;
             position: relative;
@@ -65,6 +58,7 @@
             position: relative;
             width: 24%;
             left: 38%;
+            padding-bottom: 6rem;
         }
 
         #sendBtn{
@@ -85,6 +79,37 @@
         input{
             width: 330px;
             height: 25px;
+        }
+
+        #chatHead{
+            position: relative;
+            left: 38%;
+            width: 24%;
+            min-width: 25rem;
+            overflow: auto;
+            text-align: center;
+            padding-bottom: 0.5rem;
+        }
+
+        #chatHead #imgBox{
+            float: left;
+            position: relative;
+            left: 0;
+            width: 39%;
+            margin-top: 10%;
+            border: solid 1px #c2b1b1;
+        }
+
+        img{
+           max-width: 90%;
+        }
+
+        #chatHead #contentBox{
+            float: right;
+            position: relative;
+            right: 0;
+            width: 60%;
+            margin-top: 15%;
         }
 
     </style>
@@ -153,9 +178,28 @@
     <header>
         <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
     </header>
-    <h1>${productId}번 상품 채팅방</h1>
+
+    <div id="chatHead">
+        <div id="imgBox">
+            <c:forEach var="imgUrl" items="${product.imageUrls}" begin="0" end="1">
+                <td><img src="${imgUrl}" alt=""></td>
+            </c:forEach>
+        </div>
+        <table id="contentBox">
+            <tr>
+                <th>상품명</th>
+                <td>${product.name}</td>
+            </tr>
+            <tr>
+                <th>낙찰가</th>
+                <td>${myBidPrice}</td>
+            </tr>
+        </table>
+
+    </div>
+
     <input type="hidden" id="sessionId" value="${sessionScope.__AUTH_ANTIQUE__.userId}">
-    <input type="hidden" id="roomNumber" value="${productId}">
+    <input type="hidden" id="roomNumber" value="${product.PId}">
     <input type="hidden" id="userName" value="${userId}">
 
     <div id="chating" class="chating">

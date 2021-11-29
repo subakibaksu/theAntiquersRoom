@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.theantiquersroom.myapp.domain.*;
 import com.theantiquersroom.myapp.service.ChatService;
+import com.theantiquersroom.myapp.service.ProductService;
 import com.theantiquersroom.myapp.service.UserService;
 import com.theantiquersroom.myapp.utils.ProductPageMaker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ public class UserController {
 
     @Setter(onMethod_= {@Autowired})
       private ChatService chatService;
+
+	@Setter(onMethod_= {@Autowired})
+	private ProductService productService;
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpSession session) {	// 로그아웃 실행
@@ -190,7 +194,10 @@ public class UserController {
 	} //getMyBidList
 
 	@GetMapping("/chat")
-	public String chat(@RequestParam("productId") Integer pId, Model model, HttpSession session){
+	public String chat(
+			@RequestParam("productId") Integer pId,
+			@RequestParam("myBidPrice") Integer myBidPrice,
+			Model model, HttpSession session){
 
     	//아이디 체크
 		//True or False 반환
@@ -204,10 +211,12 @@ public class UserController {
 		//model.addAtrribute("chatList",list);
 		UserDTO user = (UserDTO) session.getAttribute(LoginController.authKey);
 
+		ProductDTO productDTO = productService.getDetail(pId);
 		String userId = user.getUserId();
 
 		model.addAttribute("userId",userId);
-		model.addAttribute("productId",pId);
+		model.addAttribute("myBidPrice",myBidPrice);
+		model.addAttribute("product",productDTO);
 		model.addAttribute("chatList",chatService.getChat(pId));
 
     	return "/users/chat";

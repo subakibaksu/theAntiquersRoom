@@ -99,3 +99,19 @@ ul{
     border-radius: 20%;
 
 }
+
+.mybtn{
+
+    background-color: brown;
+    position: relative;
+    width: 5rem;
+    height: 2rem;
+    color: white;
+    border-radius: 6px;
+    border: none;
+    margin-left: 1.75rem;
+}
+
+.reviewWrite{
+    background-color: #b1a2a2;
+}
