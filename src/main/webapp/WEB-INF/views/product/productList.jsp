@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Title</title>
-    
+
     <link rel="stylesheet" href="/resources/css/productList.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

@@ -116,6 +116,7 @@
                 </if>
 
                 <if test="searchQuery != null and searchQuery != ''">
+                    AND P.ended_at > NOW()
                     AND P.name LIKE CONCAT('%',#{searchQuery},'%')
                 </if>
             </where>
@@ -151,6 +152,7 @@
             </if>
 
             <if test="searchQuery != null and searchQuery != ''">
+                AND ended_at > NOW()
                 AND name LIKE CONCAT('%',#{searchQuery},'%')
             </if>
         </where>
