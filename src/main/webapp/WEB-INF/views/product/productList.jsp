@@ -71,11 +71,12 @@
         <div id="categoryTitle">
             <c:choose>
                 <c:when test="${productCommand.category_id eq 0}"><h1>Chair</h1></c:when>
-                <c:when test="${productCommand.category_id eq 1}"><h1>Cabinet</h1></c:when>
-                <c:when test="${productCommand.category_id eq 2}"><h1>Bed</h1></c:when>
-                <c:when test="${productCommand.category_id eq 3}"><h1>Closet</h1></c:when>
-                <c:when test="${productCommand.category_id eq 4}"><h1>Dressing table</h1></c:when>
-                <c:when test="${productCommand.category_id eq 5}"><h1>etc.</h1></c:when>
+                <c:when test="${productCommand.category_id eq 1}"><h1>Table</h1></c:when>
+                <c:when test="${productCommand.category_id eq 2}"><h1>Cabinet</h1></c:when>
+                <c:when test="${productCommand.category_id eq 3}"><h1>Bed</h1></c:when>
+                <c:when test="${productCommand.category_id eq 4}"><h1>Closet</h1></c:when>
+                <c:when test="${productCommand.category_id eq 5}"><h1>Dressing table</h1></c:when>
+                <c:when test="${productCommand.category_id eq 6}"><h1>etc.</h1></c:when>
                 <c:otherwise>Search Result</c:otherwise>
             </c:choose>
         </div>
