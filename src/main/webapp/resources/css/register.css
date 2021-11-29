@@ -1,150 +1,148 @@
 @charset "UTF-8";
 
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
 body {
-	background-color: #F0E9E7;
+    min-height: 100vh;
 }
 
-.basecontainer {
-	max-width: 390px;
-	margin: 0 auto;
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #f0e9e7;
 }
 
-.top-header {
-	position: relative;
-	padding: 20px 0 54px;
-	box-sizing: border-box;
-	margin: 0 auto;
-	max-width: 768px;
-	min-width: 460px;
-	text-align: center;
+#userRegister_wrapper {
+    font-family: "Nanum Gothic", sans-serif;
+    margin-bottom: 5rem;
+}
+
+#logoBox {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
 }
 
 .logo {
-	font-family: Mercury Display A, Mercury Display B, MercuryDisplay-wb,
-		Mercury Display, serif;
-	text-decoration: none;
-	font-size: 20px;
-	text-align: left;
-	color: black;
+    color: black;
+    font-size: 1.1rem;
+    font-family: "Merriweather", serif;
+    text-decoration: none;
 }
 
-.regbase {
-	text-align: center;
-	align-items: center;
+#subjectBox {
+    text-align: center;
+    margin: 5rem 0 3rem 0;
 }
 
-.join_title {
-	text-align: left;
-	margin-bottom: 0;
+#subjectBox h2 {
+    font-family: "Gowun Dodum", sans-serif;
+    font-size: 1.5rem;
+}
+
+/* #form-container {
+} */
+
+.regconfirm,
+.emailconfirm {
+    display: flex;
+
+    width: 24rem;
+    height: 4rem;
+
+    margin-bottom: 1rem;
 }
 
 .regconfirm {
-	width: 390px;
-	height: 66px;
-	border: 1px solid lightgrey;
-	margin-bottom: 10px;
-	border-radius: 5px;
-	background-color: #fff;
+    flex-direction: column;
 }
 
-input {
-	padding: 24px 16 8 16;
-	width: 356px;
-	background-color: #fff;
+.regconfirm div {
+    display: flex;
 }
 
-input::placeholder {
-	color: #00838F;
-	opacity: 80%;
+#form-container input[type="text"] {
+    height: 3rem;
+    background-color: rgb(250, 250, 250);
+    box-shadow: 1px 1px 1px gray;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+
+    padding-left: 1rem;
 }
 
-.registerEmail {
-	width: 280px;
-	height: 22px;
-	font-size: 18px;
-	border: none;
-	margin-top: 20px;
-	padding: 2px;
+#email,
+#authInput {
+    width: 20rem !important;
+    margin-right: 1rem;
 }
 
-.register {
-	width: 350px;
-	height: 22px;
-	font-size: 18px;
-	border: none;
-	margin-top: 20px;
-	padding: 2px;
+#form-container input:focus {
+    border: none;
+}
+
+#form-container input::placeholder {
+    font-size: 0.8rem;
 }
 
 .regbtn {
-	width: 70px;
-	align-items: right;
-	border-radius: 5px;
-	border: 1px solid #D6B6B6;
-	background-color: #9C0000;
-	color: #D6B6B6;
-	padding: 5px;
+    width: 4.5rem;
+    height: 2.5rem;
+    border: none;
+    border-radius: 8px;
+    background-color: #9c0000;
+    box-shadow: 2px 2px 2px gray;
+    font-size: 0.8rem;
+    color: whitesmoke;
+
+    padding: 0.4rem;
+    margin-top: 0.35rem;
 }
 
 .regbtn:hover {
-	color: white;
-	background-color: #D6B6B6;
+    color: gray;
+    background-color: #d6b6b6;
 }
 
-.emailbtn{
-	position: relative;
-	width: 100%;
-	align-items: right;
-	border-radius: 5px;
-	border: 1px solid #D6B6B6;
-	background-color: #9C0000;
-	color: #D6B6B6;
-	padding: 5px;
-}
-
-.emailbtn:hover {
-	color: white;
-	background-color: #D6B6B6;
-}
-
-.emailconfirm {
-	width: 390px;
-	height: 66px;
-	border: 1px solid lightgrey;
-	margin-bottom: 10px;
-	border-radius: 5px;
-	background-color: #fff;
-}
-
-.inputbtn {
-	width: 300px;
-}
-
-p {
-	margin-top: 2px;
-	padding-left: 22px;
-	text-align: left;
-	font-size: 14px;
-}
-
-#subject {
-	text-align: center;
-	line-height: 150px;
-	font-size: 22px;
+.emailbtn,
+.submitbtn {
+    width: 100%;
+    height: 2.5rem;
+    border-radius: 8px;
+    border: none;
+    background-color: #9c0000;
+    box-shadow: 2px 2px 2px gray;
+    font-size: 0.8rem;
+    color: whitesmoke;
+    margin-bottom: 1rem;
 }
 
 .submitbtn {
-	width: 390px;
-	height: 40px;
-	align-items: right;
-	border-radius: 5px;
-	border: 1px solid #D6B6B6;
-	background-color: #9C0000;
-	color: #D6B6B6;
-	padding: 5px;
+    height: 3.5rem !important;
+    font-size: 0.9rem;
+    font-weight: 700;
 }
 
+.emailbtn:hover,
 .submitbtn:hover {
-	color: white;
-	background-color: #D6B6B6;
+    color: gray;
+    background-color: #d6b6b6;
+}
+
+p {
+    margin-top: 2px;
+    padding-left: 1rem;
+    text-align: left;
+    font-size: 0.8rem;
+}
+
+footer {
+    width: 100%;
 }
