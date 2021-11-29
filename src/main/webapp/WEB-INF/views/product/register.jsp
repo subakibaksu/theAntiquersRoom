@@ -90,11 +90,16 @@
                             && bidIncrementcheck && startedAtcheck && endedAtcheck
                             && contentcheck && imagescheck) {
                             $('#productSubmit')[0].submit()
-                            $("#register").click(function () {
-                                alert("성공적으로 경매가 요청되었습니다.");
+                            Swal.fire({
+                                title: '경매 요청이 완료되었습니다.',
+                                icon: 'success',
+                                closeOnClickOutside: false
+                            }).then(function(){
+                                self.location.href='/';
                             });
+
                         } else {
-                            alert("입력칸을 모두 채워주세요.");
+                            Swal.fire('입력 칸을 모두 채워주세요.','','warning');
                         }
                     }
 
