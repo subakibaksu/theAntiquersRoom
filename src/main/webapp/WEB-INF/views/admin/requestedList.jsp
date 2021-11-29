@@ -77,12 +77,12 @@
     </header>
     
 	<div id="myPageWrapper">
-	
+	<h2>승인 요청 상품</h2>
 	     <table id="myAcutionTbl">
 	        <caption>
 	            <ul id="topmenu">
 	                <li>&nbsp;</li>
-	                <li>승인 요청 상품</li>
+	                <li>&nbsp;</li>
 	                <li><button id="reqBtn" type="button" onclick="requestConfirm();">승인</button>
 					<button id="rejBtn" type="button" onclick="rejectRequest();">반려</button></li>
 	            </ul>
