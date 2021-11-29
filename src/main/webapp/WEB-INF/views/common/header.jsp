@@ -81,7 +81,7 @@
 
 				<div id="header_right">
 					<form action="/product/productList" method="get">
-						<input id="search_bar" type="text" maxlength="100" name="searchQuery" placeholder="검색어를 입력해주세요.">
+						<input id="search_bar" type="text" maxlength="100" name="searchQuery" placeholder="검색어를 입력해주세요." required>
 						<button class="findIcon" type="submit">
 							<i class="fas fa-search"></i>
 						</button>
