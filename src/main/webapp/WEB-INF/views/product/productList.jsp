@@ -52,7 +52,9 @@
     </script>
 </head>
 <body>
-    <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+    <header id="headerBox">
+        <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+    </header>
 
     <div id="productListWraper">
         <div id="categoryTitle">
