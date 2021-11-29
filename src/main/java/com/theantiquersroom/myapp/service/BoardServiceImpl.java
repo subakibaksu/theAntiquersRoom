@@ -126,7 +126,7 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 	}
 
 	@Override
-	public ReviewDTO getReviewDtail(int review_id) {
+	public ReviewDTO getReviewDtail(int reviewId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -138,7 +138,7 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 	}
 
 	@Override
-	public Integer removeReview(int review_id) {
+	public Integer removeReview(int reviewId) {
 		// TODO Auto-generated method stub
 		return null;
 	}
