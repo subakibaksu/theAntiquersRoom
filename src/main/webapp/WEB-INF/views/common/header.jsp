@@ -61,7 +61,7 @@
 
 							<!-- 회원가입버튼-->
 							<div class="menu_btn" id="signin_btn">
-								<a href="/register" >Sign in</a>
+								<a href="/register" >Sign up</a>
 							</div>
 						</c:when>
 

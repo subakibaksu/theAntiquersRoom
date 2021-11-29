@@ -73,7 +73,7 @@ $(document).ready(function (){
 
     });
 
-    $("#checkAuthBtn").click(function (){
+    $("#checkAuthBtn").on("click",function (){
 
         //Ajax로 인한 중복요청문제를 방지
         if( isAjaxing ){
@@ -97,14 +97,16 @@ $(document).ready(function (){
             contentType: 'application/json',
             success : function (result) {
 
+                console.log(result);
+                console.log(result.confirmResult);
                 //emailconfirm 성공시 #mymsg의 emailCheckStatus태그 내용을 변경
                 if(result.confirmResult){
-                    $(".emailconfirm").css('borderColor', 'green');
+                    Swal.fire("성공적으로 인증 되었습니다.","","success");
                     emailconfirmcheck = true;
 
 
                 }else {
-                    $(".emailconfirm").css('borderColor', 'crimson');
+                    Swal.fire("정상적으로 인증되지 않았습니다.","","error");
                     emailconfirmcheck = false;
                 }
 
