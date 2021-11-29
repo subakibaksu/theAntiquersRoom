@@ -125,16 +125,20 @@ header{
     padding: 8px;
 }
 
-#myAcutionTbl td{
-    padding: 4px;
-}
-
 #myAcutionTbl tr{
 	border-block: 1px solid #B1A2A2;
 }
 
 #myAcutionTbl tr:hover{
     background-color:aliceblue;
+}
+
+.detailBox{
+	text-align: left;
+}
+
+.hiddenDetail{
+	padding : 2rem 3rem;	
 }
 
 #topmenu{

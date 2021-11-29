@@ -85,12 +85,11 @@
 	                <th>경매상태</th>
 	            </tr>
 	        </thead>
-			<tbody>    
 				<c:forEach items="${auctionProductList}" var="aucProduct" varStatus="myIndex">
+				<tbody>    
 					<tr>
 						<td>
 							<img onclick="getDetail(${myIndex.index})" src="${aucProduct.imageUrl}" height="100px" width="100px">
-							<div hidden id="detail_${myIndex.index}"><c:out value="${aucProduct.content}"/></div>
 						</td>
 						<td><c:out value="${aucProduct.name}"/></td>
 						<td><c:out value="${aucProduct.categoryName}"/></td>
@@ -111,6 +110,16 @@
 							</c:if>
 						</td>
 					</tr>
+				</tbody>
+			    <tbody>
+		            <tr>
+		                <td class="detailBox" colspan="8">
+		                    <div hidden class="hiddenDetail" id="detail_${myIndex.index}">
+		                    <h3>상세정보</h3><br>
+		                    ${aucProduct.content}</div>
+		                </td>
+		            </tr>
+			    </tbody>
 				</c:forEach>
 			</tbody>
 	       

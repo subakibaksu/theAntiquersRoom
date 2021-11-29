@@ -22,6 +22,7 @@
     <script>
 
 	function getDetail(index){
+		$('#colcol').css('colspan',8);
 		$( '#detail_'+index ).slideToggle();
 	}
 	
@@ -99,12 +100,11 @@
 	                <th>승인/반려</th>
 	            </tr>
 	        </thead>
-			<tbody>    
 				<c:forEach items="${requestedList}" var="reqProduct" varStatus="myIndex">
+				<tbody>    
 					<tr>
 						<td>
 							<img onclick="getDetail(${myIndex.index})" src="${reqProduct.imageUrl}" height="100px" width="100px">
-							<div hidden id="detail_${myIndex.index}"><c:out value="${reqProduct.content}"/></div>
 						</td>
 						<td><c:out value="${reqProduct.name}"/></td>
 						<td><c:out value="${reqProduct.categoryName}"/></td>
@@ -129,12 +129,19 @@
 									<i class="fas fa-times"></i>
 								</c:otherwise>
 							</c:choose>
-
 						</td>
 					</tr>
+				</tbody>
+			    <tbody>
+		            <tr>
+		                <td class="detailBox" colspan="8">
+		                    <div hidden class="hiddenDetail" id="detail_${myIndex.index}">
+		                    <h3>상세정보</h3><br>
+		                    ${reqProduct.content}</div>
+		                </td>
+		            </tr>
+			    </tbody>
 				</c:forEach>
-			</tbody>
-	       
 	    </table>
 	
 	    <p>&nbsp;</p>
