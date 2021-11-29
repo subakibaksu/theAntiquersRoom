@@ -81,3 +81,29 @@
     border-radius: 0.125em;
     background-color: #f27474;
 }
+
+.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip] {
+    top:2.6em;
+    left:.3em;
+    width:1.5625em;
+    transform:rotate(45deg)
+}
+
+.swal2-icon.swal2-success [class^=swal2-success-line][class$=long] {
+    top:2.1em;
+    right:-0.0em;
+    width:2.9375em;
+    transform:rotate(-45deg)
+}
+
+.swal2-icon.swal2-success .swal2-success-fix {
+    position:absolute;
+    z-index:1;
+    top:.4em;
+    left:1.625em;
+    width:.4375em;
+    height:5.625em;
+    transform:rotate(-45deg)
+}
+
+
