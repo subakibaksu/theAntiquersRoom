@@ -53,7 +53,6 @@
                         <c:forEach var="imgUrl" items="${product.imageUrls}" varStatus="status">
                             <td><img class="pImg" id="pImg_${status.count}" src="${imgUrl}" alt=""></td>
                         </c:forEach>
-                        
                     </tr>
                 </table>
             </div>
@@ -61,7 +60,7 @@
                 <div id="leftTime" hidden>${product.leftTime}</div>
                 <table id="infoTable">
                     <tr>
-                        <th>판매자 닉네임</th>
+                        <th>판매자</th>
                         <td>${product.nickname}</td>
                     </tr>
                     <tr>
@@ -81,7 +80,7 @@
                         <td>
                             <c:choose>
                                 <c:when test="${empty product.currPrice}">
-                                    <p>입찰내역이 없습니다.</p>
+                                    <p>${product.startedPrice} 원</p>
                                 </c:when>
                                 <c:otherwise>
                                     <p>현재가 : ${product.currPrice} 원</p>
@@ -96,7 +95,7 @@
                                 <button id="upBtn" type="button" onclick='changeBid("up")'>
                                     <i class="fas fa-chevron-circle-up" ></i>
                                 </button>
-                                <input hidden name="pId" value="${product.pId}">
+                                <input hidden name="pId" value="${product.pid}">
                                 <input type="text" id="bidPrice" name="bidPrice" value="${product.bidIncrement}">원
                                 <button id="downBtn" type="button" onclick='changeBid("down")'>
                                     <i class="fas fa-chevron-circle-down" ></i>
@@ -104,7 +103,7 @@
                             </form>
 
                             <button type="button" id="bidBtn">입찰</button>
-                            <p id="bidResult"></p>
+                            <!-- <p id="bidResult"></p> -->
                         </td>
                     </tr>
                     <tr>
@@ -231,9 +230,9 @@
                     success : function (result) {
 
                         if(result.bidCheck){
-                            $("#bidResult").text("입찰에 성공하였습니다.");
+                            Swal.fire("입찰에 성공하였습니다.","","success");
                         }else{
-                            $("#bidResult").text("입찰에 실패하였습니다.");
+                            Swal.fire("입찰에 실패하였습니다.","","error");
                         }
 
                     },

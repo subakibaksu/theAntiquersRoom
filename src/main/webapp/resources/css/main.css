@@ -36,7 +36,9 @@ body {
 
 .mainSlides img {
     width: 100%;
-    height: 15rem;
+    height: 20rem;
+
+    filter: brightness(80%);
 }
 
 /* prev & next button */

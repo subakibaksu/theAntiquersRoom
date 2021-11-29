@@ -85,12 +85,11 @@
 	                <th>경매상태</th>
 	            </tr>
 	        </thead>
-			<tbody>    
 				<c:forEach items="${auctionProductList}" var="aucProduct" varStatus="myIndex">
+				<tbody>    
 					<tr>
 						<td>
 							<img onclick="getDetail(${myIndex.index})" src="${aucProduct.imageUrl}" height="100px" width="100px">
-							<div hidden id="detail_${myIndex.index}"><c:out value="${aucProduct.content}"/></div>
 						</td>
 						<td><c:out value="${aucProduct.name}"/></td>
 						<td><c:out value="${aucProduct.categoryName}"/></td>
@@ -105,12 +104,22 @@
 							<c:out value="${aucProduct.status}"/><br>
 							<c:if test="${aucProduct.status!='판매취소' and aucProduct.status!='낙찰완료' and aucProduct.status!='미낙찰' and aucProduct.status!='경매종료'}">
 								<form action="/admin/stopSale" method="post">
-									<input type="hidden" id="pId" name="pId" value="${aucProduct.pId}">
+									<input type="hidden" id="pId" name="pId" value="${aucProduct.pid}">
 									<input type="submit" id="stopBtn" value="판매중단">
 								</form>	
 							</c:if>
 						</td>
 					</tr>
+				</tbody>
+			    <tbody>
+		            <tr>
+		                <td class="detailBox" colspan="8">
+		                    <div hidden class="hiddenDetail" id="detail_${myIndex.index}">
+		                    <h3>상세설명</h3><br>
+		                    ${aucProduct.content}</div>
+		                </td>
+		            </tr>
+			    </tbody>
 				</c:forEach>
 			</tbody>
 	       

@@ -77,12 +77,12 @@
     </header>
     
 	<div id="myPageWrapper">
-	
+	<h2>승인 요청 상품</h2>
 	     <table id="myAcutionTbl">
 	        <caption>
 	            <ul id="topmenu">
 	                <li>&nbsp;</li>
-	                <li>승인 요청 상품</li>
+	                <li>&nbsp;</li>
 	                <li><button id="reqBtn" type="button" onclick="requestConfirm();">승인</button>
 					<button id="rejBtn" type="button" onclick="rejectRequest();">반려</button></li>
 	            </ul>
@@ -99,12 +99,11 @@
 	                <th>승인/반려</th>
 	            </tr>
 	        </thead>
-			<tbody>    
 				<c:forEach items="${requestedList}" var="reqProduct" varStatus="myIndex">
+				<tbody>    
 					<tr>
 						<td>
 							<img onclick="getDetail(${myIndex.index})" src="${reqProduct.imageUrl}" height="100px" width="100px">
-							<div hidden id="detail_${myIndex.index}"><c:out value="${reqProduct.content}"/></div>
 						</td>
 						<td><c:out value="${reqProduct.name}"/></td>
 						<td><c:out value="${reqProduct.categoryName}"/></td>
@@ -119,7 +118,7 @@
 							<c:choose>
 								<c:when test="${reqProduct.status=='승인대기중'}">
 									<form action="/admin/confirmRequest" method="post">
-										<input type="checkbox" name="checkPId" id="myCheck" value="${reqProduct.pId}" >
+										<input type="checkbox" name="checkPId" id="myCheck" value="${reqProduct.pid}" >
 									</form>
 								</c:when>
 								<c:when test="${reqProduct.status=='승인완료'}">
@@ -129,12 +128,19 @@
 									<i class="fas fa-times"></i>
 								</c:otherwise>
 							</c:choose>
-
 						</td>
 					</tr>
+				</tbody>
+			    <tbody>
+		            <tr>
+		                <td class="detailBox" colspan="8">
+		                    <div hidden class="hiddenDetail" id="detail_${myIndex.index}">
+		                    <h3>상세정보</h3><br>
+		                    ${reqProduct.content}</div>
+		                </td>
+		            </tr>
+			    </tbody>
 				</c:forEach>
-			</tbody>
-	       
 	    </table>
 	
 	    <p>&nbsp;</p>

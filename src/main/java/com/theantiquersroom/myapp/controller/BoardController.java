@@ -1,4 +1,6 @@
 package com.theantiquersroom.myapp.controller;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,9 +12,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.theantiquersroom.myapp.domain.BoardDTO;
 import com.theantiquersroom.myapp.domain.BoardQnACriteria;
+import com.theantiquersroom.myapp.domain.BoardReviewCriteria;
 import com.theantiquersroom.myapp.domain.ProductDTO;
 import com.theantiquersroom.myapp.domain.QnADTO;
 import com.theantiquersroom.myapp.domain.QnAPageMakeDTO;
+import com.theantiquersroom.myapp.domain.ReviewDTO;
+import com.theantiquersroom.myapp.domain.ReviewPageMakeDTO;
+import com.theantiquersroom.myapp.domain.UserDTO;
 import com.theantiquersroom.myapp.service.BoardService;
 import com.theantiquersroom.myapp.service.ProductService;
 
@@ -34,76 +40,83 @@ public class BoardController {
     @Setter(onMethod_= {@Autowired} )
     private ProductService prdouctService;
 
+    
     @GetMapping("/review")
-    public void getReview( ) {
-        log.debug("getReview() invoked.");
-
+    public void getReview(Model model,  BoardReviewCriteria cri) {
+  	  log.debug("getReview() invoked.");
+	  
+  		model.addAttribute("reviewList",service.getReviewListPaging(cri));
+  		
+  		int total = service.getReviewTotal();
+  		
+  		ReviewPageMakeDTO pageMake = new ReviewPageMakeDTO(cri, total);
+  		
+  		model.addAttribute("pageMaker", pageMake);
+        
     } // getReview
-
 
     @GetMapping("/getReviewDetail")
     public void getReviewDetail(Integer b_num, Model model ) {
         log.debug("getReviewDetail() invoked.");
 
-//      BoardVO board = this.service.getDetailReview(b_num);
-//      log.info("\t+ board: {}" , board);
-
-//      model.addAttribute("board", board);
-
     } // getReviewDetail
 
-
+    //리뷰작성시 상품명, 낙찰가 주입.
     @GetMapping("/registerReview")
-    public void registerReview( ) {
-        log.debug("registerReview() invoked.");
+    public String getReview(Integer pId, Model model) {
+    	log.debug("getReview({}) invoked.", pId);
+    	
+    	ProductDTO dto = this.productService.getDetail(pId);
+    	log.info("/t+ dto: {}", dto);
+    	assert dto != null;
 
-    } // registerReview  리뷰작성페이지로 이동
-
-
+    	model.addAttribute("product", dto);
+    	
+    	return "/board/registerReview";
+    } // getDetail()
+    
     @PostMapping("/registerReview")
-    public String registerReview(BoardDTO board, RedirectAttributes rttrs) {
-        log.debug("registerReview()_ invoked.");
+    public String registerReview(ReviewDTO dto, HttpSession session) {
+        log.debug("registerReview({}) invoked.", dto);
 
-//      boolean result = this.service.registerReview(board);
-//      rttrs.addAttribute("result", result);
-
+        UserDTO userdto = (UserDTO) session.getAttribute(LoginController.authKey);
+        String userId = userdto.getUserId();
+        		dto.setAuthor(userId);
+        
+        this.service.registerReview(dto);
+        
         return "redirect:/board/review";
-    } // registerReview  작성된 리뷰정보 DB전달
-
+    } // registerReview
 
     @GetMapping("/modifyReview")
-    public void modifyReview( ) {
+    public String modifyReview() {
         log.debug("modifyReview() invoked.");
-
-    } // modifyReview  리뷰 수정페이지로 이동
-
+        
+        return "redirect:/board/review";
+    } // modifyReview
 
     @PostMapping("/modifyReview")
     public String modify(BoardDTO board, RedirectAttributes rttrs) {
         log.debug("modify({}) invoked." , board);
 
-//      boolean result = this.service.modifyReview(board);
-
-        // 이동되는 화면으로 전송해줘야할 파라미터가 있으면,
-        // rttrs 를 사용해야 한다!!!
-//      rttrs.addAttribute("result", result);
-
-        return  "redirect:/board/review"; // 이동된 화면 직전에 수행했던게 양식이라면(?) redirect
+        return  "redirect:/board/review";
 
     } // modifyReview  수정된 리뷰정보 DB전달
 
 
     @PostMapping("/removeReview")
-    public String removeReview(@RequestParam("b_num") Integer b_num, RedirectAttributes rttrs) {
-        log.debug("remove({}) invoked." , b_num);
-
-//      boolean result = this.service.removeReview(b_num);
-//      rttrs.addAttribute("result" ,result);
+    public String removeReview(@RequestParam("review_id") Integer review_id, RedirectAttributes rttrs) {
+        log.debug("remove({}) invoked." , review_id);
 
         return  "redirect:/board/review";
     } // removeReview
 
+      @GetMapping("/QnA")
+      public void getQnA(Model model, BoardQnACriteria cri) { // 문의게시글 불러오기
 
+          log.debug("getQnA() invoked.");
+
+            model.addAttribute("list",service.getQnAListPaging(cri));
 
 
 //---------------------------------------------QnA=============================================
@@ -124,7 +137,8 @@ public class BoardController {
 		model.addAttribute("pageMaker", pageMake);
 		model.addAttribute("pId",pId);
 
-  } // getQnA 페이징처리
+
+      } // getQnA 페이징처리
 
     @GetMapping("/getQnADetail")
     public void getQnADetail(int bindex, Model model) {	// 상세 문의게시글 보기
@@ -203,5 +217,6 @@ public class BoardController {
         return  "redirect:/product/getDetail?" +"pId="+pId;
 
     } // removeQnA
+   
 
 } // end class

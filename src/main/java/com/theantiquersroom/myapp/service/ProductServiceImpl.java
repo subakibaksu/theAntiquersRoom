@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.theantiquersroom.myapp.domain.*;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 
-@AllArgsConstructor
+@NoArgsConstructor
 @Log4j2
 
 @Service
@@ -149,7 +150,7 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
         }
 
           return this.mapper.updateProduct(product);
-    }
+    } // modify()
 
     // 상품 수정 정보 가져오기
     @Override
@@ -168,15 +169,14 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
 
         List<ProductDTO> productDTOList = mapper.getNewProduct();
         return productDTOList;
-    }
+    } // getNewProduct()
 
     @Override
     public List<ProductDTO> getEndingProduct() {
 
         List<ProductDTO> productDTOList = mapper.getEndingProduct();
         return productDTOList;
-
-    }
+    } // getEndingProduct()
 
     // 유찰 등록
     @Transactional
@@ -184,6 +184,6 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
     public void reRegister(ProductReRegisterDTO reRegister) {
 
         this.mapper.reRegister(reRegister);
-    }
+    } // reRegister
 
 } // end class

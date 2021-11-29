@@ -4,14 +4,8 @@ import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
 
+import com.theantiquersroom.myapp.domain.*;
 import org.springframework.stereotype.Service;
-
-import com.theantiquersroom.myapp.domain.LoginDTO;
-import com.theantiquersroom.myapp.domain.MypageCriteria;
-import com.theantiquersroom.myapp.domain.ProductDTO;
-import com.theantiquersroom.myapp.domain.UserDTO;
-import com.theantiquersroom.myapp.domain.UserVO;
-import com.theantiquersroom.myapp.domain.modifyDTO;
 
 
 @Service
@@ -70,7 +64,7 @@ public interface UserService {
   	public abstract Integer getMyAuctionTotal(String userId);
 
   	// 나의 입찰리스트
-    public abstract List<ProductDTO> getMyBidList(HashMap<String,Object> map);
+    public abstract List<ProductDTO> getMyBidList(ProductCriteria cri, HashMap<String,Object> map);
 
     // 나의 입찰리스트 총 레코드 개수 반환
     public abstract Integer getMyBidTotal(String userId);

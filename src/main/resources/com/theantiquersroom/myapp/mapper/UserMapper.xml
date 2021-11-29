@@ -255,9 +255,10 @@
 
         <![CDATA[
 
-        SELECT count(p_id)
-        FROM product
-        WHERE user_id=#{userId}
+        SELECT count(P.p_id)
+        FROM product AS P
+        WHERE P.p_id IN
+              (SELECT p_id FROM bid_history WHERE user_id = #{userId})
 
         ]]>
     </select>
@@ -270,25 +271,41 @@
             parameterType="hashmap">
 
         <![CDATA[
-
             SELECT
-                P.p_id as pId,
+                P.p_id,
                 P.name,
-                P.created_at as createdAt,
-                P.updated_at as updatedAt,
+                P.created_at,
+                P.updated_at,
                 P.content,
-                P.category_id as categoryId,
-                P.user_id as userId,
-                P.started_at as startedAt,
-                P.ended_at as endedAt,
-                P.started_price as startedPrice,
-                P.bid_increment as bidIncrement,
-                P.status
-            FROM product as P
+                P.category_id,
+                P.user_id,
+                P.started_at,
+                P.ended_at,
+                P.started_price,
+                P.bid_increment,
+                P.status,
+                TIMESTAMPDIFF(SECOND,NOW(),ended_at) AS lefttime,
+                (SELECT PI.image_url
+                FROM product_image AS PI
+                WHERE PI.p_id = P.p_id
+                LIMIT 1) AS imageUrl,
+                (SELECT B.bid_price
+                FROM bid_history AS B
+                WHERE B.p_id = P.p_id
+                ORDER BY B.bid_price DESC
+                LIMIT 1) AS currPrice,
+                (SELECT B.bid_price
+                FROM bid_history AS B
+                WHERE B.user_id = #{userId} AND B.p_id = P.p_id
+                ORDER BY B.bid_price DESC
+                LIMIT 1) as myBidPrice,
+                IF(P.ended_at < NOW(),false,true) as expiration
+            FROM product AS P
+
             WHERE P.p_id IN
-                  (SELECT p_id FROM bid_history WHERE user_id = 'sleptawake@gmail.com')
-            ORDER BY P.created_at DESC
-            LIMIT #{cri.pageStart}, #{cri.amount}
+                  (SELECT p_id FROM bid_history WHERE user_id = #{userId})
+            ORDER BY P.ended_at DESC
+            LIMIT #{pageStart}, #{perPageNum}
 
 
         ]]>

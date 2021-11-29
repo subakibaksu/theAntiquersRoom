@@ -21,10 +21,9 @@ public class ProductCriteria {
     public ProductCriteria() {
 
         this.page =1;
-        this.perPageNum =9;// 페이지당 기본 9개씩 출력하도록 초기화
+        this.perPageNum =12;// 페이지당 기본 9개씩 출력하도록 초기화
 
     }
-
 
     // getter setter
     public int getPage() {

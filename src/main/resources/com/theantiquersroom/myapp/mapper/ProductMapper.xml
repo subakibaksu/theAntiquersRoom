@@ -109,11 +109,14 @@
             FROM product AS P
 
             <where>
+
                 <if test="category_id != null and category_id != ''">
+                    AND P.ended_at > NOW()
                     AND P.category_id = #{category_id}
                 </if>
 
                 <if test="searchQuery != null and searchQuery != ''">
+                    AND P.ended_at > NOW()
                     AND P.name LIKE CONCAT('%',#{searchQuery},'%')
                 </if>
             </where>
@@ -142,11 +145,14 @@
         SELECT count(*)
         FROM product
         <where>
+
             <if test="category_id != null and category_id != ''">
+                AND ended_at > NOW()
                 AND category_id = #{category_id}
             </if>
 
             <if test="searchQuery != null and searchQuery != ''">
+                AND ended_at > NOW()
                 AND name LIKE CONCAT('%',#{searchQuery},'%')
             </if>
         </where>
@@ -269,6 +275,7 @@
                 ORDER BY B.bid_price DESC
                 LIMIT 1) AS currPrice
         FROM product as P
+        WHERE P.ended_at > NOW()
         ORDER BY created_at DESC
         LIMIT 1, 10
     </select>
@@ -300,6 +307,7 @@
                 ORDER BY B.bid_price DESC
                 LIMIT 1) AS currPrice
         FROM product as P
+        WHERE P.ended_at > NOW()
         ORDER BY created_at ASC
         LIMIT 1, 10
 

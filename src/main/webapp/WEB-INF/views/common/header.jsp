@@ -61,7 +61,7 @@
 
 							<!-- 회원가입버튼-->
 							<div class="menu_btn" id="signin_btn">
-								<a href="/register" >Sign in</a>
+								<a href="/register" >Sign up</a>
 							</div>
 						</c:when>
 
@@ -80,10 +80,12 @@
 				</div>
 
 				<div id="header_right">
-					<input id="search_bar" type="text" maxlength="100" placeholder="검색어를 입력해주세요.">
-					<button class="findIcon" type="submit">
-						<i class="fas fa-search"></i>
-					</button>
+					<form action="/product/productList" method="get">
+						<input id="search_bar" type="text" maxlength="100" name="searchQuery" placeholder="검색어를 입력해주세요." required>
+						<button class="findIcon" type="submit">
+							<i class="fas fa-search"></i>
+						</button>
+					</form>
 				</div>
 			</div>
 		</div>
