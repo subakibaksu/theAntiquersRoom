@@ -90,7 +90,7 @@
 
         <ul id="productListContainer">
             <c:forEach items="${productList}" var="product">
-                <a href="/product/getDetail?pId=${product.pId}">
+                <a href="/product/getDetail?pId=${product.pid}">
                     <li class="product">
                         <img class="img" src="${product.imageUrl}" alt="">
                         <p id="productName">${product.name}</p>

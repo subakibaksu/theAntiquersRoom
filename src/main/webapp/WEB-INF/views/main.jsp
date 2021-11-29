@@ -164,7 +164,7 @@
             <div>
                 <ul class="main_ul" id="endingItems">
                     <c:forEach var="endingProduct" items="${endingProductList}">
-                        <a href="/product/getDetail?pId=${endingProduct.PId}">
+                        <a href="/product/getDetail?pId=${endingProduct.pid}">
                         <li class="main_item endingItem">
                             <div class="main_item_img">
                                 <img src="${endingProduct.imageUrl}" alt="">
