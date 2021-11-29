@@ -78,7 +78,8 @@
                     let contentcheck = false;
                     let imagescheck = false;
 
-                    $('#register').click(function () {
+                    $('#productSubmit').submit(function (e) {
+                        e.preventDefault();
                         Checkform();
                         buttonlive();
                     });
@@ -88,7 +89,7 @@
                         if (namecheck && categoryIdcheck && startedPricecheck
                             && bidIncrementcheck && startedAtcheck && endedAtcheck
                             && contentcheck && imagescheck) {
-                            console.log("buttonlive true");
+                            $('#productSubmit')[0].submit()
                             $("#register").click(function () {
                                 alert("성공적으로 경매가 요청되었습니다.");
                             });
@@ -100,37 +101,21 @@
 
                     // 입력 값 체크
                     function Checkform() {
-                        if ($('#name').val() == "") {
-                            $('#name').focus();
-                        } else namecheck = true;
+                        if ($('#name').val() != "") namecheck = true;
 
-                        if ($('#categoryId').val() == "") {
-                            $('#categoryId').focus();
-                        } else categoryIdcheck = true;
+                        if ($('#categoryId').val() != "") categoryIdcheck = true;
 
-                        if ($('#startedPrice').val() == "") {
-                            $('#startedPrice').focus();
-                        } else startedPricecheck = true;
+                        if ($('#startedPrice').val() != "") startedPricecheck = true;
 
-                        if ($('#bidIncrement').val() == "") {
-                            $('#bidIncrement').focus();
-                        } else bidIncrementcheck = true;
+                        if ($('#bidIncrement').val() != "") bidIncrementcheck = true;
 
-                        if ($('#startDate').val() == "") {
-                            $('#startDate').focus();
-                        } else startedAtcheck = true;
+                        if ($('#startDate').val() == "") startedAtcheck = true;
 
-                        if ($('#endDate').val() == "") {
-                            $('#endDate').focus();
-                        } else endedAtcheck = true;
+                        if ($('#endDate').val() == "") endedAtcheck = true;
 
-                        if ($('#summernote').val() == "") {
-                            $('#summernote').focus();
-                        } else contentcheck = true;
+                        if ($('#summernote').val() == "") contentcheck = true;
 
-                        if ($('#image1').val() == "") {
-                            $('#image1').focus();
-                        } else imagescheck = true;
+                        if ($('#image1').val() == "") imagescheck = true;
                     }
                 });
     </script>
@@ -180,7 +165,6 @@
                                         <option value="5">화장대</option>
                                         <option value="6">기타</option>
                                     </select>
-                                    <p></p>
                                 </label>
                             </td>
                         </tr>
