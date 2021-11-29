@@ -120,7 +120,7 @@
             <div>
                 <ul class="main_ul" id="newItems">
                     <c:forEach var="newProduct" items="${newProductList}">
-                        <a href="/product/getDetail?pId=${newProduct.PId}">
+                        <a href="/product/getDetail?pId=${newProduct.pid}">
                         <li class="main_item newItem">
                             <div class="main_item_img">
                                 <img src="${newProduct.imageUrl}" alt="">
@@ -198,6 +198,6 @@
 
 
     <script src="resources/js/main.js"></script>
-    
+
 </body>
 </html>

@@ -99,8 +99,8 @@
         <tbody>
         <c:forEach items="${myBidList}" var="myBid">
             <tr>
-                <td><a href="/product/getDetail?pId=${myBid.pId}"><img src="${myBid.imageUrl}" height="100px" width="100px" alt=""></a></td>
-                <td><a href="/product/getDetail?pId=${myBid.pId}"><c:out value="${myBid.name}"/></a></td>
+                <td><a href="/product/getDetail?pId=${myBid.pid}"><img src="${myBid.imageUrl}" height="100px" width="100px" alt=""></a></td>
+                <td><a href="/product/getDetail?pId=${myBid.pid}"><c:out value="${myBid.name}"/></a></td>
                 <td><c:out value="${myBid.startedPrice}"/></td>
                 <td><c:out value="${myBid.currPrice}"/></td>
                 <td><c:out value="${myBid.myBidPrice}"></c:out></td>

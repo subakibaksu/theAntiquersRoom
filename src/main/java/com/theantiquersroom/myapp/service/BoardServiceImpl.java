@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.theantiquersroom.myapp.domain.BoardQnACriteria;
+import com.theantiquersroom.myapp.domain.BoardReviewCriteria;
 import com.theantiquersroom.myapp.domain.QnADTO;
+import com.theantiquersroom.myapp.domain.ReviewDTO;
 import com.theantiquersroom.myapp.mapper.BoardMapper;
 
 import lombok.AllArgsConstructor;
@@ -89,6 +91,60 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 		return affectedRows==1;
 	} // registerReQnA()
 
+	
+//	=========================== 리뷰 게시판 ==============================
+	
+	/* 리뷰게시글 등록 */
+	@Override
+	public boolean registerReview(ReviewDTO dto) {
+		log.info("registerReview() invoked.");
+		
+		int affectedRows = this.mapper.registerReview(dto);
+		log.info("\t+ affectedRows: {}", affectedRows);
+
+		return affectedRows==1;
+	}
+	
+	/* 리뷰게시글 보기 */
+	@Override
+	public List<ReviewDTO> getReviewList() {
+		log.info("getReviewList() invoked.");
+		
+		return this.mapper.getReviewList();
+	}
+
+	@Override
+	public List<ReviewDTO> getReviewListPaging(BoardReviewCriteria cri) {
+
+		return mapper.getReviewListPaging(cri);
+	}
+
+	@Override
+	public Integer getReviewTotal() {
+		
+		return mapper.getQnATotal();
+	}
+
+	@Override
+	public ReviewDTO getReviewDtail(int reviewId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer modifyReview(ReviewDTO dto) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Integer removeReview(int reviewId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+//=============================//
+	
 	@Override
 	public void destroy() throws Exception {
 		

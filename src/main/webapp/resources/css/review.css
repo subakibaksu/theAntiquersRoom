@@ -23,7 +23,7 @@ td, th {
 }
 
 tr {
-	border-block: 1px solid black;
+	border-block: 1px solid #C1B2B2;
 }
 
 th {
@@ -32,5 +32,27 @@ th {
 }
 
 #tableContent {
-	width: 200px;
+	width: 300px;
+}
+
+#content {
+	text-overflow: ellipsis;
+    max-width: 300px;
+} 
+
+#content:hover {
+	cursor: pointer;
+}
+
+.tablehead:hover {
+	background-color: rgb(227, 182, 174, 0.2);
+}
+
+#header {
+	background-color: rgb(227, 182, 174, 0.7);
+}
+
+#img {
+	width: 90px;
+	height: 90px;
 }

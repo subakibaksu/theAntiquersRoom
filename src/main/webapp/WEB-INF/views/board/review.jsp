@@ -1,57 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-    
-    <!DOCTYPE html>
-    <html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 
-    <head>
-        <meta charset="UTF-8">
-        <title>reviewpage</title>
-        <link rel="stylesheet" href="/resources/css/review.css">
-        
-        <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-        
-    </head>
+<!DOCTYPE html>
+<html>
 
-    <body>
-    
-    
-	    <div id= "reviewcontainer">
-		
-			<p>33</p>
-		
-	        <table id="tableplace">
-	        
-	        	<div class="tablehead">
-		            <th id="tableImage">이미지</th>
-		            <th id="tableContent">글내용 </th>
-		            <th id="tableId">작성자 아이디</th>
-		            <th id="tableRating">별점</th>
-	            </div>
-	            
-	        	<div class="tablehead">
-		            <tr>
-		                <td>${file_image}</td>
-		                <td>${review}</td>
-		                <td>${user_id}</td>
-		                <td>${star_rating}</td>
-		            </tr>
-	            </div>
-	            <tr>
-	                <td>images</td>
-	                <td>content</td>
-	                <td>nickname</td>
-	                <td>별별별별별</td>
-	            </tr>
-	            
-	        </table>
-	        	
-		</div>
-		
-		<%-- <div id="footer">
-			<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-		</div> --%>
+<head>
+    <meta charset="UTF-8">
+    <title>reviewpage</title>
+    <link rel="stylesheet" href="/resources/css/review.css">        
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(document)
+			.ready(function(){
+			$("#content").onclick(function(){
+ 				$("#content").removeAttr('style');
+			});
+		});
+	</script>
+	
+</head>
 
-    </body>
-    
+<body>
+ 	<div id= "reviewcontainer">
+		     <table id="tableplace">
+		     
+		     	<tr class="tablehead" id="header">
+		          <th id="tableImage">이미지</th>
+		          <th id="tableContent">리뷰</th>
+		          <th id="tableId">닉네임</th>
+		          <th id="tableRating">별점</th>
+		        </tr>
+		<c:forEach items="${reviewList}" var="review">
+	           <tr class="tablehead">
+	              <td id="img"><c:out value="image"/></td>
+	              <td id="content" style='white-space: nowrap; overflow: hidden;'><c:out value="${review.content}"/></td>
+	              <td id="nick"><c:out value="${sessionScope.__AUTH_ANTIQUE__.nickName}"/></td>
+	              <td id="rating">
+	              	<c:choose>
+	              		<c:when test="${review.score eq '1'}">
+	              			<c:out value="★☆☆☆☆"/>
+	              		</c:when>
+	              		<c:when test="${review.score eq '2'}">
+	              			<c:out value="★★☆☆☆"/>
+	              		</c:when>
+	              		<c:when test="${review.score eq '3'}">
+	              			<c:out value="★★★☆☆"/>
+	              		</c:when>
+	              		<c:when test="${review.score eq '4'}">
+	              			<c:out value="★★★★☆"/>
+	              		</c:when>
+	              		<c:when test="${review.score eq '5'}">
+	              			<c:out value="★★★★★"/>
+	              		</c:when>
+	              	</c:choose>
+	              </td>
+	           </tr>
+	    </c:forEach>
+		     </table>
+       	
+	</div>
+</body>
 
-    </html>
+</html>
