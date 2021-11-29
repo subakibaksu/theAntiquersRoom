@@ -1,6 +1,5 @@
 $(document).ready(function (){
 
-    let idcheck = false;
     let nickcheck = false;
     let phonecheck = false;
 	let pwcheck = false;
@@ -135,7 +134,7 @@ $(document).ready(function (){
 
     // 제출버튼 활성화 함수
     function buttonlive() {
-        if (idcheck && pwcheck && chpwcheck
+        if (pwcheck && chpwcheck
             && nickcheck && phonecheck ) {
             $("#modifyBtn").click(function(){
                 alert("성공적으로 수정되었습니다.");
