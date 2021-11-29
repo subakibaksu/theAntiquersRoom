@@ -32,7 +32,6 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class UserController {
 
-	
     @Setter(onMethod_= {@Autowired})
     private UserService service;
 
@@ -68,8 +67,6 @@ public class UserController {
         }
     } //logout
 
-    // ======================== MyPage =========================== //
-    
     @GetMapping("/myAuctionList")
     public String getMyAuctionList(
     		HttpSession session,

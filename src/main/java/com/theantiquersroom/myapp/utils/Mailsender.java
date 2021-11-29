@@ -12,16 +12,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
-/**
- * Created by KBS.
- * User: KBS
- * Date: 11/7/2021
- * Time: 오전 2:12
- */
 
 @Log4j2
-
-
 public class Mailsender {
 
     @Setter(onMethod_={@Autowired})

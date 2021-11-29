@@ -10,12 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * Created by KBS.
- * User: KBS
- * Date: 11/28/2021
- * Time: 오후 10:20
- */
+
 @Log4j2
 @NoArgsConstructor
 

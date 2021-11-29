@@ -2,6 +2,7 @@ package com.theantiquersroom.myapp.service;
 
 import java.util.List;
 
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
-@AllArgsConstructor
+@NoArgsConstructor
 
 @Service
 public class BoardServiceImpl implements BoardService, InitializingBean, DisposableBean {
@@ -30,8 +31,7 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 		log.debug("getQnAList() invoked.");
 		
 		return this.mapper.getQnAList();
-
-	} 
+	} // getQnAList()
 	
 	/* 문의게시판 등록 */
 	@Override
@@ -42,43 +42,42 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 		log.info("\t+ affectedRows: {}", affectedRows);
 		
 		return affectedRows==1;
-		
-	} 
+	} // registerQnA()
 	
 	/* 문의게시판 목록(페이징 적용) */
 	@Override
 	public List<QnADTO> getQnAListPaging(BoardQnACriteria cri) {
 		
 		return mapper.getQnAListPaging(cri);
-	}
+	} // getQnAListPaging()
 	
     /* 문의게시물 총 갯수 */
 	@Override
 	public Integer getQnATotal() {
 
 		return mapper.getQnATotal();
-	}
+	} // getQnATotal()
 	
   	/* 문의게시판 조회 */
 	@Override
 	public QnADTO getQnADetail(int bindex) {
 
 		return mapper.getQnADetail(bindex);
-	}
+	} // getQnADetail()
 	
 	/* 문의게시글 수정 */
 	@Override
 	public Integer modifyQnA(QnADTO dto) {
 		
 		return mapper.modifyQnA(dto);
-	}
+	} // modifyQnA()
 	
 	/* 문의게시글 삭제 */
 	@Override
 	public Integer removeQnA(int bindex) {
 
 		return mapper.removeQnA(bindex);
-	}
+	} // removeQnA()
 	
 	/* 문의글 답글 등록 */
 	@Override
@@ -88,19 +87,16 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 		log.info("\t+ affectedRows: {}", affectedRows);
 		
 		return affectedRows==1;
-	}
-	
-//=============================//
+	} // registerReQnA()
+
 	@Override
 	public void destroy() throws Exception {
-		// TODO Auto-generated method stub
 		
-	}
+	} // destroy()
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		// TODO Auto-generated method stub
 		
-	}
+	} // afterPropertiesSet()
 
 } // end class
