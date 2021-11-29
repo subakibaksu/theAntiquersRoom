@@ -22,7 +22,6 @@
     <script>
 
 	function getDetail(index){
-		$('#colcol').css('colspan',8);
 		$( '#detail_'+index ).slideToggle();
 	}
 	

@@ -115,7 +115,7 @@
 		            <tr>
 		                <td class="detailBox" colspan="8">
 		                    <div hidden class="hiddenDetail" id="detail_${myIndex.index}">
-		                    <h3>상세정보</h3><br>
+		                    <h3>상세설명</h3><br>
 		                    ${aucProduct.content}</div>
 		                </td>
 		            </tr>
