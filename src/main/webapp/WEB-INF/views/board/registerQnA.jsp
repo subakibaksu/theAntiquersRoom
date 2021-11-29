@@ -18,8 +18,7 @@
 
 <div id="registerQnA_wrapper">
 
-      <form action="/board/registerQnA" method="post">
-      
+      <form action="/board/registerQnA" method="post">  
          <table >
          <h2 id="registerQnAH2">문의사항 작성</h2>
             <tr>
@@ -35,7 +34,8 @@
                <td><input class="registerQnAInput" type="text" name="author" value="${sessionScope.__AUTH_ANTIQUE__.userId}" readonly="readonly"></td>
             </tr>
             <tr>
-               <td><input class="registerQnAInput" type="hidden" name="pId" value="${sessionScope.__AUTH_ANTIQUE__.userType}"></td>
+            	<td>상품번호</td>
+               <td><input class="registerQnAInput" type="text" name="pId" value="${product.pId}"></td>
             </tr>
             <tr>
                <td colspan="2">
@@ -44,16 +44,12 @@
                </td>
             </tr>
          </table>
-         
       </form>
       
 </div>
-
-
 <footer>
         <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </footer>
-
 </body>
 
 </html>

@@ -41,7 +41,7 @@
                <td><input class="registerReQnAInput"  type="hidden" name="ref" value="${pageInfo.ref}"></td>
             </tr>   
             <tr>
-               <td><input type="hidden" name="pId" value="${sessionScope.__AUTH_ANTIQUE__.userType}"></td>
+               <td><input type="hidden" name="pId" value="${pageInfo.pId}"></td>
             </tr>
             <tr>
                <td colspan="2">

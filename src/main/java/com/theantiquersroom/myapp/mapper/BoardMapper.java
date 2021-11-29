@@ -11,7 +11,7 @@ public interface BoardMapper {
 	public Integer registerQnA(QnADTO dto);
 	
 	/* 문의게시판 목록 */
-	public List<QnADTO> getQnAList();
+	public List<QnADTO> getQnAListByProductId(BoardQnACriteria cri);
 	
 	/* 문의게시판 목록(페이징 적용) */
 	public List<QnADTO> getQnAListPaging(BoardQnACriteria cri);

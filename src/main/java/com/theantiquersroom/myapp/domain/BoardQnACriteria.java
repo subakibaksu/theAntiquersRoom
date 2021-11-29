@@ -1,10 +1,12 @@
 package com.theantiquersroom.myapp.domain;
 
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 public class BoardQnACriteria {
-
+ 
+	private int pId;
+	
     /* 현재 페이지 */
     private int pageNum;
     

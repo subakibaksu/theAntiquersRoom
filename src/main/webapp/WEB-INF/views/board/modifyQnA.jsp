@@ -16,8 +16,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
 </head>
 <body>
-
-	<form id="modifyForm" action="/board/modifyQnA" method="post">
 	<div id="wrapper">
 		<table border="1">
 			<caption>
@@ -25,8 +23,11 @@
 					<li>&nbsp;</li>
 					<li>QnA</li>
 					<li><button id="list_btn" type="button">목록 페이지</button></li>
-					<li><button id="modify_btn" type="button">수정 완료</button></li>
-					<li><button id="delete_btn" type="button">삭제</button></li>
+					<form action="/board/removeQnA" method="post">
+                           <input type="hidden" id="pId" name="pId" value="${pageInfo.pId}">
+                           <input type="hidden" id="bindex" name="bindex" value="${pageInfo.bindex}">
+                           <input type="submit" id="Btn"  value="deleteTest">
+                     </form>
 				</ul>
 			</caption>
 			<thead>
@@ -35,24 +36,22 @@
 					<th>게시판 제목</th>
 					<th>게시판 내용</th>
 					<th>게시판 작성자</th>
-					<th>게시판 등록일</th>
-					<th>게시판수정일</th>
+					<th>작성일</th>
+					<th>수정일</th>
 				</tr>
 			</thead>
 			<tbody>
+				<form id="modifyForm" action="/board/modifyQnA" method="post">
+					<td><input type="hidden" name="pId" value="${pageInfo.pId}"/></td>
 					<tr>
-						<td><input name=bindex readonly="readonly" value='<c:out value="${pageInfo.bindex}"/>'></td>
-						<td><input name=title  value='<c:out value="${pageInfo.title}"/>'></td>
-						<td><input name=content  value='<c:out value="${pageInfo.content}"/>'></td>
-						<td><input name=author readonly="readonly" value='<c:out value="${pageInfo.author}"/>'></td>
-						<td><input name=updatedAt readonly="readonly" value="${pageInfo.updatedAt}"/></td>
-						<td><input name=updatedAt readonly="readonly" value="${pageInfo.updatedAt}"/></td>
-<%-- 						<td><input name=createdAt readonly="readonly"  value='<fmt:formatDate pattern="yyyy/MM/dd" value="${pageInfo.createdAt}"/>'> </td> --%>
-<%-- 						<td><input name=updatedAt readonly="readonly" value='<fmt:formatDate pattern="yyyy/MM/dd" value="${pageInfo.updatedAt}"/>'> </td>			 --%>
-
+						<td><input name=bindex readonly="readonly"  value="${pageInfo.bindex}"/></td>
+						<td><input name=title placeholder="${pageInfo.title}"/></td>
+						<td><input name=content placeholder="${pageInfo.content}"/></td>
+						<td><input name=author readonly="readonly"  value="${pageInfo.author}"/></td>
 					</tr>
 			</tbody>
 		</table>
+						<li><button id="modify_btn" type="button">수정</button></li>
 		</form>
 		
 		<form id="infoForm" action="/board/modifyQnA" method="get">

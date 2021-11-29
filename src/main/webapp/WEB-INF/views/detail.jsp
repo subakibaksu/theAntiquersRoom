@@ -180,7 +180,7 @@
 
             $('#thisQnA').on("click", function(){
                 $.ajax({
-                    url: "/board/QnA", //"/board/QnA?pId=${product.pId}"
+                    url: "/board/QnA?pId=${product.pId}", //"/board/QnA?pId=${product.pId}"
                     dataType: "html",
                     success: function(data){
                         console.log(data);

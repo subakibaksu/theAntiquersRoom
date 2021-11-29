@@ -65,7 +65,7 @@
 	});	
 	
 	$("#reply_btn").on("click", function(e){
-		form.attr("action", "/board/registerReQnA?bindex=${pageInfo.bindex}");
+		form.attr("action", "/board/registerReQnA?bindex=${pageInfo.bindex}&pId=${pageinfo.pId}");
 		form.submit();
 	});	
 </script>	

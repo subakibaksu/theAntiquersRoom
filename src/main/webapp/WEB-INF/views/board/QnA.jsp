@@ -32,22 +32,42 @@
 					<th>내용</th>
 					<th>작성자</th>
 					<th>작성일</th>
+					<th>수정일</th>
 				</tr>
 			</thead>
+
+		
+			
+			
+		<c:choose>
+		<c:when test="${board.pId eq pId}">
+			
+		
+		</c:when>
+		
+		<c:when test="${board.pId ne pId}">
+		
+		
+		</c:when>
+		</c:choose>
+
+
 
 			<tbody>
 				<c:forEach items="${list}" var="board">
 					<tr class="tablehead">
+					
 						<td><c:out value="${board.bindex}" /></td>
+						
+						<!-- 답글이라면 앞에 RE: 붙이기 -->
 						<td>
-								
 								<c:if test="${board.step != 0}">
 								<div> RE:</div>
 								</c:if>
 								
 								<c:out value="${board.title}" />
 								</a>
-							
+								pId : "${board.pId}"
 						</td>
 						
 						<td id="content">
@@ -55,56 +75,22 @@
 						<c:out value="${board.content}" />
 						</a>
 						</td>
-			
 						
 						<td><c:out value="${board.author}" /></td>
 						<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss"
 								value="${board.createdAt}" /></td>
 						<td><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss"
 								value="${board.updatedAt}" /></td>
+							
 					</tr>
 				</c:forEach>
 			</tbody>
+			
 		</table>
+		<button id="regBtn" type="button">
+					<a href="/board/registerQnA?pId=${pId }">등록</a>
+					</button>
 	</div>
-
-	<button id="regBtn" type="button">
-		<a href="/board/registerQnA">REGISTER</a>
-	</button>
-
-<%-- 	<div class="pageInfo_wrap">
-		<div class="pageInfo_area">
-			<ul id="pageInfo" class="pageInfo">
-				<!-- 이전페이지 버튼 -->
-				<c:if test="${pageMaker.prev}">
-					<li class="pageInfo_btn previous"><a
-						href="${pageMaker.startPage-1}">Previous</a></li>
-				</c:if>
-
-				<!-- 각 번호 페이지 버튼 -->
-				<c:forEach var="num" begin="${pageMaker.startPage}"
-					end="${pageMaker.endPage}">
-					<li class="pageInfo_btn ${pageMaker.cri.pageNum == num ? "active":"" }"><a
-						href="${num}">${num}</a></li>
-				</c:forEach>
-
-				<!-- 다음페이지 버튼 -->
-				<c:if test="${pageMaker.next}">
-					<li class="pageInfo_btn next"><a
-						href="${pageMaker.endPage + 1 }">Next</a></li>
-				</c:if>
-			</ul>
-		</div>
-	</div>
-	<form id="moveForm" method="get">
-		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
-		<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-	</form>
-	</div> --%>
-
-
-
-
 	<script>
 		let moveForm = $("#moveForm");
 
@@ -116,10 +102,6 @@
 			moveForm.submit();
 
 		});
-		
-
-
-
 	</script>
 
 </body>
