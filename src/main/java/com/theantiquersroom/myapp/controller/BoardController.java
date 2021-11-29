@@ -34,10 +34,10 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 public class BoardController {
 
-    @Setter(onMethod_= { @Autowired} )
+	@Setter(onMethod_= {@Autowired})
     private BoardService service;
 
-    @Setter(onMethod_= {@Autowired} )
+	@Setter(onMethod_= {@Autowired})
     private ProductService prdouctService;
 
     
@@ -66,7 +66,7 @@ public class BoardController {
     public String getReview(Integer pId, Model model) {
     	log.debug("getReview({}) invoked.", pId);
     	
-    	ProductDTO dto = this.productService.getDetail(pId);
+    	ProductDTO dto = this.prdouctService.getDetail(pId);
     	log.info("/t+ dto: {}", dto);
     	assert dto != null;
 
@@ -110,14 +110,6 @@ public class BoardController {
 
         return  "redirect:/board/review";
     } // removeReview
-
-      @GetMapping("/QnA")
-      public void getQnA(Model model, BoardQnACriteria cri) { // 문의게시글 불러오기
-
-          log.debug("getQnA() invoked.");
-
-            model.addAttribute("list",service.getQnAListPaging(cri));
-
 
 //---------------------------------------------QnA=============================================
     

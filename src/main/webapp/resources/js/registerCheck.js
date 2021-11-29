@@ -53,12 +53,10 @@ $(document).ready(function (){
                     $(".emailbtn").hide();
                     $(".emailconfirm").show();
                     $("#timer").show();
-
                 }
 
                 //Ajax로 인한 중복요청문제를 방지
                 setTimeout(function (){ isAjaxing = false}, 1000);
-
             },
             error : function (error) {
 
@@ -66,11 +64,8 @@ $(document).ready(function (){
 
                 //Ajax로 인한 중복요청문제를 방지
                 setTimeout(function (){ isAjaxing = false}, 1000);
-
             },
-
         });
-
     });
 
     $("#checkAuthBtn").on("click",function (){
@@ -294,21 +289,23 @@ $(document).ready(function (){
             });
 
     //가입하기 버튼클릭시에 alert 창 띄우기
-    $('#checkit').click(function() {
-
+    $('#infoRegister').submit(function(e) {
+        e.preventDefault();
         buttonlive();
     });
 
     // 제출버튼 활성화 함수
     function buttonlive() {
-        if (idcheck && pwcheck && pwchcheck
-            && niccheck && phonecheck && emailconfirmcheck) {
-            $("#checkit").click(function(){
-                Swal.fire('성공적으로 가입되었습니다.','','success');
+        if (idcheck && niccheck && phonecheck && emailconfirmcheck) {
+            Swal.fire({
+                title: '성공적으로 가입 되었습니다.',
+                icon: 'success',
+                closeOnClickOutside: false
+            }).then(function(){
+                self.location.href='/';
             });
-        } else {
-            Swal.fire('입력칸을 모두 채워주세요.','','warning');
-            $("#checkit").prop("disabled", true);
+        } else{
+            Swal.fire('입력 내용을 다시 확인 해주세요.','','warning');
         }
     }
 
