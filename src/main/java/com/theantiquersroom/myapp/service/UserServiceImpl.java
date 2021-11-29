@@ -29,7 +29,11 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
     @Setter(onMethod_= {@Autowired})
     private Mailsender mailsender;
+    
+    @Setter(onMethod_= {@Autowired})
     private UserMapper mapper;
+    
+    @Setter(onMethod_= {@Autowired})
     private BCryptPasswordEncoder passwordEncoder;
 
     
@@ -46,13 +50,9 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
     @Override
     public boolean checkId(String userId) {
-    	log.debug("checkId({}) invoked.", userId);
-    	
     	String id = "";
     	
     	id = mapper.getUserId(userId);
-    	
-    	log.debug(id);
     	
     	if(id != null) {
     		return true;
@@ -63,12 +63,9 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
     @Override
     public boolean checkNickName(String nickName) {
-    	log.debug("checkNickName({}) invoked.", nickName);
-    	
     	String nName = "";
     	
     	nName = mapper.getNickName(nickName);
-    	log.debug("닉네임 from controller ({})", nickName);
     	
     	if(nName != null) {
     		return true;
@@ -79,7 +76,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
     @Override
     public boolean checkPhone(String phone) {
-
     	String pNum = "";
     	
     	pNum = mapper.getPhone(phone);
@@ -94,8 +90,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     @Override
     public boolean confirmEmail(String userId, String auth) throws ParseException {
 
-        log.debug("confirmEmail invoked userId : {} auth : {}",userId,auth);
-
         //DB Auth값 조회
         String databaseAuth = mapper.selectAuth(userId);
         log.debug("auth : {}",databaseAuth);
@@ -106,13 +100,10 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
         }
 
         return false;
-
     } // confirmEmail()
 
     @Override
     public boolean sendEmail(String userId) throws Exception {
-
-        log.debug("userId : {} nickname : {} ",userId);
 
         if(userId != null){
 
@@ -129,10 +120,8 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
     @Override
 	public UserDTO login(LoginDTO dto) throws Exception {
-        log.debug("login({}) invoked.", dto);
 
         UserDTO user = this.mapper.selectUserById(dto.getUserId());
-        log.info("\t+ user: {}", user);
         
         return (passwordEncoder.matches(dto.getPassword(), user.getPassword()))? user:null;
 	} // login()
@@ -147,17 +136,14 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	@Override
 	public boolean resetPwd(String userId, String nickname) throws Exception {
 
-        log.debug("userId : {} nickname : {} ",userId,nickname);
-
         boolean mailSentCheck = false;
         String nick = mapper.selectUserNickname(userId);
-        log.debug(nick);
-
+        
         if(nick.equals(nickname) && nick!=null){
 
             // 새로운 비밀번호 생성후 이메일로 전송 , DB에 Insert
             String newpassword = Integer.toString((int)(Math.random()*3000+1));
-            log.debug(newpassword);
+            
             mailsender.sendmail("your new password is : "+ newpassword,userId);
             mapper.updatePassword(passwordEncoder.encode(newpassword),userId);
             
@@ -168,24 +154,21 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
 	@Override
 	public List<UserDTO> getUserList() {
-		log.debug("getList() invoked.");
 		
 		return this.mapper.getUserList();
 	} // getList()
 	
 	@Override
 	public UserDTO get(String userId) {
-		log.debug("get({}) invoked.", userId);
 		
 		UserDTO user=this.mapper.read(userId);
-		log.info("\t+ board: {}", user);
+		
 		
 		return user;
 	} // get ( 회원 상세 정보 보기)
 	
 	@Override
 	public boolean modify(modifyDTO user) {
-		log.debug("modify({}) invoked.", user);
 		
 		// 회원 비밀번호를 인코딩하기 위한 객체 선언
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
@@ -195,28 +178,22 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 		user.setPassword(securePw);
 		
 		int affectedRows=this.mapper.update(user);
-			
-		log.info("\t+ affectedRows: {}", affectedRows);
 		
 		return affectedRows==1;		
 	} // modify()
 
 	@Override
 	public boolean remove(String userId) {
-		log.debug("remove({}) invoked.", userId);
 
 		int affectedRows=this.mapper.delete(userId);
-		log.info("\t+ affectedRows: {}", affectedRows);
 		
 		return affectedRows==1;	
 	} // remove()
 
 	@Override
 	public List<ProductDTO> getMyAuctionList(HashMap<String, Object> map) {
-		log.debug("getMyAuctionList({}) invoked.",map);
 		
 		List<ProductDTO> list=this.mapper.getMyAuctionList(map);
-		log.info("\t+ list size: {}", list.size());
 		
 		return list;
 	}//getMyAuctionList
@@ -228,7 +205,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
 	@Override
 	public Integer getMyAuctionTotal(String userId) {
-		log.debug("getMyAuctionTotal({}) invoked.", userId);
 		
 		return this.mapper.getMyAuctionTotalCount(userId);
 	}//getTotal
@@ -237,7 +213,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	public List<ProductDTO> getMyBidList(ProductCriteria cri, HashMap<String, Object> map) {
 		map.put("pageStart",cri.getPageStart());
 		map.put("perPageNum",cri.getPerPageNum());
-    	log.debug("getMyBidList({}) invoked.",map);
     	List<ProductDTO> productDTOList = mapper.getMyBidList(map);
 
 		return productDTOList;
@@ -245,14 +220,12 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
 	@Override
 	public Integer getMyBidTotal(String userId) {
-		log.debug("getMyBidTotal({}) invoked.", userId);
 
 		return mapper.getMyBidTotalCount(userId);
 	}
 
 	@Override
 	public UserDTO getKakaoUser(String kakaoUniqueId) {
-		log.debug("checkKakaoId({}) invoked.", kakaoUniqueId);
 		
 		UserDTO user = this.mapper.getKakaoUser(kakaoUniqueId);
 		
@@ -262,7 +235,6 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     // DB에 회원정보 저장
     @Override
     public boolean registerKakaoUser(UserDTO user) {
-        log.debug("registerKakaoUser({}) invoked.", user);
 
         Integer users = null;
         

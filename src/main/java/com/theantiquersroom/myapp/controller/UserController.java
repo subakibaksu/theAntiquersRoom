@@ -1,26 +1,31 @@
 package com.theantiquersroom.myapp.controller;
 
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.theantiquersroom.myapp.domain.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.theantiquersroom.myapp.domain.MyPageDTO;
+import com.theantiquersroom.myapp.domain.MypageCriteria;
+import com.theantiquersroom.myapp.domain.ProductCriteria;
+import com.theantiquersroom.myapp.domain.ProductDTO;
+import com.theantiquersroom.myapp.domain.UserDTO;
+import com.theantiquersroom.myapp.domain.modifyDTO;
 import com.theantiquersroom.myapp.service.ChatService;
 import com.theantiquersroom.myapp.service.ProductService;
 import com.theantiquersroom.myapp.service.UserService;
 import com.theantiquersroom.myapp.utils.ProductPageMaker;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.theantiquersroom.myapp.service.UserService;
 
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -44,12 +49,10 @@ public class UserController {
 
     @GetMapping("/logout")
     public String logout(HttpServletRequest request, HttpSession session) {	// 로그아웃 실행
-        log.debug("logout() invoked.");
         
         String kakaoUniqueId = (String) session.getAttribute("kakaoUniqueId");
        
         if(kakaoUniqueId != null) { //카카오로 로그인했다면, 카카오계정 로그아웃도 함께 진행
-        	log.debug("===== kakao logout");
         	
             String logout_redirect_uri = "http://localhost:8090";
 
@@ -64,8 +67,7 @@ public class UserController {
             return reqUrl;
             
         }else { //일반회원 로그아웃 시 세션 초기화
-        	log.debug("===== 일반회원 logout");
-            session.invalidate();
+        	session.invalidate();
             
             return "redirect:/";
         }
@@ -76,7 +78,6 @@ public class UserController {
     		HttpSession session,
     		@ModelAttribute("cri") MypageCriteria cri,
     		Model model) {	// 나의 경매리스트 페이지로 이동
-        log.debug("getMyAuctionList({}, {}) invoked.", cri, model);
 
         UserDTO user = (UserDTO) session.getAttribute(LoginController.authKey);
         String userId = user.getUserId();
@@ -86,7 +87,6 @@ public class UserController {
         map.put("cri", cri);
         
         List<ProductDTO> myAuctionList = this.service.getMyAuctionList(map);
- 		log.info("\t+ myAuctionList size: {}", myAuctionList.size());
 
  		model.addAttribute("myAuctionList",myAuctionList);
 	
@@ -103,24 +103,20 @@ public class UserController {
 
     @GetMapping("/getBidList")
     public String getBidList() {	// 나의 입찰리스트 페이지로 이동
-        log.debug("getBidList() invoked.");
 
         return "/user/myBidList";
     } //getBidList
  	
  	@GetMapping({"/modify" , "/mypage"})
- 	public void get(String userId, Model model) {         
- 		log.debug("get({}, {}) invoked." , userId, model);
+ 	public void get(String userId, Model model) {
  		
  		UserDTO user = this.service.get(userId);
- 		log.info("\t+ board: {}" , user);
  		
  		model.addAttribute("user", user);
  	} // mypage, modify
  	
  	@PostMapping("/modify")
  	public String modify(modifyDTO user, RedirectAttributes rttrs) {
- 		log.debug("modify({}, {}) invoked.", user,rttrs);
  		
  		boolean result=this.service.modify(user);
  			
@@ -153,10 +149,8 @@ public class UserController {
 	@PostMapping("/remove")
 	public String remove(
 			String userId,
-			RedirectAttributes rttrs) 
-	{
-		log.debug("remove({}) invoked.", userId);
-		
+			RedirectAttributes rttrs
+	) {	
 		boolean result=this.service.remove(userId);
 		rttrs.addAttribute("result", result);
 		
@@ -168,7 +162,6 @@ public class UserController {
 			HttpSession session,
 			@ModelAttribute("cri") ProductCriteria cri,
 			Model model) {	// 나의 입찰리스트 페이지로 이동
-		log.debug("getMyAuctionList({}, {}) invoked.", cri, model);
 
 		UserDTO user = (UserDTO) session.getAttribute(LoginController.authKey);
 		String userId = user.getUserId();
@@ -185,7 +178,6 @@ public class UserController {
 		//페이징 처리
 		pageMaker.setCri(cri);
 		Integer totalNum = this.service.getMyBidTotal(userId);
-		log.debug("totalNum {} ", totalNum);
 		pageMaker.setTotalCount(totalNum);
 
 		model.addAttribute("pageMaker", pageMaker);

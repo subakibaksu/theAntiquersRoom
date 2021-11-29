@@ -1,60 +1,66 @@
 @charset "UTF-8";
 
-#modifyBtn, #cancleBtn {
-	border: 1px solid #C2B1B1;
-	border-radius: 5px;
-	background-color: #C2B1B1;
-	color: white;
-	font-size: 15px;
+#modifyBtn,
+#cancleBtn {
+    border: 1px solid #c2b1b1;
+    border-radius: 8px;
+    background-color: #c2b1b1;
+    color: white;
+    font-size: 0.9rem;
+    width: 3rem;
+    height: 1.8rem;
 }
 
-#modifyBtn:hover, #cancleBtn:hover {
-	color: #9C0000;
+#modifyBtn:hover,
+#cancleBtn:hover {
+    color: #c2b1b1;
+    background-color: white;
 }
 
 #outline {
-	width: 810px;
-	height: 600px;
-	background: #FFFFFF;
-	border: 1px solid #C2B1B1;
-	box-sizing: border-box;
-	border-radius: 50px;
-	margin: 6rem auto;
+    width: 810px;
+    height: 600px;
+    background: #ffffff;
+    border: 1px solid #c2b1b1;
+    box-sizing: border-box;
+    border-radius: 50px;
+    margin: 6rem auto;
 }
 
 #inline {
-	margin: 6rem 7rem 7rem 10rem;
+    margin: 6rem 7rem 7rem 10rem;
 }
 
 .modifyInput {
-	width: 18rem;
-	height: 2rem;
-	background: #FFFFFF;
-	border: 1px solid #C2B1B1;
-	box-sizing: border-box;
-	float: right;
-	margin-right: 3rem;
-	border-radius: 5px;
+    width: 18rem;
+    height: 2rem;
+    background: #ffffff;
+    border: 1px solid #c2b1b1;
+    box-sizing: border-box;
+    float: right;
+    margin-right: 3rem;
+    border-radius: 5px;
 }
 
-.btnset { /* 버튼 중앙 정렬 */
-	float: left;
-	margin-left: 12rem;
+.btnset {
+    /* 버튼 중앙 정렬 */
+    float: left;
+    margin-left: 12rem;
 }
 
 #checkNickName {
-	color: #9C0000;
-	float: right;
-	margin-right: 5rem;
+    color: #9c0000;
+    float: right;
+    margin-right: 5rem;
 }
 
 .text {
-	position: relative;
+    position: relative;
 }
 
 #check {
-	position: absolute;
-	left: 29rem;
-	top: 0.5rem;
-	color: #9C0000;
+    position: absolute;
+    left: 29rem;
+    top: 0.5rem;
+    color: #9c0000;
 }
