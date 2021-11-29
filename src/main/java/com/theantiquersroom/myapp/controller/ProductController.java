@@ -96,7 +96,7 @@ public class ProductController {
 
             product.setPid(product.getPid());
             this.service.reRegister(product);
-        return "/";
+        return "/users/myAuctionList";
     } // Post reRegister()
 
     /*상품 수정 페이지로 이동*/

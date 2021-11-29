@@ -95,7 +95,6 @@
                             });
                         } else {
                             alert("입력칸을 모두 채워주세요.");
-                            $("#register").prop("disabled", true);
                         }
                     }
 
@@ -109,13 +108,13 @@
 
                         if ($('#bidIncrement').val() != "") bidIncrementcheck = true;
 
-                        if ($('#startDate').val() == "") startedAtcheck = true;
+                        if ($('#startDate').val() != "") startedAtcheck = true;
 
-                        if ($('#endDate').val() == "") endedAtcheck = true;
+                        if ($('#endDate').val() != "") endedAtcheck = true;
 
-                        if ($('#summernote').val() == "") contentcheck = true;
+                        if ($('#summernote').val() != "") contentcheck = true;
 
-                        if ($('#image1').val() == "") imagescheck = true;
+                        if ($('#image1').val() != "") imagescheck = true;
                     }
                 });
     </script>

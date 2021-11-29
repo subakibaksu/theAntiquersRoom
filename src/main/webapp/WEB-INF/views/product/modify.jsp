@@ -113,13 +113,19 @@
                     // 제출버튼 활성화 함수
                     function buttonlive() {
                         if (namecheck && categoryIdcheck && startedPricecheck
-                            && bidIncrementcheck &&  imagescheck) {
+                            && bidIncrementcheck && startedAtcheck && endedAtcheck
+                            && contentcheck && imagescheck) {
                             $('#productSubmit')[0].submit()
                             $("#register").click(function () {
                                 alert("성공적으로 경매가 요청되었습니다.");
+                                console.log(namecheck , categoryIdcheck , startedPricecheck
+                                    , bidIncrementcheck , imagescheck)
                             });
                         } else {
                             alert("입력칸을 모두 채워주세요.");
+                            console.log(namecheck , categoryIdcheck , startedPricecheck
+                                , bidIncrementcheck , imagescheck)
+
                         }
                     }
 
@@ -133,7 +139,13 @@
 
                         if ($('#bidIncrement').val() != "") bidIncrementcheck = true;
 
-                        if ($('#image1').val() == "") imagescheck = true;
+                        if ($('#startDate').val() != "") startedAtcheck = true;
+
+                        if ($('#endDate').val() != "") endedAtcheck = true;
+
+                        if ($('#summernote').val() != "") contentcheck = true;
+
+                        if ($('#image1').val() != "") imagescheck = true;
                     }
                 });
 
