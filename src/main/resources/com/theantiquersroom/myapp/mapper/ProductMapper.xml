@@ -11,8 +11,8 @@
             parameterType="com.theantiquersroom.myapp.domain.ProductFormDTO">
 
     <![CDATA[
-            insert into product(name, content, category_id, user_id, started_at, ended_at, started_price, bid_increment, created_at, status)
-            VALUES (#{name}, #{content}, #{categoryId}, #{userId}, #{startedAt}, #{endedAt}, #{startedPrice}, #{bidIncrement}, now(),"승인대기중")
+            INSERT INTO product(name, content, category_id, user_id, started_at, ended_at, started_price, bid_increment, status)
+            VALUES (#{name}, #{content}, #{categoryId}, #{userId}, #{startedAt}, #{endedAt}, #{startedPrice}, #{bidIncrement}, "승인대기중")
         ]]>
         <selectKey resultType="int" keyProperty="pId" order="AFTER">
             SELECT LAST_INSERT_ID()

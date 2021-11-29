@@ -29,7 +29,7 @@
     <script type="text/javascript">
 
         // 기본 이미지 ( 3개의 .productimg 값 중 ""값인 곳에 BASE_IMAGE_SRC를 넣어줌
-        const BASE_IMAGE_SRC = "https://antiquers.s3.ap-northeast-2.amazonaws.com/baseImage.png";
+        const BASE_IMAGE_SRC = "https://antiquers.s3.ap-northeast-2.amazonaws.com/default_image.jpeg";
         function setupBaseImage() {
             $('.productimg').each((idx, el) => {
                 $(el).attr('src', $(el).attr('src') || BASE_IMAGE_SRC)
@@ -104,60 +104,36 @@
                         $(e.target).parent().find('img').attr('src', imageUrl)
                     })
 
-                    $('#register').click(function () {
+                    $('#productSubmit').submit(function (e) {
+                        e.preventDefault();
                         Checkform();
                         buttonlive();
-                        baseSrc();
                     });
 
                     // 제출버튼 활성화 함수
                     function buttonlive() {
                         if (namecheck && categoryIdcheck && startedPricecheck
-                            && bidIncrementcheck && startedAtcheck && endedAtcheck
-                            && contentcheck && imagescheck) {
-                            console.log("buttonlive true");
+                            && bidIncrementcheck &&  imagescheck) {
+                            $('#productSubmit')[0].submit()
                             $("#register").click(function () {
                                 alert("성공적으로 경매가 요청되었습니다.");
                             });
                         } else {
                             alert("입력칸을 모두 채워주세요.");
-                            $("#register").prop("disabled", true);
                         }
                     }
 
                     // 입력 값 체크
                     function Checkform() {
-                        if ($('#name').val() == "") {
-                            $('#name').focus();
-                        } else namecheck = true;
+                        if ($('#name').val() != "") namecheck = true;
 
-                        if ($('#categoryId').val() == "") {
-                            $('#categoryId').focus();
-                        } else categoryIdcheck = true;
+                        if ($('#categoryId').val() != "") categoryIdcheck = true;
 
-                        if ($('#startedPrice').val() == "") {
-                            $('#startedPrice').focus();
-                        } else startedPricecheck = true;
+                        if ($('#startedPrice').val() != "") startedPricecheck = true;
 
-                        if ($('#bidIncrement').val() == "") {
-                            $('#bidIncrement').focus();
-                        } else bidIncrementcheck = true;
+                        if ($('#bidIncrement').val() != "") bidIncrementcheck = true;
 
-                        if ($('#startDate').val() == "") {
-                            $('#startDate').focus();
-                        } else startedAtcheck = true;
-
-                        if ($('#endDate').val() == "") {
-                            $('#endDate').focus();
-                        } else endedAtcheck = true;
-
-                        if ($('#summernote').val() == "") {
-                            $('#summernote').focus();
-                        } else contentcheck = true;
-
-                        if ($('#image1').val() == "") {
-                            $('#image1').focus();
-                        } else imagescheck = true;
+                        if ($('#image1').val() == "") imagescheck = true;
                     }
                 });
 
@@ -227,8 +203,8 @@
                         <tr>
                             <th>입찰단위금액</th>
                             <td colspan="3">
-                                <select name="bidIncrement" class="check" id="bidIncrement" value="${product.bidIncrement}">
-                                    <option value="${product.startedPrice}">${product.startedPrice}</option>
+                                <select name="bidIncrement" class="check" id="bidIncrement">
+                                    <option value="${product.bidIncrement}">${product.bidIncrement}</option>
                                     <option value="none">입찰 단위금액을 선택해주세요</option>
                                     <option value="1000">1,000원</option>
                                     <option value="5000">5,000원</option>

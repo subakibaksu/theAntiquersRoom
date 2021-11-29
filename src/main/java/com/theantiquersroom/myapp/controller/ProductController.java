@@ -39,11 +39,10 @@ import lombok.extern.log4j.Log4j2;
 @RequestMapping("/product")
 public class ProductController {
 
-	
+
 	@Setter(onMethod_= {@Autowired})
 	private ProductService service;
-	
-	
+
     /*상품 목록 페이지로 이동*/
     @GetMapping("/productList")
     public void productList(
@@ -87,7 +86,7 @@ public class ProductController {
         product.setUserId(user.getUserId());
 
         this.service.registerProduct(product);
-        return "/product/list"; // 추후 완료 alert으로 변경
+        return "/users/myAuctionList"; // 추후 완료 alert으로 변경
     } // Post register()
 
     /*유찰된 상품 재등록 정보 DB전달*/
@@ -164,8 +163,6 @@ public class ProductController {
     @GetMapping("/getBiddingHistory")
     public void getBiddingHistory() {
 
-
-
     } // getBiddingHistory()
 
     /*입찰정보 DB전달*/
@@ -183,7 +180,6 @@ public class ProductController {
             bidHistoryDTO.setPId(Integer.parseInt((String)map.get("pId")));
             boolean isBided = service.bid(bidHistoryDTO);
 
-
             resultMap.put("bidCheck",isBided);
 
         }else {
@@ -195,6 +191,5 @@ public class ProductController {
         return resultMap;
 
     } // bid()
-
 
 } // end class
