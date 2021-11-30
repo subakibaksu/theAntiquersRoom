@@ -1,68 +1,55 @@
 @charset "UTF-8";
 
 #reviewcontainer {
-	padding-bottom: 3.12rem;
-	flex-direction: column;
-	margin: auto;
+    padding-block: 2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+#reviewcontainer h2 {
+    font-family: "Gowun Dodum", sans-serif;
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
 #tableplace {
-	margin: auto;
-	border-collapse: collapse;
-
+    border-collapse: collapse;
+    font-family: "Nanum Gothic", sans-serif;
+    font-size: 0.8rem;
 }
 
-td, th {
-	padding-right: 1.87rem;
-	padding-left: 1.87rem;
-	text-align: center;
-	align-items: center;
-	border-spacing: 0;
-
+#tableplace tr {
+    border-block: 1px solid #c1b2b2;
 }
 
-tr {
-	border-block: 1px solid #C1B2B2;
+#header {
+    background-color: rgb(227, 182, 174, 0.7);
 }
 
-th {
-	padding-bottom: 10px;
-	padding-top: 10px;
+.tablehead:hover {
+    background-color: rgb(227, 182, 174, 0.2);
+}
+
+#tableplace td,
+#tableplace th {
+    text-align: center;
+    padding: 1rem;
 }
 
 #tableContent {
-	width: 18.75rem;
+    width: 18.75rem;
 }
 
 #content {
-	text-overflow: ellipsis;
+    text-overflow: ellipsis;
     max-width: 18.75rem;
 }
 
 #content:hover {
-	cursor: pointer;
-}
-
-.tablehead:hover {
-	background-color: rgb(227, 182, 174, 0.2);
-}
-
-#header {
-	background-color: rgb(227, 182, 174, 0.7);
+    cursor: pointer;
 }
 
 #img {
-	width: 5.6rem;
-	height: 5.6rem;
-}
-
-#modbtn {
-	width: 3.5rem;
-	color: rgba(194, 177, 177, 0.9);
-    font-weight: 800;
-    border: 1px solid rgba(194, 177, 177, 0.9);
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 3px;
-    text-align: center;
-    padding-bottom: 0.2rem;
+    width: 5rem;
+    height: 5rem;
 }
