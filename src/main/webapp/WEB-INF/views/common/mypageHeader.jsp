@@ -21,7 +21,7 @@
              	<p class="mypageP">
              		<a  href="/users/mypage">나의정보</a> |
           		  	<a href="/users/myAuctionList">나의경매</a> |
-             		<a href="">나의입찰</a></a>
+             		<a href="/users/getMyBidList">나의입찰</a>
              	</p>
             </div>
     </div>

@@ -22,13 +22,13 @@ public interface BoardService {
   	public Integer getQnATotal();
   	
   	/* 문의게시판 조회 */
-  	public QnADTO getQnADetail(int bindex);
+  	public QnADTO getQnADetail(Integer bindex);
   	
   	/* 문의게시글 수정 */
   	public Integer modifyQnA(QnADTO dto);
 
   	/* 문의게시글 삭제 */
-  	public Integer removeQnA(int bindex);
+  	public Integer removeQnA(Integer bindex);
   	
     /* 게시판 - 답글 등록 */
    	public abstract boolean registerReQnA(QnADTO dto);
