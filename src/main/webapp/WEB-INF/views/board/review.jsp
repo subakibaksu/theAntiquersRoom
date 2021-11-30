@@ -18,7 +18,7 @@
 
 	<script>
 		$(document).ready(function(){
-			$("#content").onclick(function(){
+			$("#content").on("click",function(){
 				$("#content").removeAttr('style');
 			});
 		});
