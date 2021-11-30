@@ -1,8 +1,7 @@
 @charset "UTF-8";
 
 #reviewcontainer {
-	padding-top: 100px;
-	padding-bottom: 50px;
+	padding-bottom: 3.12rem;
 	flex-direction: column;
 	margin: auto;
 }
@@ -10,16 +9,16 @@
 #tableplace {
 	margin: auto;
 	border-collapse: collapse;
-	
+
 }
 
 td, th {
-	padding-right: 30px;
-	padding-left: 30px;
+	padding-right: 1.87rem;
+	padding-left: 1.87rem;
 	text-align: center;
 	align-items: center;
 	border-spacing: 0;
-	
+
 }
 
 tr {
@@ -32,13 +31,13 @@ th {
 }
 
 #tableContent {
-	width: 300px;
+	width: 18.75rem;
 }
 
 #content {
 	text-overflow: ellipsis;
-    max-width: 300px;
-} 
+    max-width: 18.75rem;
+}
 
 #content:hover {
 	cursor: pointer;
@@ -53,6 +52,17 @@ th {
 }
 
 #img {
-	width: 90px;
-	height: 90px;
+	width: 5.6rem;
+	height: 5.6rem;
+}
+
+#modbtn {
+	width: 3.5rem;
+	color: rgba(194, 177, 177, 0.9);
+    font-weight: 800;
+    border: 1px solid rgba(194, 177, 177, 0.9);
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 3px;
+    text-align: center;
+    padding-bottom: 0.2rem;
 }

@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>detail.jsp</title>
-    
+
     <link rel="stylesheet" href="/resources/css/detail.css">
 
     <!-- fontAwdome for icons -->
@@ -179,7 +179,7 @@
 
             $('#sellerReview').on("click", function(){
                 $.ajax({
-                    url: "/board/review", //"/board/review?nickname=${product.nickname}"
+                    url: "/board/review?pid=${product.pid}",
                     dataType: "html",
                     success: function(data){
                         console.log(data);
@@ -205,7 +205,7 @@
         function changeBid(type){
             const bidPrice = document.getElementById('bidPrice');
             let amount = bidPrice.value;
-            
+
             let product = "${product}";
             let increment = "${product.bidIncrement}";
 
@@ -214,7 +214,7 @@
             }else if(type == 'down' && amount != increment){
                 amount = parseInt(amount)-parseInt(increment);
             }
-            
+
             bidPrice.value = amount;
         }
 

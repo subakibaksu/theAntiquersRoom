@@ -10,10 +10,9 @@
     <link rel="stylesheet" href="/resources/css/review.css">        
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script>
-		$(document)
-			.ready(function(){
-			$("#content").onclick(function(){
- 				$("#content").removeAttr('style');
+		$(document).ready(function(){
+			$("#content").click(function(){
+ 				$("#content").removeAttr("style");
 			});
 		});
 	</script>
