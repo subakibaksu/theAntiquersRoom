@@ -95,8 +95,15 @@
                                 <button id="upBtn" type="button" onclick='changeBid("up")'>
                                     <i class="fas fa-chevron-circle-up" ></i>
                                 </button>
-                                <input hidden name="pId" value="${product.pid}">
-                                <input type="text" id="bidPrice" name="bidPrice" value="${product.bidIncrement}">원
+                                <input hidden name="pid" value="${product.pid}">
+                                <c:choose>
+                                    <c:when test="${empty product.currPrice}">
+                                        <input type="text" id="bidPrice" name="bidPrice" value="${product.startedPrice}">원
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input type="text" id="bidPrice" name="bidPrice" value="${product.currPrice}">원
+                                    </c:otherwise>
+                                </c:choose>
                                 <button id="downBtn" type="button" onclick='changeBid("down")'>
                                     <i class="fas fa-chevron-circle-down" ></i>
                                 </button>
@@ -161,6 +168,7 @@
     <!-- jQuery/script -->
     <script>
         $(function(){
+
             $('#productInfo').on("click", function(){
                $('#contentBox').text('${product.content}');
             }); //상품설명
@@ -179,7 +187,7 @@
 
             $('#thisQnA').on("click", function(){
                 $.ajax({
-                    url: "/board/QnA?pId=${product.pid}", 
+                    url: "/board/QnA?pid=${product.pid}",
                     dataType: "html",
                     success: function(data){
                         console.log(data);
@@ -210,7 +218,6 @@
 
             $("#bidHistBtn").click(function (){
                 $("#bidHistory").slideToggle("slow");
-
             });
 
             $("#bidBtn").click(function (){

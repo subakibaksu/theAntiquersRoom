@@ -44,7 +44,7 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
         for (MultipartFile img: product.getImages()) {
             String url = uploadService.upload(img, PRODUCT_IMAGE_DIR);
             ProductImageDTO imageDto = new ProductImageDTO();
-            imageDto.setPId(product.getPId());
+            imageDto.setPid(product.getPid());
             imageDto.setImageUrl(url);
             imageDto.setImageName(img.getOriginalFilename());
             this.mapper.insertProductImage(imageDto);
@@ -79,7 +79,7 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
         log.debug("bid() invoked");
         if(bidHistoryDTO.getUserId()!=null){
 
-            if(mapper.getMaxBid(bidHistoryDTO.getPId()) == null || mapper.getMaxBid(bidHistoryDTO.getPId()) < bidHistoryDTO.getBidPrice()){
+            if(mapper.getMaxBid(bidHistoryDTO.getPid()) == null || mapper.getMaxBid(bidHistoryDTO.getPid()) < bidHistoryDTO.getBidPrice()){
 
                 mapper.insertBid(bidHistoryDTO);
 
@@ -104,11 +104,11 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
 
     // 상품상세보기
     @Override
-    public ProductDTO getDetail(Integer pId) {
-      log.debug("getDetail({}) invoked.", pId);
+    public ProductDTO getDetail(Integer pid) {
+      log.debug("getDetail({}) invoked.", pid);
 
-      ProductDTO dto = this.mapper.getDetailByPId(pId);
-      dto.setImageUrls(this.mapper.getProductImageUrls(pId));
+      ProductDTO dto = this.mapper.getDetailByPId(pid);
+      dto.setImageUrls(this.mapper.getProductImageUrls(pid));
       
       log.info("\t+ dto: {}", dto);
 
@@ -116,19 +116,19 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
     } //getDetail
 
 	@Override
-	public boolean removeProduct(Integer pId) {
-		log.debug("removeProduct({}) invoked.", pId);
+	public boolean removeProduct(Integer pid) {
+		log.debug("removeProduct({}) invoked.", pid);
 		
-		Integer affectedProduct = this.mapper.deleteProduct(pId);
+		Integer affectedProduct = this.mapper.deleteProduct(pid);
 		
 		return ((affectedProduct > 0)? true:false);
 	} //removeProduct
 
     @Override
-    public List<BidHistoryDTO> getBidHistory(Integer pId) {
+    public List<BidHistoryDTO> getBidHistory(Integer pid) {
 
-        log.debug("getBidHistory({}) Invoked",pId);
-        List<BidHistoryDTO> bidHistoryDTOList = mapper.getBidHistory(pId);
+        log.debug("getBidHistory({}) Invoked",pid);
+        List<BidHistoryDTO> bidHistoryDTOList = mapper.getBidHistory(pid);
         return bidHistoryDTOList;
 
     } // getBidHistory()
@@ -139,11 +139,11 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
     public Integer modify(ProductFormDTO product) throws Exception {
         log.debug("modify({}) invoked.", product);
 
-        this.mapper.deleteProductImage(product.getPId());
+        this.mapper.deleteProductImage(product.getPid());
         for (MultipartFile img: product.getImages()) {
             String url = uploadService.upload(img, PRODUCT_IMAGE_DIR);
             ProductImageDTO imageDto = new ProductImageDTO();
-            imageDto.setPId(product.getPId());
+            imageDto.setPid(product.getPid());
             imageDto.setImageUrl(url);
             imageDto.setImageName(img.getOriginalFilename());
             this.mapper.insertProductImage(imageDto);
@@ -154,12 +154,12 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
 
     // 상품 수정 정보 가져오기
     @Override
-    public ProductModifyDTO getModify(Integer pId) {
-        log.debug("getDetail({}) invoked.", pId);
+    public ProductModifyDTO getModify(Integer pid) {
+        log.debug("getDetail({}) invoked.", pid);
 
-        ProductModifyDTO product = this.mapper.getupdateByPId(pId);
+        ProductModifyDTO product = this.mapper.getupdateByPId(pid);
         // 이미지 가져오기
-        product.setImageUrls(this.mapper.getProductImageUrls(pId));
+        product.setImageUrls(this.mapper.getProductImageUrls(pid));
 
         return product;
     } //getDetail

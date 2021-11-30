@@ -22,10 +22,10 @@ public interface AdminMapper {
     public abstract List<ProductDTO> getRequestedList(MypageCriteria cri);
     
     //경매상태를 "승인완료"로 변경
-    public abstract Integer updateStatus(@Param("pId") Integer pId);
+    public abstract Integer updateStatus(@Param("pid") Integer pid);
     
     //경매상태를 "승인반려"로 변경
-    public abstract Integer rejectRequest(@Param("pId") Integer pId);
+    public abstract Integer rejectRequest(@Param("pid") Integer pid);
 
     //경매상품 총 게시물 개수를 반환
 	public abstract Integer getAuctionTotal(@Param("keyword") String keyword, @Param("status") String status);
@@ -34,7 +34,7 @@ public interface AdminMapper {
     public abstract List<ProductDTO> getAuctionProductList(MypageCriteria cri);
 
     //경매상태를 "판매종료"로 변경
-    public abstract Integer stopSale(@Param("pId") Integer pId);
+    public abstract Integer stopSale(@Param("pid") Integer pid);
   
     //회원 목록 조회
     public abstract List<UserDTO> selectUserList(MypageCriteria cri);

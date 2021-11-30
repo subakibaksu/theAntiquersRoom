@@ -14,6 +14,6 @@ public interface ChatService {
 
     public abstract void sendChat(ChatDTO chatDTO);
 
-    public abstract List<ChatDTO> getChat(Integer pId);
+    public abstract List<ChatDTO> getChat(Integer pid);
 
 }

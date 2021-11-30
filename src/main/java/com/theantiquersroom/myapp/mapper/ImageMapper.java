@@ -12,7 +12,7 @@ public interface ImageMapper {
     public Integer insertImage(ProductImageDTO image);
 
     // 특정 게시물 번호로 이미지파일 찾기
-    public List<ProductImageDTO> findByPId(Integer pId);
+    public List<ProductImageDTO> findByPId(Integer pid);
 
     // 이미지 수정
     public Integer updateImage(ProductImageDTO image);

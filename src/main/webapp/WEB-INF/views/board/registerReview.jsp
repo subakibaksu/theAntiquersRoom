@@ -34,7 +34,7 @@
 							<div class="info">시작가 : <input type="text" value="${product.startedAt}" readonly="readonly"></div>
 							<div class="info">낙찰가 : <input type="text" value="${product.currPrice}" readonly="readonly"></div>
 							<div class="info">낙찰자 : <input type="text" name="nickName" value="${sessionScope.__AUTH_ANTIQUE__.nickName}" readonly="readonly"></div>
-							<div><input type="hidden" name="pId" value="${product.pid}"></div>
+							<div><input type="hidden" name="pid" value="${product.pid}"></div>
 							
 						</div>
 					</div>

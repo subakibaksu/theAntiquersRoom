@@ -101,10 +101,10 @@ public class ProductController {
 
     /*상품 수정 페이지로 이동*/
     @GetMapping("/modify")
-    public String modify(Integer pId, Model model) {
-        log.debug("get({}, {}) invoked." , pId, model);
+    public String modify(Integer pid, Model model) {
+        log.debug("get({}, {}) invoked." , pid, model);
 
-        ProductModifyDTO product = this.service.getModify(pId);
+        ProductModifyDTO product = this.service.getModify(pid);
 
         model.addAttribute("product", product);
         return "/product/modify";
@@ -117,7 +117,7 @@ public class ProductController {
     public String modify(ProductFormDTO product) throws Exception {
 
         product.setImages(product.getImages().stream().filter(img -> !img.isEmpty()).collect(Collectors.toList()));
-        product.setPId(product.getPId());
+        product.setPid(product.getPid());
 
         this.service.modify(product);
 
@@ -126,10 +126,10 @@ public class ProductController {
 
     /*상품 삭제*/
     @PostMapping("/remove")
-    public String remove(Integer pId) {
-    	log.debug("remove({}) invoked.", pId);
+    public String remove(Integer pid) {
+    	log.debug("remove({}) invoked.", pid);
 
-    	boolean isRemoved = this.service.removeProduct(pId);
+    	boolean isRemoved = this.service.removeProduct(pid);
 
     	return "redirect:/users/myAuctionList";
     } // Post remove()
@@ -142,14 +142,14 @@ public class ProductController {
 
     /*상품 상세보기 페이지로 이동*/
     @GetMapping("/getDetail")
-    public String getDetail(Integer pId, Model model) {
-    	log.debug("getDetail({}) invoked.", pId);
+    public String getDetail(Integer pid, Model model) {
+    	log.debug("getDetail({}) invoked.", pid);
     	
-    	ProductDTO dto = this.service.getDetail(pId);
+    	ProductDTO dto = this.service.getDetail(pid);
     	log.info("/t+ dto: {}", dto);
     	assert dto != null;
 
-    	List<BidHistoryDTO> bidHistoryDTOList = this.service.getBidHistory(pId);
+    	List<BidHistoryDTO> bidHistoryDTOList = this.service.getBidHistory(pid);
 
     	model.addAttribute("product", dto);
     	model.addAttribute("bidHistoryList",bidHistoryDTOList);
@@ -177,7 +177,7 @@ public class ProductController {
             BidHistoryDTO bidHistoryDTO = new BidHistoryDTO();
             bidHistoryDTO.setUserId(userDTO.getUserId());
             bidHistoryDTO.setBidPrice(Integer.parseInt((String) map.get("bidPrice")));
-            bidHistoryDTO.setPId(Integer.parseInt((String)map.get("pId")));
+            bidHistoryDTO.setPid(Integer.parseInt((String)map.get("pid")));
             boolean isBided = service.bid(bidHistoryDTO);
 
             resultMap.put("bidCheck",isBided);

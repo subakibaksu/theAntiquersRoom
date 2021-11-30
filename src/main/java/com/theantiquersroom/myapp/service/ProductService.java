@@ -23,15 +23,15 @@ public interface ProductService {
     public Boolean bid(BidHistoryDTO bidHistoryDTO);
 
     //상품 상세 보기
-    public ProductDTO getDetail(Integer pId);
+    public ProductDTO getDetail(Integer pid);
 
     //상품삭제
-    public boolean removeProduct(Integer pId);
+    public boolean removeProduct(Integer pid);
 
-    public List<BidHistoryDTO> getBidHistory(Integer pId);
+    public List<BidHistoryDTO> getBidHistory(Integer pid);
 
     // 상품 정보 가져오기
-    public ProductModifyDTO getModify(Integer pId);
+    public ProductModifyDTO getModify(Integer pid);
 
     // 상품 정보 수정
     public Integer modify(ProductFormDTO product) throws Exception;

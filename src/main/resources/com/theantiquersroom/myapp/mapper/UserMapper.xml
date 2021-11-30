@@ -191,7 +191,7 @@
         <![CDATA[ 
 
             SELECT
-            	A.p_id as pId,
+            	A.p_id as pid,
                 A.name,
                 A.created_at as createdAt,
                 A.updated_at as updatedAt,

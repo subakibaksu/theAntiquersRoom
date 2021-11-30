@@ -11,7 +11,7 @@ import java.util.List;
 public class ProductModifyDTO {
 
     // 상품등록관련
-    private Integer pId;
+    private Integer pid;
     private String name;
     private String content;
     private Integer categoryId;

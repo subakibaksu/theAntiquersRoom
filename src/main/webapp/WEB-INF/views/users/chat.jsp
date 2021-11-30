@@ -199,7 +199,7 @@
     </div>
 
     <input type="hidden" id="sessionId" value="${sessionScope.__AUTH_ANTIQUE__.userId}">
-    <input type="hidden" id="roomNumber" value="${product.PId}">
+    <input type="hidden" id="roomNumber" value="${product.pid}">
     <input type="hidden" id="userName" value="${userId}">
 
     <div id="chating" class="chating">

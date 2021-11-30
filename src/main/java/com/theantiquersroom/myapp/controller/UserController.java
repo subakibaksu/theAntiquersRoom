@@ -187,7 +187,7 @@ public class UserController {
 
 	@GetMapping("/chat")
 	public String chat(
-			@RequestParam("productId") Integer pId,
+			@RequestParam("pid") Integer pid,
 			@RequestParam("myBidPrice") Integer myBidPrice,
 			Model model, HttpSession session){
 
@@ -203,13 +203,13 @@ public class UserController {
 		//model.addAtrribute("chatList",list);
 		UserDTO user = (UserDTO) session.getAttribute(LoginController.authKey);
 
-		ProductDTO productDTO = productService.getDetail(pId);
+		ProductDTO productDTO = productService.getDetail(pid);
 		String userId = user.getUserId();
 
 		model.addAttribute("userId",userId);
 		model.addAttribute("myBidPrice",myBidPrice);
 		model.addAttribute("product",productDTO);
-		model.addAttribute("chatList",chatService.getChat(pId));
+		model.addAttribute("chatList",chatService.getChat(pid));
 
     	return "/users/chat";
 	}

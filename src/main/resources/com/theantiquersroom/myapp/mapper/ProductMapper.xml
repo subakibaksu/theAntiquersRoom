@@ -22,7 +22,7 @@
     <delete id="deleteProductImage" parameterType="Integer">
         <![CDATA[
             delete from product_image
-            where p_id = #{pId}
+            where p_id = #{pid}
         ]]>
     </delete>
 
@@ -30,7 +30,7 @@
             parameterType="com.theantiquersroom.myapp.domain.ProductImageDTO">
     <![CDATA[
         insert into product_image(image_url, image_name, p_id)
-        VALUES (#{imageUrl}, #{imageName}, #{pId})
+        VALUES (#{imageUrl}, #{imageName}, #{pid})
         ]]>
     </insert>
 
@@ -39,7 +39,7 @@
         
         <![CDATA[ 
             SELECT 
-                P.p_id as pId,
+                P.p_id as pid,
                 P.name,
                 P.created_at as createdAt,
                 P.updated_at as updatedAt,
@@ -64,7 +64,7 @@
                  ORDER BY B.bid_price DESC
                  LIMIT 1) AS currPrice
             FROM product as P
-            WHERE p_id=#{pId}
+            WHERE p_id=#{pid}
         ]]>
     </select>
   
@@ -74,7 +74,7 @@
         <![CDATA[ 
             SELECT image_url
             FROM product_image
-            WHERE p_id=#{pId}
+            WHERE p_id=#{pid}
         ]]>
 
     </select>
@@ -84,7 +84,7 @@
             parameterType="hashmap">
       
             SELECT
-                P.p_id,
+                P.p_id as pid,
                 P.name,
                 P.created_at,
                 P.updated_at,
@@ -163,7 +163,7 @@
 
         SELECT bid_price
         FROM bid_history
-        WHERE p_id = #{pId}
+        WHERE p_id = #{pid}
         ORDER BY bid_price DESC
         LIMIT 1
 
@@ -174,12 +174,12 @@
         SELECT B.bid_at,
                B.user_id,
                B.bid_price,
-               B.p_id,
+               B.p_id as pid,
                (SELECT nickname
                 FROM users as U
                 WHERE B.user_id=U.user_id) as nickname
         FROM bid_history as B
-        WHERE p_id=#{pId}
+        WHERE p_id=#{pid}
         ORDER BY bid_at DESC
 
 
@@ -191,13 +191,13 @@
         INSERT
         INTO bid_history
         (bid_at,user_id, bid_price, p_id)
-        VALUES (NOW(),#{userId},#{bidPrice},#{pId})
+        VALUES (NOW(),#{userId},#{bidPrice},#{pid})
 
     </insert>
 
     <!-- 상품삭제 -->
     <delete id="deleteProduct">
-        DELETE FROM product WHERE p_id=#{pId}
+        DELETE FROM product WHERE p_id=#{pid}
     </delete>
 
     <!--    수정할 상품 정보 불러오기-->
@@ -205,7 +205,7 @@
             resultType="com.theantiquersroom.myapp.domain.ProductModifyDTO">
 
         SELECT
-            product.p_id as pId,
+            product.p_id as pid,
             product.name,
             product.content,
             product.category_id,
@@ -217,7 +217,7 @@
             FROM product
             JOIN category
             ON product.category_id = category.category_id
-            WHERE p_id=#{pId}
+            WHERE p_id=#{pid}
         </select>
 
     <!--    수정할 상품 이미지 정보 불러오기-->
@@ -228,7 +228,7 @@
             image_url,
             image_name
         FROM product_image
-        WHERE p_id=#{pId}
+        WHERE p_id=#{pid}
     </select>
 
     <!--    상품 정보 수정-->
@@ -243,7 +243,7 @@
                started_price=#{startedPrice},
                bid_increment=#{bidIncrement},
                status="승인대기중"
-        WHERE p_id=#{pId};
+        WHERE p_id=#{pid};
         ]]>
     </update>
 
@@ -308,7 +308,7 @@
                 LIMIT 1) AS currPrice
         FROM product as P
         WHERE P.ended_at > NOW()
-        ORDER BY created_at ASC
+        ORDER BY ended_at ASC
         LIMIT 1, 10
 
     </select>

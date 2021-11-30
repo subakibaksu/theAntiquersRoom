@@ -99,8 +99,8 @@
         <tbody>
         <c:forEach items="${myBidList}" var="myBid">
             <tr>
-                <td><a href="/product/getDetail?pId=${myBid.pid}"><img src="${myBid.imageUrl}" height="100px" width="100px" alt=""></a></td>
-                <td><a href="/product/getDetail?pId=${myBid.pid}"><c:out value="${myBid.name}"/></a></td>
+                <td><a href="/product/getDetail?pid=${myBid.pid}"><img src="${myBid.imageUrl}" height="100px" width="100px" alt=""></a></td>
+                <td><a href="/product/getDetail?pid=${myBid.pid}"><c:out value="${myBid.name}"/></a></td>
                 <td><c:out value="${myBid.startedPrice}"/></td>
                 <td><c:out value="${myBid.currPrice}"/></td>
                 <td><c:out value="${myBid.myBidPrice}"></c:out></td>
@@ -121,7 +121,7 @@
                 <td><p hidden class = "leftTimeTimer"><c:out value="${myBid.leftTime}"></c:out><p></td>
                 <td>
                     <c:if test="${myBid.myBidPrice >= myBid.currPrice && !myBid.expiration}">
-                        <a href="/users/chat?productId=${myBid.PId}&myBidPrice=${myBid.myBidPrice}"><button type="button" class="mybtn">연락</button></a>
+                        <a href="/users/chat?pid=${myBid.pid}&myBidPrice=${myBid.myBidPrice}"><button type="button" class="mybtn">연락</button></a>
                         <br>
                         <br>
                         <a href="/users/board/registerReview/"><button type="button" class="mybtn reviewWrite">리뷰쓰기</button></a>

@@ -26,8 +26,8 @@ public class ChatServiceImpl implements ChatService{
     }// sendChat()
 
     @Override
-    public List<ChatDTO> getChat(Integer pId) {
-        return mapper.selectChatByProductId(pId);
+    public List<ChatDTO> getChat(Integer pid) {
+        return mapper.selectChatByProductId(pid);
     }// getChat()
 
 } // end Class

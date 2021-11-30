@@ -88,7 +88,7 @@ public class ProductMapperTests {
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 		ProductFormDTO product = new ProductFormDTO();
-		product.setPId(5);
+		product.setPid(5);
 		product.setName("바뀌어라이름이름");
 		product.setContent("금요일이당");
 		product.setCategoryId(1);

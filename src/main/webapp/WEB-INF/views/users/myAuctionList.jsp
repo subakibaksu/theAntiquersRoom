@@ -62,8 +62,8 @@
                 <tbody>    
                     <c:forEach items="${myAuctionList}" var="myAuction">
                         <tr>
-                            <td><a href="/product/getDetail?pId=${myAuction.pid}"><img src="${myAuction.imageUrl}" height="100px" width="100px"></a></td>
-                            <td><a href="/product/getDetail?pId=${myAuction.pid}"><c:out value="${myAuction.name}"/></a></td>
+                            <td><a href="/product/getDetail?pid=${myAuction.pid}"><img src="${myAuction.imageUrl}" height="100px" width="100px"></a></td>
+                            <td><a href="/product/getDetail?pid=${myAuction.pid}"><c:out value="${myAuction.name}"/></a></td>
                             <td><c:out value="${myAuction.categoryName}"/></td>
                             <td><c:out value="${myAuction.startedPrice}"/></td>
                             <td><c:out value="${myAuction.currPrice}"/></td>
@@ -76,11 +76,11 @@
                             		<td>
                             			<c:out value="${myAuction.status}"/><br>
                             			<form action="/product/modify" method="get">
-	                            			<input type="hidden" id="pId" name="pId" value="${myAuction.pid}">
+	                            			<input type="hidden" id="pId" name="pid" value="${myAuction.pid}">
 	                            			<input type="submit" id="modifyBtn" value="수정">
 	                            		</form>
 	                            		<form action="/product/remove" method="post">
-	                            			<input type="hidden" id="pId" name="pId" value="${myAuction.pid}">
+	                            			<input type="hidden" id="pId" name="pid" value="${myAuction.pid}">
 	                            			<input type="submit" id="removeBtn" value="삭제">
 	                            		</form>
                             		</td>
@@ -89,7 +89,7 @@
                             	    <td>
                             			<c:out value="${myAuction.status}"/><br>
                             			<form action="/product/reRegister" method="get">
-	                            			<input type="hidden" id="pId" name="pId" value="${myAuction.pid}">
+	                            			<input type="hidden" id="pId" name="pid" value="${myAuction.pid}">
 	                            			<input type="submit" id="reRegisterBtn" value="유찰하기">
 	                            		</form>
                             		</td>

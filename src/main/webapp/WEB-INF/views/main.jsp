@@ -120,7 +120,7 @@
             <div>
                 <ul class="main_ul" id="newItems">
                     <c:forEach var="newProduct" items="${newProductList}">
-                        <a href="/product/getDetail?pId=${newProduct.pid}">
+                        <a href="/product/getDetail?pid=${newProduct.pid}">
                         <li class="main_item newItem">
                             <div class="main_item_img">
                                 <img src="${newProduct.imageUrl}" alt="">
@@ -164,7 +164,7 @@
             <div>
                 <ul class="main_ul" id="endingItems">
                     <c:forEach var="endingProduct" items="${endingProductList}">
-                        <a href="/product/getDetail?pId=${endingProduct.pid}">
+                        <a href="/product/getDetail?pid=${endingProduct.pid}">
                         <li class="main_item endingItem">
                             <div class="main_item_img">
                                 <img src="${endingProduct.imageUrl}" alt="">

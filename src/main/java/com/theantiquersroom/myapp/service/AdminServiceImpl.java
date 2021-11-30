@@ -44,20 +44,20 @@ public class AdminServiceImpl implements AdminService {
 	}//getRequestedListTotal
 
 	@Override
-	public Boolean modifyStatus(Integer pId) {
-		log.debug("modifyStatus({}) invoked.", pId);
+	public Boolean modifyStatus(Integer pid) {
+		log.debug("modifyStatus({}) invoked.", pid);
 		
-		int affectedRows=this.mapper.updateStatus(pId);
+		int affectedRows=this.mapper.updateStatus(pid);
 		log.info("\t+ affectedRows: {}", affectedRows);
 		
 		return affectedRows>0;
 	} // modifyStatus
 
 	@Override
-	public Boolean rejectRequest(Integer pId) {
-		log.debug("rejectRequest({}) invoked.", pId);
+	public Boolean rejectRequest(Integer pid) {
+		log.debug("rejectRequest({}) invoked.", pid);
 		
-		int affectedRows=this.mapper.rejectRequest(pId);
+		int affectedRows=this.mapper.rejectRequest(pid);
 		log.info("\t+ affectedRows: {}", affectedRows);
 		
 		return affectedRows>0;
@@ -81,10 +81,10 @@ public class AdminServiceImpl implements AdminService {
 	}//getAuctionTotal
 
 	@Override
-	public Boolean stopSale(Integer pId) {
-		log.debug("stopSale({}) invoked.",pId);
+	public Boolean stopSale(Integer pid) {
+		log.debug("stopSale({}) invoked.",pid);
 		
-		int affectedRows=this.mapper.stopSale(pId);
+		int affectedRows=this.mapper.stopSale(pid);
 		log.info("\t+ affectedRows: {}", affectedRows);
 		
 		return affectedRows>0;
