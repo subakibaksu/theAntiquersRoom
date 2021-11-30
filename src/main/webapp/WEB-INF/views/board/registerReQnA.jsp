@@ -27,7 +27,7 @@
          <h2 id="registerReQnAH2">문의사항 답글</h2>
             <tr>
                <td>제목</td>
-               <td><input class="registerReQnAInput" type="text"  id="title" name="title"  placeholder="내용을 입력하세요"></td>
+               <td><input class="registerReQnAInput" type="text"  id="title" name="title"  value="${pageInfo.title}의 답글"></td>
             </tr>
             <tr>
                <td>내용</td>
@@ -64,16 +64,15 @@
 	history.go(-1)
 }
 
-	/* 제목, 내용 공백일때 버튼비활성화 */
+	/* 내용 공백일때 버튼비활성화 */
 	 let content = document.querySelector("#content");
 	let button = document.querySelector("#registerButton");
 
 	button.disabled = true;
-	title.addEventListener("change", stateHandle);
 	content.addEventListener("change", stateHandle);
 
 	function stateHandle() {
-	  if (document.querySelector("#title").value === "" && document.querySelector("#content").value === "" ) {
+	  if (document.querySelector("#content").value === "" ) {
 	    button.disabled = true; 
 	  } else {
 	    button.disabled = false;
