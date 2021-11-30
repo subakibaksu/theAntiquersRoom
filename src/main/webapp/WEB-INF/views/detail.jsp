@@ -83,25 +83,34 @@
                                     <p>${product.startedPrice} 원</p>
                                 </c:when>
                                 <c:otherwise>
-                                    <p>현재가 : ${product.currPrice} 원</p>
+                                    <p>${product.currPrice} 원</p>
                                 </c:otherwise>
                             </c:choose>
                         </td>
                     </tr>
                     <tr>
+                        <th>입찰 증액 단위</th>
+                        <td>${product.bidIncrement} 원</td>
+                    </tr>
+                    <tr>
                         <th>입찰 금액</th>
                         <td id="bidTd">
                             <form id="bidForm" action="#">
-                                <button id="upBtn" type="button" onclick='changeBid("up")'>
-                                    <i class="fas fa-chevron-circle-up" ></i>
-                                </button>
                                 <input hidden name="pid" value="${product.pid}">
                                 <c:choose>
                                     <c:when test="${empty product.currPrice}">
-                                        <input type="text" id="bidPrice" name="bidPrice" value="${product.startedPrice}">원
+                                        <p id="wholeBid">500원</p><br>
+                                        <button id="upBtn" type="button" onclick='changeBid("up")'>
+                                            <i class="fas fa-chevron-circle-up" ></i>
+                                        </button>
+                                        <input type="text" id="bidPrice" name="bidPrice" value="${product.startedPrice} + ${product.bidIncrement}">
                                     </c:when>
                                     <c:otherwise>
-                                        <input type="text" id="bidPrice" name="bidPrice" value="${product.currPrice}">원
+                                        <p id="wholeBid">500원</p><br>
+                                        <button id="upBtn" type="button" onclick='changeBid("up")'>
+                                            <i class="fas fa-chevron-circle-up" ></i>
+                                        </button>
+                                        <input type="text" id="bidPrice" name="bidPrice" value="${product.currPrice} + ${product.bidIncrement}">
                                     </c:otherwise>
                                 </c:choose>
                                 <button id="downBtn" type="button" onclick='changeBid("down")'>

@@ -63,10 +63,10 @@ public class BoardController {
 
     //리뷰작성시 상품명, 낙찰가 주입.
     @GetMapping("/registerReview")
-    public String getReview(Integer pId, Model model) {
-    	log.debug("getReview({}) invoked.", pId);
+    public String getReview(Integer pid, Model model) {
+    	log.debug("getReview({}) invoked.", pid);
     	
-    	ProductDTO dto = this.prdouctService.getDetail(pId);
+    	ProductDTO dto = this.prdouctService.getDetail(pid);
     	log.info("/t+ dto: {}", dto);
     	assert dto != null;
 
@@ -114,11 +114,11 @@ public class BoardController {
 //---------------------------------------------QnA=============================================
     
   @GetMapping("/QnA")
-  public void getQnA(@RequestParam("pId") Integer pId, Model model, BoardQnACriteria cri) { // 문의게시글 불러오기	
+  public void getQnA(@RequestParam("pid") Integer pid, Model model, BoardQnACriteria cri) { // 문의게시글 불러오기
 
-	  log.debug("getQnA({}) invoked." , pId);
+	  log.debug("getQnA({}) invoked." , pid);
 	  
-	  	cri.setPid(pId);
+	  	cri.setPid(pid);
 	  
 		model.addAttribute("list",service.getQnAListByProductId(cri));
 		
@@ -127,7 +127,7 @@ public class BoardController {
 		QnAPageMakeDTO pageMake = new QnAPageMakeDTO(cri, total);
 		
 		model.addAttribute("pageMaker", pageMake);
-		model.addAttribute("pId",pId);
+		model.addAttribute("pid",pid);
 
 
       } // getQnA 페이징처리
@@ -141,10 +141,10 @@ public class BoardController {
     } // getQnADetail
 
     @GetMapping("/registerQnA")
-    public void registerQnA(Integer pId, Model model) {		
+    public void registerQnA(Integer pid, Model model) {
         log.debug("registerQnA() invoked.");
         
-        ProductDTO dto = this.prdouctService.getDetail(pId);
+        ProductDTO dto = this.prdouctService.getDetail(pid);
         
         model.addAttribute("product", dto);
 
@@ -159,7 +159,7 @@ public class BoardController {
         model.addAttribute("product", dto);
 
     	
-    	return  "redirect:/board/QnA?"+"pId="+dto.getPid();
+    	return  "redirect:/board/QnA?"+"pid="+dto.getPid();
     } // registerQnA
     
     
@@ -176,7 +176,7 @@ public class BoardController {
     	
     	this.service.registerReQnA(dto);
     	
-    	return  "redirect:/board/QnA?" +"pId="+dto.getPid();
+    	return  "redirect:/board/QnA?" +"pid="+dto.getPid();
     } // registerReQnA
 
     
@@ -189,24 +189,24 @@ public class BoardController {
     } // modifyQnA
 
     @PostMapping("/modifyQnA")
-    public String modifyQnA(QnADTO dto, Integer pId, RedirectAttributes rttr) { // 문의게시글 수정
+    public String modifyQnA(QnADTO dto, Integer pid, RedirectAttributes rttr) { // 문의게시글 수정
         log.debug("modifyQnA({})({}) invoked.", dto,rttr);
         
         int result = this.service.modifyQnA(dto);
         rttr.addAttribute("result", result);
         
-        return  "redirect:/board/QnA?" +"pId="+pId;
+        return  "redirect:/board/QnA?" +"pid="+pid;
         
     } // modifyQnA
 
     @PostMapping("/removeQnA")
-    public String removeQnA(Integer bindex, Integer pId, RedirectAttributes rttr) { // 문의게시글 삭제
+    public String removeQnA(Integer bindex, Integer pid, RedirectAttributes rttr) { // 문의게시글 삭제
         log.debug("removeQnA({}) invoked.");
         
         int result = this.service.removeQnA(bindex);
         rttr.addAttribute("result", result);
         
-        return  "redirect:/product/getDetail?" +"pId="+pId;
+        return  "redirect:/product/getDetail?" +"pid="+pid;
 
     } // removeQnA
    
