@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 #reviewcontainer {
-    padding-block: 2rem;
+    padding-block: 1rem;
     display: flex;
     flex-direction: column;
 }
@@ -9,7 +9,7 @@
 #reviewcontainer h2 {
     font-family: "Gowun Dodum", sans-serif;
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
 }
 
 #tableplace {
