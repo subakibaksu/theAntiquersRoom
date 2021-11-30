@@ -10,7 +10,7 @@ import lombok.Data;
 public class ReviewDTO {
 	
 	private Integer reviewId;
-	private Integer pId;
+	private Integer pid;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime createdAt;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

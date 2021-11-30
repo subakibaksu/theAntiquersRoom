@@ -24,7 +24,7 @@
 					<li>QnA</li>
 					<li><button id="list_btn" type="button">목록 페이지</button></li>
 					<form action="/board/removeQnA" method="post">
-                           <input type="hidden" id="pId" name="pId" value="${pageInfo.pId}">
+                           <input type="hidden" id="pId" name="pid" value="${pageInfo.pid}">
                            <input type="hidden" id="bindex" name="bindex" value="${pageInfo.bindex}">
                            <input type="submit" id="Btn"  value="deleteTest">
                      </form>
@@ -42,7 +42,7 @@
 			</thead>
 			<tbody>
 				<form id="modifyForm" action="/board/modifyQnA" method="post">
-					<td><input type="hidden" name="pId" value="${pageInfo.pId}"/></td>
+					<td><input type="hidden" name="pId" value="${pageInfo.pid}"/></td>
 					<tr>
 						<td><input name=bindex readonly="readonly"  value="${pageInfo.bindex}"/></td>
 						<td><input name=title placeholder="${pageInfo.title}"/></td>
@@ -54,9 +54,9 @@
 						<li><button id="modify_btn" type="button">수정</button></li>
 		</form>
 		
-		<form id="infoForm" action="/board/modifyQnA" method="get">
+<%-- 		<form id="infoForm" action="/board/modifyQnA" method="get">
 			<input type="hidden" id="bindex" name="bindex" value='<c:out value="${pageInfo.bindex}"/>'>
-		</form>
+		</form> --%>
 		
       <script>
       let form = $("#infoForm");        // 페이지 이동 form(리스트 페이지 이동, 조회 페이지 이동)

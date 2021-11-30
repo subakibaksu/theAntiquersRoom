@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import com.theantiquersroom.myapp.mapper.ProductMapper;
 import com.theantiquersroom.myapp.domain.ProductImageDTO;
 
-import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,8 +28,9 @@ public class ProductServiceImpl implements ProductService, InitializingBean, Dis
 
     private final String PRODUCT_IMAGE_DIR = "product";
 
-    @Setter(onMethod_= {@Autowired} )
+    @Setter(onMethod_= {@Autowired})
     private ProductMapper mapper;
+    @Setter(onMethod_= {@Autowired})
     private FileUploadService uploadService;
 
     // 상품등록

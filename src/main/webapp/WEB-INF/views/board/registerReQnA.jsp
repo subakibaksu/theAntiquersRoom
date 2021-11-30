@@ -27,7 +27,7 @@
          <h2 id="registerReQnAH2">문의사항 답글</h2>
             <tr>
                <td>제목</td>
-               <td><input class="registerReQnAInput" type="text" name="title" placeholder="제목을 입력하세요"></td>
+               <td><input class="registerReQnAInput" type="text" name="title"  value="${pageInfo.title}" readonly="readonly"></td>
             </tr>
             <tr>
                <td>내용</td>
@@ -41,7 +41,7 @@
                <td><input class="registerReQnAInput"  type="hidden" name="ref" value="${pageInfo.ref}"></td>
             </tr>   
             <tr>
-               <td><input type="hidden" name="pId" value="${pageInfo.pId}"></td>
+               <td><input type="hidden" name="pid" value="${pageInfo.pid}"></td>
             </tr>
             <tr>
                <td colspan="2">

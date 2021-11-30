@@ -35,24 +35,7 @@
 					<th>수정일</th>
 				</tr>
 			</thead>
-
-		
 			
-			
-		<c:choose>
-		<c:when test="${board.pId eq pId}">
-			
-		
-		</c:when>
-		
-		<c:when test="${board.pId ne pId}">
-		
-		
-		</c:when>
-		</c:choose>
-
-
-
 			<tbody>
 				<c:forEach items="${list}" var="board">
 					<tr class="tablehead">
@@ -62,12 +45,11 @@
 						<!-- 답글이라면 앞에 RE: 붙이기 -->
 						<td>
 								<c:if test="${board.step != 0}">
-								<div> RE:</div>
+								<div> RE: </div>
 								</c:if>
 								
 								<c:out value="${board.title}" />
 								</a>
-								pId : "${board.pId}"
 						</td>
 						
 						<td id="content">

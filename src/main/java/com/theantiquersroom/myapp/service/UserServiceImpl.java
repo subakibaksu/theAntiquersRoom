@@ -169,13 +169,8 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 	
 	@Override
 	public boolean modify(modifyDTO user) {
-		
-		// 회원 비밀번호를 인코딩하기 위한 객체 선언
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		
-		//회원 비밀번호를 암호화하여 user 객체에 다시 저장
-		String securePw = encoder.encode(user.getPassword());
-		user.setPassword(securePw);
+		// 수정 시, 받은 비밀번호 암호화
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		
 		int affectedRows=this.mapper.update(user);
 		
