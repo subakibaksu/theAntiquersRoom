@@ -195,7 +195,7 @@ header {
 }
 
 #myAcutionTbl tr:hover {
-    background-color: aliceblue;
+    background-color: rgb(227, 182, 174, 0.2);
 }
 
 #myAcutionTbl th {
