@@ -90,12 +90,16 @@
                             && bidIncrementcheck && startedAtcheck && endedAtcheck
                             && contentcheck && imagescheck) {
                             $('#productSubmit')[0].submit()
-                            $("#register").click(function () {
-                                alert("성공적으로 경매가 요청되었습니다.");
+                            Swal.fire({
+                                title: '경매 요청이 완료되었습니다.',
+                                icon: 'success',
+                                closeOnClickOutside: false
+                            }).then(function(){
+                                self.location.href='/';
                             });
+
                         } else {
-                            alert("입력칸을 모두 채워주세요.");
-                            $("#register").prop("disabled", true);
+                            Swal.fire('입력 칸을 모두 채워주세요.','','warning');
                         }
                     }
 
@@ -109,13 +113,13 @@
 
                         if ($('#bidIncrement').val() != "") bidIncrementcheck = true;
 
-                        if ($('#startDate').val() == "") startedAtcheck = true;
+                        if ($('#startDate').val() != "") startedAtcheck = true;
 
-                        if ($('#endDate').val() == "") endedAtcheck = true;
+                        if ($('#endDate').val() != "") endedAtcheck = true;
 
-                        if ($('#summernote').val() == "") contentcheck = true;
+                        if ($('#summernote').val() != "") contentcheck = true;
 
-                        if ($('#image1').val() == "") imagescheck = true;
+                        if ($('#image1').val() != "") imagescheck = true;
                     }
                 });
     </script>
