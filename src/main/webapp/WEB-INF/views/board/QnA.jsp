@@ -25,7 +25,6 @@
 
 			<thead>
 				<tr class="tablehead"  id="header">
-
 					<th class="QnAth">제목</th>
 					<th class="QnAth">내용</th>
 					<th class="QnAth">작성자</th>
