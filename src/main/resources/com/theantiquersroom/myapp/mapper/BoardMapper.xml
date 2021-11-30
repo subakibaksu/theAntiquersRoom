@@ -22,10 +22,10 @@
 				depth,
 				step,
 				author,
-				p_id as pId
+				p_id as pid
 
             FROM board
-            WHERE p_id = #{pId}
+            WHERE p_id = #{pid}
 			ORDER BY ref DESC, step ASC
 			
         ]]>
@@ -62,7 +62,7 @@
                 #{content},
                 #{ref},
                 #{author},
-                #{pId}
+                #{pid}
 
             )
         ]]>
@@ -71,7 +71,7 @@
     <!-- 문의게시물 목록(페이징) -->
     <select id="getQnAListPaging" resultType="com.theantiquersroom.myapp.domain.QnADTO">
     
-                SELECT bindex, content, author, p_id as pId, title, ref, depth, step, created_at as createdAt, updated_at as updatedAt
+                SELECT bindex, content, author, p_id as pid, title, ref, depth, step, created_at as createdAt, updated_at as updatedAt
                 FROM board ORDER BY ref DESC, step ASC
         <!-- limit ((${pageNum}-1)*${amount}), ${amount} -->
         limit #{skip},#{amount}
@@ -112,7 +112,7 @@
 		INSERT INTO board
 		(created_at, updated_at, title, content,ref, depth, step, author, p_id)
 		VALUES
-		(now(), now(), #{title},#{content},#{ref},1,(SELECT count(*) FROM board AS B WHERE B.ref = #{ref}),#{author},#{pId});
+		(now(), now(), #{title},#{content},#{ref},1,(SELECT count(*) FROM board AS B WHERE B.ref = #{ref}),#{author},#{pid});
 		 
 	</insert>
 	
@@ -131,7 +131,7 @@
 				created_at as createdAt,
 				updated_at as updatedAt,
 				content,
-				p_id as pId,
+				p_id as pid,
 				score,
 				author
 				
@@ -162,7 +162,7 @@
                 now(),
              	now(),
                 #{content},
-                #{pId},
+                #{pid},
                 #{score},
                 #{author}
             )
@@ -172,7 +172,7 @@
     <!-- 리뷰게시글 목록(페이징) -->
     <select id="getReviewListPaging" resultType="com.theantiquersroom.myapp.domain.ReviewDTO">
     
-                SELECT review_id as reviewId, created_at as createdAt, updated_at as updatedAt, content, p_id as pId, score, author
+                SELECT review_id as reviewId, created_at as createdAt, updated_at as updatedAt, content, p_id as pid, score, author
                 FROM review ORDER BY createdAt DESC
         limit #{skip},#{amount}
     

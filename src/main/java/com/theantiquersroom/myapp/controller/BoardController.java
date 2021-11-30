@@ -118,7 +118,7 @@ public class BoardController {
 
 	  log.debug("getQnA({}) invoked." , pId);
 	  
-	  	cri.setPId(pId);
+	  	cri.setPid(pId);
 	  
 		model.addAttribute("list",service.getQnAListByProductId(cri));
 		
@@ -133,7 +133,7 @@ public class BoardController {
       } // getQnA 페이징처리
 
     @GetMapping("/getQnADetail")
-    public void getQnADetail(int bindex, Model model) {	// 상세 문의게시글 보기
+    public void getQnADetail(Integer bindex, Model model) {	// 상세 문의게시글 보기
         log.debug("getQnADetail() invoked.");
         
         model.addAttribute("pageInfo", service.getQnADetail(bindex));
@@ -159,12 +159,12 @@ public class BoardController {
         model.addAttribute("product", dto);
 
     	
-    	return  "redirect:/board/QnA?"+"pId="+dto.getPId();
+    	return  "redirect:/board/QnA?"+"pId="+dto.getPid();
     } // registerQnA
     
     
     @GetMapping("/registerReQnA")
-    public void registerReQnA(int bindex, Model model) {		
+    public void registerReQnA(Integer bindex, Model model) {		
         log.debug("registerReQnA() invoked.");
         
         model.addAttribute("pageInfo", service.getQnADetail(bindex));
@@ -176,12 +176,12 @@ public class BoardController {
     	
     	this.service.registerReQnA(dto);
     	
-    	return  "redirect:/board/QnA?" +"pId="+dto.getPId();
+    	return  "redirect:/board/QnA?" +"pId="+dto.getPid();
     } // registerReQnA
 
     
     @GetMapping("/modifyQnA")
-    public void modifyQnA(int bindex, Model model) { // 문의사항 수정페이지로 이동
+    public void modifyQnA(Integer bindex, Model model) { // 문의사항 수정페이지로 이동
         log.debug("modifyQnA() invoked.");
         
         model.addAttribute("pageInfo", service.getQnADetail(bindex));
@@ -189,7 +189,7 @@ public class BoardController {
     } // modifyQnA
 
     @PostMapping("/modifyQnA")
-    public String modifyQnA(QnADTO dto, String pId, RedirectAttributes rttr) { // 문의게시글 수정
+    public String modifyQnA(QnADTO dto, Integer pId, RedirectAttributes rttr) { // 문의게시글 수정
         log.debug("modifyQnA({})({}) invoked.", dto,rttr);
         
         int result = this.service.modifyQnA(dto);
@@ -200,7 +200,7 @@ public class BoardController {
     } // modifyQnA
 
     @PostMapping("/removeQnA")
-    public String removeQnA(int bindex, String pId, RedirectAttributes rttr) { // 문의게시글 삭제
+    public String removeQnA(Integer bindex, Integer pId, RedirectAttributes rttr) { // 문의게시글 삭제
         log.debug("removeQnA({}) invoked.");
         
         int result = this.service.removeQnA(bindex);

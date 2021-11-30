@@ -65,7 +65,7 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 	
   	/* 문의게시판 조회 */
 	@Override
-	public QnADTO getQnADetail(int bindex) {
+	public QnADTO getQnADetail(Integer bindex) {
 
 		return mapper.getQnADetail(bindex);
 	} // getQnADetail()
@@ -79,7 +79,7 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 	
 	/* 문의게시글 삭제 */
 	@Override
-	public Integer removeQnA(int bindex) {
+	public Integer removeQnA(Integer bindex) {
 
 		return mapper.removeQnA(bindex);
 	} // removeQnA()

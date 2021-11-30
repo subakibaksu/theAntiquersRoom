@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class QnAPageMakeDTO {
 	
-	private int pId;
+	private Integer pid;
 	
     /* 시작 페이지 */
     private int startPage;

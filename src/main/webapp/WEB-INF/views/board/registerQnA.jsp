@@ -35,7 +35,7 @@
             </tr>
             <tr>
             	<td>상품번호</td>
-               <td><input class="registerQnAInput" type="text" name="pId" value="${product.pId}"></td>
+               <td><input class="registerQnAInput" type="text" name="pid" value="${product.pid}"></td>
             </tr>
             <tr>
                <td colspan="2">

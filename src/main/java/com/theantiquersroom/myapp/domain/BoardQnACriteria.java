@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class BoardQnACriteria {
  
-	private int pId;
+	private Integer pid;
 	
     /* 현재 페이지 */
     private int pageNum;
