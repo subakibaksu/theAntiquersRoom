@@ -53,14 +53,3 @@
     width: 5rem;
     height: 5rem;
 }
-
-#modbtn {
-	width: 3.5rem;
-	color: rgba(194, 177, 177, 0.9);
-    font-weight: 800;
-    border: 1px solid rgba(194, 177, 177, 0.9);
-    background-color: rgba(255, 255, 255, 0.7);
-    border-radius: 3px;
-    text-align: center;
-    padding-bottom: 0.2rem;
-}
