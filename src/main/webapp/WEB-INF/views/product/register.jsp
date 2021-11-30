@@ -162,11 +162,11 @@
                                     <select name="categoryId" class="check" id="categoryId">
                                         <option value="none">상품의 종류를 선택해주세요</option>
                                         <option value="0">의자</option>
-                                        <option value="1">책상</option>
+                                        <option value="1">테이블</option>
                                         <option value="2">수납장</option>
                                         <option value="3">침대</option>
                                         <option value="4">옷장</option>
-                                        <option value="5">화장대</option>
+                                        <option value="5">쇼파</option>
                                         <option value="6">기타</option>
                                     </select>
                                 </label>

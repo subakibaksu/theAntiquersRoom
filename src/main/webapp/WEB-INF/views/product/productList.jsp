@@ -64,7 +64,7 @@
                 <c:when test="${productCommand.category_id eq 2}"><h2>수납장</h2></c:when>
                 <c:when test="${productCommand.category_id eq 3}"><h2>침대</h2></c:when>
                 <c:when test="${productCommand.category_id eq 4}"><h2>옷장</h2></c:when>
-                <c:when test="${productCommand.category_id eq 5}"><h2>화장대</h2></c:when>
+                <c:when test="${productCommand.category_id eq 5}"><h2>쇼파</h2></c:when>
                 <c:when test="${productCommand.category_id eq 6}"><h2>기타</h2></c:when>
                 <c:otherwise>Search Result</c:otherwise>
             </c:choose>

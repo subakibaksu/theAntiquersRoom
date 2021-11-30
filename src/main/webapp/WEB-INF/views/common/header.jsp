@@ -95,11 +95,11 @@
 			<div id="navbar">
 				<ul class="base">
 					<li class="menu"><a href="/product/productList?category_id=0">의자</a> </li>
-					<li class="menu"><a href="/product/productList?category_id=1">책상</a> </li>
+					<li class="menu"><a href="/product/productList?category_id=1">테이블</a> </li>
 					<li class="menu"><a href="/product/productList?category_id=2">수납장</a> </li>
 					<li class="menu"><a href="/product/productList?category_id=3">침대</a> </li>
 					<li class="menu"><a href="/product/productList?category_id=4">옷장</a> </li>
-					<li class="menu"><a href="/product/productList?category_id=5">화장대</a> </li>
+					<li class="menu"><a href="/product/productList?category_id=5">쇼파</a> </li>
 					<li class="menu"><a href="/product/productList?category_id=6">기타</a> </li>
 				</ul>
 			</div>
