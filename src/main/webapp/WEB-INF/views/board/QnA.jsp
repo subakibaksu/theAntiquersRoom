@@ -25,6 +25,7 @@
 
 			<thead>
 				<tr class="tablehead">
+
 					<th class="QnAth">제목</th>
 					<th class="QnAth">내용</th>
 					<th class="QnAth">작성자</th>
@@ -35,7 +36,6 @@
 			<tbody>
 				<c:forEach items="${list}" var="board">
 					<tr class="tablehead">
-					
 						
 						<!-- 답글이라면 앞에 RE: 붙이기 -->
 						<td class="QnAtd" id="tdtitle">
