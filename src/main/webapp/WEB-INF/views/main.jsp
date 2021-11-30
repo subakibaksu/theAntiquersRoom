@@ -77,14 +77,14 @@
         <section id="mainBanner">
             <!-- banner imgs -->
             <div class="mainSlides fade">
-                <img src="https://pixabay.com/get/ge0615514da69482f6c29c0118bf0bf178d1ee5758bf731755d7e5566af360ae0e6de4d03d91ab86711474b0a48609dc493d14176627351743da5f2d742c82394849358d2cddb40873f178a6ee614854f_1920.jpg" alt="">
+                <img src="https://pixabay.com/get/g9ffa538abfd9f415741873d69c52d2ed0c25b37799e96a71ca32d4aa81272174a7879ad43a8e8e47519b7427fdbb3be3f7826cf0b0b3da428b6feac6862c0b0ea9234b004e82d92bf07c37315177b94c_1920.jpg" alt="">
             </div>
             <div class="mainSlides fade">
                 <!-- <img src="https://pixabay.com/get/g42532307632e38d7a75d94fe718cf2647c4c3de915f31a4326739705fb0d742735b927ccd94d5bbcbadd98a74fb49a9b35f6715b9abe6aa476355a41931f36aea4dc97a08632b315eaec2047b5d39625_1920.jpg" alt=""> -->
                 <img src="https://pixabay.com/get/g5b84470dc579370bad9dc4a3addfcdead211ee12c4a182316793fbf134bcc42f78ad5089276cffa94f2285c256d21d6e338a37c56d6d872ff56c65911dd28c7f088d85acfbab81bf23864eeb96837c85_1920.jpg" alt="">
             </div>
             <div class="mainSlides fade">
-                <img src="https://pixabay.com/get/gf9c986166164a5bd20cf65076140767cc5b5ccfb831d4fa672b6e40ed09931e6e6e466a67ae333a1f1385dfa6e1b33f41ef8ba4fb508d53e0dd55b111dcc5a3cda64fc28edb10cbcd5338aa171f91c37_1920.jpg" alt="">
+                <img src="https://pixabay.com/get/g791ca794407f01fb9edefcd7e384c504552dd58ce198999d823d0c92f21bc6cbb6bd54865d4b8c96f61b4af6ba492aef7a76a67888acfec75a8423e10d8180d4c1dbda83f818c492d5f467b8eee0c5e8_1920.jpg" alt="">
             </div>
             <!-- prev/next arrow -->
             <button class="prev">
