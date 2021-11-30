@@ -10,7 +10,7 @@
 	<title>registerReview</title>
 
 	<link rel="stylesheet" href="/resources/css/registerReview.css">
-	
+
 </head>
 
 <body>
@@ -22,23 +22,22 @@
 
 			<div id="registerReviewContainer">
 				<!-- 리뷰작성칸 -->
-				<div id="reviewBox"> 
-							    	
+				<div id="reviewBox">
+
 					<div id="productContainer">
 						<div id="imgsection">
-							<img id="productimg" alt=""
-								src="/resources/images/charlie.jpeg">
+							<img id="productimg" alt="" src="${product.imageUrl}" />
 						</div>
 						<div class="infoContainer">
 							<div class="info">상품명 : <input type="text" value="${product.name}" readonly="readonly"></div>
 							<div class="info">시작가 : <input type="text" value="${product.startedAt}" readonly="readonly"></div>
 							<div class="info">낙찰가 : <input type="text" value="${product.currPrice}" readonly="readonly"></div>
 							<div class="info">낙찰자 : <input type="text" name="nickName" value="${sessionScope.__AUTH_ANTIQUE__.nickName}" readonly="readonly"></div>
-							<div><input type="hidden" name="pid" value="${product.pid}"></div>
-							
+							<div><input type="text" name="pid" value="${product.pid}" hidden></div>
+							<div><input type="text" name="sellerId" value="${product.userId}" hidden></div>
 						</div>
 					</div>
-						
+
 					<div id="reviewContainer">
 						<div id="rating">
 							<div id="ratingName">별점 : </div>
