@@ -64,7 +64,7 @@ public class UserController {
             
             session.invalidate();
             
-            return reqUrl;
+            return "redirect:"+reqUrl;
             
         }else { //일반회원 로그아웃 시 세션 초기화
         	session.invalidate();
