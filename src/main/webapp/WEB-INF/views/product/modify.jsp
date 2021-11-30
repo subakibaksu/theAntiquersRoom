@@ -175,7 +175,7 @@
             <div id="infoDiv">
                 <%--    상품 등록 form --%>
                 <form id="productSubmit" action="/product/modify" method="post" enctype="multipart/form-data">
-                    <input hidden name="pId" value="${product.PId}">
+                    <input hidden name="pid" value="${product.pid}">
                     <table id="infoTable">
                         <tr>
                             <th width="200px">상품명</th>

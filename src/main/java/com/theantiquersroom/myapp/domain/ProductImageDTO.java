@@ -12,6 +12,6 @@ public class ProductImageDTO {
     private Integer index; // 1,2,3
     private String imageName; // 실제 파일 이름
     private String imageUrl; // 실제 업로드된 경로
-    private Integer pId; // 상품등록번호
+    private Integer pid; // 상품등록번호
 
 }

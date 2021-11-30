@@ -143,7 +143,7 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
 
             // 새로운 비밀번호 생성후 이메일로 전송 , DB에 Insert
             String newpassword = Integer.toString((int)(Math.random()*3000+1));
-            
+            log.debug(newpassword);
             mailsender.sendmail("your new password is : "+ newpassword,userId);
             mapper.updatePassword(passwordEncoder.encode(newpassword),userId);
             

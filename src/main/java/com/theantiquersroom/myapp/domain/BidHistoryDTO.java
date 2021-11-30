@@ -13,7 +13,7 @@ public class BidHistoryDTO {
     private LocalDateTime bidAt;
     private String userId;
     private Integer bidPrice;
-    private Integer pId;
+    private Integer pid;
     private String nickName;
 
 }

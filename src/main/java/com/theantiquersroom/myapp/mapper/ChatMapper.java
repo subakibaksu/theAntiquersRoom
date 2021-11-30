@@ -18,6 +18,6 @@ public interface ChatMapper {
 
     public abstract void insertChat(ChatDTO chatDTO);
 
-    public abstract List<ChatDTO> selectChatByProductId(@Param("pId") Integer pId);
+    public abstract List<ChatDTO> selectChatByProductId(@Param("pid") Integer pid);
 
 }

@@ -28,7 +28,7 @@
         <![CDATA[ 
 
             SELECT
-            	A.p_id as pId,
+            	A.p_id as pid,
                 A.name,
                 A.created_at as createdAt,
                 A.updated_at as updatedAt,
@@ -58,7 +58,7 @@
         SET 
             status='승인완료'
         WHERE
-            p_id = #{pId}
+            p_id = #{pid}
 
     </update>
     
@@ -69,7 +69,7 @@
         SET 
             status='승인반려'
         WHERE
-            p_id = #{pId}
+            p_id = #{pid}
 
     </update>
     
@@ -165,7 +165,7 @@
         SET 
             status='판매취소'
         WHERE
-            p_id = #{pId}
+            p_id = #{pid}
 
     </update>
 

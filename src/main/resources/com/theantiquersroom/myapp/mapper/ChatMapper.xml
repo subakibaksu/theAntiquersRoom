@@ -21,7 +21,7 @@
 
         SELECT p_id as pid,user_id,msg,sended_at
         FROM chat
-        WHERE p_id = #{pId}
+        WHERE p_id = #{pid}
 
     </select>
 </mapper>

@@ -20,10 +20,10 @@ public interface AdminService {
   	public abstract Integer getRequestedListTotal();
   	
   	// 경매 승인
-  	public abstract Boolean modifyStatus(Integer pId);
+  	public abstract Boolean modifyStatus(Integer pid);
   	
   	// 경매 승인 반려
-  	public abstract Boolean rejectRequest(Integer pId);
+  	public abstract Boolean rejectRequest(Integer pid);
   	
     // 경매 상품 조회
     public abstract List<ProductDTO> getAuctionProductList(MypageCriteria cri);
@@ -32,7 +32,7 @@ public interface AdminService {
   	public abstract Integer getAuctionTotal(String keyword, String status);
   	
   	// 경매상품 판매중단
-  	public abstract Boolean stopSale(Integer pId);
+  	public abstract Boolean stopSale(Integer pid);
   
     	// 회원 목록 조회
   	public abstract List<UserDTO> getUserList(MypageCriteria cri);
