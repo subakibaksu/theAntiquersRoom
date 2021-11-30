@@ -93,24 +93,19 @@
                         <td>${product.bidIncrement} 원</td>
                     </tr>
                     <tr>
-                        <th>입찰 금액</th>
+                        <th>입찰금액<br>(현재가+증액단위)</th>
                         <td id="bidTd">
                             <form id="bidForm" action="#">
                                 <input hidden name="pid" value="${product.pid}">
+                                <button id="upBtn" type="button" onclick='changeBid("up")'>
+                                    <i class="fas fa-chevron-circle-up" ></i>
+                                </button>
                                 <c:choose>
                                     <c:when test="${empty product.currPrice}">
-                                        <p id="wholeBid">500원</p><br>
-                                        <button id="upBtn" type="button" onclick='changeBid("up")'>
-                                            <i class="fas fa-chevron-circle-up" ></i>
-                                        </button>
-                                        <input type="text" id="bidPrice" name="bidPrice" value="${product.startedPrice} + ${product.bidIncrement}">
+                                        <input type="text" id="bidPrice" name="bidPrice" value="${product.startedPrice}">원
                                     </c:when>
                                     <c:otherwise>
-                                        <p id="wholeBid">500원</p><br>
-                                        <button id="upBtn" type="button" onclick='changeBid("up")'>
-                                            <i class="fas fa-chevron-circle-up" ></i>
-                                        </button>
-                                        <input type="text" id="bidPrice" name="bidPrice" value="${product.currPrice} + ${product.bidIncrement}">
+                                        <input type="text" id="bidPrice" name="bidPrice" value="${product.currPrice}">원
                                     </c:otherwise>
                                 </c:choose>
                                 <button id="downBtn" type="button" onclick='changeBid("down")'>
@@ -134,7 +129,7 @@
                             <button type="button" id="bidHistBtn">입찰 목록</button>
 
                             <div id="bidHistory" hidden>
-                            <table>
+                            <table id="bidHistoryTable">
                                 <th>이름</th>
                                 <th>입찰가</th>
                                 <th>입찰시간</th>
@@ -257,6 +252,10 @@
                         console.log("error", error);
 
                     },
+
+                    complete : function (){
+                        $("#bidHistoryTable").load(location.href+' #bidHistoryTable');
+                    }
 
                 });
 

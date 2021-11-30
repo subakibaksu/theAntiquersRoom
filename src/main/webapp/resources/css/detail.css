@@ -190,7 +190,15 @@ body {
     border: solid 1px;
     border-color: #d6b6b6;
     border-radius: 1%;
-    height: 500px;
+    height: auto;
+    max-height: 500px;
+    overflow: auto;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+#bidHistory::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
 }
 
 button,
