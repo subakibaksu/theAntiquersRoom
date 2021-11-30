@@ -25,49 +25,80 @@
 		$( '#detail_'+index ).slideToggle();
 	}
 	
-	function requestConfirm() {
+    function requestConfirm() {
+    	
+    	console.log("confirmRequest clicked");
+    	var checkBoxArr = [];   
+    	$("input[name='checkPId']:checked").each(function(i){	
+    		checkBoxArr.push($(this).val());   
+    	})
+    	
+        Swal.fire({
+			  title: '승인하시겠습니까?',
+			  text: "승인하시면 선택된 상품들의 경매가 시작됩니다",
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonText: 'OK'
+			}).then((result) => {
+			  if (result.isConfirmed) {
+					$.ajax({
+						url: '/admin/confirmRequest'
+						, type: 'post'
+						, dataType: 'text'
+						, data: {
+							checkBoxArr: checkBoxArr
+						}
+						, success: function(data){
+						    Swal.fire(
+								      '승인완료!',
+								      '판매가 승인되었습니다.',
+								      'success'
+								    ).then(function(){
+										window.location.href='/admin/main';
+								    })
+						}
+					});				  
+			  }
+			})
+    }
+    
+    function rejectRequest() {
+    	
+    	console.log("rejectRequest clicked");
+    	var checkBoxArr = [];   
+    	$("input[name='checkPId']:checked").each(function(i){	
+    		checkBoxArr.push($(this).val());   
+    	})
+    	
+        Swal.fire({
+			  title: '반려하시겠습니까?',
+			  text: "반려하시면 선택된 상품들은 판매될 수 없습니다",
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonText: 'OK'
+			}).then((result) => {
+			  if (result.isConfirmed) {
+					$.ajax({
+						url: '/admin/rejectRequest'
+						, type: 'post'
+						, dataType: 'text'
+						, data: {
+							checkBoxArr: checkBoxArr
+						}
+						, success: function(data){
+						    Swal.fire(
+								      '반려완료!',
+								      '판매가 반려되었습니다.',
+								      'success'
+								    ).then(function(){
+										window.location.href='/admin/main';
+								    })
+						}
+					});				  
+			  }
+			})
+    }
 
-		console.log("requestConfirm clicked");
-	    var checkBoxArr = [];   
-	    $("input[name='checkPId']:checked").each(function(i){	
-	    	checkBoxArr.push($(this).val());   
-		})
-	 
-	    $.ajax({
-	        url: '/admin/confirmRequest'
-	        , type: 'post'
-	        , dataType: 'text'
-	        , data: {
-	        	checkBoxArr: checkBoxArr
-	        }
-	    	, success: function(data){
-	    		alert("승인완료");
-				window.location.href='/admin/main';
-	    	}
-	    });
-	}
-
-	function rejectRequest() {
-
-	console.log("rejectRequest clicked");
-	var checkBoxArr = [];   
-	$("input[name='checkPId']:checked").each(function(i){	
-		checkBoxArr.push($(this).val());   
-	})
-
-	$.ajax({
-		url: '/admin/rejectRequest'
-		, type: 'post'
-		, dataType: 'text'
-		, data: {
-			checkBoxArr: checkBoxArr
-		}
-		, success: function(data){
-			alert("승인반려");
-			window.location.href='/admin/main';
-		}
-	});
-	}
 	</script>
 </head>
 <body>
@@ -117,9 +148,7 @@
 						<td>
 							<c:choose>
 								<c:when test="${reqProduct.status=='승인대기중'}">
-									<form action="/admin/confirmRequest" method="post">
 										<input type="checkbox" name="checkPId" id="myCheck" value="${reqProduct.pid}" >
-									</form>
 								</c:when>
 								<c:when test="${reqProduct.status=='승인완료'}">
 									<i class="fas fa-check"></i>
