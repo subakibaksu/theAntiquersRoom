@@ -14,6 +14,8 @@
     <title>requestedList.jsp</title>
 
     <link rel="stylesheet" href="/resources/css/myAuctionList.css"> 
+	
+	<!-- fontawsome -->
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -109,7 +111,7 @@
     
 	<div id="myPageWrapper">
 	<h2>승인 요청 상품</h2>
-	     <table id="myAcutionTbl">
+	    <table id="myAcutionTbl">
 	        <caption>
 	            <ul id="topmenu">
 	                <li>&nbsp;</li>

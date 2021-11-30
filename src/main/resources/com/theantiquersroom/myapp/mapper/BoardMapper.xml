@@ -10,8 +10,8 @@
     <select
         id="getQnAListByProductId"
         resultType="com.theantiquersroom.myapp.domain.QnADTO">
-        
-        <![CDATA[      
+
+        <![CDATA[
             SELECT
 				bindex,
 				created_at as createdAt,
@@ -27,20 +27,20 @@
             FROM board
             WHERE p_id = #{pid}
 			ORDER BY ref DESC, step ASC
-			
+
         ]]>
     </select>
-    
+
     <!-- 문의게시글 등록 -->
     <insert
-    		 id="registerQnA" 
+    		 id="registerQnA"
     		 parameterType="com.theantiquersroom.myapp.domain.QnADTO">
-    		 
+
     	<selectKey resultType="int" keyProperty="ref" order="BEFORE">
     		SELECT IFNULL(MAX(ref),0) + 1
     		FROM board
     	</selectKey>
-    		 
+
         <![CDATA[
             INSERT INTO board
             (
@@ -51,7 +51,7 @@
 				content,
 				ref,
 				author,
-				p_id 
+				p_id
             )
             VALUES
             (
@@ -67,84 +67,86 @@
             )
         ]]>
     </insert>
-    
+
     <!-- 문의게시물 목록(페이징) -->
     <select id="getQnAListPaging" resultType="com.theantiquersroom.myapp.domain.QnADTO">
-    
+
                 SELECT bindex, content, author, p_id as pid, title, ref, depth, step, created_at as createdAt, updated_at as updatedAt
                 FROM board ORDER BY ref DESC, step ASC
         <!-- limit ((${pageNum}-1)*${amount}), ${amount} -->
         limit #{skip},#{amount}
-    
+
     </select>
-    
+
     <!-- 문의게시물 총 갯수 -->
     <select id="getQnATotal" resultType="int">
-    
+
         SELECT count(*) FROM board
-    
+
     </select>
-    
+
     <!-- 문의게시물 조회 -->
     <select id="getQnADetail" resultType="com.theantiquersroom.myapp.domain.QnADTO">
-    
+
         SELECT * FROM board WHERE bindex = #{bindex}
-    
+
     </select>
-    
+
      <!-- 문의게시글 수정 -->
     <update id="modifyQnA" >
-    
+
 		UPDATE board SET title=#{title}, content=#{content}, updated_at = now() WHERE bindex = #{bindex}
-    
+
     </update>
-    
+
      <!-- 문의게시글 삭제 -->
     <delete id="removeQnA">
-    
+
         DELETE FROM board WHERE bindex = #{bindex}
-    
+
     </delete>
-    
+
 	<!-- 게시글 답글을 등록하는 쿼리 -->
 	<insert id="registerReQnA" parameterType="com.theantiquersroom.myapp.domain.QnADTO">
-	    	
+
 		INSERT INTO board
 		(created_at, updated_at, title, content,ref, depth, step, author, p_id)
 		VALUES
 		(now(), now(), #{title},#{content},#{ref},1,(SELECT count(*) FROM board AS B WHERE B.ref = #{ref}),#{author},#{pid});
-		 
+
 	</insert>
-	
+
 	<!-- ====================== 리뷰게시판 ====================== -->
-	
+
     <!-- 리뷰게시판 목록 조회 -->
     <select
         id="getReviewList"
         resultType="com.theantiquersroom.myapp.domain.ReviewDTO">
-        
+
         <![CDATA[
 
             SELECT
-            
+
 				review_id,
 				created_at as createdAt,
 				updated_at as updatedAt,
 				content,
 				p_id as pid,
 				score,
-				author
-				
-            FROM review
+				author,
+				(select image_url from product_image as D where D.p_id=R.p_id order by D.index limit 1) as imageUrl
+
+            FROM review as R
+            WHERE (SELECT user_id FROM product as P WHERE p_id = #{pid}) = seller_id
 			ORDER BY createdAt DESC
         ]]>
     </select>
-    
+
     <!-- 리뷰게시글 등록 -->
     <insert
-    		 id="registerReview" 
+    		 id="registerReview"
     		 parameterType="com.theantiquersroom.myapp.domain.ReviewDTO">
-    		 
+
         <![CDATA[
             INSERT INTO review
             (
@@ -168,44 +170,42 @@
             )
         ]]>
     </insert>
-    
+
     <!-- 리뷰게시글 목록(페이징) -->
     <select id="getReviewListPaging" resultType="com.theantiquersroom.myapp.domain.ReviewDTO">
-    
+
                 SELECT review_id as reviewId, created_at as createdAt, updated_at as updatedAt, content, p_id as pid, score, author
                 FROM review ORDER BY createdAt DESC
         limit #{skip},#{amount}
-    
+
     </select>
-    
+
     <!-- 리뷰게시글 총 갯수 -->
     <select id="getReviewTotal" resultType="int">
-    
+
         SELECT count(*) FROM review
-    
+
     </select>
-    
+
     <!-- 리뷰게시글 조회 -->
     <select id="getReviewDetail" resultType="com.theantiquersroom.myapp.domain.ReviewDTO">
-    
-        SELECT * FROM review WHERE review_id = #{review_id}
-    
+
+        SELECT * FROM review WHERE review_id = #{reviewId}
+
     </select>
-    
+
      <!-- 리뷰게시글 수정 -->
     <update id="modifyReview" >
-    
+
 		UPDATE review SET score=#{score}, content=#{content}, updated_at = now() WHERE review_id = #{review_id}
-    
+
     </update>
-    
+
      <!-- 리뷰게시글 삭제 -->
     <delete id="removeReview">
-    
+
         DELETE FROM review WHERE review_id = #{review_id}
-    
+
     </delete>
-    
+
 </mapper>
-
-

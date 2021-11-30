@@ -171,7 +171,6 @@ $(document).ready(function (){
             $('#idchecker').css('color', '#f82a2aa3');
             $('#email').focus();
             idcheck = false;
-            buttonlive();
         } else if (regxEmail.test($('#email').val()) != true) {
             $('#idchecker').text("올바른 양식으로 입력해주세요.");
             $('#idchecker').css('color', '#f82a2aa3');
@@ -288,25 +287,89 @@ $(document).ready(function (){
                 }
             });
 
-    //가입하기 버튼클릭시에 alert 창 띄우기
-    $('#infoRegister').submit(function(e) {
-        e.preventDefault();
-        buttonlive();
-    });
+        $("#registerbtn").click(function (){
+            console.log('registerBtn Clicked');
 
-    // 제출버튼 활성화 함수
-    function buttonlive() {
+            var data  = $("#infoRegister").serializeObject();
+
+            if (idcheck && niccheck && phonecheck && emailconfirmcheck) {
+                console.log('check OK');
+
+                $.ajax({
+                    async: true,
+                    cache: false,
+                    type: 'POST',
+                    data: JSON.stringify(data),
+                    url: "/registerCheck",
+                    contentType: 'application/json',
+                    success: function () {
+                        Swal.fire({
+                            title: '성공적으로 가입 되었습니다.',
+                            icon: 'success',
+                            closeOnClickOutside: false
+                        }).then(function () {
+                            self.location.href = '/';
+                        });
+                    },
+                    error: function (error) {
+                        Swal.fire('정상적으로 가입되지않았습니다.','','warning');
+                        console.log("error", error);
+
+                        //Ajax로 인한 중복요청문제를 방지
+                        setTimeout(function () {
+                            isAjaxing = false
+                        }, 1000);
+                    },
+                });
+
+            } else {
+                console.log('check Not OK');
+                Swal.fire('입력 내용을 다시 확인 해주세요.','','warning');
+            }
+
+        });
+
+    $("#kakaoRegisterbtn").click(function (){
+        console.log('registerBtn Clicked');
+
+        var data  = $("#infoRegister").serializeObject();
+
         if (idcheck && niccheck && phonecheck && emailconfirmcheck) {
-            Swal.fire({
-                title: '성공적으로 가입 되었습니다.',
-                icon: 'success',
-                closeOnClickOutside: false
-            }).then(function(){
-                self.location.href='/';
+            console.log('check OK');
+
+            $.ajax({
+                async: true,
+                cache: false,
+                type: 'POST',
+                data: JSON.stringify(data),
+                url: "/registerByKakao",
+                contentType: 'application/json',
+                success: function (result) {
+                    console.log(result);
+                    Swal.fire({
+                        title: '성공적으로 가입 되었습니다.',
+                        icon: 'success',
+                        closeOnClickOutside: false
+                    }).then(function () {
+                        self.location.href = '/';
+                    });
+                },
+                error: function (error) {
+                    Swal.fire('정상적으로 가입되지않았습니다.','','warning');
+                    console.log("error", error);
+
+                    //Ajax로 인한 중복요청문제를 방지
+                    setTimeout(function () {
+                        isAjaxing = false
+                    }, 1000);
+                },
             });
-        } else{
+
+        } else {
+            console.log('check Not OK');
             Swal.fire('입력 내용을 다시 확인 해주세요.','','warning');
         }
-    }
 
-});
+    });
+
+    });

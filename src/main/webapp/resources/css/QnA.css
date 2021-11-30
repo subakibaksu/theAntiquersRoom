@@ -1,76 +1,67 @@
 @charset "UTF-8";
 
-#wrapper {
-	padding-top: 100px;
-	padding-bottom: 50px;
-	flex-direction: column;
-	margin: auto;
+#QnA_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-block: 1rem;
+}
+
+#QnA_wrapper h2 {
+    font-family: "Gowun Dodum", sans-serif;
+    text-align: center;
+    margin-bottom: 3rem;
 }
 
 #tableplace {
-	margin: auto;
-	border-collapse: collapse;
+    border-collapse: collapse;
+    font-family: "Nanum Gothic", sans-serif;
+    font-size: 0.8rem;
 }
 
-td, th {
-	padding-right: 30px;
-	padding-left: 30px;
-	text-align: center;
-	align-items: center;
-	border-spacing: 0;
+.tablehead:hover {
+    background-color: rgb(227, 182, 174, 0.2);
 }
 
-tr {
-	border-block: 1px solid black;
+#tableplace tr {
+    border-block: 1px solid #c1b2b2;
 }
 
-th {
-	padding-bottom: 10px;
-	padding-top: 10px;
-}
-
-#tableContent {
-	width: 200px;
-}
-
-.pageInfo {
-	list-style: none;
-	display: inline-block;
-	margin: 50px 0 0 100px;
-}
-
-.pageInfo li {
-	float: left;
-	font-size: 20px;
-	margin-left: 18px;
-	padding: 7px;
-	font-weight: 500;
-}
-
-a:link {
-	color: black;
-	text-decoration: none;
-}
-
-a:visited {
-	color: black;
-	text-decoration: none;
-}
-
-a:hover {
-	color: black;
-	text-decoration: underline;
-}
-
-.active {
-	background-color: #cdd5ec;
+.QnAtd,
+.QnAth {
+    text-align: center;
+    padding: 1rem;
 }
 
 #content {
-	 display:block;
-	  width:500px;
-      padding:0 5px;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
+    /* 내용이 길어질때 뒷내용 생략 */
+    display: block;
+    width: 24rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#regBtn {
+    border: 1px solid #c2b1b1;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #c2b1b1;
+    padding: 0.2rem 0.4rem;
+    margin-top: 2rem;
+}
+
+#regBtn a {
+    text-decoration: none;
+    color: white;
+}
+
+#regBtn:hover,
+#regBtn a:hover {
+    background-color: transparent;
+    color: #c2b1b1;
+}
+
+#header {
+    background-color: rgb(227, 182, 174, 0.7);
 }

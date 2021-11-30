@@ -76,8 +76,8 @@ public class BoardController {
     } // getDetail()
     
     @PostMapping("/registerReview")
-    public String registerReview(ReviewDTO dto, HttpSession session) {
-        log.debug("registerReview({}) invoked.", dto);
+    public String registerReview(ReviewDTO dto, Integer pid, HttpSession session) {
+        log.debug("registerReview({}) invoked.", pid);
 
         UserDTO userdto = (UserDTO) session.getAttribute(LoginController.authKey);
         String userId = userdto.getUserId();
@@ -85,7 +85,7 @@ public class BoardController {
         
         this.service.registerReview(dto);
         
-        return "redirect:/board/review";
+        return "redirect:/product/getDetail?pid="+pid;
     } // registerReview
 
     @GetMapping("/modifyReview")
@@ -159,7 +159,7 @@ public class BoardController {
         model.addAttribute("product", dto);
 
     	
-    	return  "redirect:/board/QnA?"+"pid="+dto.getPid();
+    	return  "redirect:/product/getDetail?"+"pid="+dto.getPid();
     } // registerQnA
     
     
@@ -176,7 +176,7 @@ public class BoardController {
     	
     	this.service.registerReQnA(dto);
     	
-    	return  "redirect:/board/QnA?" +"pid="+dto.getPid();
+    	return  "redirect:/product/getDetail?"+"pid="+dto.getPid();
     } // registerReQnA
 
     
@@ -195,7 +195,7 @@ public class BoardController {
         int result = this.service.modifyQnA(dto);
         rttr.addAttribute("result", result);
         
-        return  "redirect:/board/QnA?" +"pid="+pid;
+    	return  "redirect:/product/getDetail?"+"pid="+dto.getPid();
         
     } // modifyQnA
 

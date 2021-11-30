@@ -34,7 +34,7 @@
 		</div>
 				<!-- container -->
 				<div class="form-container">
-					<form id="infoRegister" name="infoRegister" action="/registerByKakao" method="post">
+				<form id="infoRegister" name="infoRegister" action="/registerByKakao" method="post">
 		                <input type="hidden" name="kakaoUniqueId" value="${kakaoUniqueId}">
 
 				<!-- 이메일 입력 -->
@@ -71,8 +71,8 @@
 				</div>
 
 				<!-- 가입하기 버튼  -->
-				<div id="registerbtn">
-					<button type="submit" class="submitbtn" id="checkit" >가입하기</button>
+				<div id="kakaoRegisterbtn">
+					<button type="button" class="submitbtn" id="checkit" >가입하기</button>
 				</div>
 			</form>
 		</div>

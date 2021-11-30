@@ -1,6 +1,8 @@
 package com.theantiquersroom.myapp.controller;
 
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,11 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import com.theantiquersroom.myapp.domain.KakaoTokenVO;
@@ -115,13 +113,25 @@ public class ApiKakaoController {
     
     //카카오 통한 회원가입 서비스 수행, 저장
     @PostMapping("/registerByKakao")
-    @ResponseStatus(HttpStatus.CREATED)
-    public String registerByKakao(UserDTO user) { 
-        log.debug("registerKakaoUser({}) invoked.", user);
+	public @ResponseBody Map<String, Object> register(@RequestBody Map<String,Object> map, HttpSession session) { //회원가입 서비스 수행, 저장
 
-        this.service.registerKakaoUser(user);
-        return "/";
-    } //register
+		UserDTO user = new UserDTO();
+		user.setUserId((String)map.get("userId"));
+		user.setPhone((String)map.get("phone"));
+		user.setNickName((String)map.get("nickName"));
+		user.setKakaoUniqueId((String)session.getAttribute("kakaoUniqueId"));
+		log.debug("register({}) invoked.", user);
+
+
+		boolean result = this.service.registerKakaoUser(user);
+
+		Map<String,Object> resultMap = new HashMap<>();
+
+		resultMap.put("result",result);
+
+		return resultMap;
+
+	} //registerCheck
 	
 	
 	//액세스 토큰, 리프레시 토큰 받기
