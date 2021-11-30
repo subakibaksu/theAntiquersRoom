@@ -159,7 +159,7 @@ public class BoardController {
         model.addAttribute("product", dto);
 
     	
-    	return  "redirect:/board/QnA?"+"pid="+dto.getPid();
+    	return  "redirect:/product/getDetail?"+"pid="+dto.getPid();
     } // registerQnA
     
     
@@ -176,7 +176,7 @@ public class BoardController {
     	
     	this.service.registerReQnA(dto);
     	
-    	return  "redirect:/board/QnA?" +"pid="+dto.getPid();
+    	return  "redirect:/product/getDetail?"+"pid="+dto.getPid();
     } // registerReQnA
 
     
@@ -195,7 +195,7 @@ public class BoardController {
         int result = this.service.modifyQnA(dto);
         rttr.addAttribute("result", result);
         
-        return  "redirect:/board/QnA?" +"pid="+pid;
+    	return  "redirect:/product/getDetail?"+"pid="+dto.getPid();
         
     } // modifyQnA
 
