@@ -27,7 +27,7 @@
          <h2 id="registerReQnAH2">문의사항 답글</h2>
             <tr>
                <td>제목</td>
-               <td><input class="registerReQnAInput" type="text" name="title"  value="${pageInfo.title}" readonly="readonly"></td>
+               <td><input class="registerReQnAInput" type="text" name="title"  value="${pageInfo.title}의 답글"  readonly="readonly"></td>
             </tr>
             <tr>
                <td>내용</td>
@@ -45,7 +45,7 @@
             </tr>
             <tr>
                <td colspan="2">
-                  <button class="registerReQnAButton"  id="cancleButton"   type="button"><a href="/board/QnA">취소</a></button>
+                  <button class="registerReQnAButton"  id="cancleButton"  onclick="back()" type="button">취소</button>
                   <button class="registerReQnAButton"  id="registerButton" type="submit">등록</button>
                </td>
             </tr>
@@ -56,6 +56,14 @@
 <footer>
         <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </footer>
+
+<script>
+
+/* 취소 (이전페이지) */
+	function back() {
+	history.go(-1)
+}
+</script>
 
 </body>
 </html>
