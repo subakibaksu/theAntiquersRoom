@@ -13,6 +13,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,7 +62,7 @@ public class ApiKakaoController {
 	
 	//카카오 인가 코드 받기
 	@RequestMapping(value="/login/kakao")
-	public String oauthKakao(HttpServletRequest req, HttpServletResponse res, HttpSession session) throws Exception{
+	public String oauthKakao(HttpServletRequest req, HttpServletResponse res, HttpSession session, Model model) throws Exception{
 		log.debug("oauthKakao() invoked.");
 		
 		String code = req.getParameter("code"); //토큰 받기 요청에 필요한 인가 코드
@@ -84,14 +85,15 @@ public class ApiKakaoController {
 		log.info("\t + userId : {}", kakaoUniqueId);
 		
 	    
-	    if(kakaoUniqueId != null) { //카카오 계정 ID를 session에 바인딩
-		    session.setAttribute("kakaoUniqueId", kakaoUniqueId);
-		    
+	    if(kakaoUniqueId != null) { 
+	    	session.setAttribute("kakaoUniqueId", kakaoUniqueId);
 		    if(service.getKakaoUser(kakaoUniqueId) != null) { //이미 카카오 통해 가입한 사람이라면,
+		        UserDTO user=this.service.getKakaoUser(kakaoUniqueId);
+		        session.setAttribute(LoginController.authKey, user);
+
 		    	return "redirect:/"; //메인 화면으로 이동
 		    	
 		    }else {
-//		    	return "redirect:/"; //테스트용
 		    	return "/registerByKakao"; //카카오-회원가입 페이지로 이동
 		    }//if-else
 		    
