@@ -8,7 +8,7 @@ import lombok.Data;
 
 @Data
 public class ReviewDTO {
-	
+
 	private Integer reviewId;
 	private Integer pid;
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -18,5 +18,7 @@ public class ReviewDTO {
 	private String content;
 	private String score;
 	private String author;
-	
+	private String sellerId;
+	private String imageUrl;
+
 } // end class

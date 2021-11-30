@@ -60,13 +60,21 @@ body {
 }
 
 .infoContainer {
-	padding-left: 15px;
-	margin-top: 8px;
+	padding-left: 1rem;
+	margin-top: 1rem;
 }
 
 .info {
 	margin-top: 8px;
 	margin-bottom: 8px;
+}
+
+.info > input {
+	border:none;
+}
+
+.info > input:focus {
+	outline: none;
 }
 
 #reviewContainer {
@@ -126,6 +134,7 @@ textarea:focus {
 
 #btns {
 	position: absolute;
-    top: 820px;
+    top: 39.2rem;
+    right: 27rem;
     display: flex;
 }

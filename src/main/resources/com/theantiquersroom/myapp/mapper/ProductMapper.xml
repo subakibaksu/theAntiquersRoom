@@ -14,7 +14,7 @@
             INSERT INTO product(name, content, category_id, user_id, started_at, ended_at, started_price, bid_increment, status)
             VALUES (#{name}, #{content}, #{categoryId}, #{userId}, #{startedAt}, #{endedAt}, #{startedPrice}, #{bidIncrement}, "승인대기중")
         ]]>
-        <selectKey resultType="int" keyProperty="pId" order="AFTER">
+        <selectKey resultType="int" keyProperty="pid" order="AFTER">
             SELECT LAST_INSERT_ID()
         </selectKey>
     </insert>
@@ -119,19 +119,41 @@
                     AND P.ended_at > NOW()
                     AND P.name LIKE CONCAT('%',#{searchQuery},'%')
                 </if>
+
+                    AND (P.status = '승인완료' OR P.status = '재경매중')
             </where>
 
-            <trim prefix="ORDER BY">
+                <if test="filter == 0 or filter == null">
+                    <trim prefix="ORDER BY">
+                        p_id DESC
+                    </trim>
+                </if>
 
-                <if test="filter == 0 or filter == null">  p_id DESC </if>
+                <if test="filter == 1">
+                    <trim prefix="ORDER BY">
+                        ended_at ASC
+                    </trim>
+                </if>
 
-                <if test="filter == 1">  ended_at ASC </if>
+                <if test="filter == 2">
+                    <trim prefix="ORDER BY">
+                      (SELECT B.bid_price
+                        FROM bid_history AS B
+                        WHERE B.p_id = P.p_id
+                        ORDER BY B.bid_price DESC
+                        LIMIT 1) ASC
+                    </trim>
+                </if>
 
-                <if test="filter == 2">  started_price ASC </if>
-
-                <if test="filter == 3">  started_price DESC </if>
-
-            </trim>
+                <if test="filter == 3">
+                    <trim prefix="ORDER BY">
+                    (SELECT B.bid_price
+                    FROM bid_history AS B
+                    WHERE B.p_id = P.p_id
+                    ORDER BY B.bid_price DESC
+                    LIMIT 1) DESC
+                    </trim>
+                </if>
 
             limit #{pageStart}, #{perPageNum}
 
@@ -155,6 +177,9 @@
                 AND ended_at > NOW()
                 AND name LIKE CONCAT('%',#{searchQuery},'%')
             </if>
+
+            AND (status = '승인완료' OR status = '재경매중')
+
         </where>
 	</select>
 
@@ -275,8 +300,9 @@
                 ORDER BY B.bid_price DESC
                 LIMIT 1) AS currPrice
         FROM product as P
-        WHERE P.ended_at > NOW()
-        ORDER BY created_at DESC
+        WHERE P.ended_at > NOW() AND (P.status = '승인완료' OR P.status = '재경매중')
+
+        ORDER BY ended_at DESC
         LIMIT 1, 10
     </select>
 
@@ -307,7 +333,7 @@
                 ORDER BY B.bid_price DESC
                 LIMIT 1) AS currPrice
         FROM product as P
-        WHERE P.ended_at > NOW()
+        WHERE P.ended_at > NOW() AND (P.status = '승인완료' OR P.status = '재경매중')
         ORDER BY ended_at ASC
         LIMIT 1, 10
 

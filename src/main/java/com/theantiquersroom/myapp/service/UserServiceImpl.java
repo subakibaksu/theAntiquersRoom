@@ -231,9 +231,8 @@ public class UserServiceImpl implements UserService, InitializingBean, Disposabl
     @Override
     public boolean registerKakaoUser(UserDTO user) {
 
-        Integer users = null;
-        
-        users = mapper.insertUser(user);
+//        Integer users = null;
+//        users = mapper.insertUser(user);
         
         int affectedRows = this.mapper.insertKakaoUser(user);
 
