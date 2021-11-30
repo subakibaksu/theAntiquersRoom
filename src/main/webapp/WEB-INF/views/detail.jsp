@@ -129,7 +129,7 @@
                             <button type="button" id="bidHistBtn">입찰 목록</button>
 
                             <div id="bidHistory" hidden>
-                            <table>
+                            <table id="bidHistoryTable">
                                 <th>이름</th>
                                 <th>입찰가</th>
                                 <th>입찰시간</th>
@@ -252,6 +252,10 @@
                         console.log("error", error);
 
                     },
+
+                    complete : function (){
+                        $("#bidHistoryTable").load(location.href+' #bidHistoryTable');
+                    }
 
                 });
 
