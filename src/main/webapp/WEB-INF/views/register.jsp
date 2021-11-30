@@ -33,7 +33,7 @@
 		</div>
 
 		<div id="form-container">
-			<form id="infoRegister" name="infoRegister" action="/registerCheck" method="post">
+			<form id="infoRegister" name="infoRegister" action="#">
 				<!-- 이메일 입력 -->
 				<div class="regcontainer">
 					<div class="regconfirm">

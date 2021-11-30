@@ -15,103 +15,120 @@ body {
     flex-direction: column;
 }
 
-header{
-	width : 100%;
+header {
+    width: 100%;
 }
 
-#myPageWrapper{
-	flex-grow: 1;
-	
+#myPageWrapper {
+    flex-grow: 1;
+
     width: 100%;
     margin: 5rem 0 10rem 0;
-    
+
     display: flex;
     flex-direction: column;
     align-items: center;
 
     font-size: 0.8rem;
+    font-family: "Nanum Gothic", sans-serif;
 }
 
-#myPageWrapper h2{
+#myPageWrapper h2 {
     text-align: center;
-	font-size:1.5rem;
+    font-family: "Gowun Dodum", sans-serif !important;
+
+    margin-bottom: 1.5rem;
 }
 
-.search-container{
-	width:100%;
-	margin-top: 2rem;
-	margin-bottom: 1rem;
-	margin-right: 30%;
+.search-container {
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    margin-right: 30%;
     display: flex;
     justify-content: flex-end;
 }
 
-.search-container input[type=text]{
-	padding: 0.5rem;
-  	border: none;
-  	background-color: #FDF8F8;
+#searchKwdBox {
+    display: flex;
+    align-items: center;
 }
 
-#searchBar{
-	text-align: left;
+.search-container input[type="text"] {
+    border: none;
+    background-color: #fdf8f8;
 }
 
-.searchBtn{
-	float: right;
-  	padding: 0.4rem 0.6rem;
-  	background-color: #ddd;
-  	font-size: 1rem;
-  	border: none;
-  	cursor: pointer;
+.searchBar {
+    border: none;
+    box-shadow: 1px 1px 1px lightgray;
+    height: 1.8rem;
+    padding-left: 0.25rem;
+    margin-right: 0.2rem;
 }
 
-.searchBtn:hover{
-  	background-color: #ccc;
+.searchBar:nth-child(2) {
+    width: 10rem;
 }
 
-#total{
-	width: 100%;
+.searchBtn {
+    padding: 0.34rem 0.5rem;
+    background-color: #ddd;
+    font-size: 1rem;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+.searchBtn:hover {
+    background-color: #ccc;
+}
+
+#total {
+    width: 100%;
     text-align: end;
     margin-right: 30%;
     margin-bottom: 1rem;
 }
 
 .dropdown {
-	font-size:0.8rem;
+    font-size: 0.8rem;
 }
 
 .dropbtn {
-	background-color: #B1A2A2;
-	color: black;
-	border: none;
-    font-weight: bold;	
-	cursor: pointer;
+    background-color: #b1a2a2;
+    color: black;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
 }
 
 .dropdown-content a {
-  color: black;
-  padding: 0.7rem 1rem;
-  text-decoration: none;
-  display: block;
+    color: black;
+    padding: 0.7rem 1rem;
+    text-decoration: none;
+    display: block;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
 
 .dropdown:hover .dropdown-content {
-  display: block;
+    display: block;
 }
 
 .dropdown:hover .dropbtn {
-  color: #670000;
+    color: #670000;
 }
 
 #myAcutionTbl {
@@ -120,29 +137,8 @@ header{
     text-align: center;
 }
 
-#myAcutionTbl th{
-	background-color: #B1A2A2;
-    padding: 8px;
-}
-
-#myAcutionTbl tr{
-	border-block: 1px solid #B1A2A2;
-}
-
-#myAcutionTbl tr:hover{
-    background-color:aliceblue;
-}
-
-.detailBox{
-	text-align: left;
-}
-
-.hiddenDetail{
-	padding : 2rem 3rem;	
-}
-
-#topmenu{
-	margin-bottom: 5rem;
+#topmenu {
+    margin-bottom: 5rem;
 }
 
 #topmenu > li {
@@ -152,15 +148,16 @@ header{
     height: 50px;
 
     text-align: center;
-	font-size: 1.5rem;
+    font-size: 1.5rem;
     list-style: none;
 }
 
-#topmenu li:nth-child(3){
+#topmenu li:nth-child(3) {
     text-align: end !important;
 }
 
-#regBtn, #reqBtn{
+#regBtn,
+#reqBtn {
     width: 80px;
     height: 38px;
 
@@ -168,143 +165,167 @@ header{
     border-radius: 15px;
 
     color: white;
-    background-color: #9C0000;
+    background-color: #9c0000;
 
     font-size: 0.8rem;
     font-weight: bold;
 
-	cursor: pointer;
+    cursor: pointer;
 }
 
-#rejBtn{
+#rejBtn {
     width: 80px;
     height: 38px;
-	
-	margin-left:0.8rem;
-    border: 1px solid #9C0000;
+
+    margin-left: 0.8rem;
+    border: 1px solid #9c0000;
     border-radius: 15px;
 
-    color: #9C0000;
+    color: #9c0000;
     background-color: white;
 
     font-size: 0.8rem;
     font-weight: bold;
 
-	cursor: pointer;
+    cursor: pointer;
 }
 
-#stopBtn{
-	width: 60px;
-    height: 20px;
-    margin-top: 0.3rem;
+#myAcutionTbl tr {
+    border-block: 1px solid #eacbcb;
+}
+
+#myAcutionTbl tr:hover {
+    background-color: rgb(227, 182, 174, 0.2);
+}
+
+#myAcutionTbl th {
+    background-color: #eacbcb;
+    padding: 1rem;
+}
+
+#myAcutionTbl td * {
+    margin-block: 0.5rem;
+}
+
+.detailBox {
+    text-align: left;
+}
+
+.hiddenDetail {
+    padding: 1rem 2rem;
+}
+
+#stopBtn {
+    width: 3.5rem;
+    height: 1.5rem;
 
     border: 0;
-    border-radius: 10px;
-
+    border-radius: 7px;
     color: white;
-    background-color: #9C0000;
-
+    background-color: #9c0000;
     font-size: 0.7rem;
-    font-weight: bold;
+    cursor: pointer;
 
-	cursor: pointer;
+    padding: 0.1rem;
+    margin-top: 0.3rem;
 }
 
-form{
-	display:inline;
+form {
+    display: inline;
 }
 
-input[type=submit] {
+input[type="submit"] {
     font-size: 0.8rem;
-  	cursor: pointer;
+    cursor: pointer;
 }
 
 #modifyBtn {
     width: 40px;
-  	height: 28px;
-	
-	color:black;
-  	box-sizing: border-box;
-  	background-color: white;
-  	border: 1px solid #C2B1B1;
-  	border-radius: 10px;
+    height: 28px;
+
+    color: black;
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid #c2b1b1;
+    border-radius: 10px;
 }
 
 #removeBtn {
     width: 40px;
-  	height: 28px;
-	
-	color:white;
-  	box-sizing: border-box;
-  	background-color: #9C0000;
-  	border: 1px solid white;
-  	border-radius: 10px;
+    height: 28px;
+
+    color: white;
+    box-sizing: border-box;
+    background-color: #9c0000;
+    border: 1px solid white;
+    border-radius: 10px;
 }
 
-#reRegisterBtn{
-	width: 60px;
-  	height: 28px;
-	
-	color:black;
-  	box-sizing: border-box;
-  	background-color: white;
-  	border: 1px solid #C2B1B1;
-  	border-radius: 10px;
+#reRegisterBtn {
+    width: 60px;
+    height: 28px;
+
+    color: black;
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid #c2b1b1;
+    border-radius: 10px;
 }
 
-#pagination{
+#pagination {
     width: 95%;
-    margin: 0 auto;
-    font-size: 0.9rem;
     float: right;
     justify-content: center;
     display: flex;
+    font-size: 0.9rem;
+
+    margin-top: 2rem;
 }
 
 #paginationForm {
-	width: 300px;
+    width: 18rem;
 }
 
 #pagination ul {
-    float : right;
-    margin-right : 15%;
-    width: max-content;
+    display: flex;
+    justify-content: center;
 }
 
-#pagination li{	
+#pagination li {
     float: left;
-    
+
     width: 20px;
     height: 25px;
-    
+
     list-style: none;
-    text-align : center;
+    text-align: center;
     line-height: 25px;
     text-decoration: none;
     margin: 11px 5px;
-    
-    border: 1px solid #C2B1B1;
-    border-radius: 10px;
-    
+
+    border: 1px solid #c2b1b1;
+    border-radius: 8px;
+
     background-color: white;
 }
 
-#pagination a{
-    color: #C2B1B1!important;
-	text-decoration:none;
+#pagination a {
+    color: #c2b1b1 !important;
+    text-decoration: none;
 }
 
-#pagination li:hover{
-    background-color: #D9CECE;
+#pagination li:hover {
+    background-color: #d9cece;
 }
 
-.active{
-    background-color: #D9CECE!important;
-    color:white;
+.active {
+    background-color: #d9cece !important;
+    color: white;
 }
 
-.prev, .next{
-    width: 50px!important;
+.prev,
+.next {
+    width: 50px !important;
 
-    color: white!important;
+    color: white !important;
 }

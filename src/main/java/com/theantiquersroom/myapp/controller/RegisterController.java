@@ -34,12 +34,23 @@ public class RegisterController {
     } //register
 
     @PostMapping("/registerCheck")
-    @ResponseStatus(HttpStatus.CREATED)
-    public String register(UserDTO user) { //회원가입 서비스 수행, 저장
+    public @ResponseBody Map<String, Object> register(@RequestBody Map<String,Object> map) { //회원가입 서비스 수행, 저장
+
+        UserDTO user = new UserDTO();
+        user.setUserId((String)map.get("userId"));
+        user.setPassword((String)map.get("password"));
+        user.setPhone((String)map.get("phone"));
+        user.setNickName((String)map.get("nickName"));
+
         log.debug("register({}) invoked.", user);
 
-        this.service.registerUser(user);
-        return "/";
+        boolean result = this.service.registerUser(user);
+
+        Map<String,Object> resultMap = new HashMap<>();
+
+        resultMap.put("result",result);
+
+        return resultMap;
 
     } //registerCheck
     

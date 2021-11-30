@@ -130,7 +130,14 @@ body {
     font-weight: 700;
 }
 
+.kakaoRegisterbtn {
+    height: 3.5rem !important;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
 .emailbtn:hover,
+.kakaoRegisterbtn:hover,
 .submitbtn:hover {
     color: gray;
     background-color: #d6b6b6;

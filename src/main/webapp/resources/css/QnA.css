@@ -1,100 +1,67 @@
 @charset "UTF-8";
 
-#wrapper {
-	flex-direction: column;
-	margin: auto;
+#QnA_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-block: 1rem;
+}
+
+#QnA_wrapper h2 {
+    font-family: "Gowun Dodum", sans-serif;
+    text-align: center;
+    margin-bottom: 3rem;
 }
 
 #tableplace {
-	margin: auto;
-	border-collapse: collapse;
-}
-
-.QnAtd, .QnAth {
-	padding-right: 30px;
-	padding-left: 30px;
-	text-align: center;
-	align-items: center;
-	border-spacing: 0;
-}
-
-tr {
-	border-block: 1px solid black;
-}
-
-th {
-	padding-bottom: 10px;
-	padding-top: 10px;
-}
-
-#tableContent {
-	width: 200px;
-}
-
-.pageInfo {
-	list-style: none;
-	display: inline-block;
-	margin: 50px 0 0 100px;
-}
-
-.pageInfo li {
-	float: left;
-	font-size: 20px;
-	margin-left: 18px;
-	padding: 7px;
-	font-weight: 500;
-}
-
-a:link {
-	color: black;
-	text-decoration: none;
-}
-
-a:visited {
-	color: black;
-	text-decoration: none;
-}
-
-a:hover {
-	color: black;
-	text-decoration: underline;
-}
-
-.active {
-	background-color: #cdd5ec;
-}
-
-#content { /* 내용이 길어질때 뒷내용 생략 */
-	display: block;
-	width: 500px;
-	overflow: hidden;
-	padding-block: 10px;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-#regBtn {
-	float: right;
-	margin-right: 34rem;
-	margin-top: 0.5rem;
-	padding: 3px 7px;
-	border: 1px solid #C2B1B1;
-	border-radius: 6px;
-	cursor: pointer;
-	transition: all .3s;
-	background: 0;
-	padding: 3px 7px
-}
-
-#header {
-	background-color: rgb(227, 182, 174, 0.7);
-}
-
-#regBtn:hover {
-	background-color: #c2b1b1;
-	color: white;
+    border-collapse: collapse;
+    font-family: "Nanum Gothic", sans-serif;
+    font-size: 0.8rem;
 }
 
 .tablehead:hover {
-	background-color: rgb(227, 182, 174, 0.2);
+    background-color: rgb(227, 182, 174, 0.2);
+}
+
+#tableplace tr {
+    border-block: 1px solid #c1b2b2;
+}
+
+.QnAtd,
+.QnAth {
+    text-align: center;
+    padding: 1rem;
+}
+
+#content {
+    /* 내용이 길어질때 뒷내용 생략 */
+    display: block;
+    width: 24rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#regBtn {
+    border: 1px solid #c2b1b1;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #c2b1b1;
+    padding: 0.2rem 0.4rem;
+    margin-top: 2rem;
+}
+
+#regBtn a {
+    text-decoration: none;
+    color: white;
+}
+
+#regBtn:hover,
+#regBtn a:hover {
+    background-color: transparent;
+    color: #c2b1b1;
+}
+
+#header {
+    background-color: rgb(227, 182, 174, 0.7);
 }

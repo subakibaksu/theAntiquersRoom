@@ -76,8 +76,8 @@ public class BoardController {
     } // getDetail()
     
     @PostMapping("/registerReview")
-    public String registerReview(ReviewDTO dto, HttpSession session) {
-        log.debug("registerReview({}) invoked.", dto);
+    public String registerReview(ReviewDTO dto, Integer pid, HttpSession session) {
+        log.debug("registerReview({}) invoked.", pid);
 
         UserDTO userdto = (UserDTO) session.getAttribute(LoginController.authKey);
         String userId = userdto.getUserId();
@@ -85,7 +85,7 @@ public class BoardController {
         
         this.service.registerReview(dto);
         
-        return "redirect:/board/review";
+        return "redirect:/product/getDetail?pid="+pid;
     } // registerReview
 
     @GetMapping("/modifyReview")

@@ -38,7 +38,7 @@
          <div class="search-container">
          	<form action="/admin/searchItemList" method="post">
          		<div id=searchKwdBox>
-         		    <select id="searchBar" type="text" name="status">
+         		    <select class="searchBar" type="text" name="status">
 	         			<option value="">전체보기</option>
 	         			<option value="승인완료">승인완료</option>
 	         			<option value="판매취소">판매취소</option>
@@ -48,7 +48,7 @@
 	         			<option value="재경매중">재경매중</option>
 	         			<option value="경매종료">경매종료</option>
 	         		</select>
-		            <input id="searchBar" type="text" name="keyword" placeholder="'닉네임' 또는 '상품명'">
+		            <input class="searchBar" type="text" name="keyword" placeholder="'닉네임' 또는 '상품명'">
 					<button class="searchBtn" type="submit">
 						<i class="fas fa-search"></i>
 					</button>
