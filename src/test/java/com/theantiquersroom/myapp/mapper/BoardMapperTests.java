@@ -94,7 +94,7 @@ public class BoardMapperTests {
     	dto.setTitle("mapper test");
     	dto.setContent("mapper test");
     	dto.setAuthor("Kingdindoo");
-    	dto.setPId(2);
+    	dto.setPid(2);
     	
     	mapper.registerQnA(dto);
         
@@ -108,7 +108,7 @@ public class BoardMapperTests {
     	dto.setTitle("mapper test");
     	dto.setContent("mapper test");
     	dto.setAuthor("Kingdindoo");
-    	dto.setPId(2);
+    	dto.setPid(2);
     	
     	mapper.registerReQnA(dto);
         

@@ -142,7 +142,7 @@
                 <tr>
                     <th><a id="productInfo" >상품 설명</a></th>
                     <th><a id="sellerReview" >판매자 이전 리뷰</a></th>
-                    <th><a id="thisQnA" >문의사항</a></th>
+                    <th><a id="thisQnA" >문의사항 </a></th>
                 </tr>
                 <tr id="infoDetail">
                     <td colspan="3">
@@ -179,7 +179,7 @@
 
             $('#thisQnA').on("click", function(){
                 $.ajax({
-                    url: "/board/QnA?pId=${product.pId}", //"/board/QnA?pId=${product.pId}"
+                    url: "/board/QnA?pId=${product.pid}", 
                     dataType: "html",
                     success: function(data){
                         console.log(data);
