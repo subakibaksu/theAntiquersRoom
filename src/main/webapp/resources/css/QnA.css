@@ -1,8 +1,6 @@
 @charset "UTF-8";
 
 #wrapper {
-	padding-top: 100px;
-	padding-bottom: 50px;
 	flex-direction: column;
 	margin: auto;
 }
@@ -12,7 +10,7 @@
 	border-collapse: collapse;
 }
 
-td, th {
+.QnAtd, .QnAth {
 	padding-right: 30px;
 	padding-left: 30px;
 	text-align: center;
@@ -66,11 +64,37 @@ a:hover {
 	background-color: #cdd5ec;
 }
 
-#content {
-	 display:block;
-	  width:500px;
-      padding:0 5px;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
+#content { /* 내용이 길어질때 뒷내용 생략 */
+	display: block;
+	width: 500px;
+	overflow: hidden;
+	padding-block: 10px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+#regBtn {
+	float: right;
+	margin-right: 34rem;
+	margin-top: 0.5rem;
+	padding: 3px 7px;
+	border: 1px solid #C2B1B1;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: all .3s;
+	background: 0;
+	padding: 3px 7px
+}
+
+#header {
+	background-color: rgb(227, 182, 174, 0.7);
+}
+
+#regBtn:hover {
+	background-color: #c2b1b1;
+	color: white;
+}
+
+.tablehead:hover {
+	background-color: rgb(227, 182, 174, 0.2);
 }

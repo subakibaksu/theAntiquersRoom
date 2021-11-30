@@ -39,7 +39,7 @@
             </tr>
             <tr>
                <td colspan="2">
-                  <button class="registerQnAButton" id="cancleButton" type="button">취소</button>
+                  <button class="registerQnAButton" id="cancleButton"  onclick="back()" type="button">취소</button>
                   <button class="registerQnAButton" id="registerButton" type="submit">등록</button>
                </td>
             </tr>
@@ -50,6 +50,13 @@
 <footer>
         <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 </footer>
-</body>
+<script>
 
+/* 취소 (이전페이지) */
+	function back() {
+	history.go(-1)
+}
+</script>
+
+</body>
 </html>

@@ -5,33 +5,39 @@
 	padding: 0;
 }
 
-html, body, #getQnADetail_headerBox {
-	min-height: 100vh;
+html,
+body,
+#modifyQnA_headerBox {
+    min-height: 100vh;
 }
 
-body, #getQnADetail_headerBox {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-content: center;
+body,
+#modifyQnA_headerBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
 }
 
-#getQnADetail_wrapper {
-	flex-grow: 1;
-	font-family: "Nanum Gothic", sans-serif;
-	display: flex;
-	justify-content: center;
-	margin-top: 5rem;
+#modifyQnA_wrapper {
+    flex-grow: 1;
+    font-family: "Nanum Gothic", sans-serif;
+
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
 }
 
-#getQnADetailH2 {
+
+
+#modifyQnAH2  {
 	margin: 10px 200px 0;
 	padding-bottom: 30px;
 	width: 180px;
 	color: black;
 }
 
-.getQnADetailInput {
+.modifyQnAInput {
 	width: 100%;
 	padding: 10px;
 	box-sizing: border-box;
@@ -42,7 +48,7 @@ body, #getQnADetail_headerBox {
 	border-bottom: 2px solid #C2B1B1;
 }
 
-.getQnADetailItextarea {
+.modifyQnAtextarea {
 	border: 2px solid #C2B1B1;
 	outline-color: #C2B1B1;
 }
@@ -53,7 +59,7 @@ td:before {
 	margin: 20px 30px 0;
 }
 
-.getQnADetailButton {
+.modifyQnAButton {
 	float: right;
 	padding: 8px 12px;
 	margin: 8px 0 0;
@@ -69,7 +75,7 @@ td:before {
 	color: white;
 }
 
-#reply_btn:hover {
+#delete_btn:hover {
 	background-color: #c2b1b1;
 	color: white;
 }
@@ -78,3 +84,4 @@ td:before {
 	background-color: #c2b1b1;
 	color: white;
 }
+
