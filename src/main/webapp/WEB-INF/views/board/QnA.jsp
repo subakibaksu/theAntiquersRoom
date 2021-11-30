@@ -70,7 +70,7 @@
 			
 		</table>
 		<button id="regBtn" type="button">
-					<a href="/board/registerQnA?pId=${pid }">등록</a>
+					<a href="/board/registerQnA?pid=${pid }">등록</a>
 					</button>
 	</div>
 	<script>
