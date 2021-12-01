@@ -9,8 +9,6 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>myAuctionList.jsp</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/resources/css/myAuctionList.css">
         
@@ -43,7 +41,7 @@
                 <caption>
                     <ul id="topmenu">
                         <li>&nbsp;</li>
-                        <li>My Auction List</li>
+                        <li id="myAuction_title">My Auction List</li>
                         <li><button id="regBtn" type="button">판매등록</button></li>
                     </ul>
                 </caption>
@@ -65,8 +63,17 @@
                             <td><a href="/product/getDetail?pid=${myAuction.pid}"><img src="${myAuction.imageUrl}" height="100px" width="100px"></a></td>
                             <td><a href="/product/getDetail?pid=${myAuction.pid}"><c:out value="${myAuction.name}"/></a></td>
                             <td><c:out value="${myAuction.categoryName}"/></td>
-                            <td><c:out value="${myAuction.startedPrice}"/></td>
-                            <td><c:out value="${myAuction.currPrice}"/></td>
+                            <td><c:out value="${myAuction.startedPrice}"/>원</td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${empty myAuction.currPrice}">
+                                        <c:out value="${myAuction.startedPrice}"/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <c:out value="${myAuction.currPrice}"/>
+                                    </c:otherwise>
+                                </c:choose>
+                            원</td>
                     		<td>
                             <b>시작</b> ${myAuction.startedAt.format(DateTimeFormatter.ofPattern("MM월 dd일 HH시"))}<br>
                             <b>종료</b> ${myAuction.endedAt.format(DateTimeFormatter.ofPattern("MM월 dd일 HH시"))}

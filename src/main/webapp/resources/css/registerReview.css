@@ -5,7 +5,20 @@
     padding: 0;
 }
 
+html,
+body,
+#headerBox {
+    height: 100vh;
+}
+
+#headerBox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 #regReviewWrapper {
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -13,128 +26,129 @@
 }
 
 #registerReviewContainer {
-	display: flex;
-	flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    width: auto;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 70px;
-    padding-bottom: 70px;
-    
 }
 
 #topsubject {
-	margin:auto;
-	text-align: center;
-	margin-top: 100px;
-    font-size: 18px;
+    font-family: "Gowun Dodum", sans-serif;
+    text-align: center;
+    margin: 5rem 0 3rem 0;
 }
 
 #reviewBox {
-	display: flex;
-	margin: auto;
-	padding: 20px;
-	border: 2px solid #C1B2B2;
-	border-radius: 5px;
-	padding-bottom: 70px;
+    display: flex;
+    border: 2px solid #c1b2b2;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    font-family: "Nanum Gothic", sans-serif;
+    height: 30rem;
+
+    padding: 1.2rem;
+    margin-bottom: 6rem;
 }
 
 #productContainer {
-	border: 1px solid #C1B2B2;
-	margin-right: 20px;
-	height: 400px;
-	width: 250px;
+    border: 1px solid #c1b2b2;
+    margin-right: 20px;
+    height: 25.3rem;
+    width: 14rem;
 }
 
 #productimg {
-	width: 160px;
-	height: auto;
-	align-items: center;
+    width: 10rem;
+    height: auto;
+    align-items: center;
 }
 
 #imgsection {
-	text-align: center;
-	margin-top: 20px;
+    text-align: center;
+    margin-top: 20px;
 }
 
 .infoContainer {
-	padding-left: 1rem;
-	margin-top: 1rem;
+    padding-left: 1rem;
+    margin-top: 1rem;
 }
 
 .info {
-	margin-top: 8px;
-	margin-bottom: 8px;
+    margin-top: 8px;
+    margin-bottom: 8px;
 }
 
 .info > input {
-	border:none;
+    border: none;
 }
 
 .info > input:focus {
-	outline: none;
+    outline: none;
 }
 
 #reviewContainer {
-	border: 1px solid #C1B2B2;
-	padding:20px;
+    border: 1px solid #c1b2b2;
+    padding: 20px;
+    height: 23rem;
 }
 
 #rating {
-	border: 1px solid #C1B2B2;
-	width: 60%;
-	padding: 5px;
-	display: flex;
+    border: 1px solid #c1b2b2;
+    width: 60%;
+    padding: 5px;
+    display: flex;
 }
 
 #starRate {
-	border: none;
+    border: none;
     margin-left: 15px;
-    color: #C1B2B2;
+    color: #c1b2b2;
     font-size: 20px;
 }
 
 #ratingName {
-	color: grey;
+    color: grey;
     padding-top: 3px;
 }
 
 #reviewArea {
-	border: 1px solid #C1B2B2;
-	height: auto;
-	
+    border: 1px solid #c1b2b2;
+    height: auto;
 }
 
 textarea {
-	border: none;
-	resize: none;
-	padding: 20px;
+    border: none;
+    resize: none;
+    padding: 1.2rem;
+    font-size: 0.8rem;
 }
 
 textarea:focus {
-	outline: none;
+    outline: none;
 }
 
 .reviewbtn {
-	display: flex;
-    padding: 6px;
-    margin-left: 8px;
-    border: 1px solid #C1B2B2;
+    display: flex;
+    border: 1px solid #c1b2b2;
     border-radius: 8px;
     background-color: #fff;
+    color: #c1b2b2;
+
+    padding: 6px;
+    margin: 0 1rem;
 }
 
 .reviewbtn:hover {
-	background-color: #C1B2B2;
-	color: #fff;
-	cursor: pointer;
+    background-color: #c1b2b2;
+    color: #fff;
+    cursor: pointer;
 }
 
 #btns {
-	position: absolute;
-    top: 51rem;
-    right: 27rem;
+    position: absolute;
     display: flex;
+    justify-content: center;
+    align-self: end;
+    width: 35rem;
+    margin-bottom: 0.5rem;
 }

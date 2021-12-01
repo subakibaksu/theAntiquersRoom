@@ -137,6 +137,10 @@ header {
     text-align: center;
 }
 
+#myAcutionTbl caption {
+    margin-block: 2rem;
+}
+
 #topmenu {
     margin-bottom: 5rem;
 }
@@ -154,6 +158,12 @@ header {
 
 #topmenu li:nth-child(3) {
     text-align: end !important;
+}
+
+#myAuction_title {
+    font-family: "Merriweather", serif;
+    font-size: 1.1rem;
+    font-weight: bold;
 }
 
 #regBtn,

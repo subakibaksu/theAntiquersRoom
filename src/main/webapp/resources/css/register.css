@@ -30,6 +30,10 @@ body {
     margin-top: 2rem;
 }
 
+#logoBox a {
+	display: flex;
+}
+
 .logo {
     color: black;
     font-size: 1.1rem;
