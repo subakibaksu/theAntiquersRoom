@@ -22,7 +22,7 @@
 				depth,
 				step,
 				author,
-				p_id as pid,
+				p_id as pid
 
             FROM board
             WHERE p_id = #{pid}
