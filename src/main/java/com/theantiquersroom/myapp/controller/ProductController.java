@@ -119,7 +119,7 @@ public class ProductController {
 
         this.service.modify(product);
 
-        return "/users/myAuctionList";
+        return "redirect:/users/myAuctionList";
     } // Post modify()
 
     /*상품 삭제*/
