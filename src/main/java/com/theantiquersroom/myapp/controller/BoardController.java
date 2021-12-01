@@ -42,10 +42,10 @@ public class BoardController {
 
     
     @GetMapping("/review")
-    public void getReview(Model model,  BoardReviewCriteria cri) {
+    public void getReview(Model model, Integer pid, BoardReviewCriteria cri) {
   	  log.debug("getReview() invoked.");
 	  
-  		model.addAttribute("reviewList",service.getReviewListPaging(cri));
+  		model.addAttribute("reviewList",service.getReviewListPaging(cri,pid));
   		
   		int total = service.getReviewTotal();
   		

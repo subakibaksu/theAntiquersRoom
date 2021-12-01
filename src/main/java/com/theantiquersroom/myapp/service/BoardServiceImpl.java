@@ -1,8 +1,9 @@
 package com.theantiquersroom.myapp.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,8 @@ import com.theantiquersroom.myapp.domain.BoardReviewCriteria;
 import com.theantiquersroom.myapp.domain.QnADTO;
 import com.theantiquersroom.myapp.domain.ReviewDTO;
 import com.theantiquersroom.myapp.mapper.BoardMapper;
-import com.theantiquersroom.myapp.mapper.ProductMapper;
 
-import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j2;
 
@@ -117,9 +117,13 @@ public class BoardServiceImpl implements BoardService, InitializingBean, Disposa
 	}
 
 	@Override
-	public List<ReviewDTO> getReviewListPaging(BoardReviewCriteria cri) {
-
-		return mapper.getReviewListPaging(cri);
+	public List<ReviewDTO> getReviewListPaging(BoardReviewCriteria cri, Integer pid) {
+		
+		Map<Object,Object> map = new HashMap<>();
+		
+		map.put("pid",pid);
+		
+		return mapper.getReviewListPaging(map);
 	}
 
 	@Override

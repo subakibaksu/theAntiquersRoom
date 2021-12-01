@@ -126,21 +126,21 @@
 
         <![CDATA[
 
-            SELECT
+			 SELECT
 
-				review_id as reviewId,
-				created_at as createdAt,
-				updated_at as updatedAt,
-				content,
-				p_id as pid,
-				score,
-				author,
-				seller_id as sellerId,
-				(select image_url from product_image as D where D.p_id=R.p_id order by D.index limit 1) as imageUrl
-
-            FROM review as R
-            WHERE (SELECT user_id FROM product as P WHERE P.#{pid} = R.pid) = sellerId
-			ORDER BY createdAt DESC
+			    review_id as reviewId,
+			    created_at as createdAt,
+			    updated_at as updatedAt,
+			    content,
+			    p_id as pid,
+			    score,
+			    author,
+			    seller_id as sellerId,
+			    (select image_url from product_image as D where D.p_id=R.p_id order by D.index limit 1) as imageUrl
+			
+			FROM review as R
+			WHERE R.seller_Id = (SELECT user_id FROM product WHERE p_id = #{pid})
+			ORDER BY created_at DESC
         ]]>
     </select>
 
@@ -174,12 +174,24 @@
     </insert>
 
     <!-- 리뷰게시글 목록(페이징) -->
-    <select id="getReviewListPaging" resultType="com.theantiquersroom.myapp.domain.ReviewDTO">
+    <select id="getReviewListPaging" resultType="com.theantiquersroom.myapp.domain.ReviewDTO" parameterType="hashmap">
 
-                SELECT review_id as reviewId, created_at as createdAt, updated_at as updatedAt, content, p_id as pid, score, author
-                FROM review ORDER BY createdAt DESC
-        limit #{skip},#{amount}
+			 SELECT
 
+			    review_id as reviewId,
+			    created_at as createdAt,
+			    updated_at as updatedAt,
+			    content,
+			    p_id as pid,
+			    score,
+			    author,
+			    seller_id as sellerId,
+			    (select image_url from product_image as D where D.p_id=R.p_id order by D.index limit 1) as imageUrl
+			
+			FROM review as R
+			WHERE R.seller_Id = (SELECT user_id FROM product WHERE p_id = #{pid})
+			ORDER BY created_at DESC
+			
     </select>
 
     <!-- 리뷰게시글 총 갯수 -->

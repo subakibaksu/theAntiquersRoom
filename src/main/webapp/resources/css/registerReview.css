@@ -5,7 +5,7 @@
     padding: 0;
 }
 
-body {
+#regReviewWrapper {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -134,7 +134,7 @@ textarea:focus {
 
 #btns {
 	position: absolute;
-    top: 39.2rem;
+    top: 51rem;
     right: 27rem;
     display: flex;
 }
