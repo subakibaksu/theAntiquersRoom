@@ -125,7 +125,7 @@
 
                 <if test="filter == 0 or filter == null">
                     <trim prefix="ORDER BY">
-                        p_id DESC
+                        p_id ASC
                     </trim>
                 </if>
 
