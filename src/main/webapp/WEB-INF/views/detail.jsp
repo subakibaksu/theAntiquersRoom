@@ -231,36 +231,34 @@
                 console.log(data);
 
                 $.ajax({
-
                     async: true,
                     type : 'POST',
                     data : JSON.stringify(data),
                     url : "/product/bid",
                     contentType: "application/json",
-
                     success : function (result) {
-
                         if(result.bidCheck){
                             Swal.fire("입찰에 성공하였습니다.","","success");
                         }else{
-                            Swal.fire("입찰에 실패하였습니다.","","error");
+                            Swal.fire({
+                                title: '입찰에 실패하였습니다.',
+                                icon: 'error',
+                                closeOnClickOutside: false
+                            }).then(function () {
+                                if('${sessionScope.__AUTH_ANTIQUE__.userId}' == ''){
+                                    self.location.href = '/login';
+                                }                                
+                            });
                         }
-
                     },
                     error : function (error) {
-
                         console.log("error", error);
-
                     },
-
                     complete : function (){
                         $("#bidHistoryTable").load(location.href+' #bidHistoryTable');
                     }
-
                 });
-
             });
-
         });
     </script>
     <script src="/resources/js/common/serializeObject.js"></script>
