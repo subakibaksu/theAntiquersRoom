@@ -57,7 +57,7 @@
 
 				<!-- 비밀번호 입력  -->
 				<div class="regconfirm">
-					<input type="text" class="register" id="password" name="password" placeholder="비밀번호">
+					<input type="password" class="register" id="password" name="password" placeholder="비밀번호">
 					<p class="passwordcheck"></p>
 				</div>
 

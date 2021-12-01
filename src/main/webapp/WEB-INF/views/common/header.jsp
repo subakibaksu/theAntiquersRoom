@@ -6,7 +6,7 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Header</title>
+	<title>The Antiquer's Room</title>
 
 	<link rel="stylesheet" href="../../../resources/css/header.css">
 

@@ -1,26 +1,19 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
 
-*{
+* {
     padding: 0;
     margin: 0;
 }
 
-/* html{
-	background: 
-        url(../../resources/images/flowerBack.jpg)
-        no-repeat center center fixed;
-    background-size: cover;
-} */
-
-body{
+body {
     display: flex;
     justify-content: center;
 
     padding-top: 4rem;
 }
 
-#wrapper{
+#wrapper {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,7 +26,7 @@ body{
     padding: 2rem;
 }
 
-.logo{
+.logo {
     display: flex;
     justify-content: center;
 
@@ -41,28 +34,28 @@ body{
 }
 
 .logo img,
-.logo ul{
+.logo ul {
     margin: auto 0;
 }
 
-.logo img{
+.logo img {
     height: 73px;
 }
 
-.logo ul{
+.logo ul {
     list-style: none;
 }
 
-.logo ul li{
-    font-family: 'Merriweather', serif;
+.logo ul li {
+    font-family: "Merriweather", serif;
     font-weight: bold;
 
     margin-bottom: 2px;
     margin-left: 2px;
 }
 
-.greeting{
-    font-family: 'Merriweather', serif;
+.greeting {
+    font-family: "Merriweather", serif;
     font-size: 1.5em;
 
     text-align: center;
@@ -70,11 +63,11 @@ body{
     margin-bottom: 2rem;
 }
 
-#loginDiv{
+#loginDiv {
     display: flex;
 }
 
-#loginForm input{
+#loginForm input {
     width: 24em;
     height: 3.3em;
 
@@ -82,7 +75,7 @@ body{
     padding-left: 0.8rem;
 }
 
-#loginForm button{
+#loginForm button {
     width: 25.3em;
     height: 3.2em;
 
@@ -96,7 +89,7 @@ body{
     margin-bottom: 1rem;
 }
 
-#findIdPwd{
+#findIdPwd {
     display: flex;
     justify-content: space-between;
     border-bottom: 1.7px solid;
@@ -104,23 +97,24 @@ body{
 
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
-    
+
     width: 350px;
 }
 
-#findIdPwd a{
+#findIdPwd a {
     font-size: 0.5rem;
     font-weight: 500;
     color: rgb(0, 7, 100);
     text-decoration: none;
-    
+    cursor: pointer;
+
     padding-right: 0.7rem;
 }
 
-.signinLink{
+.signinLink {
     padding-left: 0.7rem;
 }
 
-#kakaoBtn{
+#kakaoBtn {
     width: 21em;
 }
