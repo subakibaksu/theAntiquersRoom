@@ -112,9 +112,7 @@
         <div id="pagingnationContainer">
             <ul class="pagination">
                 <c:if test="${pageMaker.prev}">
-                    <li>
                         <a class="page" href="/product/productList${pageMaker.makeQuery(pageMaker.startPage - 1)}&category_id=${productCommand.category_id}&searchQuery=${productCommand.searchQuery}&filter=${productCommand.filter}">이전</a>
-                    </li>
                 </c:if>
 
                 <c:forEach begin="${pageMaker.startPage }" end="${pageMaker.endPage }" var="index">
@@ -129,9 +127,7 @@
                 </c:forEach>
 
                 <c:if test="${pageMaker.next }">
-                    <li>
                         <a class="page" href="/product/productList${pageMaker.makeQuery(pageMaker.endPage + 1)}&category_id=${productCommand.category_id}&searchQuery=${productCommand.searchQuery}&filter=${productCommand.filter}">다음</a>
-                    </li>
                 </c:if>
             </ul>
         </div>
