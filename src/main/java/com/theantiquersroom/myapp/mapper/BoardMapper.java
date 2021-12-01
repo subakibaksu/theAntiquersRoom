@@ -1,6 +1,7 @@
 package com.theantiquersroom.myapp.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.theantiquersroom.myapp.domain.BoardQnACriteria;
 import com.theantiquersroom.myapp.domain.BoardReviewCriteria;
@@ -42,7 +43,7 @@ public interface BoardMapper {
 	public List<ReviewDTO> getReviewList();
 	
 	/* 리뷰게시판 목록(페이징 적용) */
-	public List<ReviewDTO> getReviewListPaging(BoardReviewCriteria cri);
+	public List<ReviewDTO> getReviewListPaging(Map<Object,Object> map);
 	
 	/* 리뷰게시판 총 갯수 */
 	public Integer getReviewTotal();

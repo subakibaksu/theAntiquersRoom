@@ -28,7 +28,7 @@
 <body>
 	<div id= "reviewcontainer">
 		
-		<h2>${review.sellerId} 님의 이전 리뷰</h2>
+		<h2>판매자의 이전 리뷰</h2>
 		<table id="tableplace">
 			<tr class="tablehead" id="header">
 				<th id="tableContent">리뷰</th>

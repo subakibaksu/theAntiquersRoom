@@ -45,7 +45,7 @@ public interface BoardService {
    	public abstract List<ReviewDTO> getReviewList();
    	
    	/* 리뷰게시판 페이징 */
-   	public abstract List<ReviewDTO> getReviewListPaging(BoardReviewCriteria cri);
+   	public abstract List<ReviewDTO> getReviewListPaging(BoardReviewCriteria cri,Integer pid);
    	
    	/* 리뷰게시글 총 갯수 */
    	public Integer getReviewTotal();
