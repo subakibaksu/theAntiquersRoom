@@ -35,11 +35,11 @@
     </div>
     
     <form id="modifyForm" action="/users/modify" method="get">
-		<input type="hidden" id="userId" name="userId" value="${sessionScope.__AUTH_ANTIQUE__.userId}"/>'>
+		<input type="hidden" id="userId" name="userId" value="${sessionScope.__AUTH_ANTIQUE__.userId}"/>
 	</form>
 	
 	<form id="removeForm" action="/users/remove" method="post">
-		<input type="hidden" id="userId" name="userId" value="${sessionScope.__AUTH_ANTIQUE__.userId}"/>'>
+		<input type="hidden" id="userId" name="userId" value="${sessionScope.__AUTH_ANTIQUE__.userId}"/>
 	</form>
 	
 
