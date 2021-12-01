@@ -12,10 +12,8 @@
 
 <link rel="stylesheet" href="/resources/css/getQnADetail.css">
 
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
 
 </head>
 <body>
@@ -56,11 +54,26 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2">
-						<button class="getQnADetailButton" id="cancle_btn" onclick="back()" type="button">취소</button>
-						<button class="getQnADetailButton" id="reply_btn" type="button">답글</button>
-						<button class="getQnADetailButton" id="modify_btn" type="button">수정</button>
-					</td>
+    					<c:choose>
+					         <c:when test = "${sessionScope.__AUTH_ANTIQUE__.userId eq pageInfo.author}">
+						     <td colspan="2">
+							<button class="getQnADetailButton" id="cancle_btn" onclick="back()" type="button">취소</button>
+							<button class="getQnADetailButton" id="reply_btn" type="button">답글</button>
+							<button class="getQnADetailButton" id="modify_btn" type="button">수정</button>
+							</td>
+					         </c:when>
+					         
+					         <c:when test = "${sessionScope.__AUTH_ANTIQUE__.userId eq 'admin@antiquers.com'}">
+						     <td colspan="2">
+							<button class="getQnADetailButton" id="cancle_btn" onclick="back()" type="button">취소</button>
+							<button class="getQnADetailButton" id="reply_btn" type="button">답글</button>
+							<button class="getQnADetailButton" id="modify_btn" type="button">수정</button>	
+							</td>				       
+							  </c:when>
+					
+					         <c:otherwise>
+					         </c:otherwise>
+					  	  </c:choose>
 				</tr>
 			</table>
 		</form>

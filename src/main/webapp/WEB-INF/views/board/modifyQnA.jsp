@@ -32,12 +32,12 @@
 				<tr>
 					<td>제목</td>
 					<td>
-					<input class="modifyQnAInput" name="title" value='<c:out value="${pageInfo.title}"/>'>
+					<input class="modifyQnAInput" id="title" name="title" placeholder='<c:out value="${pageInfo.title}"/>'>
 					</td>
 				</tr>
 				<tr>
 					<td>내용</td>
-               		<td><textarea class="modifyQnAtextarea" name="content" cols="50" rows="13" ><c:out value="${pageInfo.content}"/></textarea></td>
+               		<td><textarea class="modifyQnAtextarea" id="content" name="content" cols="50" rows="13"  placeholder='<c:out value="${pageInfo.content}"/>'></textarea></td>
 				</tr>
 				<tr>
 					<td>작성자</td>
@@ -47,11 +47,26 @@
 				</tr>
 
 				<tr>
-					<td colspan="2">
-						<button class="modifyQnAButton" id="cancle_btn" onclick="back()" type="button">취소</button>
-						<button class="modifyQnAButton" id="delete_btn" type="button">삭제</button>
-						<button class="modifyQnAButton" id="modify_btn" type="button">수정</button>
-					</td>
+				    	<c:choose>
+					         <c:when test = "${sessionScope.__AUTH_ANTIQUE__.userId eq pageInfo.author}">
+							<td colspan="2">
+							<button class="modifyQnAButton" id="cancle_btn" onclick="back()" type="button">취소</button>
+							<button class="modifyQnAButton" id="delete_btn" type="button">삭제</button>
+							<button class="modifyQnAButton" id="modify_btn" type="button">수정</button>
+							</td>
+					        </c:when>
+					         
+					         <c:when test = "${sessionScope.__AUTH_ANTIQUE__.userId eq 'admin@antiquers.com'}">
+							<td colspan="2">
+							<button class="modifyQnAButton" id="cancle_btn" onclick="back()" type="button">취소</button>
+							<button class="modifyQnAButton" id="delete_btn" type="button">삭제</button>
+							<button class="modifyQnAButton" id="modify_btn" type="button">수정</button>
+							</td>			       
+							  </c:when>
+					
+					         <c:otherwise>
+					         </c:otherwise>
+					  	  </c:choose>
 				</tr>
 			</table> 
 		</form>
@@ -88,6 +103,24 @@
 	  	function back() {
 			history.go(-1)
 		}
+      
+	  	/* 제목, 내용 공백일때 버튼비활성화 */
+	  	 let title = document.querySelector("#title");
+	  	 let content = document.querySelector("#content");
+	  	let button = document.querySelector("#modify_btn");
+
+	  	button.disabled = true;
+	  	title.addEventListener("change", stateHandle);
+	  	content.addEventListener("change", stateHandle);
+
+	  	function stateHandle() {
+	  	  if (document.querySelector("#title").value === "" && document.querySelector("#content").value === "" ) {
+	  	    button.disabled = true; 
+	  	  } else {
+	  	    button.disabled = false;
+	  	  }
+	  	} 
+	  	
 	</script>
 </body>
 </html>

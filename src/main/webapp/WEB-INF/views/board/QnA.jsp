@@ -27,7 +27,6 @@
 		<table id="tableplace">
 			<tr class="tablehead"  id="header">
 				<th class="QnAth">제목</th>
-				<th class="QnAth">내용</th>
 				<th class="QnAth">작성자</th>
 				<th class="QnAth">작성일</th>
 			</tr>
@@ -40,16 +39,11 @@
 							<c:if test="${board.step != 0}">
 								<div> RE: </div>
 							</c:if>
-							
+							<a href="/board/getQnADetail?bindex=${board.bindex}">
 							<c:out value="${board.title}" />
 							</a>
 						</td>
-						
-						<td class="QnAtd"  id="content">
-						<a href="/board/getQnADetail?bindex=${board.bindex}">
-						<c:out value="${board.content}" />
-						</a>
-						</td>
+
 						<td class="QnAtd" ><c:out value="${board.author}" /></td>
 						<td class="QnAtd">
 							<fmt:formatDate pattern="MM월 dd일" value="${board.updatedAt}" />
