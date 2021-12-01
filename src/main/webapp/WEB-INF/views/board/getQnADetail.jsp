@@ -72,6 +72,9 @@
 							  </c:when>
 					
 					         <c:otherwise>
+						     <td colspan="2">
+							<button class="getQnADetailButton" id="reply_btn" type="button">답글</button>
+							</td>
 					         </c:otherwise>
 					  	  </c:choose>
 				</tr>
