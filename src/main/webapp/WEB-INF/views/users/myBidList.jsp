@@ -121,7 +121,7 @@
                 <td><p hidden class = "leftTimeTimer"><c:out value="${myBid.leftTime}"></c:out><p></td>
                 <td>
                     <c:if test="${myBid.myBidPrice >= myBid.currPrice && !myBid.expiration}">
-                        <a href="/users/chat?pid=${myBid.pid}&myBidPrice=${myBid.myBidPrice}"><button type="button" class="mybtn">연락</button></a>
+                        <a href="/users/chat?pid=${myBid.pid}"><button type="button" class="mybtn">연락</button></a>
                         <br>
                         <br>
                         <a href="/board/registerReview?pid=${myBid.pid}"><button type="button" class="mybtn reviewWrite">리뷰쓰기</button></a>
