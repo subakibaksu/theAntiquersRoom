@@ -139,7 +139,7 @@
 				(select image_url from product_image as D where D.p_id=R.p_id order by D.index limit 1) as imageUrl
 
             FROM review as R
-            WHERE (SELECT user_id FROM product as P WHERE p_id = R.#{pid}) = sellerId
+            WHERE (SELECT user_id FROM product as P WHERE P.#{pid} = R.pid) = sellerId
 			ORDER BY createdAt DESC
         ]]>
     </select>
