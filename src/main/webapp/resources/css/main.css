@@ -32,13 +32,14 @@ body {
 
 .mainSlides {
     display: none;
+    height: 25rem;
+    overflow: hidden;
 }
 
 .mainSlides img {
     width: 100%;
-    height: 20rem;
-
-    filter: brightness(80%);
+    filter: brightness(70%);
+    margin-top: -20rem;
 }
 
 /* prev & next button */
