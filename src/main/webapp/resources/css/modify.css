@@ -1,4 +1,59 @@
 @charset "UTF-8";
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100vh;
+}
+
+#outline {
+    width: 30rem;
+    height: 30rem;
+    background: #ffffff;
+    border: 1px solid #c2b1b1;
+    border-radius: 30px;
+    margin: 6rem auto;
+}
+
+#outline form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30rem;
+    height: 30rem;
+
+    margin-left: 4rem;
+}
+
+.modifyInput {
+    width: 15rem;
+    height: 2rem;
+    background: #ffffff;
+    border: 1px solid #c2b1b1;
+    border-radius: 5px;
+    margin-right: 3rem;
+    padding-left: 0.5rem;
+}
+
+.text {
+    display: flex;
+    justify-content: space-between;
+    width: 25rem;
+
+    font-family: "Gowun Dodum", sans-serif;
+    font-size: 0.8rem;
+
+    margin-bottom: 1rem;
+}
+
+.btnset {
+    width: 20rem;
+    text-align: center;
+    padding-top: 3rem;
+}
 
 #modifyBtn,
 #cancleBtn {
@@ -9,58 +64,11 @@
     font-size: 0.9rem;
     width: 3rem;
     height: 1.8rem;
+    margin: 0 1rem;
 }
 
 #modifyBtn:hover,
 #cancleBtn:hover {
     color: #c2b1b1;
     background-color: white;
-}
-
-#outline {
-    width: 810px;
-    height: 600px;
-    background: #ffffff;
-    border: 1px solid #c2b1b1;
-    box-sizing: border-box;
-    border-radius: 50px;
-    margin: 6rem auto;
-}
-
-#inline {
-    margin: 6rem 7rem 7rem 10rem;
-}
-
-.modifyInput {
-    width: 18rem;
-    height: 2rem;
-    background: #ffffff;
-    border: 1px solid #c2b1b1;
-    box-sizing: border-box;
-    float: right;
-    margin-right: 3rem;
-    border-radius: 5px;
-}
-
-.btnset {
-    /* 버튼 중앙 정렬 */
-    float: left;
-    margin-left: 12rem;
-}
-
-#checkNickName {
-    color: #9c0000;
-    float: right;
-    margin-right: 5rem;
-}
-
-.text {
-    position: relative;
-}
-
-#check {
-    position: absolute;
-    left: 29rem;
-    top: 0.5rem;
-    color: #9c0000;
 }

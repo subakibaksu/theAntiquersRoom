@@ -25,7 +25,20 @@ body,
 
     display: flex;
     flex-direction: column;
-    align-content: center;
+    align-items: center;
+}
+
+#info {
+    padding-top: 8rem;
+    text-align: center;
+}
+
+#info * {
+    padding-bottom: 0.5rem;
+}
+
+#info div {
+    font-size: 0.8rem;
 }
 
 .btnset {
@@ -49,9 +62,4 @@ body,
 #removeBtn:hover {
     background-color: #c2b1b1;
     color: white;
-}
-
-#info {
-    padding-top: 8rem;
-    text-align: center;
 }

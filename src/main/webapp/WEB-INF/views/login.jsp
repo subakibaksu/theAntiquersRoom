@@ -5,14 +5,15 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>login.jsp</title>
 
+    <link rel="stylesheet" href="/resources/css/resetPassword.css">
+    <link rel="stylesheet" href="/resources/css/login.css">
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/resources/css/resetPassword.css">
-    <link rel="stylesheet" href="../../../resources/css/login.css">
+
     <script src="/resources/js/resetPassword.js"/>
 </head>
 <body>
@@ -34,7 +35,7 @@
 
     <div id="wrapper">
         <div class="logo">
-            <img src="../../../resources/images/logoImg.png" alt="image not found">
+            <img id="logoimg" src="/resources/images/logo6.png" alt="" >
             <ul>
                 <li>The</li>
                 <li>Antiquer's Room</li>
