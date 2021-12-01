@@ -123,6 +123,7 @@ public class AdminController {
     //경매상품 판매중단
  	@PostMapping("/stopSale")
  	public String stopSale(@RequestParam(value="pid") Integer pid, RedirectAttributes rttrs) {
+
  		log.debug("stopSale({}, {}) invoked.", pid,rttrs);
  		
  	 	boolean result=this.service.stopSale(pid);

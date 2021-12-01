@@ -81,7 +81,7 @@
 
 				<!-- 가입하기 버튼  -->
 				<div id="registerbtn">
-					<button type="submit" class="submitbtn" id="checkit" >가입하기</button>
+					<button type="button" class="submitbtn" id="checkit" >가입하기</button>
 				</div>
 			</form>
 		</div>

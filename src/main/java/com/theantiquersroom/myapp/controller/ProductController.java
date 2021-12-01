@@ -76,17 +76,16 @@ public class ProductController {
 
     /*상품 등록정보 DB전달*/
     @PostMapping("/register")
-    @ResponseStatus(HttpStatus.CREATED)
     public String register(
-       ProductFormDTO product,
-       @SessionAttribute(LoginController.authKey) UserDTO user
+            ProductFormDTO product,
+            @SessionAttribute(LoginController.authKey) UserDTO user
     ) throws Exception{
 
         product.setImages(product.getImages().stream().filter(img -> !img.isEmpty()).collect(Collectors.toList()));
         product.setUserId(user.getUserId());
 
         this.service.registerProduct(product);
-        return "/users/myAuctionList"; // 추후 완료 alert으로 변경
+        return "redirect:/users/myAuctionList"; // 추후 완료 alert으로 변경
     } // Post register()
 
     /*유찰된 상품 재등록 정보 DB전달*/
@@ -96,7 +95,7 @@ public class ProductController {
 
             product.setPid(product.getPid());
             this.service.reRegister(product);
-        return "/users/myAuctionList";
+        return "redirect:/users/myAuctionList";
     } // Post reRegister()
 
     /*상품 수정 페이지로 이동*/
@@ -113,7 +112,6 @@ public class ProductController {
 
     /*수정된 상품 정보 DB전달*/
     @PostMapping("/modify")
-    @ResponseStatus(HttpStatus.CREATED)
     public String modify(ProductFormDTO product) throws Exception {
 
         product.setImages(product.getImages().stream().filter(img -> !img.isEmpty()).collect(Collectors.toList()));
