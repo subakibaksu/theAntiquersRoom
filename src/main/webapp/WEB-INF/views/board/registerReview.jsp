@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
@@ -7,20 +6,18 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>registerReview</title>
 
 	<link rel="stylesheet" href="/resources/css/registerReview.css">
 
 </head>
-
 <body>
 
-    <header>
+    <header id="headerBox">
         <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
     </header>
 	
 	<div id="regReviewWrapper">
-		<p id="topsubject">리뷰작성</p>
+		<h2 id="topsubject">리뷰작성</h2>
 
 		<form action="/board/registerReview" method="post">
 
@@ -65,7 +62,6 @@
 					</div>
 				</div>
 			</div>
-
 		</form>
 	</div>
 	
@@ -80,5 +76,4 @@
 	</script>
 
 </body>
-
 </html>

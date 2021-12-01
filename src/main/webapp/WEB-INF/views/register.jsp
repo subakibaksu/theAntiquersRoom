@@ -22,9 +22,12 @@
 	<!-- 사이트 로고-->
 	<div id="userRegister_wrapper">
 		<div id="logoBox">
-			<a href="#" class="logo">
-				<div class="logo">The</div>
-				<div class="logo">Antiquer's Room</div>
+			<a href="/" class="logo">
+				<img id="logoimg" src="/resources/images/logo6.png" alt="" width="40" height="55">
+				<div>
+					<div class="logo">The</div>
+					<div class="logo">Antiquer's Room</div>
+				</div>
 			</a>
 		</div>
 

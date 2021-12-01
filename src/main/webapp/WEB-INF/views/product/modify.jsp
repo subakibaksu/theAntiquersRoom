@@ -164,7 +164,7 @@
     </script>
 
     <div id="wrapper">
-        <div id="subject">경매 상품 수정</div>
+        <h2 id="subject">경매 상품 수정</h2>
 
         <section id="pInfo">
             <div id="infoDiv">
