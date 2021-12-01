@@ -160,7 +160,7 @@
                                         <option value="2">수납장</option>
                                         <option value="3">침대</option>
                                         <option value="4">옷장</option>
-                                        <option value="5">쇼파</option>
+                                        <option value="5">소파</option>
                                         <option value="6">기타</option>
                                     </select>
                                 </label>
