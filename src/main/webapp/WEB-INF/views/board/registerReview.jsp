@@ -33,8 +33,8 @@
 							<div class="info">시작가 : <input type="text" value="${product.startedAt}" readonly="readonly"></div>
 							<div class="info">낙찰가 : <input type="text" value="${product.currPrice}" readonly="readonly"></div>
 							<div class="info">낙찰자 : <input type="text" name="nickName" value="${sessionScope.__AUTH_ANTIQUE__.nickName}" readonly="readonly"></div>
-							<div><input type="text" name="pid" value="${product.pid}" hidden></div>
-							<div><input type="text" name="sellerId" value="${product.userId}" hidden></div>
+							<div><input type="text" name="pid" value="${product.pid}" hidden="hidden"></div>
+							<div><input type="text" name="sellerId" value="${product.userId}" hidden="hidden"></div>
 						</div>
 					</div>
 
@@ -56,14 +56,20 @@
 
 					<!-- 버튼 -->
 					<div id="btns">
-						<button type="submit" class="reviewbtn">리뷰작성</button>
-						<button type="button" onclick="location.href='review'" class="reviewbtn">작성취소</button>
+						<button type="submit" onclick="back()" class="reviewbtn">리뷰작성</button>
+						<button type="button" onclick="back()" class="reviewbtn">작성취소</button>
 					</div>
 				</div>
 			</div>
 
 		</form>
 	</div>
+	
+	<script>
+		function back() {
+			history.go(-1)
+		}
+	</script>
 
 </body>
 

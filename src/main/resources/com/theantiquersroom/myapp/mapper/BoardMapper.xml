@@ -22,7 +22,7 @@
 				depth,
 				step,
 				author,
-				p_id as pid
+				p_id as pid,
 
             FROM board
             WHERE p_id = #{pid}
@@ -51,7 +51,8 @@
 				content,
 				ref,
 				author,
-				p_id
+				p_id,
+
             )
             VALUES
             (
@@ -62,7 +63,7 @@
                 #{content},
                 #{ref},
                 #{author},
-                #{pid}
+                #{pid},
 
             )
         ]]>
@@ -127,17 +128,18 @@
 
             SELECT
 
-				review_id,
+				review_id as reviewId,
 				created_at as createdAt,
 				updated_at as updatedAt,
 				content,
 				p_id as pid,
 				score,
 				author,
+				seller_id as sellerId,
 				(select image_url from product_image as D where D.p_id=R.p_id order by D.index limit 1) as imageUrl
 
             FROM review as R
-            WHERE (SELECT user_id FROM product as P WHERE p_id = #{pid}) = seller_id
+            WHERE (SELECT user_id FROM product as P WHERE p_id = R.#{pid}) = sellerId
 			ORDER BY createdAt DESC
         ]]>
     </select>
@@ -150,23 +152,23 @@
         <![CDATA[
             INSERT INTO review
             (
-				review_id,
 				created_at,
 				updated_at,
 				content,
 				p_id,
 				score,
-				author
+				author,
+				seller_id
             )
             VALUES
             (
-               #{reviewId},
                 now(),
              	now(),
                 #{content},
                 #{pid},
                 #{score},
-                #{author}
+                #{author},
+                #{sellerId}
             )
         ]]>
     </insert>
@@ -197,14 +199,14 @@
      <!-- 리뷰게시글 수정 -->
     <update id="modifyReview" >
 
-		UPDATE review SET score=#{score}, content=#{content}, updated_at = now() WHERE review_id = #{review_id}
+		UPDATE review SET score=#{score}, content=#{content}, updated_at = now() WHERE review_id = #{reviewId}
 
     </update>
 
      <!-- 리뷰게시글 삭제 -->
     <delete id="removeReview">
 
-        DELETE FROM review WHERE review_id = #{review_id}
+        DELETE FROM review WHERE review_id = #{revieId}
 
     </delete>
 
