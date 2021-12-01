@@ -15,7 +15,11 @@
 
 <body>
 
-	<div>
+    <header>
+        <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+    </header>
+	
+	<div id="regReviewWrapper">
 		<p id="topsubject">리뷰작성</p>
 
 		<form action="/board/registerReview" method="post">
@@ -64,6 +68,10 @@
 
 		</form>
 	</div>
+	
+	<footer id="footerBox">
+        <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+    </footer>
 	
 	<script>
 		function back() {
