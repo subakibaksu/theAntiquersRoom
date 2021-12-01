@@ -190,10 +190,6 @@
                 <th>상품명</th>
                 <td>${product.name}</td>
             </tr>
-            <tr>
-                <th>낙찰가</th>
-                <td>${myBidPrice}</td>
-            </tr>
         </table>
 
     </div>

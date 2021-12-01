@@ -202,26 +202,14 @@ public class UserController {
 	@GetMapping("/chat")
 	public String chat(
 			@RequestParam("pid") Integer pid,
-			@RequestParam("myBidPrice") Integer myBidPrice,
 			Model model, HttpSession session){
 
-    	//아이디 체크
-		//True or False 반환
-
-		//만약 True 이면 계속 진행
-
-    	//매퍼에서 기존 DB에 저장되어있던 채팅정보들을 가져옵니다..
-		// List<ChatDTO> list = service.getChat(pId);
-
-		//model에 지정해줍니다.
-		//model.addAtrribute("chatList",list);
 		UserDTO user = (UserDTO) session.getAttribute(LoginController.authKey);
 
 		ProductDTO productDTO = productService.getDetail(pid);
 		String userId = user.getUserId();
 
 		model.addAttribute("userId",userId);
-		model.addAttribute("myBidPrice",myBidPrice);
 		model.addAttribute("product",productDTO);
 		model.addAttribute("chatList",chatService.getChat(pid));
 

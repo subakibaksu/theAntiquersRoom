@@ -94,6 +94,15 @@
 	                            		</form>
                             		</td>
                             	</c:when>
+                            	<c:when test="${myAuction.status=='낙찰완료'}">
+                            	    <td>
+                            			<c:out value="${myAuction.status}"/><br>
+                            			<form action="/users/chat?pid=${myAuction.pid}" method="get">
+	                            			<input type="hidden" id="pId" name="pid" value="${myAuction.pid}">
+	                            			<input type="submit" id="reRegisterBtn" value="구매자와채팅">
+	                            		</form>
+                            		</td>
+                            	</c:when>                            	
                             	<c:otherwise>
                             		<td><c:out value="${myAuction.status}"/></td>
                             	</c:otherwise>
