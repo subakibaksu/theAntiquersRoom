@@ -4,19 +4,31 @@
 
 <html>
 <head>
-    <title>Title</title>
+    <title>errorpage</title>
+    <style>
+    	img  {
+    		margin: auto;
+    		display: flex;
+    	}
+    	button {
+    		border: 1px solid lightblue; 
+    		background-color: lightblue;
+    		font-size: 1.5rem;
+    		border-radius: 0.5rem;
+    		color: white;
+    		text-align: center;
+    		margin:auto;
+    		display: block;
+    		cursor: pointer;
+    		margin-bottom: 4rem;
+    	}
+    </style>
 </head>
 <body>
 
-<h1>/WEB-INF/views/errorPage.jsp</h1>
+<img alt="error.jpeg" src="/resources/images/errorpage.jpg" style="width: 600px;">
 
-<hr/>
-
-<p>잠시 시스템에 문제가 발생했습니다. 잠시 후에 다시 시도하여 주십시요.</p>
-
-<hr/>
-
-<h2>exception: ${exception}</h2>
+<button type="button" onclick="location.href='/'">메인페이지로 돌아가기</button>
 
 </body>
 </html>
