@@ -122,10 +122,10 @@ public class AdminController {
     
     //경매상품 판매중단
  	@PostMapping("/stopSale")
- 	public String stopSale(@RequestParam(value="pId") Integer pId, RedirectAttributes rttrs) {
- 		log.debug("stopSale({}, {}) invoked.", pId,rttrs);
+ 	public String stopSale(@RequestParam(value="pId") Integer pid, RedirectAttributes rttrs) {
+ 		log.debug("stopSale({}, {}) invoked.", pid,rttrs);
  		
- 	 	boolean result=this.service.stopSale(pId);
+ 	 	boolean result=this.service.stopSale(pid);
  			
  		return "redirect:/admin/auctionProductList";
  	} //stopSale

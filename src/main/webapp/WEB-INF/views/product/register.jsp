@@ -90,13 +90,7 @@
                             && bidIncrementcheck && startedAtcheck && endedAtcheck
                             && contentcheck && imagescheck) {
                             $('#productSubmit')[0].submit()
-                            Swal.fire({
-                                title: '경매 요청이 완료되었습니다.',
-                                icon: 'success',
-                                closeOnClickOutside: false
-                            }).then(function(){
-                                self.location.href='/';
-                            });
+                            Swal.fire("경매 요청이 완료되었습니다.","","success");
 
                         } else {
                             Swal.fire('입력 칸을 모두 채워주세요.','','warning');
@@ -226,7 +220,7 @@
                             <td colspan="2">
                                 <div id="register_page_button">
                                     <button type="submit" class="register_page_button">상품등록</button>
-                                    <a href="/users/mypage">
+                                    <a href="/users/myAuctionList">
                                         <button type="button" class="register_page_button">취소</button>
                                     </a>
                                 </div>
