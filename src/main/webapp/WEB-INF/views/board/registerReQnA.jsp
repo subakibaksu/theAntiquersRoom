@@ -27,11 +27,11 @@
          <h2 id="registerReQnAH2">문의사항 답글</h2>
             <tr>
                <td>제목</td>
-               <td><input class="registerReQnAInput" type="text" name="title"  value="${pageInfo.title}의 답글"  readonly="readonly"></td>
+               <td><input class="registerReQnAInput" type="text"  id="title" name="title"  value="${pageInfo.title}의 답글"></td>
             </tr>
             <tr>
                <td>내용</td>
-               <td><textarea class="registerReQnAtextarea" name="content" cols="50" rows="10" placeholder="내용을 입력하세요"></textarea></td>
+               <td><textarea class="registerReQnAtextarea" id="content" name="content" cols="50" rows="10" placeholder="내용을 입력하세요"></textarea></td>
             </tr>
             <tr>
                <td>작성자</td>
@@ -63,6 +63,21 @@
 	function back() {
 	history.go(-1)
 }
+
+	/* 내용 공백일때 버튼비활성화 */
+	 let content = document.querySelector("#content");
+	let button = document.querySelector("#registerButton");
+
+	button.disabled = true;
+	content.addEventListener("change", stateHandle);
+
+	function stateHandle() {
+	  if (document.querySelector("#content").value === "" ) {
+	    button.disabled = true; 
+	  } else {
+	    button.disabled = false;
+	  }
+	} 
 </script>
 
 </body>
