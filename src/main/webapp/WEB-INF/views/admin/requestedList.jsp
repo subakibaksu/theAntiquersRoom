@@ -37,7 +37,6 @@
     	
         Swal.fire({
 			  title: '승인하시겠습니까?',
-			  text: "승인하시면 선택된 상품들의 경매가 시작됩니다",
 			  icon: 'warning',
 			  showCancelButton: true,
 			  confirmButtonText: 'OK'
@@ -74,7 +73,6 @@
     	
         Swal.fire({
 			  title: '반려하시겠습니까?',
-			  text: "반려하시면 선택된 상품들은 판매될 수 없습니다",
 			  icon: 'warning',
 			  showCancelButton: true,
 			  confirmButtonText: 'OK'
