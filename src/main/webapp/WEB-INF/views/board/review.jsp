@@ -27,17 +27,16 @@
 </head>
 <body>
 	<div id= "reviewcontainer">
-		<h2>${review.userId} 님의 이전 리뷰</h2>
+		
+		<h2>${review.sellerId} 님의 이전 리뷰</h2>
 		<table id="tableplace">
 			<tr class="tablehead" id="header">
-				<th id="tableImage">이미지</th>
 				<th id="tableContent">리뷰</th>
 				<th id="tableId">닉네임</th>
 				<th id="tableRating">별점</th>
 			</tr>
 			<c:forEach items="${reviewList}" var="review">
 				<tr class="tablehead">
-					<td id="img"><c:out value="image"/></td>
 					<td id="content" style='white-space: nowrap; overflow: hidden;'><c:out value="${review.content}"/></td>
 					<td id="nick"><c:out value="${review.author}"/></td>
 					<td id="rating">

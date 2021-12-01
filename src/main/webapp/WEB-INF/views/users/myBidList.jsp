@@ -124,7 +124,7 @@
                         <a href="/users/chat?pid=${myBid.pid}&myBidPrice=${myBid.myBidPrice}"><button type="button" class="mybtn">연락</button></a>
                         <br>
                         <br>
-                        <a href="/users/board/registerReview/"><button type="button" class="mybtn reviewWrite">리뷰쓰기</button></a>
+                        <a href="/board/registerReview?pid=${myBid.pid}"><button type="button" class="mybtn reviewWrite">리뷰쓰기</button></a>
                     </c:if>
                 </td>
             </tr>

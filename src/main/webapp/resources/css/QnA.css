@@ -17,6 +17,7 @@
     border-collapse: collapse;
     font-family: "Nanum Gothic", sans-serif;
     font-size: 0.8rem;
+    width: 40rem;
 }
 
 .tablehead:hover {
