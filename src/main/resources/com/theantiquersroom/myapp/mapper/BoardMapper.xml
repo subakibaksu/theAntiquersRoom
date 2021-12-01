@@ -51,7 +51,7 @@
 				content,
 				ref,
 				author,
-				p_id,
+				p_id
 
             )
             VALUES
@@ -63,7 +63,7 @@
                 #{content},
                 #{ref},
                 #{author},
-                #{pid},
+                #{pid}
 
             )
         ]]>
