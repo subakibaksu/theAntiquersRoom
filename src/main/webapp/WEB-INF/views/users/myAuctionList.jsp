@@ -12,7 +12,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>myAuctionList.jsp</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="../../../resources/css/myAuctionList.css">
+        <link rel="stylesheet" href="/resources/css/myAuctionList.css">
         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-migrate/3.3.2/jquery-migrate.min.js"></script>
@@ -76,11 +76,11 @@
                             		<td>
                             			<c:out value="${myAuction.status}"/><br>
                             			<form action="/product/modify" method="get">
-	                            			<input type="hidden" id="pId" name="pid" value="${myAuction.pid}">
+	                            			<input type="hidden" id="pid" name="pid" value="${myAuction.pid}">
 	                            			<input type="submit" id="modifyBtn" value="수정">
 	                            		</form>
 	                            		<form action="/product/remove" method="post">
-	                            			<input type="hidden" id="pId" name="pid" value="${myAuction.pid}">
+	                            			<input type="hidden" id="pid" name="pid" value="${myAuction.pid}">
 	                            			<input type="submit" id="removeBtn" value="삭제">
 	                            		</form>
                             		</td>
@@ -89,8 +89,8 @@
                             	    <td>
                             			<c:out value="${myAuction.status}"/><br>
                             			<form action="/product/reRegister" method="get">
-	                            			<input type="hidden" id="pId" name="pid" value="${myAuction.pid}">
-	                            			<input type="submit" id="reRegisterBtn" value="유찰하기">
+	                            			<input type="hidden" id="pid" name="pid" value="${myAuction.pid}">
+	                            			<input type="submit" id="reRegisterBtn" value="재경매">
 	                            		</form>
                             		</td>
                             	</c:when>
@@ -98,8 +98,8 @@
                             	    <td>
                             			<c:out value="${myAuction.status}"/><br>
                             			<form action="/users/chat?pid=${myAuction.pid}" method="get">
-	                            			<input type="hidden" id="pId" name="pid" value="${myAuction.pid}">
-	                            			<input type="submit" id="reRegisterBtn" value="구매자와채팅">
+	                            			<input type="hidden" id="pid" name="pid" value="${myAuction.pid}">
+	                            			<input type="submit" id="reRegisterBtn" value="채팅">
 	                            		</form>
                             		</td>
                             	</c:when>                            	
