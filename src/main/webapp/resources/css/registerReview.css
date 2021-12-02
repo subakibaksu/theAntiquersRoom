@@ -97,6 +97,7 @@ body,
     width: 60%;
     padding: 5px;
     display: flex;
+    width: auto;
 }
 
 #starRate {
@@ -117,6 +118,7 @@ body,
 }
 
 textarea {
+	height: 18rem;
     border: none;
     resize: none;
     padding: 1.2rem;

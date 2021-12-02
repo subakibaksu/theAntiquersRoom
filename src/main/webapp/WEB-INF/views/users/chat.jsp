@@ -21,7 +21,14 @@
             min-width: 25rem;
             height: 500px;
             overflow: auto;
+            -ms-overflow-style: none; /* IE and Edge */
+    		scrollbar-width: none; /* Firefox */
+            
         }
+        
+        .chating::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+		}
         .chating .mydiv{
             float: right;
             margin-left: 18rem;
@@ -31,11 +38,11 @@
             border: 1px solid #d6b6b6;
             border-radius: 10px;
             color: #0a0a0a;
-            text-align: right;
+            text-align: left;
             margin: 0.5rem;
             padding: 0.3rem;
             position: relative;
-            width: auto;
+            width: 9rem;
         }
 
         .chating .othersdiv{
@@ -145,8 +152,10 @@
                 }else if(d.type == "message"){
                     if(d.sessionId == $("#sessionId").val()){
                         $("#chating").append("<div class='mydiv'><p class='me'>나 :" + d.msg + "</p></div>");
+                        $("#chating").scrollTop($("#chating")[0].scrollHeight);
                     }else{
                         $("#chating").append("<div class='othersdiv'><p class='others'>" + d.userName + " :" + d.msg + "</p></div>");
+                        $("#chating").scrollTop($("#chating")[0].scrollHeight);
                     }
 
                 }else{

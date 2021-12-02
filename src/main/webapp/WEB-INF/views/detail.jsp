@@ -67,10 +67,7 @@
                         <th>상품명</th>
                         <td>${product.name}</td>
                     </tr>
-                    <tr>
-                        <th>카테고리</th>
-                        <td>${product.categoryId}</td>
-                    </tr>
+                    
                     <tr>
                         <th>경매 시작 가격</th>
                         <td>${product.startedPrice}원</td>
@@ -116,7 +113,6 @@
                             <button type="button" id="bidBtn">입찰</button>
                             <!-- <p id="bidResult"></p> -->
                         </td>
-                    </tr>
                     <tr>
                         <th>남은 시간</th>
                         <td>
@@ -174,7 +170,7 @@
         $(function(){
 
             $('#productInfo').on("click", function(){
-               $('#contentBox').text('${product.content}');
+               $('#contentBox').html('${product.content}');
             }); //상품설명
 
             $('#sellerReview').on("click", function(){
@@ -224,7 +220,7 @@
                 $("#bidHistory").slideToggle("slow");
             });
 
-            $("#bidBtn").click(function (){
+            $("#bidBtn").on("click",function (){
 
                 var data  = $("#bidForm").serializeObject();
 

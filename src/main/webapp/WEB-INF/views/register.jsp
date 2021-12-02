@@ -66,7 +66,7 @@
 
 				<!-- 비밀번호 확인  -->
 				<div class="regconfirm">
-					<input type="text" class="register" id="confirmpassword" placeholder="비밀번호 확인">
+					<input type="password" class="register" id="confirmpassword" placeholder="비밀번호 확인">
 					<p class="pwdconfirmcheck"></p>
 				</div>
 				
