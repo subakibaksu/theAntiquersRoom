@@ -11,6 +11,9 @@
 - Backend - Java, Spring Framework, Mybatis 
 - Frontend - jQuery, Bootstrap 
 
+## notion 
+- https://www.notion.so/The-Antiquers-room-c54e8cbb554e4bd6be5e3fbd42a2f20d
+
 ## 👥 Contributors
 - @hayo01
 - @beomsookim96
